@@ -1,0 +1,324 @@
+input[type=checkbox]{
+    /* Double-sized Checkboxes */
+    -ms-transform: scale(1.1); /* IE */
+    -moz-transform: scale(1.1); /* FF */
+    -webkit-transform: scale(1.1); /* Safari and Chrome */
+    -o-transform: scale(1.1); /* Opera */
+    padding: 10px;
+  }
+  
+   .cumplimiento {
+          background-color: lightgray;
+          border-radius: 1.25em;
+          width: 300px;
+          height: 16px;
+          width: 50vw;
+      }
+  
+      .cumplimiento>span {
+          display: flex;
+      }
+  
+      .progress-value {
+          background-color: #6777ef;
+          transition: 0.3s all linear;
+          border-radius: 1.25em;
+          height: 16px;
+          width: 50vw;
+          animation: progress-color 1s linear forwards;
+          -webkit-animation: progress-color 1s linear forwards;
+      }
+  
+      /* animation */
+      @keyframes progress-color {
+          0% {
+              width: 0;
+          }
+  
+          50% {
+              width: 70%;
+              background: purple;
+          }
+  
+          100% {
+              width: 100%;
+              background: green;
+          }
+      }
+  
+      .mensaje {
+          font-size: 85%;
+      }
+  
+  
+      * {
+          margin: 0;
+          padding: 0;
+      }
+  
+      html {
+          height: 100%;
+      }
+  
+      p {
+          color: grey;
+      }
+  
+      #heading {
+          text-transform: uppercase;
+          color: #6777ef;
+          font-weight: normal;
+      }
+  
+      #msform {
+          text-align: center;
+          position: relative;
+          margin-top: 20px;
+      }
+  
+      #msform fieldset {
+          background: white;
+          border: 0 none;
+          border-radius: 0.5rem;
+          box-sizing: border-box;
+          width: 100%;
+          margin: 0;
+          padding-bottom: 20px;
+  
+          /*stacking fieldsets above each other*/
+          position: relative;
+      }
+  
+      .form-card {
+          text-align: left;
+      }
+  
+      /*Hide all except first fieldset*/
+      #msform fieldset:not(:first-of-type) {
+          display: none;
+      }
+  
+      #input,
+      #textarea {
+          padding: 8px 15px 8px 15px;
+          border: 1px solid #ccc;
+          border-radius: 0px;
+          margin-bottom: 25px;
+          margin-top: 2px;
+          width: 100%;
+          box-sizing: border-box;
+          font-family: montserrat;
+          color: #2C3E50;
+          background-color: #ECEFF1;
+          font-size: 16px;
+          letter-spacing: 1px;
+      }
+  
+      .input:focus,
+      .textarea:focus {
+          -moz-box-shadow: none !important;
+          -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+          border: 1px solid #673AB7;
+          outline-width: 0;
+      }
+  
+      /*Next Buttons*/
+      .action-button {
+          width: 100px;
+          background: #6777ef;
+          font-weight: bold;
+          color: white;
+          border: 0 none;
+          border-radius: 0px;
+          cursor: pointer;
+          padding: 10px 5px;
+          margin: 10px 0px 10px 5px;
+          float: right;
+      }
+  
+      .action-button:hover,
+      .action-button:focus {
+          background-color: #311B92;
+      }
+  
+      /*Previous Buttons*/
+      .action-button-previous {
+          width: 100px;
+          background: #616161;
+          font-weight: bold;
+          color: white;
+          border: 0 none;
+          border-radius: 0px;
+          cursor: pointer;
+          padding: 10px 5px;
+          margin: 10px 5px 10px 0px;
+          float: right;
+      }
+      .action-button-previous:hover,
+      .action-button-previous:focus {
+          background-color: #000000;
+      }
+  
+      .action-button-submit {
+          width: 100px;
+          background: green;
+          font-weight: bold;
+          color: white;
+          border: 0 none;
+          border-radius: 0px;
+          cursor: pointer;
+          padding: 10px 5px;
+          margin: 10px 5px 10px 0px;
+          float: right;
+      }
+  
+      .action-button-submit:hover,
+      .action-button-submit:focus {
+          background-color: #2E9F1A;
+      }
+  
+      /*The background card*/
+      .card {
+          z-index: 0;
+          border: none;
+          position: relative;
+      }
+  
+      /*FieldSet headings*/
+      .fs-title {
+          font-size: 25px;
+         
+          margin-bottom: 15px;
+          font-weight: normal;
+          text-align: left;
+      }
+  
+      .purple-text {
+          color:  #6777ef;
+          font-weight: normal;
+      }
+  
+      /*Step Count*/
+      .steps {
+          font-size: 20px;
+          color: gray;
+          margin-bottom: 10px;
+          font-weight: normal;
+          text-align: right;
+      }
+      .porcentaje{
+          font-size: 20px;
+          color: gray;
+          margin-bottom: 10px;
+          font-weight: normal;
+          text-align: right;
+  
+      }
+  
+      /*Field names*/
+      .fieldlabels {
+          color: gray;
+          text-align: left;
+      }
+  
+      /*Icon progressbar*/
+      #progressbar {
+          margin-bottom: 30px;
+          overflow: hidden;
+          color: lightgrey;
+      }
+  
+      #progressbar .active {
+          color: #6777ef;
+          
+      }
+  
+      #progressbar li {
+          list-style-type: none;
+          font-size: 15px;
+          width: 20%;
+          float: left;
+          position: relative;
+          font-weight: 400;
+      }
+  
+      /*Icons in the ProgressBar*/
+      #progressbar #account:before {
+          font-family: FontAwesome;
+          content: "\f0c2";
+      }
+  
+      #progressbar #personal:before {
+          font-family: FontAwesome;
+          content: "\f0a1";
+        
+      }
+      #progressbar #almacen:before {
+          font-family: FontAwesome;
+          content: "\f0b1";
+        
+      }
+  
+      #progressbar #payment:before {
+          font-family: FontAwesome;
+          content: "\f185";
+      }
+  
+      #progressbar #confirm:before {
+          font-family: FontAwesome;
+          content: "\f0ee";  
+      }
+  
+      /*Icon ProgressBar before any progress*/
+      #progressbar li:before {
+          width: 50px;
+          height: 50px;
+          line-height: 45px;
+          display: block;
+          font-size: 20px;
+          color: #ffffff;
+          background: lightgray;
+          border-radius: 50%;
+          margin: 0 auto 10px auto;
+          padding: 2px;
+      }
+  
+      /*ProgressBar connectors*/
+      #progressbar li:after {
+          content: '';
+          width: 100%;
+          height: 2px;
+          background: lightgray;
+          position: absolute;
+          left: 0;
+          top: 25px;
+          z-index: -1;
+      }
+  
+      /*Color number of the step and the connector before it*/
+      #progressbar li.active:before{
+          background: linear-gradient(to right, #96c93d, #00b09b);
+          
+      }
+  
+      #progressbar li.active:after {
+         /*  background: #6777ef; */
+         background: #00b09b;
+  
+      }
+  
+      /*Animated Progress Bar*/
+      .progress {
+          height: 20px;
+      }
+  
+      .progress-bar {
+          background-color: #6777ef;
+      }
+  
+      /*Fit image in bootstrap div*/
+      .fit-image {
+          width: 100%;
+          object-fit: cover;
+      }

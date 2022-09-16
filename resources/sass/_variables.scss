@@ -1,0 +1,34 @@
+// Body
+$body-bg: #f8fafc;
+
+// Typography
+$font-family-sans-serif: 'Nunito', sans-serif;
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
+
+$colors: (
+  primary:    		#191d21,
+  secondary:      #cdd3d8,
+  success:        #47c363,
+  info:           #3abaf4,
+  warning:        #ffa426,
+  danger:         #fc544b,
+  light:          #e3eaef,
+  grey:  		      #868e96,
+  whitesmoke:     #f7f9f9,
+  dark:       		#191d21,
+  muted:          #98a6ad,
+  body:           #f4f6f9,
+  font:           #6c757d,
+  fontdark:       #34395e,
+  white:          #ffffff,
+
+  // Form Control
+  formcontrol_normal_background:    #fdfdff,
+  formcontrol_normal_border:        #e4e6fc,
+  formcontrol_focus_background:     #fefeff,
+  formcontrol_focus_border:         #95a0f4,
+
+  // Utilities
+  section_title_line: #6777ef,
+);
