@@ -25,7 +25,7 @@ use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Messages\SolicitudSe
  * @author J. Marcelo Aviles Paco
  * @desc Clase con servicios generales para la facturacion
  *
- */
+*/
 class ServicioFacturacion extends ServicioSiat
 {
 	public function buildInvoiceXml(SiatInvoice $invoice)
@@ -34,6 +34,7 @@ class ServicioFacturacion extends ServicioSiat
 		return $invoice->toXml(null, true)->asXML();
 
 	}
+
 	/**
 	 * Realiza en envio de una unica factura
 	 * 
@@ -43,6 +44,7 @@ class ServicioFacturacion extends ServicioSiat
 	 * @throws Exception
 	 * @return Object Retorna la respuesta del servicio web siat
 	 */
+
 	public function recepcionFactura(SiatInvoice $factura, $tipoEmision = SiatInvoice::TIPO_EMISION_ONLINE, $tipoFactura = SiatInvoice::FACTURA_DERECHO_CREDITO_FISCAL)
 	{
 		$factura->cabecera->razonSocialEmisor	= $this->razonSocial;
@@ -141,12 +143,15 @@ class ServicioFacturacion extends ServicioSiat
 			$solicitud->tipoFacturaDocumento	= $tipoFactura;
 			$solicitud->codigoSucursal			= isset($facturas[0]) ? $facturas[0]->cabecera->codigoSucursal : 0;
 			$solicitud->codigoPuntoVenta		= isset($facturas[0]) ? $facturas[0]->cabecera->codigoPuntoVenta : 0;
-			$solicitud->fechaEnvio				= date("Y-m-d\TH:i:s.m0");
+			$solicitud->fechaEnvio				= date("Y-m-d\TH:i:s.v");
+			/* $solicitud->fechaEnvio				= date("Y-m-d\TH:i:s.m0"); */
+			/* $solicitud->fechaEnvio				= null; */
 			$solicitud->setBufferFromInvoicesXml($invoicesXml);
 			$solicitud->validate();
 			$data = [
 				$solicitud->toArray()
 			];
+			/* dd($data); */
 			$this->wsdl = $facturas[0]->getEndpoint($this->modalidad, $this->ambiente);
 			$res = $this->callAction('recepcionMasivaFactura', $data);
 			return $res;
@@ -292,6 +297,7 @@ class ServicioFacturacion extends ServicioSiat
 		$data = [
 			$solicitud->toArray()
 		];
+		/* dd($data); */
 		$this->wsdl = SiatInvoice::getWsdl($this->modalidad, $this->ambiente, $documentoSector);
 		$res = $this->callAction('validacionRecepcionMasivaFactura', $data);
 		return $res;

@@ -32,6 +32,7 @@ class VentaController extends Controller
 {
     public function registerSale(Request $request)
     {
+        
         try {
             DB::beginTransaction();
             $fecha = Carbon::now()->toDateString();
@@ -74,7 +75,7 @@ class VentaController extends Controller
 
             $dataCuf = [
                 "nitEmisor" => 166172023, /* Nit de la empresa */
-                "codigoSucursal" => $sucursal->codigo_fiscal,
+                "codigoSucursal" => $sucursal->codigo_fiscal, // "codigoSucursal" => $sucursal->codigo_fiscal,
                 "codigoDocumentoSector" => DocumentTypes::FACTURA_COMPRA_VENTA,
                 "numeroFactura" => $cufd->numero_factura,
                 "codigoPuntoVenta" => 1,

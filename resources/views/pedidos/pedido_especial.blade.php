@@ -71,7 +71,7 @@
             <div class="table-responsive">
                 <table class="table table-hover table-bordered" style="width: 100%;" id="table">
                     <thead class="table-info">                       
-                        <th>CAT</th>
+                        <th>CATEGORIA</th>
                         <th style="text-align: center;">Producto</th>
                         <th style="text-align: center;">Cantidad Solicitada</th>
                         <th style="text-align: center;">Unidad Medida</th>
@@ -87,6 +87,7 @@
                         @foreach($productos_predefinidos as $item  )
 
                         <tr id="{{$item->id}}">
+                           
                             <Td>{{$item->producto->categoria->nombre}}</td>
                             <td style="text-align: center;" class="id_productos" id="{{$item->producto_id}}">{{$item->producto->nombre}} </td>
                             <td style="text-align: center;"><input type="number"  id="stock-{{$item->id}}" value="{{ $item->cantidad }}" class="form-control stock" /> </td>
@@ -162,7 +163,8 @@
     let array_subtotales = [];
     let array_detalle_pedido_id_a_agregar= [];
     let precio_prod=[];
-
+    let categoria_nombre='';
+    let categoria_id=0;
     const csrfToken = document.head.querySelector( "[name~=csrf-token][content]" ).content;
 
     let producto_id;
@@ -221,7 +223,8 @@
                         producto_nombre = data.producto_nombre;
                         um=data.unidad_medida;
                         preciogeneral =  data.precio;
-              
+                        categoria_nombre = data.categoria;
+                        categoria_id = data.categoria_id;              
                     } else {
                         producto.selectedIndex = 0;
                         iziToast.warning({
@@ -337,7 +340,7 @@
 
 
             let html='<tr id="'+stocks_input.length+'" >'+
-                        
+                        '<Td >'+categoria_nombre+'  </td>'+
                         '<td style="text-align: center;" class="id_productos" id="'+producto_id+'">'+ producto_nombre +'  </td>'+
                         '<td style="text-align: center;"><input type="number"  id="stock-'+stocks_input.length+'" value="'+nueva_cantidad+'" class="form-control stock" /> </td>'+
                         '<td style="text-align: center;">  '+um+'</td>'+

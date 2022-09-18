@@ -351,7 +351,7 @@ class SincronizarCatalogosController extends Controller
         $this->sincronizarMensajesServicios($sucursal);
          $this->sincronizarMotivosAnulaciones($sucursal); 
         $this->sincronizarTiposDocumentoSector($sucursal);
-        $this->sincronizarListaLeyendasFactura($sucursal);
+        $this->sincronizarListaLeyendasFactura($sucursal);   
         $this->sincronizarDocumentosIdentidades($sucursal);
         $this->sincronizarEventosSignificativos($sucursal); 
         $this->sincronizarListadoTotalActividades($sucursal);

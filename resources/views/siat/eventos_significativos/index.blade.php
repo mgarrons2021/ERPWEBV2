@@ -38,7 +38,7 @@
                                             <span class="input-group-addon "><strong>Contingencia:</strong> </span>
                                             <select name="evento_significativo_id" id="evento_significativo_id" class="form-control selectric">
                                                 @foreach($eventos_significativos as $evento_significativo)
-                                                <option value="{{$evento_significativo->codigo_clasificador}}">{{$evento_significativo->descripcion}}</option>
+                                                <option value="{{$evento_significativo->id}}">{{$evento_significativo->descripcion}}</option>
                                                 @endforeach
                                             </select>
                                         </div>

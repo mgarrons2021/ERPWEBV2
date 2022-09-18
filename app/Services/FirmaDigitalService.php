@@ -11,13 +11,10 @@ use Illuminate\Support\Facades\Auth;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Invoices\SiatInvoice;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Services\ServicioSiat;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Services\ServicioFacturacionElectronica;
-
 class FirmaDigitalService
 {
-
 	public $cuisService;
 	public $cufdService;
-
 	public function __construct()
 	{
 		$this->cuisService = new CuisService();
@@ -32,20 +29,30 @@ class FirmaDigitalService
 		$fecha_generica = Carbon::now();
 		$sucursal = 0;
 		$sucursal_db = Sucursal::where('codigo_fiscal', $sucursal)->first();
-		$puntoventa = 0;
+		$puntoventa = 1;
+
 		/* $resCuis = $this->cuisService->obtenerCuis($puntoventa, $sucursal); */
 		/* $resCufd = $this->cufdService->obtenerCufd($puntoventa, $sucursal, $resCuis->codigo_cui); */
+		
 		$resCuis = SiatCui::first();
+		
+		//dd($resCuis);
+
 		$resCufd = SiatCufd::where('fecha_vigencia', '>=', $fecha_generica)
 			->where('sucursal_id', $sucursal_db->id)
 			->orderBy('id', 'desc')
 			->first();
+		
+		//dd($resCuis);
+
 		/* for ($i = 0; $i < 115; $i++) { */
 		$factura = $this->emisionIndividualService->construirFactura($puntoventa, $sucursal,  $this->configService->config->modalidad, $this->configService->documentoSector, $this->configService->codigoActividad, $this->configService->codigoProductoSin);
+		//dd($factura);
 		$res = $this->testFirma($sucursal, $puntoventa, $factura, $this->configService->tipoFactura);
+		//dd($res);
 		return $res;
 		//die;
-		/* } */
+
 	}
 
 	function testFirma($sucursal, $puntoventa, SiatInvoice $factura, $tipoFactura)
@@ -65,7 +72,6 @@ class FirmaDigitalService
 			->orderBy('id', 'desc')
 			->first();
 
-
 		/* echo "Codigo CUIS: ", $resCuis->codigo, "\n";
 		echo "Codigo CUFD: ", $resCufd->codigo, "\n";
 		echo "Codigo Control: ", $resCufd->codigoControl, "\n";
@@ -84,4 +90,5 @@ class FirmaDigitalService
 		/* dd($service); */
 		return $res;
 	}
+
 }

@@ -24,6 +24,7 @@ class MailFacturacionController extends Controller
                 ->subject($datosMail['clienteNombre'])
                 ->attachData($pdf->output(), "Factura.pdf");
         });
+
         return true;
     }
 }

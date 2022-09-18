@@ -22,10 +22,10 @@ class CreateRegistrosVisitasTable extends Migration
             $table->unsignedBigInteger('venta_id');
 
             $table->foreign('cliente_id')->on('clientes')->references('id');
-            $table->foreign('venta_id')->on('ventas')->references('id');
+            $table->foreign('venta_id')->on('ventas')->onDelete('cascade')->references('id');
             $table->timestamps();
         });
-    }
+    }   
 
     /**
      * Reverse the migrations.

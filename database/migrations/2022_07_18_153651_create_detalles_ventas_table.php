@@ -23,7 +23,7 @@ class CreateDetallesVentasTable extends Migration
             $table->unsignedBigInteger('venta_id');
 
             $table->foreign('plato_id')->on('platos')->references('id');
-            $table->foreign('venta_id')->on('ventas')->references('id');
+            $table->foreign('venta_id')->on('ventas')->onDelete('cascade')->references('id');
             $table->timestamps();
         });
     }

@@ -154,7 +154,8 @@ class PedidoController extends Controller
     {
         if (isset($request->producto_id)) {
             $producto = Producto::find($request->producto_id);
-            //dd($producto); 
+            $categoria_nombre=$producto->categoria->nombre;
+            $categoria_id = $producto->categoria->id;
             $producto_proveedor = Producto_Proveedor::where('producto_id', $request->producto_id)->first();
             //dd($producto_proveedor);
             if (is_null($producto_proveedor)) {
@@ -170,6 +171,8 @@ class PedidoController extends Controller
                         'producto_nombre' => $producto->nombre,
                         'unidad_medida' => $producto->unidad_medida_compra->nombre,
                         'precio' => $producto_proveedor->precio,
+                        'categoria'=>$categoria_nombre,
+                        'categoria_id' => $categoria_id,
                         'success' => true
                     ]
                 );

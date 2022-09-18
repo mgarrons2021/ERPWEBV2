@@ -54961,3 +54961,323 @@ stdClass Object
 
 )
 
+[2022-09-18 16:02:46]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-18 16:02:46]#
+Illuminate\Http\JsonResponse Object
+(
+    [data:protected] => {"response_siat":{"RespuestaServicioFacturacion":{"codigoDescripcion":"VALIDADA","codigoEstado":908,"codigoRecepcion":"85f1d141-378c-11ed-83a8-0fba2508ef62","transaccion":true}},"factura":{"cabecera":{"nitEmisor":166172023,"razonSocialEmisor":"DONESCO S.R.L","municipio":"La Paz","telefono":"88867523","numeroFactura":920,"cuf":"B5EB51F7ABA0BF3181146E27FCE4B0B87FB004F0A132EC5F361D6D74","cufd":"CQUFlQ10wUUFBNzzBCMjYwMjVGRTc=Q3zDgVNBUVRKV1VIyOTA3RjJCQUVDQ","codigoSucursal":0,"direccion":"Pedro Kramer #109","codigoPuntoVenta":1,"fechaEmision":"2022-09-18T16:02:43.000","nombreRazonSocial":"Perez","codigoTipoDocumentoIdentidad":1,"numeroDocumento":2287567,"complemento":null,"codigoCliente":"CC-2287567","codigoMetodoPago":1,"numeroTarjeta":null,"montoTotal":57990,"montoTotalSujetoIva":57990,"codigoMoneda":1,"tipoCambio":1,"montoTotalMoneda":57990,"montoGiftCard":null,"descuentoAdicional":0,"codigoExcepcion":null,"cafc":null,"leyenda":"Ley Nro 453: Tienes derecho a recibir informaci\u00f3n sobre las caracter\u00edsticas y contenidos de los servicios que utilices.","usuario":"MonoBusiness User 01","codigoDocumentoSector":1},"detalle":[{"actividadEconomica":"561110","codigoProductoSin":"63310","codigoProducto":"D001-1042","descripcion":"Nombre del producto #01","cantidad":1,"unidadMedida":58,"precioUnitario":32860,"montoDescuento":0,"subTotal":32860,"numeroSerie":null,"numeroImei":null},{"actividadEconomica":"561110","codigoProductoSin":"63310","codigoProducto":"D001-2780","descripcion":"Nombre del producto #02","cantidad":1,"unidadMedida":58,"precioUnitario":25130,"montoDescuento":0,"subTotal":25130,"numeroSerie":null,"numeroImei":null}],"endpoint":"https:\/\/pilotosiatservicios.impuestos.gob.bo\/v2\/ServicioFacturacionCompraVenta?wsdl"}}
+    [callback:protected] => 
+    [encodingOptions:protected] => 0
+    [headers] => Symfony\Component\HttpFoundation\ResponseHeaderBag Object
+        (
+            [computedCacheControl:protected] => Array
+                (
+                    [no-cache] => 1
+                    [private] => 1
+                )
+
+            [cookies:protected] => Array
+                (
+                )
+
+            [headerNames:protected] => Array
+                (
+                    [cache-control] => Cache-Control
+                    [date] => Date
+                    [content-type] => Content-Type
+                )
+
+            [headers:protected] => Array
+                (
+                    [cache-control] => Array
+                        (
+                            [0] => no-cache, private
+                        )
+
+                    [date] => Array
+                        (
+                            [0] => Sun, 18 Sep 2022 20:02:46 GMT
+                        )
+
+                    [content-type] => Array
+                        (
+                            [0] => application/json
+                        )
+
+                )
+
+            [cacheControl:protected] => Array
+                (
+                )
+
+        )
+
+    [content:protected] => {"response_siat":{"RespuestaServicioFacturacion":{"codigoDescripcion":"VALIDADA","codigoEstado":908,"codigoRecepcion":"85f1d141-378c-11ed-83a8-0fba2508ef62","transaccion":true}},"factura":{"cabecera":{"nitEmisor":166172023,"razonSocialEmisor":"DONESCO S.R.L","municipio":"La Paz","telefono":"88867523","numeroFactura":920,"cuf":"B5EB51F7ABA0BF3181146E27FCE4B0B87FB004F0A132EC5F361D6D74","cufd":"CQUFlQ10wUUFBNzzBCMjYwMjVGRTc=Q3zDgVNBUVRKV1VIyOTA3RjJCQUVDQ","codigoSucursal":0,"direccion":"Pedro Kramer #109","codigoPuntoVenta":1,"fechaEmision":"2022-09-18T16:02:43.000","nombreRazonSocial":"Perez","codigoTipoDocumentoIdentidad":1,"numeroDocumento":2287567,"complemento":null,"codigoCliente":"CC-2287567","codigoMetodoPago":1,"numeroTarjeta":null,"montoTotal":57990,"montoTotalSujetoIva":57990,"codigoMoneda":1,"tipoCambio":1,"montoTotalMoneda":57990,"montoGiftCard":null,"descuentoAdicional":0,"codigoExcepcion":null,"cafc":null,"leyenda":"Ley Nro 453: Tienes derecho a recibir informaci\u00f3n sobre las caracter\u00edsticas y contenidos de los servicios que utilices.","usuario":"MonoBusiness User 01","codigoDocumentoSector":1},"detalle":[{"actividadEconomica":"561110","codigoProductoSin":"63310","codigoProducto":"D001-1042","descripcion":"Nombre del producto #01","cantidad":1,"unidadMedida":58,"precioUnitario":32860,"montoDescuento":0,"subTotal":32860,"numeroSerie":null,"numeroImei":null},{"actividadEconomica":"561110","codigoProductoSin":"63310","codigoProducto":"D001-2780","descripcion":"Nombre del producto #02","cantidad":1,"unidadMedida":58,"precioUnitario":25130,"montoDescuento":0,"subTotal":25130,"numeroSerie":null,"numeroImei":null}],"endpoint":"https:\/\/pilotosiatservicios.impuestos.gob.bo\/v2\/ServicioFacturacionCompraVenta?wsdl"}}
+    [version:protected] => 1.0
+    [statusCode:protected] => 200
+    [statusText:protected] => OK
+    [charset:protected] => 
+    [original] => Array
+        (
+            [response_siat] => stdClass Object
+                (
+                    [RespuestaServicioFacturacion] => stdClass Object
+                        (
+                            [codigoDescripcion] => VALIDADA
+                            [codigoEstado] => 908
+                            [codigoRecepcion] => 85f1d141-378c-11ed-83a8-0fba2508ef62
+                            [transaccion] => 1
+                        )
+
+                )
+
+            [factura] => SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Invoices\CompraVenta Object
+                (
+                    [cabecera] => SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Invoices\InvoiceHeader Object
+                        (
+                            [nitEmisor] => 166172023
+                            [razonSocialEmisor] => DONESCO S.R.L
+                            [municipio] => La Paz
+                            [telefono] => 88867523
+                            [numeroFactura] => 920
+                            [cuf] => B5EB51F7ABA0BF3181146E27FCE4B0B87FB004F0A132EC5F361D6D74
+                            [cufd] => CQUFlQ10wUUFBNzzBCMjYwMjVGRTc=Q3zDgVNBUVRKV1VIyOTA3RjJCQUVDQ
+                            [codigoSucursal] => 0
+                            [direccion] => Pedro Kramer #109
+                            [codigoPuntoVenta] => 1
+                            [fechaEmision] => 2022-09-18T16:02:43.000
+                            [nombreRazonSocial] => Perez
+                            [codigoTipoDocumentoIdentidad] => 1
+                            [numeroDocumento] => 2287567
+                            [complemento] => 
+                            [codigoCliente] => CC-2287567
+                            [codigoMetodoPago] => 1
+                            [numeroTarjeta] => 
+                            [numeroTarjetaReal:protected] => 
+                            [montoTotal] => 57990
+                            [montoTotalSujetoIva] => 57990
+                            [codigoMoneda] => 1
+                            [tipoCambio] => 1
+                            [montoTotalMoneda] => 57990
+                            [montoGiftCard] => 
+                            [descuentoAdicional] => 0
+                            [codigoExcepcion] => 
+                            [cafc] => 
+                            [leyenda] => Ley Nro 453: Tienes derecho a recibir información sobre las características y contenidos de los servicios que utilices.
+                            [usuario] => MonoBusiness User 01
+                            [codigoDocumentoSector] => 1
+                            [xmlAllFields:protected] => 1
+                            [namespaces:protected] => Array
+                                (
+                                )
+
+                            [classAlias:protected] => 
+                            [skipProperties:protected] => Array
+                                (
+                                )
+
+                            [xmlAttributes:protected] => Array
+                                (
+                                    [complemento] => Array
+                                        (
+                                            [0] => Array
+                                                (
+                                                    [attr] => xsi:nil
+                                                    [value] => true
+                                                    [ns] => http://www.w3.org/2001/XMLSchema-instance
+                                                )
+
+                                        )
+
+                                    [numeroTarjeta] => Array
+                                        (
+                                            [0] => Array
+                                                (
+                                                    [attr] => xsi:nil
+                                                    [value] => true
+                                                    [ns] => http://www.w3.org/2001/XMLSchema-instance
+                                                )
+
+                                        )
+
+                                    [montoGiftCard] => Array
+                                        (
+                                            [0] => Array
+                                                (
+                                                    [attr] => xsi:nil
+                                                    [value] => true
+                                                    [ns] => http://www.w3.org/2001/XMLSchema-instance
+                                                )
+
+                                        )
+
+                                    [codigoExcepcion] => Array
+                                        (
+                                            [0] => Array
+                                                (
+                                                    [attr] => xsi:nil
+                                                    [value] => true
+                                                    [ns] => http://www.w3.org/2001/XMLSchema-instance
+                                                )
+
+                                        )
+
+                                    [cafc] => Array
+                                        (
+                                            [0] => Array
+                                                (
+                                                    [attr] => xsi:nil
+                                                    [value] => true
+                                                    [ns] => http://www.w3.org/2001/XMLSchema-instance
+                                                )
+
+                                        )
+
+                                )
+
+                        )
+
+                    [detalle] => Array
+                        (
+                            [0] => SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Invoices\InvoiceDetail Object
+                                (
+                                    [actividadEconomica] => 561110
+                                    [codigoProductoSin] => 63310
+                                    [codigoProducto] => D001-1042
+                                    [descripcion] => Nombre del producto #01
+                                    [cantidad] => 1
+                                    [unidadMedida] => 58
+                                    [precioUnitario] => 32860
+                                    [montoDescuento] => 0
+                                    [subTotal] => 32860
+                                    [numeroSerie] => 
+                                    [numeroImei] => 
+                                    [xmlAllFields:protected] => 1
+                                    [namespaces:protected] => Array
+                                        (
+                                        )
+
+                                    [classAlias:protected] => 
+                                    [skipProperties:protected] => Array
+                                        (
+                                        )
+
+                                    [xmlAttributes:protected] => Array
+                                        (
+                                            [numeroSerie] => Array
+                                                (
+                                                    [0] => Array
+                                                        (
+                                                            [attr] => xsi:nil
+                                                            [value] => true
+                                                            [ns] => http://www.w3.org/2001/XMLSchema-instance
+                                                        )
+
+                                                )
+
+                                            [numeroImei] => Array
+                                                (
+                                                    [0] => Array
+                                                        (
+                                                            [attr] => xsi:nil
+                                                            [value] => true
+                                                            [ns] => http://www.w3.org/2001/XMLSchema-instance
+                                                        )
+
+                                                )
+
+                                        )
+
+                                )
+
+                            [1] => SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Invoices\InvoiceDetail Object
+                                (
+                                    [actividadEconomica] => 561110
+                                    [codigoProductoSin] => 63310
+                                    [codigoProducto] => D001-2780
+                                    [descripcion] => Nombre del producto #02
+                                    [cantidad] => 1
+                                    [unidadMedida] => 58
+                                    [precioUnitario] => 25130
+                                    [montoDescuento] => 0
+                                    [subTotal] => 25130
+                                    [numeroSerie] => 
+                                    [numeroImei] => 
+                                    [xmlAllFields:protected] => 1
+                                    [namespaces:protected] => Array
+                                        (
+                                        )
+
+                                    [classAlias:protected] => 
+                                    [skipProperties:protected] => Array
+                                        (
+                                        )
+
+                                    [xmlAttributes:protected] => Array
+                                        (
+                                            [numeroSerie] => Array
+                                                (
+                                                    [0] => Array
+                                                        (
+                                                            [attr] => xsi:nil
+                                                            [value] => true
+                                                            [ns] => http://www.w3.org/2001/XMLSchema-instance
+                                                        )
+
+                                                )
+
+                                            [numeroImei] => Array
+                                                (
+                                                    [0] => Array
+                                                        (
+                                                            [attr] => xsi:nil
+                                                            [value] => true
+                                                            [ns] => http://www.w3.org/2001/XMLSchema-instance
+                                                        )
+
+                                                )
+
+                                        )
+
+                                )
+
+                        )
+
+                    [required:protected] => Array
+                        (
+                        )
+
+                    [nsData:protected] => Array
+                        (
+                        )
+
+                    [endpoint] => https://pilotosiatservicios.impuestos.gob.bo/v2/ServicioFacturacionCompraVenta?wsdl
+                    [xmlAllFields:protected] => 1
+                    [namespaces:protected] => Array
+                        (
+                        )
+
+                    [classAlias:protected] => facturaComputarizadaCompraVenta
+                    [skipProperties:protected] => Array
+                        (
+                            [0] => endpoint
+                            [1] => classAlias
+                            [2] => xmlAllFields
+                            [3] => namespaces
+                            [4] => skipProperties
+                            [5] => xmlAttributes
+                        )
+
+                    [xmlAttributes:protected] => Array
+                        (
+                        )
+
+                )
+
+        )
+
+    [exception] => 
+)
+

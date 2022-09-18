@@ -26,8 +26,8 @@ class EventoSignificativoService
 	function pruebasEventos2($codigo_evento,$sucursal,$fecha_inicio_contingencia,$fecha_final_contingencia){
 
 		
-		$puntoventa = 0;
-		$codigoEvento	= $codigo_evento;
+		$puntoventa = 1;
+		$codigoEvento	=  $codigo_evento;
 		$fecha_generica = Carbon::now();
 		$sucursal_db = Sucursal::find($sucursal);
 		
@@ -48,7 +48,7 @@ class EventoSignificativoService
 		/* $resCuis 	= $this->cuisService->obtenerCuis($puntoventa, $sucursal, true); */
 	
 		$resCufd	= $this->cufdService->obtenerCufd($puntoventa, $sucursal_db->codigo_fiscal, $resCuis, true);
-		 /* dd($resCuis,$resCufd);  */
+		
 		
 		
 		/* $pvfechaInicio 	= (new Carbon($cufd_bd->fecha_generado))->format("Y-m-d\TH:i:s.v");
@@ -60,6 +60,7 @@ class EventoSignificativoService
 		
 
 		  $evento 	= $this->obtenerListadoEventos($sucursal_db->id, $puntoventa, $codigoEvento);  
+		  
 		 
 		$resEvento = $this->registroEvento(
 			$cuis_bd->codigo_cui,
@@ -74,6 +75,8 @@ class EventoSignificativoService
 	
 		return $resEvento;
 	}
+
+
 
 
 
@@ -102,7 +105,7 @@ class EventoSignificativoService
 		return $resEvent;
 	}
 
-	function obtenerListadoEventos($sucursal, $codigoPuntoVenta =0, $buscarId = null){
+	function obtenerListadoEventos($sucursal, $codigoPuntoVenta =1, $buscarId = 1){
 		$fecha_generica = Carbon::now();
 
 		$codigoSucursal = Sucursal::where('id',$sucursal)
@@ -118,21 +121,25 @@ class EventoSignificativoService
 		
 		$serviceSync->setConfig((array)$this->configService->config);
 		$serviceSync->cuis = $resCuis->codigo_cui;
-		/* dd($codigoSucursal->codigo_fiscal, $codigoPuntoVenta); */
+		
 		$eventsList = $serviceSync->sincronizarParametricaEventosSignificativos($codigoSucursal->codigo_fiscal, $codigoPuntoVenta);
+		
 
 	
 		if (!$buscarId)
 			return $eventsList;
-
+		/* dd($buscarId); */
 		$nombre_evento = 'VENTA EN LUGARES SIN INTERNET';
 		$evento = null;
 		foreach ($eventsList->RespuestaListaParametricas->listaCodigos as $evt) {
+			/* echo( json_encode($evt) );
+			echo($buscarId); */
 			if ($evt->codigoClasificador == $buscarId) {
 				$evento = $evt;
 				break;
 			}
 		}
+		/* dd($evento); */
 		return $evento;
 	}
 }

@@ -427,6 +427,8 @@ Route::get('ejecutar_pruebas_catalogos', [\App\Http\Controllers\Siat\Sincronizar
 
  /* ETAPA 7 ANULACION FACTURAS */
  Route::get('test_anulacion_factura', [\App\Http\Controllers\Siat\AnulacionFacturaController::class, 'test_anulacion_factura']);  
+ 
+ Route::get('prueba_anulacion', [\App\Http\Controllers\Siat\AnulacionFacturaController::class, 'prueba_anulacion']);  
 
  /* ETAPA 8 FIRMA DIGITAL */
 

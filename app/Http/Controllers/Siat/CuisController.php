@@ -27,9 +27,10 @@ class CuisController extends Controller
 
     public function store(Request $request)
     {
-        $cuisService = new CuisService();
+        $cuisService = new CuisService(); 
         $sucursal = Sucursal::find($request->sucursal_id);
-        $response = $cuisService->obtenerCuis(0,  $sucursal->codigo_fiscal);
+        $puntoVenta=1;
+        $response = $cuisService->obtenerCuis($puntoVenta,  $sucursal->codigo_fiscal);
         $respCrearCuis = $cuisService->createCuis($response, $request->sucursal_id);
         if ($respCrearCuis['status']) {
             if (isset($response->RespuestaCuis->mensajesList)) {

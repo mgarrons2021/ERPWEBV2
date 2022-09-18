@@ -25,48 +25,54 @@ class EmisionMasivaService
 		$this->emisionPaqueteService = new EmisionPaqueteService();
 	}
 
-	function pruebasEmisionMasiva(){
+	function pruebasEmisionMasiva()
+	{
 		$fecha =  (new  Carbon())->now();
 		/* $fechaEmision		= date("Y-m-d\TH:i:s.v"); */
-		$fechaEmision_Inicio = $fecha->format("Y-m-d\TH:i:s.v");
+		$fechaEmision = $fecha->format("Y-m-d\TH:i:s.v");
 		$cantidad 			= 1000;
 		$codigoSucursal 	= 0;
-		$codigoPuntoVenta 	= 1;
+		$codigoPuntoVenta 	= 0;
 		$cafc				= null;
 
-		 /* for ($i = 0; $i < 20; $i++) {  */
+		for ($i = 0; $i < 20; $i++) {
 
-			$facturas = $this->emisionPaqueteService->construirFacturas($codigoSucursal, $codigoPuntoVenta, $cantidad, $this->configService->documentoSector, $this->configService->codigoActividad, $this->configService->codigoProductoSin, $fechaEmision_Inicio);
-			$fechaEmision = date("Y-m-d\TH:i:s.v", strtotime($fechaEmision_Inicio) + 5);
+			$facturas = $this->emisionPaqueteService->construirFacturas($codigoSucursal, $codigoPuntoVenta, $cantidad, $this->configService->documentoSector, $this->configService->codigoActividad, $this->configService->codigoProductoSin, $fechaEmision);
+			$fechaEmision = date("Y-m-d\TH:i:s.v", strtotime($fechaEmision) + 5000);
 			$res = $this->testMasiva($codigoSucursal, $codigoPuntoVenta, $this->configService->documentoSector, $facturas, $this->configService->tipoFactura);
-			 if ($res->RespuestaServicioFacturacion->codigoEstado == 901) { 
+			print_r($res);
+
+			if ($res->RespuestaServicioFacturacion->codigoEstado == 901) {
 				$res = $this->testRecepcionMasiva(
-					$codigoSucursal,	
+					$codigoSucursal,
 					$codigoPuntoVenta,
 					$this->configService->documentoSector,
 					$this->configService->tipoFactura,
 					$res->RespuestaServicioFacturacion->codigoRecepcion,
 				);
+				/* 	dd($res); */
+				print_r($res);
 
-				return $res;
+				/* return $res; */
 				/* dd($res->RespuestaServicioFacturacion->codigoRecepcion); */
-				/* print_r($res); */
-			} 
-		/*  }  */
+			}
+		}
 	}
 
 	function testMasiva($codigoSucursal, $codigoPuntoVenta, $documentoSector, $facturas, $tipoFactura)
 	{
 		$resCuis = $this->cuisService->obtenerCuis($codigoPuntoVenta, $codigoSucursal);
 		$resCufd = $this->cufdService->obtenerCufd($codigoPuntoVenta, $codigoSucursal, $resCuis->RespuestaCuis->codigo);
+		/* dd($resCuis,$resCufd); */
 
 		echo "Codigo CUIS: ", $resCuis->RespuestaCuis->codigo, "\n";
 		echo "Codigo CUFD: ", $resCufd->RespuestaCufd->codigo, "\n";
 		echo "Codigo Control: ", $resCufd->RespuestaCufd->codigoControl, "\n";
 
 		$service = SiatFactory::obtenerServicioFacturacion($this->configService->config, $resCuis->RespuestaCuis->codigo, $resCufd->RespuestaCufd->codigo, $resCufd->RespuestaCufd->codigoControl);
-		/*  dd($facturas); */
+		/* dd($service);  */
 		$res = $service->recepcionMasivaFactura($facturas, SiatInvoice::TIPO_EMISION_MASIVA, $tipoFactura);
+		/* dd($res); */
 		/* print_r($res); */
 		return $res;
 	}
@@ -89,11 +95,11 @@ class EmisionMasivaService
 		while ($res->RespuestaServicioFacturacion->codigoDescripcion == 'PENDIENTE') {
 			echo "REINTENTANTO RESPUESTA RECEPCION MASIVA\n=====================\n";
 			$res = $this->testRecepcionMasiva($codigoSucursal, $codigoPuntoVenta, $documentoSector, $tipoFactura, $codigoRecepcion);
+			print_r($res);
 		}
 
 		echo "RESPUESTA RECEPCION MASIVA\n===================\n";
 
 		return $res;
-
 	}
 }

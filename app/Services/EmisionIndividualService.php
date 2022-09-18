@@ -150,7 +150,7 @@ class EmisionIndividualService
         $factura->cabecera->numeroFactura        = rand(1, 1000);
         $factura->cabecera->codigoSucursal        = $codigoSucursal;
         $factura->cabecera->direccion            = 'Pedro Kramer #109';
-        $factura->cabecera->codigoPuntoVenta    = 1;
+        $factura->cabecera->codigoPuntoVenta    = $codigoPuntoVenta;
         $factura->cabecera->fechaEmision        = date('Y-m-d\TH:i:s.v');
         $factura->cabecera->nombreRazonSocial    = 'Perez';
         $factura->cabecera->codigoTipoDocumentoIdentidad    = 1; //CI - CEDULA DE IDENTIDAD
@@ -234,6 +234,8 @@ class EmisionIndividualService
         $cuis = SiatCui::where('sucursal_id', $sucursal_DB->id)
             ->where('estado', 'V')
             ->orderBy('id', 'desc')->first();
+
+        //dd($cuis);
 
         $cufd = SiatCufd::where('sucursal_id', $sucursal_DB->id)
             ->whereDate('fecha_vigencia', '>=', $fecha_actual)

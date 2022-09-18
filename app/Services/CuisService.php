@@ -51,7 +51,7 @@ class CuisService
         $serviceCodigos->debug = true;
         $serviceCodigos->setConfig((array)$this->configService->config);
         $resCuis = $serviceCodigos->cuis($codigoPuntoVenta, $codigoSucursal);
-        /* dd($resCuis); */
+        
         return $resCuis;
     }
 }
