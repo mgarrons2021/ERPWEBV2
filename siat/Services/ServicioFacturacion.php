@@ -1,8 +1,10 @@
 <?php
+
 /**
  * @author J. Marcelo Aviles Paco
  * @copyright Sintic Bolivia 
  */
+
 namespace SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Services;
 
 use App\Models\Venta;
@@ -25,14 +27,13 @@ use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Messages\SolicitudSe
  * @author J. Marcelo Aviles Paco
  * @desc Clase con servicios generales para la facturacion
  *
-*/
+ */
 class ServicioFacturacion extends ServicioSiat
 {
 	public function buildInvoiceXml(SiatInvoice $invoice)
 	{
 		/* dd($invoice->toXml(null, true)->asXML()); */
 		return $invoice->toXml(null, true)->asXML();
-
 	}
 
 	/**
@@ -50,7 +51,7 @@ class ServicioFacturacion extends ServicioSiat
 		$factura->cabecera->razonSocialEmisor	= $this->razonSocial;
 		$factura->cabecera->nitEmisor 	= $this->nit;
 		$factura->cabecera->cufd		= $this->cufd;
-		 $factura->buildCuf(0, $this->modalidad, $tipoEmision, $tipoFactura, $this->codigoControl); 
+		$factura->buildCuf(0, $this->modalidad, $tipoEmision, $tipoFactura, $this->codigoControl);
 
 		//die($factura->cuf);
 		$factura->validate();
@@ -58,11 +59,11 @@ class ServicioFacturacion extends ServicioSiat
 		/* dd($facturaXml); */
 		//print $facturaXml;
 		//$facturaXml = file_get_contents('factura.xml');
-		if( $this->debug )
+		if ($this->debug)
 			$this->debug($facturaXml, 1);
 		//file_put_contents('factura.xml', $facturaXml);
 		//var_dump($facturaXml);die;
-		
+
 		$solicitud = new SolicitudServicioRecepcionFactura();
 		$solicitud->cufd 					= $this->cufd;
 		$solicitud->cuis					= $this->cuis;
@@ -82,20 +83,17 @@ class ServicioFacturacion extends ServicioSiat
 		$solicitud->setBuffer($facturaXml, true);
 		/* dd($solicitud->setBuffer($facturaXml, true)); */
 		/* dd($factura->cabecera); */
- 		try
-		{
+		try {
 			$data = [
 				$solicitud->toArray()
 			];
 
 			/* dd($data); */
-			
+
 			$this->wsdl = $factura->getEndpoint($this->modalidad, $this->ambiente);
 			$res = $this->callAction('recepcionFactura', $data);
-			return response()->json(["response_siat"=>$res,'factura'=>$factura]);
-		}
-		catch(\SoapFault $e)
-		{
+			return $res;
+		} catch (\SoapFault $e) {
 			//print_r($e->getMessage());
 			throw new Exception($e->getMessage());
 		}
@@ -108,19 +106,17 @@ class ServicioFacturacion extends ServicioSiat
 	 * @param int $tipoEmision
 	 * @param int $tipoFactura
 	 */
-	public function recepcionMasivaFactura( array $facturas, $tipoEmision = SiatInvoice::TIPO_EMISION_ONLINE, $tipoFactura = SiatInvoice::FACTURA_DERECHO_CREDITO_FISCAL)
+	public function recepcionMasivaFactura(array $facturas, $tipoEmision = SiatInvoice::TIPO_EMISION_ONLINE, $tipoFactura = SiatInvoice::FACTURA_DERECHO_CREDITO_FISCAL)
 	{
-		try
-		{
+		try {
 			//if( !count($facturas) )
 			//	throw new Exception('Invalid siat invoices, the service requires atleast one invoice');
-			
+
 			$invoiceFiles = [];
 			$invoicesXml = [];
 			//##validate invoices
 			/* dd($facturas); */
-			foreach($facturas as $factura)
-			{
+			foreach ($facturas as $factura) {
 				/* dd($factura->cabecera->cufd); */
 				$factura->cabecera->cufd = $this->cufd;
 				$factura->buildCuf(0, $this->modalidad, $tipoEmision, $tipoFactura, $this->codigoControl);
@@ -155,9 +151,7 @@ class ServicioFacturacion extends ServicioSiat
 			$this->wsdl = $facturas[0]->getEndpoint($this->modalidad, $this->ambiente);
 			$res = $this->callAction('recepcionMasivaFactura', $data);
 			return $res;
-		}
-		catch(SoapFault $e)
-		{
+		} catch (SoapFault $e) {
 			echo $e->getMessage();
 		}
 	}
@@ -172,27 +166,28 @@ class ServicioFacturacion extends ServicioSiat
 	 * @throws Exception
 	 * @return object
 	 */
-	public function recepcionPaqueteFactura(array $facturas, $codigoEvento, $tipoEmision = SiatInvoice::TIPO_EMISION_ONLINE, 
-		$tipoFactura = SiatInvoice::FACTURA_DERECHO_CREDITO_FISCAL, $cafc = null)
-		
-	{
+	public function recepcionPaqueteFactura(
+		array $facturas,
+		$codigoEvento,
+		$tipoEmision = SiatInvoice::TIPO_EMISION_ONLINE,
+		$tipoFactura = SiatInvoice::FACTURA_DERECHO_CREDITO_FISCAL,
+		$cafc = null
+	) {
 		$cafc            = "1011917833B0D";
-		try
-		{
-			if( !count($facturas) )
+		try {
+			if (!count($facturas))
 				throw new Exception('Invalid siat invoices, the service requires atleast one invoice');
 			$xmlInvoices = [];
 			//##validate invoices
 			/* dd($facturas); */
-			foreach($facturas as $factura)
-			{
-				
+			foreach ($facturas as $factura) {
+
 				//$factura->cufd = $this->cufd;
-			
+
 				//print_r($this->buildInvoiceXml($factura));
 				$xmlInvoices[] = $this->buildInvoiceXml($factura);
 			}
-			
+
 			//print_r($xmlInvoices);die();
 			$solicitud = new SolicitudServicioRecepcionPaquete();
 			$solicitud->cafc					= $cafc;
@@ -210,7 +205,7 @@ class ServicioFacturacion extends ServicioSiat
 			$solicitud->codigoEmision			= $tipoEmision;
 			$solicitud->codigoPuntoVenta		= $facturas[0]->cabecera->codigoPuntoVenta;
 			$solicitud->codigoSucursal			= $facturas[0]->cabecera->codigoSucursal;
-			
+
 			//$solicitud->setBuffer($xmlInvoices);
 			$solicitud->setBufferFromInvoicesXml($xmlInvoices);
 			/* dd($xmlInvoices); */
@@ -220,13 +215,11 @@ class ServicioFacturacion extends ServicioSiat
 			];
 
 			/* 	dd($data); */
-			
+
 			$this->wsdl = $facturas[0]->getEndpoint($this->modalidad, $this->ambiente);
 			$res = $this->callAction('recepcionPaqueteFactura', $data);
 			return $res;
-		}
-		catch(SoapFault $e)
-		{
+		} catch (SoapFault $e) {
 			echo $e->getMessage();
 		}
 	}
@@ -240,11 +233,13 @@ class ServicioFacturacion extends ServicioSiat
 	 * @param int $documentoSector
 	 * @return object Respuesta del servicio siat
 	 */
-	public function validacionRecepcionPaqueteFactura($codigoSucursal, $codigoPuntoVenta, $codigoRecepcion,
+	public function validacionRecepcionPaqueteFactura(
+		$codigoSucursal,
+		$codigoPuntoVenta,
+		$codigoRecepcion,
 		$tipoFactura = SiatInvoice::FACTURA_DERECHO_CREDITO_FISCAL,
 		$documentoSector = DocumentTypes::FACTURA_COMPRA_VENTA
-	)
-	{
+	) {
 		$solicitud = new SolicitudServicioValidacionRecepcionPaquete();
 		$solicitud->cuis 	= $this->cuis;
 		$solicitud->cufd 	= $this->cufd;
@@ -258,7 +253,7 @@ class ServicioFacturacion extends ServicioSiat
 		$solicitud->tipoFacturaDocumento	= $tipoFactura;
 		$solicitud->codigoDocumentoSector	= $documentoSector;
 		$solicitud->codigoRecepcion			= $codigoRecepcion;
-		
+
 		$data = [
 			$solicitud->toArray()
 		];
@@ -275,11 +270,13 @@ class ServicioFacturacion extends ServicioSiat
 	 * @param int $documentoSector
 	 * @return object Respuesta del servicio siat
 	 */
-	public function validacionRecepcionMasivaFactura($codigoSucursal, $codigoPuntoVenta, $codigoRecepcion,
-		$tipoFactura = SiatInvoice::FACTURA_DERECHO_CREDITO_FISCAL, 
+	public function validacionRecepcionMasivaFactura(
+		$codigoSucursal,
+		$codigoPuntoVenta,
+		$codigoRecepcion,
+		$tipoFactura = SiatInvoice::FACTURA_DERECHO_CREDITO_FISCAL,
 		$documentoSector = DocumentTypes::FACTURA_COMPRA_VENTA
-	)
-	{
+	) {
 		$solicitud = new SolicitudServicioValidacionRecepcionMasiva();
 		$solicitud->cuis 	= $this->cuis;
 		$solicitud->cufd 	= $this->cufd;
@@ -293,7 +290,7 @@ class ServicioFacturacion extends ServicioSiat
 		$solicitud->tipoFacturaDocumento	= $tipoFactura;
 		$solicitud->codigoDocumentoSector	= $documentoSector;
 		$solicitud->codigoRecepcion			= $codigoRecepcion;
-		
+
 		$data = [
 			$solicitud->toArray()
 		];
@@ -331,7 +328,7 @@ class ServicioFacturacion extends ServicioSiat
 		$solicitud->codigoMotivo			= $motivo;
 		$solicitud->cuf						= $cuf;
 		$solicitud->validate();
-		
+
 		$data = [
 			$solicitud->toArray()
 		];
@@ -340,6 +337,5 @@ class ServicioFacturacion extends ServicioSiat
 		$res = $this->callAction('anulacionFactura', $data);
 		/* dd($res); */
 		return $res;
-		
 	}
 }

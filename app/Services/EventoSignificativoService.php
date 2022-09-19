@@ -26,7 +26,7 @@ class EventoSignificativoService
 	function pruebasEventos2($codigo_evento,$sucursal,$fecha_inicio_contingencia,$fecha_final_contingencia){
 
 		
-		$puntoventa = 1;
+		$puntoventa = 0;
 		$codigoEvento	=  $codigo_evento;
 		$fecha_generica = Carbon::now();
 		$sucursal_db = Sucursal::find($sucursal);
@@ -55,11 +55,11 @@ class EventoSignificativoService
 		$pvfechaFin		= (new Carbon())->subMinutes(2)->format("Y-m-d\TH:i:s.v"); */
 		
 		$pvfechaInicio = (new Carbon($fecha_inicio_contingencia))->format("Y-m-d\TH:i:s.v");
-		$pvfechaFin	   =  (new Carbon($fecha_final_contingencia))->subMinutes(2)->format("Y-m-d\TH:i:s.v");
+		$pvfechaFin	   =  (new Carbon($fecha_final_contingencia))->format("Y-m-d\TH:i:s.v");
 		 /* dd($pvfechaInicio,$pvfechaFin); */ 
 		
 
-		  $evento 	= $this->obtenerListadoEventos($sucursal_db->id, $puntoventa, $codigoEvento);  
+		$evento 	= $this->obtenerListadoEventos($sucursal_db->id, $puntoventa, $codigoEvento);  
 		  
 		 
 		$resEvento = $this->registroEvento(
@@ -131,6 +131,7 @@ class EventoSignificativoService
 		/* dd($buscarId); */
 		$nombre_evento = 'VENTA EN LUGARES SIN INTERNET';
 		$evento = null;
+		/* dd($eventsList->RespuestaListaParametricas); */
 		foreach ($eventsList->RespuestaListaParametricas->listaCodigos as $evt) {
 			/* echo( json_encode($evt) );
 			echo($buscarId); */

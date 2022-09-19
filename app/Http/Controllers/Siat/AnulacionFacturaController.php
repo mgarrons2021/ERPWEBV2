@@ -96,7 +96,7 @@ class AnulacionFacturaController extends Controller
     function prueba_anulacion()
     {
         $sucursal = 0;
-        $puntoventa = 1;
+        $puntoventa = 0;
 
         $resCuis     = $this->cuisService->obtenerCuis($puntoventa, $sucursal, true);
         $resCufd    = $this->cufdService->obtenerCufd($puntoventa, $sucursal, $resCuis->RespuestaCuis->codigo, true);
@@ -104,7 +104,7 @@ class AnulacionFacturaController extends Controller
 
         $factura = $this->emisionIndividualService->construirFactura($puntoventa, $sucursal, $this->configService->config->modalidad, $this->configService->documentoSector, $this->configService->codigoActividad, $this->configService->codigoProductoSin);
         $res = $this->anulacionService->testFactura($sucursal, $puntoventa, $factura, $this->configService->tipoFactura);
-        /* print_r($res); */
+    
         if ($res->RespuestaServicioFacturacion->codigoEstado == 908) {
             $resa = $this->anulacionService->testAnular2(1, $factura->cabecera->cuf, $sucursal, $puntoventa, $this->configService->tipoFactura, SiatInvoice::TIPO_EMISION_ONLINE, $this->configService->documentoSector);
             print_r($resa);

@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Models\TurnoIngreso;
-use App\Models\Venta;
 use Carbon\Carbon;
-use App\Models\Siat\SiatCui;
-use App\Models\Siat\SiatCufd;
-use App\Models\Sucursal;
 use App\Models\User;
+use App\Models\Venta;
+use App\Models\Sucursal;
+use App\Models\Siat\SiatCui;
 use Illuminate\Http\Request;
+use App\Models\TurnoIngreso;
+use App\Models\Siat\SiatCufd;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\SiatConfig;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Services\ServicioSiat;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Services\ServicioFacturacionCodigos;
@@ -40,7 +40,7 @@ class TurnoController extends Controller
         $user = $request->user_id;
         $user_id = User::find($request->user_id);
         $sucursal = Sucursal::find($request->sucursal_id);
-        $codigoPuntoVenta  = 1;
+        $codigoPuntoVenta  = 0;
         $fecha_generado_cufd = Carbon::now()->toDateTimeString();
         $fecha = Carbon::now()->format('Y-m-d H:i');
         $turno_am = DB::select("select turno from turnos_ingresos where fecha = '$fecha' and user_id = '$user' and turno = 0");

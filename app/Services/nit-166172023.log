@@ -55281,3 +55281,3002 @@ Illuminate\Http\JsonResponse Object
     [exception] => 
 )
 
+[2022-09-19 08:11:06]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:11:06]#
+Illuminate\Http\JsonResponse Object
+(
+    [data:protected] => {"response_siat":{"RespuestaServicioFacturacion":{"codigoDescripcion":"VALIDADA","codigoEstado":908,"codigoRecepcion":"cbe415d4-3813-11ed-83a8-0fba2508ef62","transaccion":true}},"factura":{"cabecera":{"nitEmisor":166172023,"razonSocialEmisor":"DONESCO S.R.L","municipio":"La Paz","telefono":"88867523","numeroFactura":16,"cuf":"B5EB51F7ABA0C207EF7A4F0E282C15A363D9CEA10323768DA91D6D74","cufd":"BQWVDXTBRQUE=NzzBCMjYwMjVGRTc=Q1V+bUlJVUpXVUJIyOTA3RjJCQUVDQ","codigoSucursal":0,"direccion":"Pedro Kramer #109","codigoPuntoVenta":1,"fechaEmision":"2022-09-19T08:11:04.000","nombreRazonSocial":"Perez","codigoTipoDocumentoIdentidad":1,"numeroDocumento":2287567,"complemento":null,"codigoCliente":"CC-2287567","codigoMetodoPago":1,"numeroTarjeta":null,"montoTotal":25720,"montoTotalSujetoIva":25720,"codigoMoneda":1,"tipoCambio":1,"montoTotalMoneda":25720,"montoGiftCard":null,"descuentoAdicional":0,"codigoExcepcion":null,"cafc":null,"leyenda":"Ley Nro 453: Tienes derecho a recibir informaci\u00f3n sobre las caracter\u00edsticas y contenidos de los servicios que utilices.","usuario":"MonoBusiness User 01","codigoDocumentoSector":1},"detalle":[{"actividadEconomica":"561110","codigoProductoSin":"63310","codigoProducto":"D001-1635","descripcion":"Nombre del producto #01","cantidad":1,"unidadMedida":58,"precioUnitario":7290,"montoDescuento":0,"subTotal":7290,"numeroSerie":null,"numeroImei":null},{"actividadEconomica":"561110","codigoProductoSin":"63310","codigoProducto":"D001-2589","descripcion":"Nombre del producto #02","cantidad":1,"unidadMedida":58,"precioUnitario":18430,"montoDescuento":0,"subTotal":18430,"numeroSerie":null,"numeroImei":null}],"endpoint":"https:\/\/pilotosiatservicios.impuestos.gob.bo\/v2\/ServicioFacturacionCompraVenta?wsdl"}}
+    [callback:protected] => 
+    [encodingOptions:protected] => 0
+    [headers] => Symfony\Component\HttpFoundation\ResponseHeaderBag Object
+        (
+            [computedCacheControl:protected] => Array
+                (
+                    [no-cache] => 1
+                    [private] => 1
+                )
+
+            [cookies:protected] => Array
+                (
+                )
+
+            [headerNames:protected] => Array
+                (
+                    [cache-control] => Cache-Control
+                    [date] => Date
+                    [content-type] => Content-Type
+                )
+
+            [headers:protected] => Array
+                (
+                    [cache-control] => Array
+                        (
+                            [0] => no-cache, private
+                        )
+
+                    [date] => Array
+                        (
+                            [0] => Mon, 19 Sep 2022 12:11:06 GMT
+                        )
+
+                    [content-type] => Array
+                        (
+                            [0] => application/json
+                        )
+
+                )
+
+            [cacheControl:protected] => Array
+                (
+                )
+
+        )
+
+    [content:protected] => {"response_siat":{"RespuestaServicioFacturacion":{"codigoDescripcion":"VALIDADA","codigoEstado":908,"codigoRecepcion":"cbe415d4-3813-11ed-83a8-0fba2508ef62","transaccion":true}},"factura":{"cabecera":{"nitEmisor":166172023,"razonSocialEmisor":"DONESCO S.R.L","municipio":"La Paz","telefono":"88867523","numeroFactura":16,"cuf":"B5EB51F7ABA0C207EF7A4F0E282C15A363D9CEA10323768DA91D6D74","cufd":"BQWVDXTBRQUE=NzzBCMjYwMjVGRTc=Q1V+bUlJVUpXVUJIyOTA3RjJCQUVDQ","codigoSucursal":0,"direccion":"Pedro Kramer #109","codigoPuntoVenta":1,"fechaEmision":"2022-09-19T08:11:04.000","nombreRazonSocial":"Perez","codigoTipoDocumentoIdentidad":1,"numeroDocumento":2287567,"complemento":null,"codigoCliente":"CC-2287567","codigoMetodoPago":1,"numeroTarjeta":null,"montoTotal":25720,"montoTotalSujetoIva":25720,"codigoMoneda":1,"tipoCambio":1,"montoTotalMoneda":25720,"montoGiftCard":null,"descuentoAdicional":0,"codigoExcepcion":null,"cafc":null,"leyenda":"Ley Nro 453: Tienes derecho a recibir informaci\u00f3n sobre las caracter\u00edsticas y contenidos de los servicios que utilices.","usuario":"MonoBusiness User 01","codigoDocumentoSector":1},"detalle":[{"actividadEconomica":"561110","codigoProductoSin":"63310","codigoProducto":"D001-1635","descripcion":"Nombre del producto #01","cantidad":1,"unidadMedida":58,"precioUnitario":7290,"montoDescuento":0,"subTotal":7290,"numeroSerie":null,"numeroImei":null},{"actividadEconomica":"561110","codigoProductoSin":"63310","codigoProducto":"D001-2589","descripcion":"Nombre del producto #02","cantidad":1,"unidadMedida":58,"precioUnitario":18430,"montoDescuento":0,"subTotal":18430,"numeroSerie":null,"numeroImei":null}],"endpoint":"https:\/\/pilotosiatservicios.impuestos.gob.bo\/v2\/ServicioFacturacionCompraVenta?wsdl"}}
+    [version:protected] => 1.0
+    [statusCode:protected] => 200
+    [statusText:protected] => OK
+    [charset:protected] => 
+    [original] => Array
+        (
+            [response_siat] => stdClass Object
+                (
+                    [RespuestaServicioFacturacion] => stdClass Object
+                        (
+                            [codigoDescripcion] => VALIDADA
+                            [codigoEstado] => 908
+                            [codigoRecepcion] => cbe415d4-3813-11ed-83a8-0fba2508ef62
+                            [transaccion] => 1
+                        )
+
+                )
+
+            [factura] => SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Invoices\CompraVenta Object
+                (
+                    [cabecera] => SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Invoices\InvoiceHeader Object
+                        (
+                            [nitEmisor] => 166172023
+                            [razonSocialEmisor] => DONESCO S.R.L
+                            [municipio] => La Paz
+                            [telefono] => 88867523
+                            [numeroFactura] => 16
+                            [cuf] => B5EB51F7ABA0C207EF7A4F0E282C15A363D9CEA10323768DA91D6D74
+                            [cufd] => BQWVDXTBRQUE=NzzBCMjYwMjVGRTc=Q1V+bUlJVUpXVUJIyOTA3RjJCQUVDQ
+                            [codigoSucursal] => 0
+                            [direccion] => Pedro Kramer #109
+                            [codigoPuntoVenta] => 1
+                            [fechaEmision] => 2022-09-19T08:11:04.000
+                            [nombreRazonSocial] => Perez
+                            [codigoTipoDocumentoIdentidad] => 1
+                            [numeroDocumento] => 2287567
+                            [complemento] => 
+                            [codigoCliente] => CC-2287567
+                            [codigoMetodoPago] => 1
+                            [numeroTarjeta] => 
+                            [numeroTarjetaReal:protected] => 
+                            [montoTotal] => 25720
+                            [montoTotalSujetoIva] => 25720
+                            [codigoMoneda] => 1
+                            [tipoCambio] => 1
+                            [montoTotalMoneda] => 25720
+                            [montoGiftCard] => 
+                            [descuentoAdicional] => 0
+                            [codigoExcepcion] => 
+                            [cafc] => 
+                            [leyenda] => Ley Nro 453: Tienes derecho a recibir información sobre las características y contenidos de los servicios que utilices.
+                            [usuario] => MonoBusiness User 01
+                            [codigoDocumentoSector] => 1
+                            [xmlAllFields:protected] => 1
+                            [namespaces:protected] => Array
+                                (
+                                )
+
+                            [classAlias:protected] => 
+                            [skipProperties:protected] => Array
+                                (
+                                )
+
+                            [xmlAttributes:protected] => Array
+                                (
+                                    [complemento] => Array
+                                        (
+                                            [0] => Array
+                                                (
+                                                    [attr] => xsi:nil
+                                                    [value] => true
+                                                    [ns] => http://www.w3.org/2001/XMLSchema-instance
+                                                )
+
+                                        )
+
+                                    [numeroTarjeta] => Array
+                                        (
+                                            [0] => Array
+                                                (
+                                                    [attr] => xsi:nil
+                                                    [value] => true
+                                                    [ns] => http://www.w3.org/2001/XMLSchema-instance
+                                                )
+
+                                        )
+
+                                    [montoGiftCard] => Array
+                                        (
+                                            [0] => Array
+                                                (
+                                                    [attr] => xsi:nil
+                                                    [value] => true
+                                                    [ns] => http://www.w3.org/2001/XMLSchema-instance
+                                                )
+
+                                        )
+
+                                    [codigoExcepcion] => Array
+                                        (
+                                            [0] => Array
+                                                (
+                                                    [attr] => xsi:nil
+                                                    [value] => true
+                                                    [ns] => http://www.w3.org/2001/XMLSchema-instance
+                                                )
+
+                                        )
+
+                                    [cafc] => Array
+                                        (
+                                            [0] => Array
+                                                (
+                                                    [attr] => xsi:nil
+                                                    [value] => true
+                                                    [ns] => http://www.w3.org/2001/XMLSchema-instance
+                                                )
+
+                                        )
+
+                                )
+
+                        )
+
+                    [detalle] => Array
+                        (
+                            [0] => SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Invoices\InvoiceDetail Object
+                                (
+                                    [actividadEconomica] => 561110
+                                    [codigoProductoSin] => 63310
+                                    [codigoProducto] => D001-1635
+                                    [descripcion] => Nombre del producto #01
+                                    [cantidad] => 1
+                                    [unidadMedida] => 58
+                                    [precioUnitario] => 7290
+                                    [montoDescuento] => 0
+                                    [subTotal] => 7290
+                                    [numeroSerie] => 
+                                    [numeroImei] => 
+                                    [xmlAllFields:protected] => 1
+                                    [namespaces:protected] => Array
+                                        (
+                                        )
+
+                                    [classAlias:protected] => 
+                                    [skipProperties:protected] => Array
+                                        (
+                                        )
+
+                                    [xmlAttributes:protected] => Array
+                                        (
+                                            [numeroSerie] => Array
+                                                (
+                                                    [0] => Array
+                                                        (
+                                                            [attr] => xsi:nil
+                                                            [value] => true
+                                                            [ns] => http://www.w3.org/2001/XMLSchema-instance
+                                                        )
+
+                                                )
+
+                                            [numeroImei] => Array
+                                                (
+                                                    [0] => Array
+                                                        (
+                                                            [attr] => xsi:nil
+                                                            [value] => true
+                                                            [ns] => http://www.w3.org/2001/XMLSchema-instance
+                                                        )
+
+                                                )
+
+                                        )
+
+                                )
+
+                            [1] => SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Invoices\InvoiceDetail Object
+                                (
+                                    [actividadEconomica] => 561110
+                                    [codigoProductoSin] => 63310
+                                    [codigoProducto] => D001-2589
+                                    [descripcion] => Nombre del producto #02
+                                    [cantidad] => 1
+                                    [unidadMedida] => 58
+                                    [precioUnitario] => 18430
+                                    [montoDescuento] => 0
+                                    [subTotal] => 18430
+                                    [numeroSerie] => 
+                                    [numeroImei] => 
+                                    [xmlAllFields:protected] => 1
+                                    [namespaces:protected] => Array
+                                        (
+                                        )
+
+                                    [classAlias:protected] => 
+                                    [skipProperties:protected] => Array
+                                        (
+                                        )
+
+                                    [xmlAttributes:protected] => Array
+                                        (
+                                            [numeroSerie] => Array
+                                                (
+                                                    [0] => Array
+                                                        (
+                                                            [attr] => xsi:nil
+                                                            [value] => true
+                                                            [ns] => http://www.w3.org/2001/XMLSchema-instance
+                                                        )
+
+                                                )
+
+                                            [numeroImei] => Array
+                                                (
+                                                    [0] => Array
+                                                        (
+                                                            [attr] => xsi:nil
+                                                            [value] => true
+                                                            [ns] => http://www.w3.org/2001/XMLSchema-instance
+                                                        )
+
+                                                )
+
+                                        )
+
+                                )
+
+                        )
+
+                    [required:protected] => Array
+                        (
+                        )
+
+                    [nsData:protected] => Array
+                        (
+                        )
+
+                    [endpoint] => https://pilotosiatservicios.impuestos.gob.bo/v2/ServicioFacturacionCompraVenta?wsdl
+                    [xmlAllFields:protected] => 1
+                    [namespaces:protected] => Array
+                        (
+                        )
+
+                    [classAlias:protected] => facturaComputarizadaCompraVenta
+                    [skipProperties:protected] => Array
+                        (
+                            [0] => endpoint
+                            [1] => classAlias
+                            [2] => xmlAllFields
+                            [3] => namespaces
+                            [4] => skipProperties
+                            [5] => xmlAttributes
+                        )
+
+                    [xmlAttributes:protected] => Array
+                        (
+                        )
+
+                )
+
+        )
+
+    [exception] => 
+)
+
+[2022-09-19 08:11:11]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:11:11]#
+Illuminate\Http\JsonResponse Object
+(
+    [data:protected] => {"response_siat":{"RespuestaServicioFacturacion":{"codigoDescripcion":"VALIDADA","codigoEstado":908,"codigoRecepcion":"cf4fa279-3813-11ed-83a8-0fba2508ef62","transaccion":true}},"factura":{"cabecera":{"nitEmisor":166172023,"razonSocialEmisor":"DONESCO S.R.L","municipio":"La Paz","telefono":"88867523","numeroFactura":681,"cuf":"B5EB51F7ABA0C207F0B08064E41A45BA3B1939FB12BBD78DA91D6D74","cufd":"BQWVDXTBRQUE=NzzBCMjYwMjVGRTc=Q0t7c0lJVUpXVUJIyOTA3RjJCQUVDQ","codigoSucursal":0,"direccion":"Pedro Kramer #109","codigoPuntoVenta":1,"fechaEmision":"2022-09-19T08:11:10.000","nombreRazonSocial":"Perez","codigoTipoDocumentoIdentidad":1,"numeroDocumento":2287567,"complemento":null,"codigoCliente":"CC-2287567","codigoMetodoPago":1,"numeroTarjeta":null,"montoTotal":75430,"montoTotalSujetoIva":75430,"codigoMoneda":1,"tipoCambio":1,"montoTotalMoneda":75430,"montoGiftCard":null,"descuentoAdicional":0,"codigoExcepcion":null,"cafc":null,"leyenda":"Ley Nro 453: Tienes derecho a recibir informaci\u00f3n sobre las caracter\u00edsticas y contenidos de los servicios que utilices.","usuario":"MonoBusiness User 01","codigoDocumentoSector":1},"detalle":[{"actividadEconomica":"561110","codigoProductoSin":"63310","codigoProducto":"D001-3978","descripcion":"Nombre del producto #01","cantidad":1,"unidadMedida":58,"precioUnitario":39340,"montoDescuento":0,"subTotal":39340,"numeroSerie":null,"numeroImei":null},{"actividadEconomica":"561110","codigoProductoSin":"63310","codigoProducto":"D001-2544","descripcion":"Nombre del producto #02","cantidad":1,"unidadMedida":58,"precioUnitario":36090,"montoDescuento":0,"subTotal":36090,"numeroSerie":null,"numeroImei":null}],"endpoint":"https:\/\/pilotosiatservicios.impuestos.gob.bo\/v2\/ServicioFacturacionCompraVenta?wsdl"}}
+    [callback:protected] => 
+    [encodingOptions:protected] => 0
+    [headers] => Symfony\Component\HttpFoundation\ResponseHeaderBag Object
+        (
+            [computedCacheControl:protected] => Array
+                (
+                    [no-cache] => 1
+                    [private] => 1
+                )
+
+            [cookies:protected] => Array
+                (
+                )
+
+            [headerNames:protected] => Array
+                (
+                    [cache-control] => Cache-Control
+                    [date] => Date
+                    [content-type] => Content-Type
+                )
+
+            [headers:protected] => Array
+                (
+                    [cache-control] => Array
+                        (
+                            [0] => no-cache, private
+                        )
+
+                    [date] => Array
+                        (
+                            [0] => Mon, 19 Sep 2022 12:11:11 GMT
+                        )
+
+                    [content-type] => Array
+                        (
+                            [0] => application/json
+                        )
+
+                )
+
+            [cacheControl:protected] => Array
+                (
+                )
+
+        )
+
+    [content:protected] => {"response_siat":{"RespuestaServicioFacturacion":{"codigoDescripcion":"VALIDADA","codigoEstado":908,"codigoRecepcion":"cf4fa279-3813-11ed-83a8-0fba2508ef62","transaccion":true}},"factura":{"cabecera":{"nitEmisor":166172023,"razonSocialEmisor":"DONESCO S.R.L","municipio":"La Paz","telefono":"88867523","numeroFactura":681,"cuf":"B5EB51F7ABA0C207F0B08064E41A45BA3B1939FB12BBD78DA91D6D74","cufd":"BQWVDXTBRQUE=NzzBCMjYwMjVGRTc=Q0t7c0lJVUpXVUJIyOTA3RjJCQUVDQ","codigoSucursal":0,"direccion":"Pedro Kramer #109","codigoPuntoVenta":1,"fechaEmision":"2022-09-19T08:11:10.000","nombreRazonSocial":"Perez","codigoTipoDocumentoIdentidad":1,"numeroDocumento":2287567,"complemento":null,"codigoCliente":"CC-2287567","codigoMetodoPago":1,"numeroTarjeta":null,"montoTotal":75430,"montoTotalSujetoIva":75430,"codigoMoneda":1,"tipoCambio":1,"montoTotalMoneda":75430,"montoGiftCard":null,"descuentoAdicional":0,"codigoExcepcion":null,"cafc":null,"leyenda":"Ley Nro 453: Tienes derecho a recibir informaci\u00f3n sobre las caracter\u00edsticas y contenidos de los servicios que utilices.","usuario":"MonoBusiness User 01","codigoDocumentoSector":1},"detalle":[{"actividadEconomica":"561110","codigoProductoSin":"63310","codigoProducto":"D001-3978","descripcion":"Nombre del producto #01","cantidad":1,"unidadMedida":58,"precioUnitario":39340,"montoDescuento":0,"subTotal":39340,"numeroSerie":null,"numeroImei":null},{"actividadEconomica":"561110","codigoProductoSin":"63310","codigoProducto":"D001-2544","descripcion":"Nombre del producto #02","cantidad":1,"unidadMedida":58,"precioUnitario":36090,"montoDescuento":0,"subTotal":36090,"numeroSerie":null,"numeroImei":null}],"endpoint":"https:\/\/pilotosiatservicios.impuestos.gob.bo\/v2\/ServicioFacturacionCompraVenta?wsdl"}}
+    [version:protected] => 1.0
+    [statusCode:protected] => 200
+    [statusText:protected] => OK
+    [charset:protected] => 
+    [original] => Array
+        (
+            [response_siat] => stdClass Object
+                (
+                    [RespuestaServicioFacturacion] => stdClass Object
+                        (
+                            [codigoDescripcion] => VALIDADA
+                            [codigoEstado] => 908
+                            [codigoRecepcion] => cf4fa279-3813-11ed-83a8-0fba2508ef62
+                            [transaccion] => 1
+                        )
+
+                )
+
+            [factura] => SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Invoices\CompraVenta Object
+                (
+                    [cabecera] => SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Invoices\InvoiceHeader Object
+                        (
+                            [nitEmisor] => 166172023
+                            [razonSocialEmisor] => DONESCO S.R.L
+                            [municipio] => La Paz
+                            [telefono] => 88867523
+                            [numeroFactura] => 681
+                            [cuf] => B5EB51F7ABA0C207F0B08064E41A45BA3B1939FB12BBD78DA91D6D74
+                            [cufd] => BQWVDXTBRQUE=NzzBCMjYwMjVGRTc=Q0t7c0lJVUpXVUJIyOTA3RjJCQUVDQ
+                            [codigoSucursal] => 0
+                            [direccion] => Pedro Kramer #109
+                            [codigoPuntoVenta] => 1
+                            [fechaEmision] => 2022-09-19T08:11:10.000
+                            [nombreRazonSocial] => Perez
+                            [codigoTipoDocumentoIdentidad] => 1
+                            [numeroDocumento] => 2287567
+                            [complemento] => 
+                            [codigoCliente] => CC-2287567
+                            [codigoMetodoPago] => 1
+                            [numeroTarjeta] => 
+                            [numeroTarjetaReal:protected] => 
+                            [montoTotal] => 75430
+                            [montoTotalSujetoIva] => 75430
+                            [codigoMoneda] => 1
+                            [tipoCambio] => 1
+                            [montoTotalMoneda] => 75430
+                            [montoGiftCard] => 
+                            [descuentoAdicional] => 0
+                            [codigoExcepcion] => 
+                            [cafc] => 
+                            [leyenda] => Ley Nro 453: Tienes derecho a recibir información sobre las características y contenidos de los servicios que utilices.
+                            [usuario] => MonoBusiness User 01
+                            [codigoDocumentoSector] => 1
+                            [xmlAllFields:protected] => 1
+                            [namespaces:protected] => Array
+                                (
+                                )
+
+                            [classAlias:protected] => 
+                            [skipProperties:protected] => Array
+                                (
+                                )
+
+                            [xmlAttributes:protected] => Array
+                                (
+                                    [complemento] => Array
+                                        (
+                                            [0] => Array
+                                                (
+                                                    [attr] => xsi:nil
+                                                    [value] => true
+                                                    [ns] => http://www.w3.org/2001/XMLSchema-instance
+                                                )
+
+                                        )
+
+                                    [numeroTarjeta] => Array
+                                        (
+                                            [0] => Array
+                                                (
+                                                    [attr] => xsi:nil
+                                                    [value] => true
+                                                    [ns] => http://www.w3.org/2001/XMLSchema-instance
+                                                )
+
+                                        )
+
+                                    [montoGiftCard] => Array
+                                        (
+                                            [0] => Array
+                                                (
+                                                    [attr] => xsi:nil
+                                                    [value] => true
+                                                    [ns] => http://www.w3.org/2001/XMLSchema-instance
+                                                )
+
+                                        )
+
+                                    [codigoExcepcion] => Array
+                                        (
+                                            [0] => Array
+                                                (
+                                                    [attr] => xsi:nil
+                                                    [value] => true
+                                                    [ns] => http://www.w3.org/2001/XMLSchema-instance
+                                                )
+
+                                        )
+
+                                    [cafc] => Array
+                                        (
+                                            [0] => Array
+                                                (
+                                                    [attr] => xsi:nil
+                                                    [value] => true
+                                                    [ns] => http://www.w3.org/2001/XMLSchema-instance
+                                                )
+
+                                        )
+
+                                )
+
+                        )
+
+                    [detalle] => Array
+                        (
+                            [0] => SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Invoices\InvoiceDetail Object
+                                (
+                                    [actividadEconomica] => 561110
+                                    [codigoProductoSin] => 63310
+                                    [codigoProducto] => D001-3978
+                                    [descripcion] => Nombre del producto #01
+                                    [cantidad] => 1
+                                    [unidadMedida] => 58
+                                    [precioUnitario] => 39340
+                                    [montoDescuento] => 0
+                                    [subTotal] => 39340
+                                    [numeroSerie] => 
+                                    [numeroImei] => 
+                                    [xmlAllFields:protected] => 1
+                                    [namespaces:protected] => Array
+                                        (
+                                        )
+
+                                    [classAlias:protected] => 
+                                    [skipProperties:protected] => Array
+                                        (
+                                        )
+
+                                    [xmlAttributes:protected] => Array
+                                        (
+                                            [numeroSerie] => Array
+                                                (
+                                                    [0] => Array
+                                                        (
+                                                            [attr] => xsi:nil
+                                                            [value] => true
+                                                            [ns] => http://www.w3.org/2001/XMLSchema-instance
+                                                        )
+
+                                                )
+
+                                            [numeroImei] => Array
+                                                (
+                                                    [0] => Array
+                                                        (
+                                                            [attr] => xsi:nil
+                                                            [value] => true
+                                                            [ns] => http://www.w3.org/2001/XMLSchema-instance
+                                                        )
+
+                                                )
+
+                                        )
+
+                                )
+
+                            [1] => SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Invoices\InvoiceDetail Object
+                                (
+                                    [actividadEconomica] => 561110
+                                    [codigoProductoSin] => 63310
+                                    [codigoProducto] => D001-2544
+                                    [descripcion] => Nombre del producto #02
+                                    [cantidad] => 1
+                                    [unidadMedida] => 58
+                                    [precioUnitario] => 36090
+                                    [montoDescuento] => 0
+                                    [subTotal] => 36090
+                                    [numeroSerie] => 
+                                    [numeroImei] => 
+                                    [xmlAllFields:protected] => 1
+                                    [namespaces:protected] => Array
+                                        (
+                                        )
+
+                                    [classAlias:protected] => 
+                                    [skipProperties:protected] => Array
+                                        (
+                                        )
+
+                                    [xmlAttributes:protected] => Array
+                                        (
+                                            [numeroSerie] => Array
+                                                (
+                                                    [0] => Array
+                                                        (
+                                                            [attr] => xsi:nil
+                                                            [value] => true
+                                                            [ns] => http://www.w3.org/2001/XMLSchema-instance
+                                                        )
+
+                                                )
+
+                                            [numeroImei] => Array
+                                                (
+                                                    [0] => Array
+                                                        (
+                                                            [attr] => xsi:nil
+                                                            [value] => true
+                                                            [ns] => http://www.w3.org/2001/XMLSchema-instance
+                                                        )
+
+                                                )
+
+                                        )
+
+                                )
+
+                        )
+
+                    [required:protected] => Array
+                        (
+                        )
+
+                    [nsData:protected] => Array
+                        (
+                        )
+
+                    [endpoint] => https://pilotosiatservicios.impuestos.gob.bo/v2/ServicioFacturacionCompraVenta?wsdl
+                    [xmlAllFields:protected] => 1
+                    [namespaces:protected] => Array
+                        (
+                        )
+
+                    [classAlias:protected] => facturaComputarizadaCompraVenta
+                    [skipProperties:protected] => Array
+                        (
+                            [0] => endpoint
+                            [1] => classAlias
+                            [2] => xmlAllFields
+                            [3] => namespaces
+                            [4] => skipProperties
+                            [5] => xmlAttributes
+                        )
+
+                    [xmlAttributes:protected] => Array
+                        (
+                        )
+
+                )
+
+        )
+
+    [exception] => 
+)
+
+[2022-09-19 08:12:19]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:12:19]#
+Illuminate\Http\JsonResponse Object
+(
+    [data:protected] => {"response_siat":{"RespuestaServicioFacturacion":{"codigoDescripcion":"VALIDADA","codigoEstado":908,"codigoRecepcion":"f78b031e-3813-11ed-83a8-0fba2508ef62","transaccion":true}},"factura":{"cabecera":{"nitEmisor":166172023,"razonSocialEmisor":"DONESCO S.R.L","municipio":"La Paz","telefono":"88867523","numeroFactura":906,"cuf":"B5EB51F7ABA0C2080344CA417B092718712EAF24D3066E9DA91D6D74","cufd":"BQWVDXTBRQUE=NzzBCMjYwMjVGRTc=QzlGbEpJVUpXVUJIyOTA3RjJCQUVDQ","codigoSucursal":0,"direccion":"Pedro Kramer #109","codigoPuntoVenta":1,"fechaEmision":"2022-09-19T08:12:02.000","nombreRazonSocial":"Perez","codigoTipoDocumentoIdentidad":1,"numeroDocumento":2287567,"complemento":null,"codigoCliente":"CC-2287567","codigoMetodoPago":1,"numeroTarjeta":null,"montoTotal":19040,"montoTotalSujetoIva":19040,"codigoMoneda":1,"tipoCambio":1,"montoTotalMoneda":19040,"montoGiftCard":null,"descuentoAdicional":0,"codigoExcepcion":null,"cafc":null,"leyenda":"Ley Nro 453: Tienes derecho a recibir informaci\u00f3n sobre las caracter\u00edsticas y contenidos de los servicios que utilices.","usuario":"MonoBusiness User 01","codigoDocumentoSector":1},"detalle":[{"actividadEconomica":"561110","codigoProductoSin":"63310","codigoProducto":"D001-3008","descripcion":"Nombre del producto #01","cantidad":1,"unidadMedida":58,"precioUnitario":15220,"montoDescuento":0,"subTotal":15220,"numeroSerie":null,"numeroImei":null},{"actividadEconomica":"561110","codigoProductoSin":"63310","codigoProducto":"D001-2921","descripcion":"Nombre del producto #02","cantidad":1,"unidadMedida":58,"precioUnitario":3820,"montoDescuento":0,"subTotal":3820,"numeroSerie":null,"numeroImei":null}],"endpoint":"https:\/\/pilotosiatservicios.impuestos.gob.bo\/v2\/ServicioFacturacionCompraVenta?wsdl"}}
+    [callback:protected] => 
+    [encodingOptions:protected] => 0
+    [headers] => Symfony\Component\HttpFoundation\ResponseHeaderBag Object
+        (
+            [computedCacheControl:protected] => Array
+                (
+                    [no-cache] => 1
+                    [private] => 1
+                )
+
+            [cookies:protected] => Array
+                (
+                )
+
+            [headerNames:protected] => Array
+                (
+                    [cache-control] => Cache-Control
+                    [date] => Date
+                    [content-type] => Content-Type
+                )
+
+            [headers:protected] => Array
+                (
+                    [cache-control] => Array
+                        (
+                            [0] => no-cache, private
+                        )
+
+                    [date] => Array
+                        (
+                            [0] => Mon, 19 Sep 2022 12:12:19 GMT
+                        )
+
+                    [content-type] => Array
+                        (
+                            [0] => application/json
+                        )
+
+                )
+
+            [cacheControl:protected] => Array
+                (
+                )
+
+        )
+
+    [content:protected] => {"response_siat":{"RespuestaServicioFacturacion":{"codigoDescripcion":"VALIDADA","codigoEstado":908,"codigoRecepcion":"f78b031e-3813-11ed-83a8-0fba2508ef62","transaccion":true}},"factura":{"cabecera":{"nitEmisor":166172023,"razonSocialEmisor":"DONESCO S.R.L","municipio":"La Paz","telefono":"88867523","numeroFactura":906,"cuf":"B5EB51F7ABA0C2080344CA417B092718712EAF24D3066E9DA91D6D74","cufd":"BQWVDXTBRQUE=NzzBCMjYwMjVGRTc=QzlGbEpJVUpXVUJIyOTA3RjJCQUVDQ","codigoSucursal":0,"direccion":"Pedro Kramer #109","codigoPuntoVenta":1,"fechaEmision":"2022-09-19T08:12:02.000","nombreRazonSocial":"Perez","codigoTipoDocumentoIdentidad":1,"numeroDocumento":2287567,"complemento":null,"codigoCliente":"CC-2287567","codigoMetodoPago":1,"numeroTarjeta":null,"montoTotal":19040,"montoTotalSujetoIva":19040,"codigoMoneda":1,"tipoCambio":1,"montoTotalMoneda":19040,"montoGiftCard":null,"descuentoAdicional":0,"codigoExcepcion":null,"cafc":null,"leyenda":"Ley Nro 453: Tienes derecho a recibir informaci\u00f3n sobre las caracter\u00edsticas y contenidos de los servicios que utilices.","usuario":"MonoBusiness User 01","codigoDocumentoSector":1},"detalle":[{"actividadEconomica":"561110","codigoProductoSin":"63310","codigoProducto":"D001-3008","descripcion":"Nombre del producto #01","cantidad":1,"unidadMedida":58,"precioUnitario":15220,"montoDescuento":0,"subTotal":15220,"numeroSerie":null,"numeroImei":null},{"actividadEconomica":"561110","codigoProductoSin":"63310","codigoProducto":"D001-2921","descripcion":"Nombre del producto #02","cantidad":1,"unidadMedida":58,"precioUnitario":3820,"montoDescuento":0,"subTotal":3820,"numeroSerie":null,"numeroImei":null}],"endpoint":"https:\/\/pilotosiatservicios.impuestos.gob.bo\/v2\/ServicioFacturacionCompraVenta?wsdl"}}
+    [version:protected] => 1.0
+    [statusCode:protected] => 200
+    [statusText:protected] => OK
+    [charset:protected] => 
+    [original] => Array
+        (
+            [response_siat] => stdClass Object
+                (
+                    [RespuestaServicioFacturacion] => stdClass Object
+                        (
+                            [codigoDescripcion] => VALIDADA
+                            [codigoEstado] => 908
+                            [codigoRecepcion] => f78b031e-3813-11ed-83a8-0fba2508ef62
+                            [transaccion] => 1
+                        )
+
+                )
+
+            [factura] => SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Invoices\CompraVenta Object
+                (
+                    [cabecera] => SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Invoices\InvoiceHeader Object
+                        (
+                            [nitEmisor] => 166172023
+                            [razonSocialEmisor] => DONESCO S.R.L
+                            [municipio] => La Paz
+                            [telefono] => 88867523
+                            [numeroFactura] => 906
+                            [cuf] => B5EB51F7ABA0C2080344CA417B092718712EAF24D3066E9DA91D6D74
+                            [cufd] => BQWVDXTBRQUE=NzzBCMjYwMjVGRTc=QzlGbEpJVUpXVUJIyOTA3RjJCQUVDQ
+                            [codigoSucursal] => 0
+                            [direccion] => Pedro Kramer #109
+                            [codigoPuntoVenta] => 1
+                            [fechaEmision] => 2022-09-19T08:12:02.000
+                            [nombreRazonSocial] => Perez
+                            [codigoTipoDocumentoIdentidad] => 1
+                            [numeroDocumento] => 2287567
+                            [complemento] => 
+                            [codigoCliente] => CC-2287567
+                            [codigoMetodoPago] => 1
+                            [numeroTarjeta] => 
+                            [numeroTarjetaReal:protected] => 
+                            [montoTotal] => 19040
+                            [montoTotalSujetoIva] => 19040
+                            [codigoMoneda] => 1
+                            [tipoCambio] => 1
+                            [montoTotalMoneda] => 19040
+                            [montoGiftCard] => 
+                            [descuentoAdicional] => 0
+                            [codigoExcepcion] => 
+                            [cafc] => 
+                            [leyenda] => Ley Nro 453: Tienes derecho a recibir información sobre las características y contenidos de los servicios que utilices.
+                            [usuario] => MonoBusiness User 01
+                            [codigoDocumentoSector] => 1
+                            [xmlAllFields:protected] => 1
+                            [namespaces:protected] => Array
+                                (
+                                )
+
+                            [classAlias:protected] => 
+                            [skipProperties:protected] => Array
+                                (
+                                )
+
+                            [xmlAttributes:protected] => Array
+                                (
+                                    [complemento] => Array
+                                        (
+                                            [0] => Array
+                                                (
+                                                    [attr] => xsi:nil
+                                                    [value] => true
+                                                    [ns] => http://www.w3.org/2001/XMLSchema-instance
+                                                )
+
+                                        )
+
+                                    [numeroTarjeta] => Array
+                                        (
+                                            [0] => Array
+                                                (
+                                                    [attr] => xsi:nil
+                                                    [value] => true
+                                                    [ns] => http://www.w3.org/2001/XMLSchema-instance
+                                                )
+
+                                        )
+
+                                    [montoGiftCard] => Array
+                                        (
+                                            [0] => Array
+                                                (
+                                                    [attr] => xsi:nil
+                                                    [value] => true
+                                                    [ns] => http://www.w3.org/2001/XMLSchema-instance
+                                                )
+
+                                        )
+
+                                    [codigoExcepcion] => Array
+                                        (
+                                            [0] => Array
+                                                (
+                                                    [attr] => xsi:nil
+                                                    [value] => true
+                                                    [ns] => http://www.w3.org/2001/XMLSchema-instance
+                                                )
+
+                                        )
+
+                                    [cafc] => Array
+                                        (
+                                            [0] => Array
+                                                (
+                                                    [attr] => xsi:nil
+                                                    [value] => true
+                                                    [ns] => http://www.w3.org/2001/XMLSchema-instance
+                                                )
+
+                                        )
+
+                                )
+
+                        )
+
+                    [detalle] => Array
+                        (
+                            [0] => SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Invoices\InvoiceDetail Object
+                                (
+                                    [actividadEconomica] => 561110
+                                    [codigoProductoSin] => 63310
+                                    [codigoProducto] => D001-3008
+                                    [descripcion] => Nombre del producto #01
+                                    [cantidad] => 1
+                                    [unidadMedida] => 58
+                                    [precioUnitario] => 15220
+                                    [montoDescuento] => 0
+                                    [subTotal] => 15220
+                                    [numeroSerie] => 
+                                    [numeroImei] => 
+                                    [xmlAllFields:protected] => 1
+                                    [namespaces:protected] => Array
+                                        (
+                                        )
+
+                                    [classAlias:protected] => 
+                                    [skipProperties:protected] => Array
+                                        (
+                                        )
+
+                                    [xmlAttributes:protected] => Array
+                                        (
+                                            [numeroSerie] => Array
+                                                (
+                                                    [0] => Array
+                                                        (
+                                                            [attr] => xsi:nil
+                                                            [value] => true
+                                                            [ns] => http://www.w3.org/2001/XMLSchema-instance
+                                                        )
+
+                                                )
+
+                                            [numeroImei] => Array
+                                                (
+                                                    [0] => Array
+                                                        (
+                                                            [attr] => xsi:nil
+                                                            [value] => true
+                                                            [ns] => http://www.w3.org/2001/XMLSchema-instance
+                                                        )
+
+                                                )
+
+                                        )
+
+                                )
+
+                            [1] => SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Invoices\InvoiceDetail Object
+                                (
+                                    [actividadEconomica] => 561110
+                                    [codigoProductoSin] => 63310
+                                    [codigoProducto] => D001-2921
+                                    [descripcion] => Nombre del producto #02
+                                    [cantidad] => 1
+                                    [unidadMedida] => 58
+                                    [precioUnitario] => 3820
+                                    [montoDescuento] => 0
+                                    [subTotal] => 3820
+                                    [numeroSerie] => 
+                                    [numeroImei] => 
+                                    [xmlAllFields:protected] => 1
+                                    [namespaces:protected] => Array
+                                        (
+                                        )
+
+                                    [classAlias:protected] => 
+                                    [skipProperties:protected] => Array
+                                        (
+                                        )
+
+                                    [xmlAttributes:protected] => Array
+                                        (
+                                            [numeroSerie] => Array
+                                                (
+                                                    [0] => Array
+                                                        (
+                                                            [attr] => xsi:nil
+                                                            [value] => true
+                                                            [ns] => http://www.w3.org/2001/XMLSchema-instance
+                                                        )
+
+                                                )
+
+                                            [numeroImei] => Array
+                                                (
+                                                    [0] => Array
+                                                        (
+                                                            [attr] => xsi:nil
+                                                            [value] => true
+                                                            [ns] => http://www.w3.org/2001/XMLSchema-instance
+                                                        )
+
+                                                )
+
+                                        )
+
+                                )
+
+                        )
+
+                    [required:protected] => Array
+                        (
+                        )
+
+                    [nsData:protected] => Array
+                        (
+                        )
+
+                    [endpoint] => https://pilotosiatservicios.impuestos.gob.bo/v2/ServicioFacturacionCompraVenta?wsdl
+                    [xmlAllFields:protected] => 1
+                    [namespaces:protected] => Array
+                        (
+                        )
+
+                    [classAlias:protected] => facturaComputarizadaCompraVenta
+                    [skipProperties:protected] => Array
+                        (
+                            [0] => endpoint
+                            [1] => classAlias
+                            [2] => xmlAllFields
+                            [3] => namespaces
+                            [4] => skipProperties
+                            [5] => xmlAttributes
+                        )
+
+                    [xmlAttributes:protected] => Array
+                        (
+                        )
+
+                )
+
+        )
+
+    [exception] => 
+)
+
+[2022-09-19 08:13:38]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:13:38]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 26707971-3814-11ed-8d22-8540a7777e96
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:13:54]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:13:54]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 304a2456-3814-11ed-8d22-8540a7777e96
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:15:32]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:15:32]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 6a6ef001-3814-11ed-8a77-b903534eb7eb
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:16:11]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:16:11]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 81eb8282-3814-11ed-adf3-696bcd0c11fe
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:16:25]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:16:25]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 8a534de7-3814-11ed-adf3-696bcd0c11fe
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:16:28]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:16:28]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 8c0d0c69-3814-11ed-83a8-0fba2508ef62
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:16:31]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:16:31]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 8e049688-3814-11ed-8d22-8540a7777e96
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:16:32]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:16:32]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-19 08:16:33]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:16:33]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 8f2dfb5d-3814-11ed-8d22-8540a7777e96
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:16:34]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:16:34]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 8fa9e23e-3814-11ed-83a8-0fba2508ef62
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:16:42]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:16:42]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-19 08:16:53]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:16:53]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-19 08:17:02]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:17:02]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-19 08:17:06]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:17:06]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-19 08:17:07]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:17:07]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => a397f6f8-3814-11ed-8d22-8540a7777e96
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:17:20]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:17:20]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => aa7ca450-3814-11ed-adf3-696bcd0c11fe
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:17:40]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:17:40]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => b6ddbde1-3814-11ed-8d22-8540a7777e96
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:17:53]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:17:53]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-19 08:17:53]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:17:53]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => becf95af-3814-11ed-8a77-b903534eb7eb
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:18:05]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:18:05]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => c5d00947-3814-11ed-83a8-0fba2508ef62
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:18:13]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:18:13]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-19 08:18:29]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:18:29]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-19 08:18:56]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:18:56]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-19 08:18:58]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:18:58]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => e58df3b5-3814-11ed-83a8-0fba2508ef62
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:19:18]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:19:18]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-19 08:19:20]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:19:20]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-19 08:24:16]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:24:16]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-19 08:24:22]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:24:22]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-19 08:25:07]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:25:07]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-19 08:27:25]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:27:25]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 13ed0658-3816-11ed-8a77-b903534eb7eb
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:28:16]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:28:16]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-19 08:28:30]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:28:30]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 3aaf342f-3816-11ed-adf3-696bcd0c11fe
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:30:08]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:30:08]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 74fa4d11-3816-11ed-8a77-b903534eb7eb
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:31:27]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:31:27]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => a3ecbbff-3816-11ed-8d22-8540a7777e96
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:32:50]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:32:50]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => d5182a66-3816-11ed-adf3-696bcd0c11fe
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:33:02]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:33:02]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => dca043db-3816-11ed-83a8-0fba2508ef62
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:33:35]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:33:35]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => f083f916-3816-11ed-8a77-b903534eb7eb
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:33:48]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:33:48]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => f7fc0d5c-3816-11ed-8d22-8540a7777e96
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:34:02]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:34:02]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-19 08:34:17]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:34:17]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 096a7bbf-3817-11ed-adf3-696bcd0c11fe
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:34:32]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:34:32]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 124e072f-3817-11ed-8a77-b903534eb7eb
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:34:47]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:34:47]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 1b646214-3817-11ed-8a77-b903534eb7eb
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:35:02]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:35:02]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-19 08:35:32]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:35:32]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 36119b59-3817-11ed-8a77-b903534eb7eb
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:36:02]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:36:02]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-19 08:36:17]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:36:17]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 50e91848-3817-11ed-83a8-0fba2508ef62
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:36:17]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:36:17]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-19 08:36:46]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:36:46]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 6233abaa-3817-11ed-adf3-696bcd0c11fe
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:36:47]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:36:47]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 62d65417-3817-11ed-83a8-0fba2508ef62
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:38:32]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:38:32]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => a160eb4d-3817-11ed-adf3-696bcd0c11fe
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:39:20]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:39:20]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => bd738150-3817-11ed-8a77-b903534eb7eb
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:39:32]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:39:32]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-19 08:39:33]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:39:33]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-19 08:39:34]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:39:34]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => c5eb2ad7-3817-11ed-adf3-696bcd0c11fe
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:39:47]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:39:47]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => ce0b8cfc-3817-11ed-adf3-696bcd0c11fe
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:39:49]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:39:49]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => cf1841ce-3817-11ed-83a8-0fba2508ef62
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:41:02]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:41:02]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-19 08:41:07]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:41:07]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-19 08:48:07]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:48:07]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => f823ce32-3818-11ed-8a77-b903534eb7eb
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:48:43]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:48:43]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 0dbbc302-3819-11ed-adf3-696bcd0c11fe
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:48:58]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:48:58]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-19 08:49:13]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:49:13]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-19 08:49:13]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:49:13]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 1f9fd6ac-3819-11ed-83a8-0fba2508ef62
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:50:49]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:50:49]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-19 08:50:49]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:50:49]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 58ce0de9-3819-11ed-adf3-696bcd0c11fe
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:51:25]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:51:25]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-19 08:51:40]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:51:40]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-19 08:51:56]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:51:56]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 803ca810-3819-11ed-8d22-8540a7777e96
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:52:10]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:52:10]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-19 08:52:10]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:52:10]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 88fa0d85-3819-11ed-8d22-8540a7777e96
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:52:46]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:52:46]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 9e39f6ba-3819-11ed-8d22-8540a7777e96
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:53:01]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:53:01]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => a76ab702-3819-11ed-adf3-696bcd0c11fe
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:53:16]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:53:16]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-19 08:53:30]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:53:30]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => b8d1100d-3819-11ed-8a77-b903534eb7eb
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:54:31]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:54:31]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => dc9e409b-3819-11ed-adf3-696bcd0c11fe
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:55:00]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:55:00]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => ee33bfe0-3819-11ed-8d22-8540a7777e96
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:55:00]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:55:00]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-19 08:56:00]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:56:00]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 123ac539-381a-11ed-adf3-696bcd0c11fe
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:56:15]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:56:15]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-19 08:56:15]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:56:15]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 1b0ec085-381a-11ed-83a8-0fba2508ef62
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:56:46]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:56:46]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 2d2d1e42-381a-11ed-8d22-8540a7777e96
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:58:06]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:58:06]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-19 08:58:06]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:58:06]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 5d147472-381a-11ed-8a77-b903534eb7eb
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:58:21]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:58:21]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 661aa2d0-381a-11ed-83a8-0fba2508ef62
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:58:36]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:58:36]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 6ec17268-381a-11ed-adf3-696bcd0c11fe
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:58:51]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:58:51]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 77a10657-381a-11ed-8a77-b903534eb7eb
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:59:24]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:59:24]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 8b8e57e0-381a-11ed-8a77-b903534eb7eb
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 08:59:52]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 08:59:52]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-19 09:00:51]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 09:00:51]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => bf88769a-381a-11ed-adf3-696bcd0c11fe
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 09:01:37]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 09:01:37]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => da95831f-381a-11ed-adf3-696bcd0c11fe
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 09:02:21]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 09:02:21]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-19 09:02:21]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 09:02:21]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => f51cbe3d-381a-11ed-8d22-8540a7777e96
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 09:02:35]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 09:02:35]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-19 09:02:36]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 09:02:36]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => fe104ee8-381a-11ed-8d22-8540a7777e96
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 09:02:45]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 09:02:45]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 0330b77a-381b-11ed-8a77-b903534eb7eb
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 09:02:52]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 09:02:52]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-19 09:04:13]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 09:04:13]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 37e61065-381b-11ed-8d22-8540a7777e96
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 09:04:16]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 09:04:16]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-19 09:04:41]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 09:04:41]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 48b3d26e-381b-11ed-8d22-8540a7777e96
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 09:04:58]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 09:04:58]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 5219acf0-381b-11ed-83a8-0fba2508ef62
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 09:05:50]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 09:05:50]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 71721ec0-381b-11ed-8d22-8540a7777e96
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 09:05:58]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 09:05:58]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 766eab87-381b-11ed-8a77-b903534eb7eb
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 09:06:13]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 09:06:13]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-19 09:06:42]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 09:06:42]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 90a55540-381b-11ed-8a77-b903534eb7eb
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 09:06:56]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 09:06:56]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 9912c58d-381b-11ed-adf3-696bcd0c11fe
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 09:06:56]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 09:06:56]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-19 09:06:57]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 09:06:57]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-19 09:08:26]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 09:08:26]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-19 09:09:42]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 09:09:42]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => fbb48eab-381b-11ed-8a77-b903534eb7eb
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 09:10:44]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 09:10:44]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 211ad64a-381c-11ed-83a8-0fba2508ef62
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 09:10:56]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 09:10:56]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 283b7bb3-381c-11ed-83a8-0fba2508ef62
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 09:11:11]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 09:11:11]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 31039003-381c-11ed-adf3-696bcd0c11fe
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-19 09:11:57]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 09:11:57]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-19 09:12:42]#
+RESULTADO RECEPCION FACTURA
+=============================
+[2022-09-19 09:12:42]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => VALIDADA
+            [codigoEstado] => 908
+            [codigoRecepcion] => 66e24d2b-381c-11ed-8d22-8540a7777e96
+            [transaccion] => 1
+        )
+
+)
+

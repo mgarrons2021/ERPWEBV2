@@ -43,6 +43,7 @@ class VentaController extends Controller
 
             $cantidad_visitas = 1;
             $sucursal_id = $request->sucursal;
+            $puntoVenta=0;
 
             /*  return response()->json($request->nit_ci); */
 
@@ -78,7 +79,7 @@ class VentaController extends Controller
                 "codigoSucursal" => $sucursal->codigo_fiscal, // "codigoSucursal" => $sucursal->codigo_fiscal,
                 "codigoDocumentoSector" => DocumentTypes::FACTURA_COMPRA_VENTA,
                 "numeroFactura" => $cufd->numero_factura,
-                "codigoPuntoVenta" => 1,
+                "codigoPuntoVenta" => $puntoVenta,
                 "fechaEmision" => date('Y-m-d\TH:i:s.v'),
                 "modalidad" => ServicioSiat::MOD_COMPUTARIZADA_ENLINEA,
                 "tipoEmision" => SiatInvoice::TIPO_EMISION_ONLINE,

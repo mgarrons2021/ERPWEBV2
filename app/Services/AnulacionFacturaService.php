@@ -26,7 +26,7 @@ class AnulacionFacturaService
 	{
 		/* dd($cuf,$motivo); */
 		$fecha_actual =  Carbon::now()->toDateString();
-		$puntoventa = 1;
+		$puntoventa = 0;
 		$sucursal = 0;
 		$resCuis 	= SiatCui::where('fecha_expiracion', '>=', $fecha_actual)
 			->where('sucursal_id', $sucursal_id)

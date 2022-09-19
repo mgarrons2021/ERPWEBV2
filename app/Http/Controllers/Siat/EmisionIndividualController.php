@@ -35,7 +35,7 @@ class EmisionIndividualController extends Controller
 
        /*  return response()->json($dataFactura); */
         $fecha_actual = Carbon::now();
-        $puntoventa = 1;
+        $puntoventa = 0;
        /*  $sucursal_id = 12;
         $sucursalcodigoFiscal = 0; */
         $sucursal_id = $dataFactura['sucursal']['id'];

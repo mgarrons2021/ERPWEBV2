@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Invoices\SiatInvoice;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Services\ServicioSiat;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Services\ServicioFacturacionElectronica;
+
 class FirmaDigitalService
 {
 	public $cuisService;
@@ -33,16 +34,16 @@ class FirmaDigitalService
 
 		/* $resCuis = $this->cuisService->obtenerCuis($puntoventa, $sucursal); */
 		/* $resCufd = $this->cufdService->obtenerCufd($puntoventa, $sucursal, $resCuis->codigo_cui); */
-		
+
 		$resCuis = SiatCui::first();
-		
+
 		//dd($resCuis);
 
 		$resCufd = SiatCufd::where('fecha_vigencia', '>=', $fecha_generica)
 			->where('sucursal_id', $sucursal_db->id)
 			->orderBy('id', 'desc')
 			->first();
-		
+
 		//dd($resCuis);
 
 		/* for ($i = 0; $i < 115; $i++) { */
@@ -90,5 +91,4 @@ class FirmaDigitalService
 		/* dd($service); */
 		return $res;
 	}
-
 }
