@@ -30,6 +30,7 @@ class CreateVentasTable extends Migration
 
             $table->string('qr',300)->nullable();
             
+            $table->unsignedBigInteger('cufd_id');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('cliente_id');
             $table->unsignedBigInteger('sucursal_id'); 
@@ -38,6 +39,7 @@ class CreateVentasTable extends Migration
             $table->unsignedBigInteger('evento_significativo_id')->nullable();
 
             $table->foreign('user_id')->on('users')->references('id');
+            $table->foreign('cufd_id')->on('siat_cufds')->references('id');
             $table->foreign('cliente_id')->on('clientes')->references('id');
             $table->foreign('sucursal_id')->on('sucursals')->references('id');
             $table->foreign('turnos_ingreso_id')->on('turnos_ingresos')->references('id');

@@ -40,6 +40,8 @@ class EventoSignificativoController extends Controller
         $arrayVentas = [];
         $fecha_actual = Carbon::now()->toDateString();
         $ventas = json_decode($request->ventas);
+
+
         foreach ($ventas as $venta) {
             $cliente = Cliente::find($venta->cliente_id);
             $sucursal = Cliente::find($venta->cliente_id);
@@ -54,16 +56,17 @@ class EventoSignificativoController extends Controller
                 'detalle_venta' => $detalle_venta,
             ];
         }
-    //   dd($ventas);
+        //   dd($ventas);
         $detalles_venta = DetalleVenta::where('venta_id', $venta->id)->get();
 
         $cafc            = "1011917833B0D";
-        $puntoventa      = 0;
-        
+        $puntoventa      = 1;
+
         $codigo_evento   = $ventas[0]->evento_significativo_id;
+        $cufd_id = $ventas[0]->cufd_id;
         $codigo_evento_significativo = EventoSignificativo::find($codigo_evento);
         /* dd($codigo_evento_significativo); */
-        
+
 
         $evento = EventoSignificativo::where('id', $codigo_evento)->first();
 
@@ -77,7 +80,7 @@ class EventoSignificativoController extends Controller
         $fecha_final_contingencia = $request->fecha_fin;
 
         $evento_significativoService = new EventoSignificativoService();
-        $response = $evento_significativoService->pruebasEventos2($codigo_evento_significativo->codigo_clasificador, $sucursal, $fecha_inicio_contingencia, $fecha_final_contingencia);
+        $response = $evento_significativoService->pruebasEventos2(4, $sucursal, $fecha_inicio_contingencia, $fecha_final_contingencia, $cufd_id);
 
         /* Funcion para mandar las facturas por paquete */
         /* $res = $this->testPaquetes($sucursal, $puntoventa, $ventas, $cufd, $this->configService->tipoFactura, $evento, $cafc); */
@@ -85,7 +88,7 @@ class EventoSignificativoController extends Controller
         return $response;
     }
 
-   /*  function testPaquetes($codigoSucursal, $codigoPuntoVenta, array $facturas, $codigoControlAntiguo, $tipoFactura, $evento, $cafc)
+    /*  function testPaquetes($codigoSucursal, $codigoPuntoVenta, array $facturas, $codigoControlAntiguo, $tipoFactura, $evento, $cafc)
     {
         $fecha_actual = Carbon::now()->toDateString();
 
@@ -130,6 +133,7 @@ class EventoSignificativoController extends Controller
         $ventas = Venta::where('sucursal_id', Auth::user()->sucursals[0]->id)
             ->where('fecha_venta', (new Carbon())->toDateString())
             ->where('estado', 1)
+            ->where('evento_significativo_id', "<>", null)
             ->get();
 
         return view('siat.eventos_significativos.index', compact('eventos_significativos', 'ventas', 'fecha_actual'));
@@ -152,8 +156,9 @@ class EventoSignificativoController extends Controller
             ->whereBetween('fecha_venta', [$fecha_inicial, $fecha_final])
             ->where('ventas.evento_significativo_id', $evento_significativo)
             ->where('estado', 1)
+            ->where('evento_significativo_id', "<>", null)
             ->get();
-            
+
 
 
         return view('siat.eventos_significativos.index', compact('eventos_significativos', 'ventas', 'fecha_actual'));

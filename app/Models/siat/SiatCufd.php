@@ -5,6 +5,7 @@ namespace App\Models\Siat;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Sucursal;
+use App\Models\Venta;
 
 class SiatCufd extends Model
 {
@@ -15,5 +16,9 @@ class SiatCufd extends Model
 
     public function sucursal(){
         return $this->belongsTo(Sucursal::class);
+    }
+
+    public function ventas(){
+        return $this->hasMany(Venta::class);
     }
 }

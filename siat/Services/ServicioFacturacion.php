@@ -87,7 +87,7 @@ class ServicioFacturacion extends ServicioSiat
 			$data = [
 				$solicitud->toArray()
 			];
-
+			/* dd($data); */
 			/* dd($data); */
 
 			$this->wsdl = $factura->getEndpoint($this->modalidad, $this->ambiente);

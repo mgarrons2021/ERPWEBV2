@@ -33,11 +33,9 @@ class EmisionIndividualController extends Controller
     public function emisionIndividual( $dataFactura)
     {
 
-       /*  return response()->json($dataFactura); */
         $fecha_actual = Carbon::now();
-        $puntoventa = 0;
-       /*  $sucursal_id = 12;
-        $sucursalcodigoFiscal = 0; */
+        $puntoventa = 1;
+
         $sucursal_id = $dataFactura['sucursal']['id'];
         $sucursalcodigoFiscal = $dataFactura['sucursal']['codigo_fiscal'];
         $modalidad = $this->emisionIndividualService->configService->config->modalidad;

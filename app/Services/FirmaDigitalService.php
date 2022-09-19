@@ -45,10 +45,10 @@ class FirmaDigitalService
 			->first();
 
 		//dd($resCuis);
-
+		//dd( $this->configService->config);
 		/* for ($i = 0; $i < 115; $i++) { */
 		$factura = $this->emisionIndividualService->construirFactura($puntoventa, $sucursal,  $this->configService->config->modalidad, $this->configService->documentoSector, $this->configService->codigoActividad, $this->configService->codigoProductoSin);
-		//dd($factura);
+		dd($factura);
 		$res = $this->testFirma($sucursal, $puntoventa, $factura, $this->configService->tipoFactura);
 		//dd($res);
 		return $res;

@@ -46,6 +46,7 @@ class VentaService
         $venta->nro_transaccion = $turno->nro_transacciones;
         $venta->evento_significativo_id = $ventaData['evento_significativo_id'];
         $venta->cuf = $ventaData['cuf'];
+        $venta->cufd_id = $ventaData['cufd_id'];
         $turno->save();
 
         $venta->numero_factura = $ventaData['numero_factura'];

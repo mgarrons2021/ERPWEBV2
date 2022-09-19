@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use App\Models\Siat\EventoSignificativo;
+use App\Models\Siat\SiatCufd;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -43,6 +44,10 @@ class Venta extends Model
 
     public function evento_significativo(){
         return $this->belongsTo(EventoSignificativo::class);
+    }
+
+    public function cufd(){
+        return $this->belongsTo(SiatCufd::class);
     }
 
     public function getSales($fecha_inicio,$fecha_fin,$sucursal){
