@@ -37,7 +37,7 @@ class VentaController extends Controller
             DB::beginTransaction();
             $fecha = Carbon::now()->toDateString();
             $hora_actual = Carbon::now()->toTimeString();
-            $modalidad = 2; //Computarizada en linea
+            $modalidad = 1; //Computarizada en linea
             $tipoEmision = 1; //EN LINEA
             $tipoFactura = 1; //Factura derecho credito fiscal
 

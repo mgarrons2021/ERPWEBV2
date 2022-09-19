@@ -121,8 +121,8 @@ class ServicioSiat
 			/* dd($action,$data); */
 			//$this->debug($data, 0);
 			/* dd($data,$action); */
+			/* dd($data); */
 			$res = $client->__soapCall($action, $data);
-			/* dd($res); */
 			$this->debug("CABECERAS SOLICITUD\n================\n", 0);
 			$this->debug($client->__getLastRequestHeaders(), 0);
 			$this->debug("DATOS SOLICITUD\n================\n", 0);

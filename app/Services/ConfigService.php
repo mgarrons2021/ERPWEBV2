@@ -11,7 +11,7 @@ class ConfigService{
     public $config;
 
     public $sucursal             = 0;
-    public $puntoventa          = 0;
+    public $puntoventa          = 1;
     public $cantFacturas        = 1000; /* Cantidad factura para hacer pruebas */
     public $codigoEvento        = 1;
     public $evento             = null;
@@ -29,7 +29,7 @@ class ConfigService{
         $this->config = new SiatConfig([
             'nombreSistema' => 'MAGNOREST',
             'codigoSistema' => '722907F2BAECC0B26025FE7',
-            'nit'           => 166172023,
+            'nit'           =>  166172023,
             'razonSocial'   => 'DONESCO S.R.L',
             'modalidad'     => ServicioSiat::MOD_ELECTRONICA_ENLINEA,  /* Electronica en linea */
             'ambiente'      => ServicioSiat::AMBIENTE_PRUEBAS,
@@ -38,9 +38,8 @@ class ConfigService{
             'tokenDelegado' =>'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJET05FU0NPXzAyMyIsImNvZGlnb1Npc3RlbWEiOiI3MjI5MDdGMkJBRUNDMEIyNjAyNUZFNyIsIm5pdCI6Ikg0c0lBQUFBQUFBQUFETTBNek0wTnpJd01nWUE3bHFjcHdrQUFBQT0iLCJpZCI6NTE5NjgyLCJleHAiOjE2NjQ1ODI0MDAsImlhdCI6MTY2MDgyOTA0NCwibml0RGVsZWdhZG8iOjE2NjE3MjAyMywic3Vic2lzdGVtYSI6IlNGRSJ9.8ubSTM8oYEuY7pHiNQYbNj6I87koRUqzOqsQ341VMKwA8Y_A9nh_qA4ttCdY-6HywevMQ4Ov64I-w7S3k47NYw',
             'telefono'      => '34345435',
             'ciudad'        => 'SANTA CRUZ GC'
+
         ]);
-
-
     }
 
 }

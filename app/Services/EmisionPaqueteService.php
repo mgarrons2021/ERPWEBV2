@@ -44,7 +44,7 @@ class EmisionPaqueteService
                 break;
             }
         }
-        dd($evento);
+        /* dd($evento); */
         return $evento;
     }
 

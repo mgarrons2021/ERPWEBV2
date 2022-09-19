@@ -107,7 +107,7 @@ class EmisionIndividualService
         $subTotal = 0;
         $factura = null;
         $detailClass = InvoiceDetail::class;
-
+        //dd($modalidad);
         if ($modalidad == ServicioSiat::MOD_ELECTRONICA_ENLINEA) {
             if ($documentoSector == DocumentTypes::FACTURA_COMPRA_VENTA)
                 $factura = new ElectronicaCompraVenta();

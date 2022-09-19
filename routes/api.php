@@ -131,16 +131,16 @@ Route::get('/getPlatos', function () {
     return response($response, 200)->header('Content-Type', 'application/json');
 });
 
-Route::get('/getSignifficantEvents',function(){
-    
+Route::get('/getSignifficantEvents', function () {
+
     $events = new EventoSignificativo();
     $signifficant_events = $events->getSignifficantEvents();
-        $response= [
-            'success' =>true,
-            'events'=> $signifficant_events,
+    $response = [
+        'success' => true,
+        'events' => $signifficant_events,
 
-        ];
-        return response($response, 200)->header('Content-Type', 'application/json');
+    ];
+    return response($response, 200)->header('Content-Type', 'application/json');
 });
 
 
@@ -258,21 +258,21 @@ Route::get('verified_turn', function (Request $request) {
 Route::get('change_status_sale', function (Request $request) {
 
     $venta =  Venta::find($request->id_venta);
-    $turno= $request->turno;
+    $turno = $request->turno;
     if (isset($venta)) {
         $venta->estado = $request->estado;
         $venta->save();
 
         $ventas_activas = Venta::selectRaw('sum(ventas.total_venta) as total_venta')
-            ->where('ventas.turnos_ingreso_id',$turno)
-            ->where('ventas.estado',1)
+            ->where('ventas.turnos_ingreso_id', $turno)
+            ->where('ventas.estado', 1)
             ->get();
 
         $turno = TurnoIngreso::find($request->turno);
         $turno->ventas = $ventas_activas[0]->total_venta;
         $turno->save();
 
-            $response = [
+        $response = [
             'success' => true,
         ];
     } else {
@@ -403,45 +403,42 @@ Route::get('obtenerCufdAPI', [\App\Http\Controllers\Api\FacturacioEnLineaControl
 
 Route::get('sincronizarTotalTipoEmisionAPI', [\App\Http\Controllers\Api\FacturacioEnLineaController::class, 'sincronizarTotalTipoEmisionAPI']);
 
-Route::get('sincronizarTiposDocumentoSector', [\App\Http\Controllers\Siat\SincronizarCatalogosController::class, 'sincronizarTiposDocumentoSector']); 
+Route::get('sincronizarTiposDocumentoSector', [\App\Http\Controllers\Siat\SincronizarCatalogosController::class, 'sincronizarTiposDocumentoSector']);
 
-Route::get('ejecutar_pruebas_catalogos', [\App\Http\Controllers\Siat\SincronizarCatalogosController::class, 'ejecutar_pruebas_catalogos']); 
-
-
- Route::get('sincronizarListadoTotalActividades', [\App\Http\Controllers\Siat\SincronizarCatalogosController::class, 'sincronizarListadoTotalActividades']);  
-
- Route::get('sincronizarListaLeyendasFactura', [\App\Http\Controllers\Siat\SincronizarCatalogosController::class, 'sincronizarListaLeyendasFactura']);  
-
- Route::get('sincronizarFechaHora', [\App\Http\Controllers\Siat\SincronizarCatalogosController::class, 'sincronizarFechaHora']);  
-
- /*ETAPA 4 EMISION INDIVIDUAL*/  
- Route::post('emisionIndividual', [\App\Http\Controllers\Siat\EmisionIndividualController::class, 'emisionIndividual']);  
-
- /* 5TA ETAPA EVENTOS SIGNIFICATIVOS */
-
- Route::get('generar_evento_significativo', [\App\Http\Controllers\Siat\EventoSignificativoController::class, 'generar_evento_significativo']);  
+Route::get('ejecutar_pruebas_catalogos', [\App\Http\Controllers\Siat\SincronizarCatalogosController::class, 'ejecutar_pruebas_catalogos']);
 
 
-  /*ETAPA 6 EMISION POR PAQUETES*/  
- Route::get('emisionPaquetes', [\App\Http\Controllers\Siat\EmisionPaqueteController::class, 'emisionPaquetes']);  
+Route::get('sincronizarListadoTotalActividades', [\App\Http\Controllers\Siat\SincronizarCatalogosController::class, 'sincronizarListadoTotalActividades']);
 
- /* ETAPA 7 ANULACION FACTURAS */
- Route::get('test_anulacion_factura', [\App\Http\Controllers\Siat\AnulacionFacturaController::class, 'test_anulacion_factura']);  
- 
- Route::get('prueba_anulacion', [\App\Http\Controllers\Siat\AnulacionFacturaController::class, 'prueba_anulacion']);  
+Route::get('sincronizarListaLeyendasFactura', [\App\Http\Controllers\Siat\SincronizarCatalogosController::class, 'sincronizarListaLeyendasFactura']);
 
- /* ETAPA 8 FIRMA DIGITAL */
+Route::get('sincronizarFechaHora', [\App\Http\Controllers\Siat\SincronizarCatalogosController::class, 'sincronizarFechaHora']);
 
- Route::get('generar_firma_digital', [\App\Http\Controllers\Siat\FirmaDigitalController::class, 'generar_firma_digital']);  
+/*ETAPA 4 EMISION INDIVIDUAL*/
+Route::post('emisionIndividual', [\App\Http\Controllers\Siat\EmisionIndividualController::class, 'emisionIndividual']);
 
- /* ETAPA 9 METODOS EMISION MASIVA  */
- Route::get('generar_emision_masiva', [\App\Http\Controllers\Siat\EmisionMasivaController::class, 'generar_emision_masiva']);  
- 
+/* 5TA ETAPA EVENTOS SIGNIFICATIVOS */
+Route::get('generar_evento_significativo', [\App\Http\Controllers\Siat\EventoSignificativoController::class, 'generar_evento_significativo']);
 
- Route::get('get_leyendas', function () {
+/*ETAPA 6 EMISION POR PAQUETES*/
+Route::get('emisionPaquetes', [\App\Http\Controllers\Siat\EmisionPaqueteController::class, 'emisionPaquetes']);
+
+/* ETAPA 7 ANULACION FACTURAS */
+Route::get('test_anulacion_factura', [\App\Http\Controllers\Siat\AnulacionFacturaController::class, 'test_anulacion_factura']);
+
+Route::get('prueba_anulacion', [\App\Http\Controllers\Siat\AnulacionFacturaController::class, 'prueba_anulacion']);
+
+/* ETAPA 8 FIRMA DIGITAL */
+Route::get('generar_firma_digital', [\App\Http\Controllers\Siat\FirmaDigitalController::class, 'generar_firma_digital']);
+
+/* ETAPA 9 METODOS EMISION MASIVA  */
+Route::get('generar_emision_masiva', [\App\Http\Controllers\Siat\EmisionMasivaController::class, 'generar_emision_masiva']);
+
+
+Route::get('get_leyendas', function () {
 
     $obj = new LeyendaFactura();
-    $client=$obj->getLeyenda();
+    $client = $obj->getLeyenda();
     if ($client == null) {
         $response = [
             'success' => false,

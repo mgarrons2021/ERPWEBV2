@@ -35,14 +35,16 @@ class EmisionPaqueteController extends Controller
     public function emisionPaquetes()
     {
         $sucursal = 0;
-        $puntoventa = 1;
+        $puntoventa = 0;
         $cantidad = 500;
         $codigoEvento = 1;
         $fecha_generica = Carbon::now();
         $sucursal_db = Sucursal::where('codigo_fiscal', $sucursal)->first();
-        $cufd_bd = SiatCufd::where('sucursal_id', $sucursal_db->id)->orderBy('fecha_generado', 'desc')->first();
-        $cufdAntiguo = $cufd_bd->codigo;
-        $codigoControlAntiguo     = $cufd_bd->codigo_control;
+        $cufd_bd = SiatCufd::where('sucursal_id', $sucursal_db->id)->orderBy('id', 'desc')->first();
+        /* $cufdAntiguo = $cufd_bd->codigo;
+        $codigoControlAntiguo     = $cufd_bd->codigo_control; */
+        $cufdAntiguo     = 'BQWVDcMOTTkFBNzEMwOUY5ODg1MUU=Qm97TXlNQkhXVUJFFNEUxMkI5MjFFO';
+        $codigoControlAntiguo     = '1EF66CB35E86D74';
         $cafc            = "1011917833B0D"; //'101B4283AAD6D';
         /* $resEvento         = null; */
         $resCuis         = $this->cuisService->obtenerCuis($puntoventa, $sucursal);
@@ -50,9 +52,12 @@ class EmisionPaqueteController extends Controller
 
         /* for ($i = 0; $i < 70; $i++) { */
         # code...
-
-        $pvfechaInicio     = (new Carbon($cufd_bd->fecha_generado))->format("Y-m-d\TH:i:s.v");
-        $pvfechaFin        = (new Carbon())->subMinutes(2)->subSeconds(30)->format("Y-m-d\TH:i:s.v");
+        $fechaInicio     = '2022-06-30T14:01:00.000';
+        $fechaFin        = '2022-06-30T14:10:00.000';
+        $pvfechaInicio     = $fechaInicio;
+        $pvfechaFin        = $fechaFin;
+        /* $pvfechaInicio     = (new Carbon($cufd_bd->fecha_generado))->format("Y-m-d\TH:i:s.v");
+        $pvfechaFin        = (new Carbon())->subMinutes(2)->subSeconds(30)->format("Y-m-d\TH:i:s.v"); */
         /*  dd($pvfechaInicio,$pvfechaFin); */
         $evento         = $this->emisionPaqueteService->obtenerListadoEventos($sucursal, $puntoventa, $codigoEvento);
         /* $evento or die('Evento no encontrado'); */
@@ -80,7 +85,7 @@ class EmisionPaqueteController extends Controller
             $this->configService->codigoActividad,
             $this->configService->codigoProductoSin,
             $pvfechaInicio,
-            $cufdAntiguo->codigo,
+            $cufdAntiguo,
         );
 
 

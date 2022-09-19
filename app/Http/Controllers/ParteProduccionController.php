@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Models\Categoria;
 use App\Models\DetalleParteProduccion;
 use App\Models\ParteProduccion;
 use App\Models\Producto;
@@ -138,9 +138,10 @@ class ParteProduccionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $partes_producciones = ParteProduccion::find($id);
+        $categorias = Categoria::all();
+        return view('partes_producciones.edit', compact('partes_producciones', 'categorias'));
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -197,6 +198,50 @@ class ParteProduccionController extends Controller
         }
     }
 
+    public function actualizarPedido(Request $request)
+    {
+        $detalle_parte_produccion = ParteProduccion::find($request->parte_produccion_id);
+        $total_eliminado = 0;
+        $nuevospedidos = $request->agregarNuevos;
+
+        if (sizeof($nuevospedidos) != 0) {
+            foreach ($nuevospedidos as $index => $detalle) {
+                $detalle_pedido = new DetalleParteProduccion();
+                $detalle_pedido->cantidad = $detalle['cantidad'];
+                $detalle_pedido->precio = $detalle['precio'];
+                $detalle_pedido->subtotal = $detalle['subtotal'];
+                $detalle_pedido->parte_produccion_id = $detalle_parte_produccion->id;
+                $detalle_pedido->producto_id = $detalle['producto_id'];
+                $detalle_pedido->save();
+            }
+        }
+        
+        if (sizeof($request->detallesAEditar_id) != 0) {
+            foreach ($request->detallesAEditar_id as $index => $detalleEditar) {
+                $detalle_pedido = DetalleParteProduccion::find($detalleEditar);
+                $detalle_pedido->cantidad = $request->stocks[$index];
+                $detalle_pedido->subtotal = $request->subtotales[$index];
+                $detalle_pedido->save();
+            }
+        }
+        if (sizeof($request->detallesAEliminar_id) != 0) {
+            foreach ($request->detallesAEliminar_id as $index => $detalleEliminar) {
+                $detalle_pedido = DetalleParteProduccion::find($detalleEliminar);
+                if ($detalle_pedido != null) {
+                    $total_eliminado += $detalle_pedido->subtotal;
+                    $detalle_pedido->delete();
+                }
+            }
+        }
+        $detalle_parte_produccion->total = $request->total_pedido;
+        $detalle_parte_produccion->save();
+
+        return response()->json(
+            [
+                'success' => true
+            ]
+        );
+    }
 
     public function agregarInsumo(Request $request)
     {

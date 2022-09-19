@@ -83,12 +83,9 @@
                             $total =0;
                             $subtotal=0;
                         @endphp                   
-                        
                         @foreach($productos_predefinidos as $item  )
-
-                        <tr id="{{$item->id}}">
-                           
-                            <Td>{{$item->producto->categoria->nombre}}</td>
+                        <tr id="{{$item->id}}">                           
+                            <Td  class="{{$item->producto->categoria->id}}">{{$item->producto->categoria->nombre}}</td>
                             <td style="text-align: center;" class="id_productos" id="{{$item->producto_id}}">{{$item->producto->nombre}} </td>
                             <td style="text-align: center;"><input type="number"  id="stock-{{$item->id}}" value="{{ $item->cantidad }}" class="form-control stock" /> </td>
                             <td style="text-align: center;">  {{ $item->producto->unidad_medida_compra->nombre }}</td>
@@ -340,7 +337,7 @@
 
 
             let html='<tr id="'+stocks_input.length+'" >'+
-                        '<Td >'+categoria_nombre+'  </td>'+
+                        '<Td class="'+categoria_id+'">'+categoria_nombre+'  </td>'+
                         '<td style="text-align: center;" class="id_productos" id="'+producto_id+'">'+ producto_nombre +'  </td>'+
                         '<td style="text-align: center;"><input type="number"  id="stock-'+stocks_input.length+'" value="'+nueva_cantidad+'" class="form-control stock" /> </td>'+
                         '<td style="text-align: center;">  '+um+'</td>'+
@@ -355,8 +352,7 @@
                 title: "AVISO",
                 message: "Debe rellenar los campos faltantes",
                 position: "topCenter",
-                timeout: 1500,
-                
+                timeout: 1500,                
             });
         }
     }
