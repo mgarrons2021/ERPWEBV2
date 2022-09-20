@@ -36,9 +36,10 @@ class EmisionPaqueteController extends Controller
     public function emisionPaquetes(Request $request)
     {
         $sucursal = 0;
-        $puntoventa = 0;
-        $cantidad = 2;  /* CANTIDAD FACTURAS */
-        $cafc            = "1011917833B0D"; //'101B4283AAD6D';
+        $puntoventa = 1;
+        
+        $cantidad = 500;  /* CANTIDAD FACTURAS */
+        $cafc     = "1011917833B0D"; //'101B4283AAD6D';
         $codigoEvento = 4;
         $fecha_generica = Carbon::now();
         $sucursal_db = Sucursal::where('codigo_fiscal', $sucursal)->first();
@@ -50,7 +51,6 @@ class EmisionPaqueteController extends Controller
             ->first();
         $cufdAntiguo = $cufd_bd->codigo;
         $resCuis = $cuis_bd->codigo_cui;
-
 
         $codigoControlAntiguo     = $cufd_bd->codigo_control;
 

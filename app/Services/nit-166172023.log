@@ -66813,3 +66813,1768 @@ stdClass Object
 
 )
 
+[2022-09-20 15:11:23]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 789577
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:11:39]#
+2022-09-20T15:08:48.000
+[2022-09-20 15:11:39]#
+2022-09-20T15:09:28.000
+[2022-09-20 15:12:10]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 15:12:10]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => 373e204f-3918-11ed-a9c5-63257e7687fe
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:12:12]#
+2022-09-20T15:10:34.000
+[2022-09-20 15:12:12]#
+2022-09-20T15:11:14.000
+[2022-09-20 15:13:04]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 789632
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:13:05]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 15:13:05]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => 588b83ef-3918-11ed-a210-e15771e2917e
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:13:07]#
+2022-09-20T15:13:00.000
+[2022-09-20 15:13:07]#
+2022-09-20T15:13:40.000
+[2022-09-20 15:14:08]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 789656
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:17:48]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 789729
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:17:50]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 15:17:50]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => 01fe4523-3919-11ed-984d-8755a3df40da
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:18:36]#
+2022-09-20T15:14:46.000
+[2022-09-20 15:18:36]#
+2022-09-20T15:15:26.000
+[2022-09-20 15:26:15]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 789975
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:26:17]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 15:26:17]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => 304ba4eb-391a-11ed-984d-8755a3df40da
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:28:22]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 790078
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:28:25]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 15:28:25]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => 7c8f6b2d-391a-11ed-b7d5-03319eb05c74
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:28:27]#
+2022-09-20T15:23:55.000
+[2022-09-20 15:28:27]#
+2022-09-20T15:24:35.000
+[2022-09-20 15:29:33]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 790121
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:29:37]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 15:29:37]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => a6ff8625-391a-11ed-b7d5-03319eb05c74
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:29:39]#
+2022-09-20T15:25:11.000
+[2022-09-20 15:29:39]#
+2022-09-20T15:25:51.000
+[2022-09-20 15:30:24]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 790154
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:30:26]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 15:30:26]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => c4ca52d1-391a-11ed-984d-8755a3df40da
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:30:40]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 790170
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:30:43]#
+2022-09-20T15:27:07.000
+[2022-09-20 15:30:43]#
+2022-09-20T15:27:47.000
+[2022-09-20 15:31:12]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 15:31:12]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => e031db61-391a-11ed-b7d5-03319eb05c74
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:31:45]#
+2022-09-20T15:25:11.000
+[2022-09-20 15:31:45]#
+2022-09-20T15:25:51.000
+[2022-09-20 15:32:36]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 790231
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:32:53]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 15:32:53]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => 1c2dd845-391b-11ed-a9c5-63257e7687fe
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:33:09]#
+2022-09-20T15:25:11.000
+[2022-09-20 15:33:09]#
+2022-09-20T15:25:51.000
+[2022-09-20 15:33:19]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 790272
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:33:58]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 15:33:58]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => 42e2bfe9-391b-11ed-984d-8755a3df40da
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:33:59]#
+2022-09-20T15:31:51.000
+[2022-09-20 15:33:59]#
+2022-09-20T15:32:31.000
+[2022-09-20 15:35:39]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 790399
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:35:41]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 15:35:41]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => 806eab1b-391b-11ed-a210-e15771e2917e
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:35:43]#
+2022-09-20T15:31:51.000
+[2022-09-20 15:35:43]#
+2022-09-20T15:32:31.000
+[2022-09-20 15:36:30]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 790444
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:36:36]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 15:36:36]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => a09d0b0b-391b-11ed-a9c5-63257e7687fe
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:36:53]#
+2022-09-20T15:32:59.000
+[2022-09-20 15:36:53]#
+2022-09-20T15:33:39.000
+[2022-09-20 15:37:13]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 790466
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:37:31]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 15:37:31]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => c1cb001b-391b-11ed-984d-8755a3df40da
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:37:43]#
+2022-09-20T15:35:37.000
+[2022-09-20 15:37:43]#
+2022-09-20T15:36:17.000
+[2022-09-20 15:38:34]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 790528
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:38:51]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 15:38:51]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => f1d212c1-391b-11ed-a210-e15771e2917e
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:39:08]#
+2022-09-20T15:35:37.000
+[2022-09-20 15:39:08]#
+2022-09-20T15:36:17.000
+[2022-09-20 15:40:31]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 790637
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:40:33]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 15:40:33]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => 2eac891d-391c-11ed-984d-8755a3df40da
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:41:20]#
+2022-09-20T15:37:42.000
+[2022-09-20 15:41:20]#
+2022-09-20T15:38:22.000
+[2022-09-20 15:42:20]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 790774
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:42:23]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 15:42:23]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => 6fa7f8ff-391c-11ed-984d-8755a3df40da
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:42:25]#
+2022-09-20T15:39:27.000
+[2022-09-20 15:42:25]#
+2022-09-20T15:40:07.000
+[2022-09-20 15:42:36]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 790792
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:43:08]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 15:43:08]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => 8aa5ea51-391c-11ed-984d-8755a3df40da
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:43:09]#
+2022-09-20T15:40:37.000
+[2022-09-20 15:43:09]#
+2022-09-20T15:41:17.000
+[2022-09-20 15:43:38]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 790864
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:43:39]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 15:43:39]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => 9da58003-391c-11ed-a210-e15771e2917e
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:43:41]#
+2022-09-20T15:41:56.000
+[2022-09-20 15:43:41]#
+2022-09-20T15:42:36.000
+[2022-09-20 15:44:06]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 790899
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:44:08]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 15:44:08]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => ae8bd34d-391c-11ed-984d-8755a3df40da
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:44:35]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 790933
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:45:07]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 15:45:07]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => d1e449d0-391c-11ed-b7d5-03319eb05c74
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:45:24]#
+2022-09-20T15:42:35.000
+[2022-09-20 15:45:24]#
+2022-09-20T15:43:15.000
+[2022-09-20 15:46:13]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 791053
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:48:32]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 791435
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:49:44]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 791645
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:49:46]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 15:49:46]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => 77fcbc32-391d-11ed-b7d5-03319eb05c74
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:50:17]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 791776
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:50:19]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 15:50:19]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => 8bb20dc5-391d-11ed-a9c5-63257e7687fe
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:50:35]#
+2022-09-20T15:44:53.000
+[2022-09-20 15:50:35]#
+2022-09-20T15:45:33.000
+[2022-09-20 15:51:18]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 791821
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:51:35]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 15:51:35]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => b93cfd47-391d-11ed-a9c5-63257e7687fe
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 15:51:37]#
+2022-09-20T15:45:40.000
+[2022-09-20 15:51:37]#
+2022-09-20T15:46:20.000
+[2022-09-20 16:03:32]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 792998
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 16:03:34]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 16:03:34]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => 66013d3d-391f-11ed-b7d5-03319eb05c74
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 16:03:36]#
+2022-09-20T16:03:09.000
+[2022-09-20 16:03:36]#
+2022-09-20T16:03:49.000
+[2022-09-20 16:06:58]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 793182
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 16:07:07]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 16:07:07]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => e461d6a0-391f-11ed-8dee-4bddae25dc8b
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 16:07:09]#
+2022-09-20T17:28:23.000
+[2022-09-20 16:07:09]#
+2022-09-20T16:06:03.000
+[2022-09-20 16:10:12]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 793362
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 16:10:19]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 16:10:19]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => 573b6404-3920-11ed-984d-8755a3df40da
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 16:10:22]#
+2022-09-20T17:30:00.000
+[2022-09-20 16:10:22]#
+2022-09-20T16:07:40.000
+[2022-09-20 16:14:05]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 793408
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 16:14:15]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 16:14:15]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => e3bb40fc-3920-11ed-b7d5-03319eb05c74
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 16:14:20]#
+2022-09-20T17:31:35.000
+[2022-09-20 16:14:20]#
+2022-09-20T16:09:15.000
+[2022-09-20 16:16:26]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 793483
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 16:16:34]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 16:16:34]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => 36bb1e11-3921-11ed-b7d5-03319eb05c74
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 16:16:53]#
+2022-09-20T17:34:03.000
+[2022-09-20 16:16:53]#
+2022-09-20T16:11:43.000
+[2022-09-20 16:19:09]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 793701
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 16:19:32]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 16:19:32]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => a07290ef-3921-11ed-a210-e15771e2917e
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 16:19:49]#
+2022-09-20T17:35:29.000
+[2022-09-20 16:19:49]#
+2022-09-20T16:13:09.000
+[2022-09-20 16:21:54]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 793909
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 16:22:01]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 16:22:01]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => f983ece6-3921-11ed-b7d5-03319eb05c74
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 16:22:04]#
+2022-09-20T17:38:56.000
+[2022-09-20 16:22:04]#
+2022-09-20T16:16:36.000
+[2022-09-20 16:24:01]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 794147
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 16:24:09]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 16:24:09]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => 45754dc4-3922-11ed-984d-8755a3df40da
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 16:24:25]#
+2022-09-20T17:41:23.000
+[2022-09-20 16:24:25]#
+2022-09-20T16:19:03.000
+[2022-09-20 16:24:57]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 794232
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 16:25:19]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 16:25:19]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 953
+                    [descripcion] => EL CODIGO UNICO DE FACTURACION DIARIA (CUFD) NO SE ENCUENTRA VIGENTE
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-20 16:25:19]#
+2022-09-20T17:42:46.000
+[2022-09-20 16:25:19]#
+2022-09-20T16:20:26.000
+[2022-09-20 16:25:37]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 794318
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 16:26:15]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 16:26:15]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => 909ca661-3922-11ed-984d-8755a3df40da
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 16:26:16]#
+2022-09-20T17:44:11.000
+[2022-09-20 16:26:16]#
+2022-09-20T16:21:51.000
+[2022-09-20 16:27:58]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 794568
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 16:31:33]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 794832
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 16:31:41]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 16:31:41]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => 533675b3-3923-11ed-a210-e15771e2917e
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 16:31:47]#
+2022-09-20T17:49:11.000
+[2022-09-20 16:31:47]#
+2022-09-20T16:26:51.000
+[2022-09-20 16:32:27]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 794863
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 16:32:37]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 16:32:37]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => 74878364-3923-11ed-a210-e15771e2917e
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 16:33:04]#
+2022-09-20T17:50:15.000
+[2022-09-20 16:33:04]#
+2022-09-20T16:27:55.000
+[2022-09-20 16:35:51]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 794916
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 16:36:25]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 16:36:25]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => f12e3875-3923-11ed-984d-8755a3df40da
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 16:36:27]#
+2022-09-20T17:52:15.000
+[2022-09-20 16:36:27]#
+2022-09-20T16:29:55.000
+[2022-09-20 16:38:38]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 794956
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 16:38:48]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 16:38:48]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => 5172fe67-3924-11ed-a9c5-63257e7687fe
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 16:39:28]#
+2022-09-20T17:54:09.000
+[2022-09-20 16:39:28]#
+2022-09-20T16:31:49.000
+[2022-09-20 16:41:15]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 795013
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 16:41:38]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 16:41:38]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => b61971a9-3924-11ed-a210-e15771e2917e
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 16:42:25]#
+2022-09-20T17:56:51.000
+[2022-09-20 16:42:25]#
+2022-09-20T16:34:31.000
+[2022-09-20 16:45:05]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 795063
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 16:45:35]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 16:45:35]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => 3c4940b0-3925-11ed-984d-8755a3df40da
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 16:46:35]#
+2022-09-20T17:59:34.000
+[2022-09-20 16:46:35]#
+2022-09-20T16:37:14.000
+[2022-09-20 16:48:04]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 795096
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 16:48:51]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 16:48:51]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => b237604e-3925-11ed-a210-e15771e2917e
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 16:50:00]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 795118
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 16:51:13]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 16:51:13]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => 06c30d2d-3926-11ed-984d-8755a3df40da
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 16:54:30]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 795158
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 16:58:41]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 795198
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 16:59:08]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 16:59:08]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => 26c362b6-3927-11ed-a9c5-63257e7687fe
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 17:03:21]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 795227
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 17:06:16]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 795247
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 17:13:05]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 795278
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 17:14:48]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 795295
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 17:17:15]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 795306
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 17:19:29]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 795307
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 17:21:50]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 795309
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 17:23:08]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 795312
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 17:25:49]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 795319
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 17:26:25]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 17:26:25]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => f158c6f8-392a-11ed-984d-8755a3df40da
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 17:28:27]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 795322
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 17:30:53]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 795324
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 17:35:31]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 795345
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 17:38:15]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 795349
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 17:38:30]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 17:38:30]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => a63b4624-392c-11ed-b7d5-03319eb05c74
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 17:39:28]#
+2022-09-20T18:39:43.000
+[2022-09-20 17:39:28]#
+2022-09-20T17:17:23.000
+[2022-09-20 17:39:57]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 795354
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 17:40:07]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 17:40:07]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => e27cd803-392c-11ed-b7d5-03319eb05c74
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 17:40:34]#
+2022-09-20T18:42:11.000
+[2022-09-20 17:40:34]#
+2022-09-20T17:19:51.000
+[2022-09-20 17:42:16]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 795365
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 17:42:29]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 17:42:29]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => 36f06946-392d-11ed-b7d5-03319eb05c74
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 17:42:42]#
+2022-09-20T18:44:18.000
+[2022-09-20 17:42:42]#
+2022-09-20T17:21:58.000
+[2022-09-20 17:43:44]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 795369
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 17:44:22]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 17:44:22]#
+
+[2022-09-20 17:44:22]#
+2022-09-20T18:46:44.000
+[2022-09-20 17:44:22]#
+2022-09-20T17:24:24.000
+[2022-09-20 17:45:09]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 795371
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 17:45:30]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 17:45:30]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => a2464905-392d-11ed-8dee-4bddae25dc8b
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 17:45:38]#
+2022-09-20T18:48:12.000
+[2022-09-20 17:45:38]#
+2022-09-20T17:25:52.000
+[2022-09-20 17:47:16]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 795381
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 17:47:26]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 17:47:26]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => e7ff19c2-392d-11ed-a210-e15771e2917e
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 17:47:28]#
+2022-09-20T18:50:22.000
+[2022-09-20 17:47:28]#
+2022-09-20T17:28:02.000
+[2022-09-20 17:47:54]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 795391
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 17:48:18]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 17:48:18]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => 0706ac9b-392e-11ed-a210-e15771e2917e
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 17:48:52]#
+2022-09-20T18:53:11.000
+[2022-09-20 17:48:52]#
+2022-09-20T17:30:51.000
+[2022-09-20 17:49:47]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 795469
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 17:50:12]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 17:50:12]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => 4b023d49-392e-11ed-a210-e15771e2917e
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 17:51:13]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 795509
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 17:51:53]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-20 17:51:53]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => 861475e5-392e-11ed-8dee-4bddae25dc8b
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-20 17:52:01]#
+2022-09-20T18:58:36.000
+[2022-09-20 17:52:01]#
+2022-09-20T17:36:16.000
+[2022-09-20 17:52:39]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 795548
+            [transaccion] => 1
+        )
+
+)
+

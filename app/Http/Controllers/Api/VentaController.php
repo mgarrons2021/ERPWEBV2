@@ -43,7 +43,7 @@ class VentaController extends Controller
 
             $cantidad_visitas = 1;
             $sucursal_id = $request->sucursal;
-            $puntoVenta=0;
+            $puntoVenta=1;
 
             /*  return response()->json($request->nit_ci); */
 

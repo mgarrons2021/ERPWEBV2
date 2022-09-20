@@ -359,7 +359,7 @@
         console.log(array_stocks);
         console.log(array_detalle_pedido_id_a_agregar);
         
-        detallesAEditar();
+        //detallesAEditar();
 
         if( fecha.value !='' ){
             detallesAEditar();
@@ -375,7 +375,8 @@
                 'subtotales':array_subtotales,
                 'total':td_total_pedido,
                 'fecha_pedido':fecha.value,
-                'precios':precio_prod
+                'precios':precio_prod,
+                'categorias':array_categorias,
             }),
         })
         .then((response) => {
@@ -419,17 +420,15 @@
     function detallesAEditar() 
     {
         
-        /* for (let index = 0; index < stocks_input.length; index++) {
+        for (let index = 0; index < stocks_input.length; index++) {
             array_stocks.push(stocks_input[index].value);
             array_subtotales.push(td_subtotales[index].innerHTML);
             array_detalle_pedido_id_a_agregar.push(  idproductos[index].id );   
             precio_prod.push( precios[index].innerHTML );
-        } */
-        
-        for (let index = 0; index < categorias.length; index++) {
-            //console.log(categorias[index].classList[0]);    
             array_categorias.push( categorias[index].classList[0] );
         }
+
+
         console.log(array_categorias);
         
     }

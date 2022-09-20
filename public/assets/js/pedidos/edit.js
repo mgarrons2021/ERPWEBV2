@@ -158,6 +158,13 @@ agregar_insumo.addEventListener('click',function(){
     } else {
         $("#errorproducto").addClass("d-none");
     }
+    
+    if (cantidad_solicitada.value == "") {
+        $("#errorcantidad").removeClass("d-none");
+    } else {
+        $("#errorcantidad").addClass("d-none");
+    }
+
 
     if(producto.value != "sin_seleccionar"){
         
@@ -174,19 +181,21 @@ agregar_insumo.addEventListener('click',function(){
         '</td>'+
         '<td style="text-align: center;">'+productonombre.value+'</td>'+
         '<td style="text-align: center;">'+unidad_medida.value+'</td>'+
-        '<td style="text-align: center;">'+          
-            ' <input type="number" class="form-control stock" id="stock-'+producto.value+'" style="text-align:center" name="cantidad_enviada" value="0" step="any">'+
-        ' </td>'+
+        '<td style="text-align: center;">' +
+            ' <input type="number" class="form-control stock" id="stock-'+ producto.value +'" style="text-align:center" step="any" value="'+cantidad_solicitada.value +'" readonly>' +
+            " </td>" +
         '<td style="text-align: center;" class="precio" id="precio-'+producto.value+'"> '+precios.value+'</td>'+
-        ' <td style="text-align: center;" class="td_subtotal"  id="subtotal-'+producto.value+'"> 0 </td>'+
-        '</tr>'; 
-
+        ' <td style="text-align: center;" class="td_subtotal"  id="subtotal-'+producto.value+'">' +cantidad_solicitada.value * precios.value +"</td>" +
+        "</tr>";
         cuerpotabla.innerHTML+=tr;
+        td_total_pedido.innerText =
+        parseFloat(td_total_pedido.innerText) +
+        parseFloat(precios.value) * parseFloat(cantidad_solicitada.value);
         array_detalle_inventario_id_a_agregar.push({
-            'cantidad_solicitada':0,
+            'cantidad_solicitada':cantidad_solicitada.value,
             'cantidad_enviada':0,
             'precio':precios.value,
-            'subtotal_solicitado':0,
+            'subtotal_solicitado':producto.value*precios.value,
             'subtotal_enviado':0,
             'pedido_id':0,
             'producto_id':producto.value

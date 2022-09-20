@@ -174,9 +174,7 @@ agregar_insumo.addEventListener("click", function () {
             '<span class="slider round"></span>' +
             "</label>" +
             "</td>" +
-            '<td style="text-align: center;">' +
-            productonombre.value +
-            "</td>" +
+            '<td style="text-align: center;">'+ productonombre.value + "</td>" +
             '<td style="text-align: center;">' +
             ' <input type="number" class="form-control stock" id="stock-'+ producto.value +'" style="text-align:center" step="any" value="'+cantidad.value +'" readonly>' +
             " </td>" +

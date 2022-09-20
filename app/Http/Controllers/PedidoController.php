@@ -612,31 +612,46 @@ class PedidoController extends Controller
         $pedido3->save();
         $total3 = 0; 
 
-
         $subtotales=$request->subtotales;
         $stock=$request->stocks;
         $productos=$request->idproductos;
         $precios = $request->precios;
+        $categorias=$request->categorias;
         //dd($subtotales);
         foreach ($productos as $index =>  $item) {                    
-            if($stock[$index]>0){
-
-
+            if($stock[$index]>0)
+            {
+//falta controlar los subtotales
                 $detalle_pedido = new DetallePedido();    
-                $total += floatval($subtotales[$index]);
                 $detalle_pedido->cantidad_solicitada = $stock[$index];
                 $detalle_pedido->precio = $precios[$index];
-                $detalle_pedido->subtotal_solicitado = $subtotales[$index];
+                $detalle_pedido->subtotal_solicitado = $detalle_pedido->cantidad_solicitada * $detalle_pedido->precio;
                 $detalle_pedido->producto_id = $item;
-                $detalle_pedido->pedido_id = $pedido->id;
-                $detalle_pedido->save();
 
+                if( $categorias[$index] == 10 || $categorias[$index] == 11   ){
+                    $detalle_pedido->pedido_id = $pedido->id;
+                    $total += floatval($detalle_pedido->subtotal_solicitado);
+                }else if(  $categorias[$index] == 13 || $categorias[$index] == 2 || $categorias[$index] == 12 || $categorias[$index] == 9    ){//no comestible mas
+                    $detalle_pedido->pedido_id = $pedido2->id;
+                    $total2 += floatval($detalle_pedido->subtotal_solicitado);
+                }else if(   $categorias[$index] == 8 || $categorias[$index] == 7 || $categorias[$index] == 14  ){
+                    $detalle_pedido->pedido_id = $pedido3->id;
+                    $total3 += floatval($detalle_pedido->subtotal_solicitado);
+                }
+
+                $detalle_pedido->save();
 
             }
         }
 
         $pedido->update([
             'total_solicitado' =>  $total,
+        ]); 
+        $pedido2->update([
+            'total_solicitado' =>  $total2,
+        ]); 
+        $pedido3->update([
+            'total_solicitado' =>  $total3,
         ]); 
 
         return response()->json(
