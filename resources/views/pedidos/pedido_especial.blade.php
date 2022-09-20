@@ -104,9 +104,7 @@
                         @endforeach
                         @php
                             //dd($productos_predefinidos);
-                        @endphp
-                        
-                        
+                        @endphp                      
                     </tbody>
                     <tfooter>
                         <tr>

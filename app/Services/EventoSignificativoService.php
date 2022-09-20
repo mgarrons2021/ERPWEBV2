@@ -64,12 +64,7 @@ class EventoSignificativoService
 
 		$pvfechaInicio = (new Carbon($fecha_inicio_contingencia))->format("Y-m-d\TH:i:s.v");
 		$pvfechaFin	   =  (new Carbon($fecha_final_contingencia))->format("Y-m-d\TH:i:s.v");
-		/* dd($pvfechaInicio,$pvfechaFin); */
-
-
 		$evento 	= $this->obtenerListadoEventos($sucursal_db->id, $puntoventa, $codigoEvento);
-
-
 		$resEvento = $this->registroEvento(
 			$cuis_bd->codigo_cui,
 			$resCufd->RespuestaCufd->codigo,

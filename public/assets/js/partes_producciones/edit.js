@@ -178,23 +178,11 @@ agregar_insumo.addEventListener("click", function () {
             productonombre.value +
             "</td>" +
             '<td style="text-align: center;">' +
-            ' <input type="number" class="form-control stock" id="stock-' +
-            producto.value +
-            '" style="text-align:center" step="any" value="' +
-            cantidad.value +
-            '" readonly>' +
+            ' <input type="number" class="form-control stock" id="stock-'+ producto.value +'" style="text-align:center" step="any" value="'+cantidad.value +'" readonly>' +
             " </td>" +
             /* '<td style="text-align: center;" class="cantidad" id="stock-'+producto.value+'"> '+cantidad.value+'</td>'+ */
-            '<td style="text-align: center;" class="precio" id="precio-' +
-            producto.value +
-            '"> ' +
-            precios.value +
-            "</td>" +
-            ' <td style="text-align: center;" class="subtotal"  id="subtotal-' +
-            producto.value +
-            '"> ' +
-            cantidad.value * precios.value +
-            " </td>" +
+            '<td style="text-align: center;" class="precio" id="precio-' +producto.value + '"> ' + precios.value + "</td>" +
+            ' <td style="text-align: center;" class="subtotal"  id="subtotal-'+ producto.value +'">' +cantidad.value * precios.value +  " </td>" +
             /*    '<td style="text-align: center;" class="subtotal" name="subtotal" id="">'+( parseFloat(precios.value) * parseFloat(cantidad.value))+'</td>'+
       ' <td style="text-align: center;" class="subtotal"  id="subtotal-'+producto.value+'"> '+cantidad.value+' * '+precios.value+'</td>'+ */
             "</tr>";
@@ -204,11 +192,11 @@ agregar_insumo.addEventListener("click", function () {
             parseFloat(total_pedido.innerText) +
             parseFloat(precios.value) * parseFloat(cantidad.value);
         array_detalle_inventario_id_a_agregar.push({
-            cantidad: precios.value,
-            precios: precios.value,
-            subtotal: producto.value*precios.value,
-            parte_produccion_id: 0,
-            producto_id: producto.value,
+            'cantidad': cantidad.value,
+            'precios': precios.value,
+            'subtotal': producto.value*precios.value,
+            'parte_produccion_id': 0,
+            'producto_id': producto.value,
         });
     }
 });

@@ -76,7 +76,7 @@ class EmisionPaqueteService
             $factura = $this->emisionIndividualService->construirFactura($puntoventa, $sucursal, $this->configService->config->modalidad, $documentoSector, $codigoActividad, $codigoProductoSin);
             $factura->cabecera->nitEmisor = $this->configService->config->nit;
             $factura->cabecera->razonSocialEmisor = $this->configService->config->razonSocial;
-            $factura->cabecera->fechaEmision = $fechaEmision ?: date('Y-m-d\TH:i:s.v');
+            $factura->cabecera->fechaEmision = $fechaEmision ?: date('Y-m-d\TH:i:s.v'); 
             $factura->cabecera->cufd = $cufdAntiguo;
             $factura->cabecera->cafc = $cafc;
             $facturas[] = $factura;

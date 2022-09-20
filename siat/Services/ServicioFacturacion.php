@@ -186,6 +186,7 @@ class ServicioFacturacion extends ServicioSiat
 
 				//print_r($this->buildInvoiceXml($factura));
 				$xmlInvoices[] = $this->buildInvoiceXml($factura);
+				/* dd($factura); */
 			}
 
 			//print_r($xmlInvoices);die();
@@ -214,7 +215,7 @@ class ServicioFacturacion extends ServicioSiat
 				$solicitud->toArray()
 			];
 
-			/* 	dd($data); */
+				
 
 			$this->wsdl = $facturas[0]->getEndpoint($this->modalidad, $this->ambiente);
 			$res = $this->callAction('recepcionPaqueteFactura', $data);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Siat;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Siat\SiatCufd;
 use App\Models\Siat\SiatCui;
@@ -13,7 +14,6 @@ use App\Services\EmisionIndividualService;
 use App\Services\EmisionPaqueteService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-
 
 class EmisionPaqueteController extends Controller
 {
@@ -35,37 +35,49 @@ class EmisionPaqueteController extends Controller
 
     public function emisionPaquetes(Request $request)
     {
-        $cantidad = 500;
         $sucursal = 0;
         $puntoventa = 0;
-        $codigoEvento = 1;
+        $cantidad = 500;
+        $cafc            = "1011917833B0D"; //'101B4283AAD6D';
+        $codigoEvento = 2;
         $fecha_generica = Carbon::now();
         $sucursal_db = Sucursal::where('codigo_fiscal', $sucursal)->first();
         $cufd_bd = SiatCufd::find($request->cufd_id);
-
+        
         $cuis_bd     = SiatCui::where('fecha_expiracion', '>=', $fecha_generica)
-            ->where('sucursal_id', $sucursal)
+            ->where('sucursal_id', $sucursal_db->id)
             ->orderBy('id', 'desc')
             ->first();
         $cufdAntiguo = $cufd_bd->codigo;
         $resCuis = $cuis_bd->codigo_cui;
 
-        
+
         $codigoControlAntiguo     = $cufd_bd->codigo_control;
-        $cafc            = "1011917833B0D"; //'101B4283AAD6D';
-        $resCuis         = $this->cuisService->obtenerCuis($puntoventa, $sucursal);
-        $resCufd        = $this->cufdService->obtenerCufd($puntoventa, $sucursal, $resCuis->RespuestaCuis->codigo);
+
+        $resCufd        = $this->cufdService->obtenerCufd($puntoventa, $sucursal, $resCuis);
+        $fecha_generado_cufd = Carbon::now()->toDateTimeString();
+        /*  dd($resCufd); */
+        $guardar_cufd = SiatCufd::create([
+            'estado' => "V",
+            'codigo' => $resCufd->RespuestaCufd->codigo,
+            'codigo_control' => $resCufd->RespuestaCufd->codigoControl,
+            'direccion' => $resCufd->RespuestaCufd->direccion,
+            'fecha_vigencia' => new Carbon($resCufd->RespuestaCufd->fechaVigencia),
+            'fecha_generado' => $fecha_generado_cufd,
+            'sucursal_id' => $sucursal_db->id,
+            'numero_factura' => 0
+        ]);
 
         /* for ($i = 0; $i < 70; $i++) { */
         # code...
-        $fechaInicio     = '2022-09-20T14:08:41.000';
-
+        /*   dd($cufd_bd); */
         $fechaFin        = Carbon::now();
-        $pvfechaInicio     = (new Carbon($fechaInicio))->format("Y-m-d\TH:i:s.v");
-        $pvfechaFin        = (new Carbon($fechaFin))->format("Y-m-d\TH:i:s.v");
+        $pvfechaInicio     = (new Carbon($cufd_bd->fecha_generado))->addMinutes(2)->format("Y-m-d\TH:i:s.v");
+        $pvfechaFin        = (new Carbon($cufd_bd->fecha_generado))->addMinutes(3)->format("Y-m-d\TH:i:s.v");
+      /*   dd($pvfechaInicio, $pvfechaFin); */
         $evento         = $this->emisionPaqueteService->obtenerListadoEventos($sucursal, $puntoventa, $codigoEvento);
         $resEvento         = $this->emisionPaqueteService->registroEvento(
-            $resCuis->RespuestaCuis->codigo,
+            $resCuis,
             $resCufd->RespuestaCufd->codigo,
             $sucursal,
             $puntoventa,
@@ -102,4 +114,5 @@ class EmisionPaqueteController extends Controller
         $this->emisionPaqueteService->test_log($pvfechaFin);
         /* } */
     }
+    
 }

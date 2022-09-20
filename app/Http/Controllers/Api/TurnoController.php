@@ -15,6 +15,8 @@ use App\Http\Controllers\Controller;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\SiatConfig;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Services\ServicioSiat;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Services\ServicioFacturacionCodigos;
+
+
 class TurnoController extends Controller
 {
     public $config;
@@ -29,8 +31,8 @@ class TurnoController extends Controller
             'modalidad'     => ServicioSiat::MOD_COMPUTARIZADA_ENLINEA,
             'ambiente'      => ServicioSiat::AMBIENTE_PRUEBAS,
             'tokenDelegado'    => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJET05FU0NPXzAyMyIsImNvZGlnb1Npc3RlbWEiOiI3MjI5MDdGMkJBRUNDMEIyNjAyNUZFNyIsIm5pdCI6Ikg0c0lBQUFBQUFBQUFETTBNek0wTnpJd01nWUE3bHFjcHdrQUFBQT0iLCJpZCI6NTE5NjgyLCJleHAiOjE2NjQ1ODI0MDAsImlhdCI6MTY2MDgyOTA0NCwibml0RGVsZWdhZG8iOjE2NjE3MjAyMywic3Vic2lzdGVtYSI6IlNGRSJ9.8ubSTM8oYEuY7pHiNQYbNj6I87koRUqzOqsQ341VMKwA8Y_A9nh_qA4ttCdY-6HywevMQ4Ov64I-w7S3k47NYw',
-            'pubCert'		=> MOD_SIAT_DIR . SB_DS . 'certs' . SB_DS . 'terminalx' . SB_DS . 'PatrickService_Ltda_CER.pem',
-	        'privCert'		=> MOD_SIAT_DIR . SB_DS . 'certs' . SB_DS . 'terminalx' . SB_DS . 'Patricio_Aguilar_Vargas.pem', 
+            'pubCert'		=> MOD_SIAT_DIR . SB_DS . 'certs' . SB_DS . 'terminalx' . SB_DS . 'DONESCO_SRL_CER.pem',
+	        'privCert'		=> MOD_SIAT_DIR . SB_DS . 'certs' . SB_DS . 'terminalx' . SB_DS . 'DONESCO_S.R.L._CER.pem',  
             'telefono'        => '34345435',
             'ciudad'        => 'SANTA CRUZ GC'
         ]);
@@ -40,7 +42,7 @@ class TurnoController extends Controller
         $user = $request->user_id;
         $user_id = User::find($request->user_id);
         $sucursal = Sucursal::find($request->sucursal_id);
-        $codigoPuntoVenta  = 1;
+        $codigoPuntoVenta  = 0;
         $fecha_generado_cufd = Carbon::now()->toDateTimeString();
         $fecha = Carbon::now()->format('Y-m-d H:i');
         $turno_am = DB::select("select turno from turnos_ingresos where fecha = '$fecha' and user_id = '$user' and turno = 0");
