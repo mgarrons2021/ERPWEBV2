@@ -640,6 +640,7 @@ use App\Http\Controllers\VentaController;
         Route::delete('/partes_producciones/{id}', [\App\Http\Controllers\ParteProduccionController::class, 'destroy'])->name('partes_producciones.destroy');
         Route::put('/partes_producciones/{id}', [App\Http\Controllers\ParteProduccionController::class, 'update'])->name('partes_producciones.update');
         Route::post('partes_producciones/actualizarPedido', [App\Http\Controllers\ParteProduccionController::class, 'actualizarPedido'])->name('partes_producciones.actualizarPedido');
+       
     });
 
     Route::post('/enviaremail', [App\Http\Controllers\MailController::class, 'sendEmail'])->name('mail.sendEmail');

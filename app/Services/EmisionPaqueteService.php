@@ -123,8 +123,8 @@ class EmisionPaqueteService
             $resCuis->RespuestaCuis->codigo,
             $resCufd->RespuestaCufd->codigo
         );
-        //$service->setConfig((array)$config);
-        //$service->codigoControl = $resCufd->RespuestaCufd->codigoControl;
+        $service->setConfig((array)$this->configService->config);
+        /* $service->codigoControl = $resCufd->RespuestaCufd->codigoControl; */
         $res = $service->validacionRecepcionPaqueteFactura($codigoSucursal, $codigoPuntoVenta, $codigoRecepcion, $tipoFactura, $documentoSector);
 
         while ($res->RespuestaServicioFacturacion->codigoDescripcion == 'PENDIENTE') {

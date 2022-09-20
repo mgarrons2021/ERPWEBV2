@@ -162,6 +162,7 @@ class EmisionIndividualService
         $factura->cabecera->montoTotalSujetoIva    = $factura->cabecera->montoTotal;
         $factura->cabecera->descuentoAdicional    = 0;
         $factura->cabecera->codigoMoneda        = 1; //BOLIVIANO
+        
         $factura->cabecera->tipoCambio            = 1;
         $factura->cabecera->usuario                = 'MonoBusiness User 01';
 

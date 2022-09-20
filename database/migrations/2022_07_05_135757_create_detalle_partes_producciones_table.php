@@ -22,8 +22,8 @@ class CreateDetallePartesProduccionesTable extends Migration
             $table->unsignedBigInteger('parte_produccion_id');
             $table->unsignedBigInteger('producto_id');
 
-            $table->foreign('parte_produccion_id')->on('partes_producciones')->references('id');
-            $table->foreign('producto_id')->on('productos')->references('id');
+            $table->foreign('parte_produccion_id')->on('partes_producciones')->references('id')->onDelete('cascade');
+            $table->foreign('producto_id')->on('productos')->references('id')->onDelete('cascade');
             $table->timestamps();
         });
     }

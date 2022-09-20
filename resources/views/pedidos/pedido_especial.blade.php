@@ -85,7 +85,7 @@
                         @endphp                   
                         @foreach($productos_predefinidos as $item  )
                         <tr id="{{$item->id}}">                           
-                            <Td  class="{{$item->producto->categoria->id}}">{{$item->producto->categoria->nombre}}</td>
+                            <Td  class="{{$item->producto->categoria->id}} categoria">{{$item->producto->categoria->nombre}}</td>
                             <td style="text-align: center;" class="id_productos" id="{{$item->producto_id}}">{{$item->producto->nombre}} </td>
                             <td style="text-align: center;"><input type="number"  id="stock-{{$item->id}}" value="{{ $item->cantidad }}" class="form-control stock" /> </td>
                             <td style="text-align: center;">  {{ $item->producto->unidad_medida_compra->nombre }}</td>
@@ -122,11 +122,8 @@
                 <button type="button" class="btn btn-outline-danger" id="cancelar">Cancelar </button>
                 <a type="button" class="btn btn-outline-info" id="nuevos" href="{{route('productosinsumos.create')}}">Agregar Nuevos Productos </a>
             </div>
-
         </div>
-
     </div>
-
 </section>
 
 @endsection
@@ -142,6 +139,7 @@
     let ruta_obtener_plato = "{{route('platos_sucursales.obtenerPlato')}}";
 
     let precios = document.getElementsByClassName('precios');
+    let categorias = document.getElementsByClassName('categoria');
     let td_subtotales = document.getElementsByClassName("td_subtotal");
     let td_total_pedido = document.getElementById("total_pedido");
     let stocks_input = document.getElementsByClassName("form-control stock");
@@ -157,6 +155,7 @@
     let array_stocks = [];
     let array_subtotales = [];
     let array_detalle_pedido_id_a_agregar= [];
+    let array_categorias = [];
     let precio_prod=[];
     let categoria_nombre='';
     let categoria_id=0;
@@ -335,7 +334,7 @@
 
 
             let html='<tr id="'+stocks_input.length+'" >'+
-                        '<Td class="'+categoria_id+'">'+categoria_nombre+'  </td>'+
+                        '<Td class="'+categoria_id+' categoria">'+categoria_nombre+'  </td>'+
                         '<td style="text-align: center;" class="id_productos" id="'+producto_id+'">'+ producto_nombre +'  </td>'+
                         '<td style="text-align: center;"><input type="number"  id="stock-'+stocks_input.length+'" value="'+nueva_cantidad+'" class="form-control stock" /> </td>'+
                         '<td style="text-align: center;">  '+um+'</td>'+
@@ -359,6 +358,8 @@
     {
         console.log(array_stocks);
         console.log(array_detalle_pedido_id_a_agregar);
+        
+        detallesAEditar();
 
         if( fecha.value !='' ){
             detallesAEditar();
@@ -412,22 +413,27 @@
                 timeout: 1500,
                 
             });
-        }
-
-        
+        }        
     }
 
-    function detallesAEditar() {
+    function detallesAEditar() 
+    {
         
-        for (let index = 0; index < stocks_input.length; index++) {
+        /* for (let index = 0; index < stocks_input.length; index++) {
             array_stocks.push(stocks_input[index].value);
             array_subtotales.push(td_subtotales[index].innerHTML);
             array_detalle_pedido_id_a_agregar.push(  idproductos[index].id );   
             precio_prod.push( precios[index].innerHTML );
+        } */
+        
+        for (let index = 0; index < categorias.length; index++) {
+            //console.log(categorias[index].classList[0]);    
+            array_categorias.push( categorias[index].classList[0] );
         }
+        console.log(array_categorias);
         
     }
 
-</script>
+</script>   
 
 @endsection

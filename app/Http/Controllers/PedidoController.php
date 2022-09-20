@@ -581,27 +581,47 @@ class PedidoController extends Controller
         //guardar pedido
         $user_log = Auth::id();
         $user = User::find($user_log);
-        $pedido = new Pedido();
-        $pedido->fecha_actual = Carbon::now()->toDateString();
-    
+        $pedido  = new Pedido();
+        $pedido2 = new Pedido();
+        $pedido3 = new Pedido();
+        //1 CARNES
+        $pedido->fecha_actual = Carbon::now()->toDateString();    
         $pedido->fecha_pedido = $request->fecha_pedido;
         $pedido->estado = 'P'; //CREADO EN PENDIENTE
         $pedido->user_id = Auth::id();
         $pedido->sucursal_principal_id = $user->sucursals[0]->id;
         $pedido->sucursal_secundaria_id = 2;
         $pedido->save();
-        $total = 0; 
+        $total = 0;
+        //2  INSUMOS
+        $pedido2->fecha_actual = Carbon::now()->toDateString();    
+        $pedido2->fecha_pedido = $request->fecha_pedido;
+        $pedido2->estado = 'P'; //CREADO EN PENDIENTE
+        $pedido2->user_id = Auth::id();
+        $pedido2->sucursal_principal_id = $user->sucursals[0]->id;
+        $pedido2->sucursal_secundaria_id = 2;
+        $pedido2->save();
+        $total2 = 0; 
+        //3 VERDURAS
+        $pedido3->fecha_actual = Carbon::now()->toDateString();    
+        $pedido3->fecha_pedido = $request->fecha_pedido;
+        $pedido3->estado = 'P'; //CREADO EN PENDIENTE
+        $pedido3->user_id = Auth::id();
+        $pedido3->sucursal_principal_id = $user->sucursals[0]->id;
+        $pedido3->sucursal_secundaria_id = 2;
+        $pedido3->save();
+        $total3 = 0; 
+
 
         $subtotales=$request->subtotales;
         $stock=$request->stocks;
         $productos=$request->idproductos;
         $precios = $request->precios;
-
         //dd($subtotales);
-
-        foreach ($productos as $index =>  $item) {
-                    
+        foreach ($productos as $index =>  $item) {                    
             if($stock[$index]>0){
+
+
                 $detalle_pedido = new DetallePedido();    
                 $total += floatval($subtotales[$index]);
                 $detalle_pedido->cantidad_solicitada = $stock[$index];
@@ -610,9 +630,11 @@ class PedidoController extends Controller
                 $detalle_pedido->producto_id = $item;
                 $detalle_pedido->pedido_id = $pedido->id;
                 $detalle_pedido->save();
+
+
             }
         }
-        
+
         $pedido->update([
             'total_solicitado' =>  $total,
         ]); 

@@ -7,16 +7,16 @@
 
 namespace SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Services;
 
-use App\Models\Venta;
-use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\DocumentTypes;
-use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Messages\SolicitudServicioRecepcionFactura;
-use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Services\ServicioSiat;
-use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Invoices\SiatInvoice;
 use Exception;
 use SoapFault;
+use App\Models\Venta;
+use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\DocumentTypes;
+use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Services\ServicioSiat;
+use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Invoices\SiatInvoice;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Messages\SolicitudServicioRecepcionMasiva;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Messages\SolicitudServicioRecepcionPaquete;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Invoices\CompraVenta;
+use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Messages\SolicitudServicioRecepcionFactura;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Messages\SolicitudServicioValidacionRecepcionMasiva;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Messages\SolicitudServicioValidacionRecepcionPaquete;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Messages\SolicitudServicioAnulacionFactura;
@@ -183,7 +183,9 @@ class ServicioFacturacion extends ServicioSiat
 			foreach ($facturas as $factura) {
 
 				//$factura->cufd = $this->cufd;
-
+				$factura->buildCuf(0, $this->modalidad, $tipoEmision, $tipoFactura, $this->codigoControl);
+				$factura->validate();
+				/* $facturaXml = $this->buildInvoiceXml($factura); */
 				//print_r($this->buildInvoiceXml($factura));
 				$xmlInvoices[] = $this->buildInvoiceXml($factura);
 				/* dd($factura); */
@@ -215,7 +217,7 @@ class ServicioFacturacion extends ServicioSiat
 				$solicitud->toArray()
 			];
 
-				
+
 
 			$this->wsdl = $facturas[0]->getEndpoint($this->modalidad, $this->ambiente);
 			$res = $this->callAction('recepcionPaqueteFactura', $data);
@@ -258,6 +260,8 @@ class ServicioFacturacion extends ServicioSiat
 		$data = [
 			$solicitud->toArray()
 		];
+
+		/* dd($data); */
 		$this->wsdl = SiatInvoice::getWsdl($this->modalidad, $this->ambiente, $documentoSector);
 		$res = $this->callAction('validacionRecepcionPaqueteFactura', $data);
 		return $res;

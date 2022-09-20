@@ -93,11 +93,24 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
 <script>
-    const csrfToken = document.head.querySelector("[name~=csrf-token][content]").content;
+   
     let ruta_eliminar_parte_produccion = "{{ route('partes_producciones.destroy','') }}";
     let ruta_index_parte_produccion = "{{ route('partes_producciones.index') }}";
-    
+    let ruta_parte_producciones = "{{ route('partes_producciones.index') }}";
+    const csrfToken = document.head.querySelector("[name~=csrf-token][content]").content;
 </script>
+
+@if(session('eliminar')=='ok')
+
+<script>
+    Swal.fire(
+        'Eliminado!',
+        'Tu registro ha sido eliminado.',
+        'success'
+    )
+</script>
+@endif
+
 
 <script>
     /*ELIMINAR UN PEDIDO*/
@@ -119,6 +132,7 @@
                 confirmButtonText: "Si, Eliminar!",
                 cancelButtonText: "No, Cancelar!",
                 reverseButtons: true,
+            
             })
             .then((result) => {
                 if (result.value) {
@@ -141,7 +155,7 @@
                                             "success"
                                         )
                                         .then(function() {
-                                            window.location = ruta_parte_producciones;
+                                            window.location = ruta_eliminar_parte_produccion;
                                         });
                                 }
                             },
@@ -197,4 +211,5 @@
 </script>
 @endsection
 @endsection
+
 
