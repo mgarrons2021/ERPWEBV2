@@ -37,7 +37,7 @@ class EmisionPaqueteService
             return $eventsList;
 
         $nombre_evento = 'CORTE DEL SERVICIO DE INTERNET';
-        $evento = null; 
+        $evento = null;
         foreach ($eventsList->RespuestaListaParametricas->listaCodigos as $evt) {
             if ($evt->codigoClasificador == $buscarId) {
                 $evento = $evt;
@@ -64,12 +64,13 @@ class EmisionPaqueteService
             $sucursal,
             $puntoventa
         );
-       
+
         return $resEvent;
     }
 
-      function construirFacturas($sucursal, $puntoventa, int $cantidad, $documentoSector, $codigoActividad, $codigoProductoSin, &$fechaEmision = null, $cufdAntiguo = null, $cafc = null){
-       
+    function construirFacturas($sucursal, $puntoventa, int $cantidad, $documentoSector, $codigoActividad, $codigoProductoSin, &$fechaEmision = null, $cufdAntiguo = null, $cafc = null)
+    {
+
         $facturas = [];
         for ($i = 0; $i < $cantidad; $i++) {
             $factura = $this->emisionIndividualService->construirFactura($puntoventa, $sucursal, $this->configService->config->modalidad, $documentoSector, $codigoActividad, $codigoProductoSin);
@@ -106,13 +107,14 @@ class EmisionPaqueteService
             $tipoFactura,
             $cafc
         );
-       /*  return dd($res); */
+        /*  return dd($res); */
         $this->test_log("RESULTADO RECEPCION PAQUETE\n=============================");
         $this->test_log($res);
         return $res;
     }
 
-    function testRecepcionPaquete($codigoSucursal, $codigoPuntoVenta, $documentoSector, $tipoFactura, $codigoRecepcion){
+    function testRecepcionPaquete($codigoSucursal, $codigoPuntoVenta, $documentoSector, $tipoFactura, $codigoRecepcion)
+    {
 
         $resCuis =  $this->cuisService->obtenerCuis($codigoPuntoVenta, $codigoSucursal);
         $resCufd =  $this->cufdService->obtenerCufd($codigoPuntoVenta, $codigoSucursal, $resCuis->RespuestaCuis->codigo);

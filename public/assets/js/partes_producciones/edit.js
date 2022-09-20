@@ -297,7 +297,7 @@ actualizar_pedido_enviado.addEventListener("click", function () {
             if (data.success == true) {
                 iziToast.success({
                     title: "SUCCESS",
-                    message: "Pedido Actualizado exitosamente",
+                    message: "Parte Produccion Actualizado exitosamente",
                     position: "topRight",
                     timeout: 1500,
                     onClosed: function () {

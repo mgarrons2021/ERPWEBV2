@@ -104,7 +104,7 @@ class AnulacionFacturaController extends Controller
 
         $factura = $this->emisionIndividualService->construirFactura($puntoventa, $sucursal, $this->configService->config->modalidad, $this->configService->documentoSector, $this->configService->codigoActividad, $this->configService->codigoProductoSin);
         $res = $this->anulacionService->testFactura($sucursal, $puntoventa, $factura, $this->configService->tipoFactura);
-    
+
         if ($res->RespuestaServicioFacturacion->codigoEstado == 908) {
             $resa = $this->anulacionService->testAnular2(1, $factura->cabecera->cuf, $sucursal, $puntoventa, $this->configService->tipoFactura, SiatInvoice::TIPO_EMISION_ONLINE, $this->configService->documentoSector);
             print_r($resa);

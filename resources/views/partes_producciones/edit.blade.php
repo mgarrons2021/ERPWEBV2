@@ -6,14 +6,14 @@
 
 <section class="section">
     <div class="section-header">
-        <h3 class="page__heading">Pedido Nro: {{ $partes_producciones->id }}</h3>
+        <h3 class="page__heading">Parte Produccion Nro: {{ $partes_producciones->id }}</h3>
     </div>
     <div class="section-body">
         <div class="row">
             <div class="col-lg-12">
                 <div class="card ">
                     <div class="card-header">
-                        <h4>Datos del Pedido</h4>
+                        <h4>Datos del Parte Produccion</h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -25,26 +25,26 @@
 
                                     @endphp
 
-                                    <tr>
+                                   <!--  <tr>
                                         <th>Fecha pedido:</th>
                                         <td>{{$partes_producciones->fecha_actual }}</td>
-                                    </tr>
+                                    </tr> -->
                                     <tr>
-                                        <th>Hora pedido:</th>
+                                        <th>Hora Registro:</th>
                                         <td>{{ $hora_solicitado }}</td>
                                     </tr>
 
-                                    <tr>
+                                   <!--  <tr>
                                         <th>Fecha Entrega:</th>
                                         <td>{{ $partes_producciones->fecha_pedido }}</td>
-                                    </tr>
+                                    </tr> -->
 
                                     <tr>
-                                        <th> Total Solicitado:</th>
+                                        <th> Total Parte Produccion:</th>
                                         <td>{{$partes_producciones->total}} Bs</td>
                                     </tr>
                                   
-                                    <tr>
+                                   <!--  <tr>
                                         <th> Estado Pedido:</th>
 
                                         @if ($partes_producciones->estado==1)
@@ -53,7 +53,7 @@
                                         @if ($partes_producciones->estado==0)
                                         <td class="badge badge-success"> Entregado</td>
                                         @endif
-                                    </tr>
+                                    </tr> -->
                                     <tr>
                                         <th> Realizado Por</th>
                                         <td>{{$partes_producciones->user->name}}</td>
@@ -109,7 +109,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Detalles del Pedido</h4>
+                        <h4>Detalles del Parte Produccion</h4>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered" >
@@ -118,7 +118,7 @@
                                 <th style="text-align: center;"> Eliminar </th>
                                 <th style="text-align: center;"> Insumo </th>
                                 <!-- <th style="text-align: center;"> UM </th> -->
-                                <th style="text-align: center;"> Cantidad Solicitada </th>
+                                <th style="text-align: center;"> Cantidad </th>
                                 <th style="text-align: center;"> Costo </th>
                                 <th style="text-align: center;"> Subtotal </th>
                             </thead>
@@ -161,7 +161,7 @@
                     </div>
                     <div class="card-footer">
                         <div class=" text-center">
-                            <button type="button" class="btn btn-primary" id="actualizar_pedido">Actualizar Pedido</button>
+                            <button type="button" class="btn btn-primary" id="actualizar_pedido">Actualizar Parte Produccion</button>
                             <a href="{{ route('partes_producciones.index') }}" type="button" class="btn btn-danger" id="cancelar">Cancelar </a>
                         </div>
                     </div>
