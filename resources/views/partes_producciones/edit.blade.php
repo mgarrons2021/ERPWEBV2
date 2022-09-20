@@ -117,13 +117,13 @@
                                 <th style="text-align: center;"> Editar </th>
                                 <th style="text-align: center;"> Eliminar </th>
                                 <th style="text-align: center;"> Insumo </th>
-                                <th style="text-align: center;"> UM </th>
+                                <!-- <th style="text-align: center;"> UM </th> -->
                                 <th style="text-align: center;"> Cantidad Solicitada </th>
                                 <th style="text-align: center;"> Costo </th>
                                 <th style="text-align: center;"> Subtotal </th>
                             </thead>
                             <tbody id="cuerpotabla">
-                                <input type="hidden" name="id" id="id" value="{{$partes_producciones->id}}">
+                                <input type="hidden" name="parte_produccion_id" id="parte_produccion_id" value="{{$partes_producciones->id}}">
                                 @foreach($partes_producciones->detalle_partes_producciones as $index => $detalle )
                                 <tr>
                                     <td style="text-align:center ;">
@@ -139,13 +139,12 @@
                                             <span class="slider round"></span>
                                         </label>
                                     </td>
-
                                     <td style="text-align: center;">{{$detalle->producto->nombre}}</td>
-                                    @if(isset($detalle->producto->unidad_medida_venta->nombre))
+                                  <!--   @if(isset($detalle->producto->unidad_medida_venta->nombre))
                                     <td style="text-align: center;">{{$detalle->producto->unidad_medida_venta->nombre}}</td>
                                     @else 
                                     <td>SIN U/M</td>
-                                    @endif
+                                    @endif -->
                                     <td style="text-align: center;">
                                         <input type="number" class="form-control stock" id="stock-{{$detalle->id}}" style="text-align:center" value="{{$detalle->cantidad}}" step="any" readonly>
                                     </td>
@@ -155,7 +154,7 @@
                                 @endforeach
                             </tbody>
                             <tfoot>
-                                <td colspan="6" style="text-align: center;"> Total Parte Produccion</td>
+                                <td colspan="5" style="text-align: center;"> Total Parte Produccion</td>
                                 <td colspan="1" style="text-align: center;" id="total">{{$partes_producciones->total}} Bs</td>
                             </tfoot>
                         </table>

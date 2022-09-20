@@ -208,7 +208,7 @@ class ParteProduccionController extends Controller
             foreach ($nuevospedidos as $index => $detalle) {
                 $detalle_pedido = new DetalleParteProduccion();
                 $detalle_pedido->cantidad = $detalle['cantidad'];
-                $detalle_pedido->precio = $detalle['precio'];
+                $detalle_pedido->precio = $detalle['precios'];
                 $detalle_pedido->subtotal = $detalle['subtotal'];
                 $detalle_pedido->parte_produccion_id = $detalle_parte_produccion->id;
                 $detalle_pedido->producto_id = $detalle['producto_id'];
@@ -233,7 +233,7 @@ class ParteProduccionController extends Controller
                 }
             }
         }
-        $detalle_parte_produccion->total = $request->total_pedido;
+        $detalle_parte_produccion->total =  $request->total_pedido - $total_eliminado;
         $detalle_parte_produccion->save();
 
         return response()->json(

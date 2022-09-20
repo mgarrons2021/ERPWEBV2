@@ -53,9 +53,9 @@ class EmisionPaqueteController extends Controller
         /* for ($i = 0; $i < 70; $i++) { */
         # code...
         $fechaInicio     = '2022-06-30T14:01:00.000';
-        $fechaFin        = '2022-06-30T14:10:00.000';
+        $fechaFin        = Carbon::now();
         $pvfechaInicio     = $fechaInicio;
-        $pvfechaFin        = $fechaFin;
+        $pvfechaFin        = (new Carbon($fechaFin))->format("Y-m-d\TH:i:s.v");
         /* $pvfechaInicio     = (new Carbon($cufd_bd->fecha_generado))->format("Y-m-d\TH:i:s.v");
         $pvfechaFin        = (new Carbon())->subMinutes(2)->subSeconds(30)->format("Y-m-d\TH:i:s.v"); */
         /*  dd($pvfechaInicio,$pvfechaFin); */

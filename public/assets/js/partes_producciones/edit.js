@@ -3,31 +3,31 @@ const csrfToken = document.head.querySelector(
 ).content;
 
 let actualizar_pedido_enviado = document.getElementById("actualizar_pedido");
-let nuevo_producto = document.getElementById('agregar_nuevo_producto');
+let nuevo_producto = document.getElementById("agregar_nuevo_producto");
 let agregar_insumo = document.getElementById("agregar_insumo");
 
 let checboxs_editar = document.getElementsByClassName("checkbox-editar");
 let checboxs_eliminar = document.getElementsByClassName("checkbox-eliminar");
 let stocks_input = document.getElementsByClassName("form-control stock");
 let precios = document.getElementById("precio");
-let preciosos = document.getElementsByClassName('precio');
+let preciosos = document.getElementsByClassName("precio");
 
 let subtotales = document.getElementsByClassName("subtotal");
-let total = document.getElementById("total");
-let pedido_id = document.getElementById("id");
+let total_pedido = document.getElementById("total");
+let parte_produccion_id = document.getElementById("parte_produccion_id");
 let producto = document.getElementById("producto");
 let productonombre = document.getElementById("producto_nombre");
 let unidad_medida = document.getElementById("unidad_medida");
 let cantidad = document.getElementById("cantidad");
 let costo = document.getElementById("costo");
-let cuerpotabla = document.getElementById('cuerpotabla');
+let cuerpotabla = document.getElementById("cuerpotabla");
 
 /* VECTORES PARA GUARDAR LA INFORMACION CAPTURADA DE LOS STOCKS, SUBTOTALES Y ID'S DE LOS DETALLES DEL INVENTARIO*/
 let array_stocks = [];
 let array_subtotales = [];
 let array_detalle_pedido_id_a_editar = [];
 let array_detalle_pedido_id_a_eliminar = [];
-let array_detalle_inventario_id_a_agregar= [];
+let array_detalle_inventario_id_a_agregar = [];
 
 /*OBTENER PRECIO DE PRODUCTO */
 /* producto.addEventListener("change", (e) => {
@@ -80,20 +80,17 @@ $(document).ready(function () {
 
     /*ACTUALIZA LOS SUBTOTALES Y EL TOTAL INVENTARIO*/
     $("body").on("keyup", ".stock", function () {
-        
-        for (let i in stocks_input) 
-        {
+        for (let i in stocks_input) {
             let stock = stocks_input[i];
             let precio = preciosos[i];
-            
-            let td_subtotal = subtotales[i];
-            td_subtotal.innerHTML = stock.value * precio.innerHTML;
+
+            let subtotal = subtotales[i];
+            subtotal.innerHTML = stock.value * precio.innerHTML;
         }
-        
+
         let total = 0;
-        
-        for (let j in subtotales) 
-        {
+
+        for (let j in subtotales) {
             if (
                 subtotales[j].innerHTML !== undefined &&
                 !isNaN(subtotales[j].innerHTML)
@@ -102,95 +99,118 @@ $(document).ready(function () {
             }
         }
 
-        total.innerHTML = total;
-
+        total_pedido.innerHTML = total;
     });
 
     $("#producto")
-    .select2({
-        placeholder: "Seleccione una opcion",
-    })
-    .on("change", function (e) {
-        console.log( e.target.value );
-        fetch( ruta_obtener_precios , {
-            method: "POST",
-            body: JSON.stringify({
-                producto_id: e.target.value,
-            }),
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRF-Token": csrfToken,
-            },
+        .select2({
+            placeholder: "Seleccione una opcion",
         })
-        .then((response) => {
-            return response.json();
-        })
-        .then((data) => {
-            console.log(data);
-            if(data.precio != null){            
-
-                precios.value= data.precio;
-                productonombre.value=data.producto_nombre;
-                unidad_medida.value = data.unidad_medida;               
-
-            }else{
-                $("#producto")
-                .val("sin_seleccionar")
-                .trigger("change.select2");
-                iziToast.warning({
-                    title: "WARNING",
-                    message:
-                        "El producto no cuenta con un precio especifico . . . ",
-                    position: "topCenter",
-                    timeout: 1100
-                });
-            } 
-        })
-        .catch((error) => console.error(error));
-
-    });   
-
+        .on("change", function (e) {
+            console.log(e.target.value);
+            fetch(ruta_obtener_precios, {
+                method: "POST",
+                body: JSON.stringify({
+                    producto_id: e.target.value,
+                }),
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-Token": csrfToken,
+                },
+            })
+                .then((response) => {
+                    return response.json();
+                })
+                .then((data) => {
+                    console.log(data);
+                    if (data.precio != null) {
+                        precios.value = data.precio;
+                        productonombre.value = data.producto_nombre;
+                        unidad_medida.value = data.unidad_medida;
+                    } else {
+                        $("#producto")
+                            .val("sin_seleccionar")
+                            .trigger("change.select2");
+                        iziToast.warning({
+                            title: "WARNING",
+                            message:
+                                "El producto no cuenta con un precio especifico . . . ",
+                            position: "topCenter",
+                            timeout: 1100,
+                        });
+                    }
+                })
+                .catch((error) => console.error(error));
+        });
 });
 
-agregar_insumo.addEventListener('click',function(){
+agregar_insumo.addEventListener("click", function () {
     if (producto.value == "sin_seleccionar") {
         $("#errorproducto").removeClass("d-none");
     } else {
         $("#errorproducto").addClass("d-none");
     }
 
-    if(producto.value != "sin_seleccionar"){
-        
-        let tr = '<tr>'+
-        '<td> <label class="switch">'+
-        '<input type="checkbox" class="checkbox-editar" value="'+producto.value+'">'+
-        '<span class="slider round"></span>'+
-        '</label></td>'+
-        '<td>'+
-        '<label class="switch">'+
-        '<input type="checkbox" class="checkbox-eliminar" value="'+producto.value+'">'+
-        '<span class="slider round"></span>'+
-        '</label>'+
-        '</td>'+
-        '<td style="text-align: center;">'+productonombre.value+'</td>'+
-        '<td style="text-align: center;">'+unidad_medida.value+'</td>'+
-        '<td style="text-align: center;">'+          
-            ' <input type="number" class="form-control stock" id="stock-'+producto.value+'" style="text-align:center" name="cantidad" value="0" step="any">'+
-        ' </td>'+
-        '<td style="text-align: center;" class="precio" id="precio-'+producto.value+'"> '+precios.value+'</td>'+
-        ' <td style="text-align: center;" class="subtotal"  id="subtotal-'+producto.value+'"> 0 </td>'+
-        '</tr>'; 
-
-        cuerpotabla.innerHTML+=tr;
-        array_detalle_inventario_id_a_agregar.push({
-            'cantidad':0,
-            'precio':precios.value,
-            'subtotal':0,
-            'id':0,
-            'producto_id':producto.value
-        })
+    if (cantidad.value == "") {
+        $("#errorcantidad").removeClass("d-none");
+    } else {
+        $("#errorcantidad").addClass("d-none");
     }
 
+    if (producto.value != "sin_seleccionar") {
+        let tr =
+            "<tr>" +
+            '<td> <label class="switch">' +
+            '<input type="checkbox" class="checkbox-editar" value="' +
+            producto.value +
+            '">' +
+            '<span class="slider round"></span>' +
+            "</label></td>" +
+            "<td>" +
+            '<label class="switch">' +
+            '<input type="checkbox" class="checkbox-eliminar" value="' +
+            producto.value +
+            '">' +
+            '<span class="slider round"></span>' +
+            "</label>" +
+            "</td>" +
+            '<td style="text-align: center;">' +
+            productonombre.value +
+            "</td>" +
+            '<td style="text-align: center;">' +
+            ' <input type="number" class="form-control stock" id="stock-' +
+            producto.value +
+            '" style="text-align:center" step="any" value="' +
+            cantidad.value +
+            '" readonly>' +
+            " </td>" +
+            /* '<td style="text-align: center;" class="cantidad" id="stock-'+producto.value+'"> '+cantidad.value+'</td>'+ */
+            '<td style="text-align: center;" class="precio" id="precio-' +
+            producto.value +
+            '"> ' +
+            precios.value +
+            "</td>" +
+            ' <td style="text-align: center;" class="subtotal"  id="subtotal-' +
+            producto.value +
+            '"> ' +
+            cantidad.value * precios.value +
+            " </td>" +
+            /*    '<td style="text-align: center;" class="subtotal" name="subtotal" id="">'+( parseFloat(precios.value) * parseFloat(cantidad.value))+'</td>'+
+      ' <td style="text-align: center;" class="subtotal"  id="subtotal-'+producto.value+'"> '+cantidad.value+' * '+precios.value+'</td>'+ */
+            "</tr>";
+
+        cuerpotabla.innerHTML += tr;
+        total_pedido.innerText =
+            parseFloat(total_pedido.innerText) +
+            parseFloat(precios.value) * parseFloat(cantidad.value);
+        array_detalle_inventario_id_a_agregar.push({
+            cantidad: precios.value,
+            precios: precios.value,
+            subtotal: producto.value*precios.value,
+            parte_produccion_id: 0,
+            producto_id: producto.value,
+        });
+    }
 });
 
 /* 
@@ -237,58 +257,61 @@ agregar_insumo.addEventListener("click", function () {
 /* Actualizar Pedidos Enviados */
 
 actualizar_pedido_enviado.addEventListener("click", function () {
-
     for (let index = 0; index < subtotales.length; index++) {
-        array_detalle_pedido_id_a_editar.push( stocks_input[index].id.substr(stocks_input[index].id.search('-')+1) );
-        array_subtotales.push( subtotales[index].innerText );
-        array_stocks.push( stocks_input[index].value );
+        console.log(stocks_input[index]);
+        array_detalle_pedido_id_a_editar.push(
+            stocks_input[index].id.substr(
+                stocks_input[index].id.search("-") + 1
+            )
+        );
+        array_subtotales.push(subtotales[index].innerText);
+        array_stocks.push(stocks_input[index].value);
     }
     detallesAEditar();
     detallesAEliminar();
-                                                        
-    console.log( array_detalle_pedido_id_a_editar);
+
+    console.log(array_detalle_pedido_id_a_editar);
     console.log(array_detalle_inventario_id_a_agregar);
 
     fetch(ruta_actualizar_pedido_enviado, {
         method: "POST",
         body: JSON.stringify({
-            id: id.value,
-            total_pedido: total.innerHTML,
+            parte_produccion_id: parte_produccion_id.value,
+            total_pedido: total_pedido.innerHTML,
             stocks: array_stocks,
             subtotales: array_subtotales,
             detallesAEditar_id: array_detalle_pedido_id_a_editar,
-            agregarNuevos:array_detalle_inventario_id_a_agregar,
-            detallesAEliminar_id:array_detalle_pedido_id_a_eliminar
-        }),             
-        headers: {              
+            agregarNuevos: array_detalle_inventario_id_a_agregar,
+            detallesAEliminar_id: array_detalle_pedido_id_a_eliminar,
+        }),
+        headers: {
             "Content-Type": "application/json",
             "X-CSRF-Token": csrfToken,
         },
     })
-    .then((response) => {
-        return response.json();
-    })
-    .then((data) => {
-        console.log(data);
-        if (data.success == true) {
-            iziToast.success({
-                title: "SUCCESS",
-                message: "Pedido Actualizado exitosamente",
-                position: "topRight",
-                timeout: 1500,
-                onClosed: function () {
-                    window.location.href = ruta_pedidos_index;
-                },
-            });
-        }
-    })
-    .catch((error) => console.error(error));
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            console.log(data);
+            if (data.success == true) {
+                iziToast.success({
+                    title: "SUCCESS",
+                    message: "Pedido Actualizado exitosamente",
+                    position: "topRight",
+                    timeout: 1500,
+                    onClosed: function () {
+                        window.location.href = ruta_pedidos_index;
+                    },
+                });
+            }
+        })
+        .catch((error) => console.error(error));
 
     array_stocks = [];
     array_subtotales = [];
     array_detalle_pedido_id_a_editar = [];
-    array_detalle_pedido_id_a_eliminar = [];  
-
+    array_detalle_pedido_id_a_eliminar = [];
 });
 
 function detallesAEditar() {
