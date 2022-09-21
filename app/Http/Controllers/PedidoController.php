@@ -628,13 +628,13 @@ class PedidoController extends Controller
                 $detalle_pedido->subtotal_solicitado = $detalle_pedido->cantidad_solicitada * $detalle_pedido->precio;
                 $detalle_pedido->producto_id = $item;
 
-                if( $categorias[$index] == 10 || $categorias[$index] == 11   ){
+                if( $categorias[$index] == 4 || $categorias[$index] == 5   ){
                     $detalle_pedido->pedido_id = $pedido->id;
                     $total += floatval($detalle_pedido->subtotal_solicitado);
-                }else if(  $categorias[$index] == 13 || $categorias[$index] == 2 || $categorias[$index] == 12 || $categorias[$index] == 9    ){//no comestible mas
+                }else if(  $categorias[$index] == 14 || $categorias[$index] == 9 || $categorias[$index] == 10 || $categorias[$index] == 11 || $categorias[$index] == 13    ){//no comestible mas
                     $detalle_pedido->pedido_id = $pedido2->id;
                     $total2 += floatval($detalle_pedido->subtotal_solicitado);
-                }else if(   $categorias[$index] == 8 || $categorias[$index] == 7 || $categorias[$index] == 14  ){
+                }else if(   $categorias[$index] == 8 || $categorias[$index] == 7 || $categorias[$index] == 12  ){
                     $detalle_pedido->pedido_id = $pedido3->id;
                     $total3 += floatval($detalle_pedido->subtotal_solicitado);
                 }

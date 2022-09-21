@@ -172,7 +172,8 @@ class ServicioFacturacion extends ServicioSiat
 		$tipoEmision = SiatInvoice::TIPO_EMISION_ONLINE,
 		$tipoFactura = SiatInvoice::FACTURA_DERECHO_CREDITO_FISCAL,
 		$cafc = null
-	) {
+	)
+	 {
 		$cafc            = "1011917833B0D";
 		try {
 			if (!count($facturas))

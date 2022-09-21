@@ -76,7 +76,7 @@ class ServicioOperaciones extends ServicioSiat
 				]
 			]
 		];
-
+		/* dd($data); */
 		$res = $this->callAction($method, $data);
 
 		return $res;

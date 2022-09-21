@@ -55,6 +55,7 @@ class EmisionPaqueteService
         $serviceOps->setConfig((array)$this->configService->config);
         $serviceOps->cuis = $cuis;
         $serviceOps->cufd = $cufd;
+       /*  dd($serviceOps); */
         $resEvent = $serviceOps->registroEventoSignificativo(
             $evento->codigoClasificador,
             $evento->descripcion,

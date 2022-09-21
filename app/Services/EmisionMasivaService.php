@@ -33,7 +33,7 @@ class EmisionMasivaService
 		$cantidad 			= 1000;
 		$codigoSucursal 	= 0;
 		$codigoPuntoVenta 	= 0;
-		$cafc				= null;
+		$cafc				= "1011917833B0D";
 
 		for ($i = 0; $i < 20; $i++) {
 
