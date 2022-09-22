@@ -36,15 +36,14 @@ class EmisionPaqueteController extends Controller
     public function emisionPaquetes(Request $request)
     {
         $sucursal = 0;
-        $puntoventa = 1;
-        
-        $cantidad = 2;  /* CANTIDAD FACTURAS */
+        $puntoventa = 0;
+               //patrick y jhonatan
+        $cantidad = 3;  /* CANTIDAD FACTURAS */
         $cafc     = "1011917833B0D"; //'101B4283AAD6D';
         $codigoEvento = 1;
         $fecha_generica = Carbon::now();
         $sucursal_db = Sucursal::where('codigo_fiscal', $sucursal)->first();
         $cufd_bd = SiatCufd::find($request->cufd_id);
-
         $cuis_bd     = SiatCui::where('fecha_expiracion', '>=', $fecha_generica)
             ->where('sucursal_id', $sucursal_db->id)
             ->orderBy('id', 'desc')
@@ -72,8 +71,8 @@ class EmisionPaqueteController extends Controller
         # code...
         /*   dd($cufd_bd); */
         $fechaFin        = Carbon::now();
-        $pvfechaInicio     = (new Carbon($cufd_bd->fecha_generado))->addMinutes(2)->format("Y-m-d\TH:i:s.v");
-        $pvfechaFin        = (new Carbon($cufd_bd->fecha_generado))->addMinutes(4)->format("Y-m-d\TH:i:s.v");
+        $pvfechaInicio     = (new Carbon($cufd_bd->fecha_generado))->addMinutes(1)->format("Y-m-d\TH:i:s.v");
+        $pvfechaFin        = (new Carbon($cufd_bd->fecha_generado))->addMinutes(3)->format("Y-m-d\TH:i:s.v");
         /*   dd($pvfechaInicio, $pvfechaFin); */
         $evento         = $this->emisionPaqueteService->obtenerListadoEventos($sucursal, $puntoventa, $codigoEvento);
         $resEvento         = $this->emisionPaqueteService->registroEvento(
