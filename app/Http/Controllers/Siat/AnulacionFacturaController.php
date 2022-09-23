@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\MailAnulacionController;
 use App\Models\Cliente;
 use App\Models\Siat\MotivoAnulacion;
+use App\Models\Siat\SiatCufd;
 use App\Models\Venta;
 use App\Services\AnulacionFacturaService;
 use App\Services\ConfigService;
@@ -60,10 +61,11 @@ class AnulacionFacturaController extends Controller
         $venta = Venta::find($request->venta_id);
         $sucursal_id = $venta->sucursal_id;
         $cuf = $venta->cuf;
+        $cufd = SiatCufd::find($venta->cufd_id);
         /* dd($cuf); */
         $motivo = $request->codigo_clasificador;
         $anulacion_factura_service = new AnulacionFacturaService();
-        $res = $anulacion_factura_service->pruebasAnulacion($cuf, $motivo, $sucursal_id);
+        $res = $anulacion_factura_service->pruebasAnulacion($cuf,$cufd->codigo, $motivo, $sucursal_id);
 
 
         if ($res->RespuestaServicioFacturacion->transaccion === true) {

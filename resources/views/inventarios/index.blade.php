@@ -35,7 +35,6 @@
                     </div>
                 </div>
 
-
                 <div class="card">
                     <div class="card-body">
                         <a class="btn btn-outline-info" href="{{route('inventarios.create')}}">Nuevo Inventario</a><br><br>

@@ -54,8 +54,11 @@ class KeperiController extends Controller
         $keperi->cantidad_marinado = $request->cantidad_marinado;
         $keperi->cantidad_enviado = $request->cantidad_enviado;
         $keperi->cantidad_cocido = $request->cantidad_cocido;
-        $keperi->cantidad_sellado = $request->cantidad_sellado;
+        
         $keperi->nombre_usuario = $request->nombre_usuario;
+        $keperi->temperatura_maxima = $request->temperatura_maxima;
+        $keperi->veces_volcado = $request->veces_volcado;
+
         $keperi->save();
         return redirect()->route('keperis.index');
     }
@@ -100,8 +103,10 @@ class KeperiController extends Controller
         $keperi->cantidad_marinado = $request->cantidad_marinado;
         $keperi->cantidad_enviado = $request->cantidad_enviado;
         $keperi->cantidad_cocido = $request->cantidad_cocido;
-        $keperi->cantidad_sellado = $request->cantidad_sellado;
+    
         $keperi->nombre_usuario = $request->nombre_usuario;
+        $keperi->temperatura_maxima = $request->temperatura_maxima;
+        $keperi->veces_volcado = $request->veces_volcado;
 
         $keperi->save();
 

@@ -17,6 +17,8 @@ use App\Services\EmisionPaqueteService;
 use App\Models\Siat\SiatCufd;
 use App\Services\ConfigService;
 use App\Models\Siat\SiatCui;
+use App\Models\Sucursal;
+use App\Models\User;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\SiatFactory;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Invoices\SiatInvoice;
 
@@ -38,93 +40,104 @@ class EventoSignificativoController extends Controller
     public function generar_evento_significativo(Request $request)
     {
         $arrayVentas = [];
-        $fecha_actual = Carbon::now()->toDateString();
         $ventas = json_decode($request->ventas);
-
-
+        /*  dd($ventas); */
         foreach ($ventas as $venta) {
-            $cliente = Cliente::find($venta->cliente_id);
-            $sucursal = Cliente::find($venta->cliente_id);
-            $user = Cliente::find($venta->user_id);
             $venta_db = Venta::find($venta->id);
-            $detalle_venta = DetalleVenta::where('venta_id', $venta->id)->get();
-            $dataFactura = [
+            $cliente = Cliente::find($venta->cliente_id);
+            $sucursal = Sucursal::find($venta->sucursal_id);
+            $user = User::find($venta->user_id);
+            $detalleVenta = DetalleVenta::where('venta_id', $venta->id)->get();
+            $dataVenta = [
                 'cliente' => $cliente,
                 'sucursal' => $sucursal,
                 'user' => $user,
                 'venta' => $venta_db,
-                'detalle_venta' => $detalle_venta,
+                'detalle_venta' => $detalleVenta,
             ];
+            array_push($arrayVentas, $dataVenta);
         }
-        //   dd($ventas);
-        $detalles_venta = DetalleVenta::where('venta_id', $venta->id)->get();
-
-        $cafc            = "1011917833B0D";
-        $puntoventa      = 1;
-
-        $codigo_evento   = $ventas[0]->evento_significativo_id;
-        $cufd_id = $ventas[0]->cufd_id;
-        $codigo_evento_significativo = EventoSignificativo::find($codigo_evento);
-        /* dd($codigo_evento_significativo); */
-
-
-        $evento = EventoSignificativo::where('id', $codigo_evento)->first();
-
-        $sucursal = $ventas[0]->sucursal_id;
-
-        $cufd = SiatCufd::where('sucursal_id', $sucursal)
-            ->where('fecha_vigencia', '<=', $fecha_actual)
-            ->orderBy('id', 'desc')->first();
-
-        $fecha_inicio_contingencia = $request->fecha_inicio;
-        $fecha_final_contingencia = $request->fecha_fin;
-
-        $evento_significativoService = new EventoSignificativoService();
-        $response = $evento_significativoService->pruebasEventos2(4, $sucursal, $fecha_inicio_contingencia, $fecha_final_contingencia, $cufd_id);
-
-        /* Funcion para mandar las facturas por paquete */
-        /* $res = $this->testPaquetes($sucursal, $puntoventa, $ventas, $cufd, $this->configService->tipoFactura, $evento, $cafc); */
-
-        return $response;
-    }
-
-    /*  function testPaquetes($codigoSucursal, $codigoPuntoVenta, array $facturas, $codigoControlAntiguo, $tipoFactura, $evento, $cafc)
-    {
-        $fecha_actual = Carbon::now()->toDateString();
-
-        $resCufd = SiatCufd::where('fecha_vigencia', '>=', $fecha_actual)
-            ->where('sucursal_id', $codigoSucursal)
+        /* dd($arrayVentas[0]['detalle_venta'][0]->plato); */
+        $evento_significativo = EventoSignificativo::find($ventas[0]->evento_significativo_id);
+        $sucursal = 0;
+        $puntoventa = 0;
+        $cantidadFacturas = count($ventas);
+        $cafc     = "1011917833B0D";
+        $codigoEvento = 1;
+        $fecha_generica = Carbon::now();
+        $sucursal_db = Sucursal::where('codigo_fiscal', $sucursal)->first();
+        $cufd_bd = SiatCufd::find($ventas[0]->cufd_id);
+        $cuis_bd     = SiatCui::where('fecha_expiracion', '>=', $fecha_generica)
+            ->where('sucursal_id', $sucursal_db->id)
             ->orderBy('id', 'desc')
             ->first();
+        $cufdAntiguo = $cufd_bd->codigo;
+        $resCuis = $cuis_bd->codigo_cui;
+
+        $codigoControlAntiguo     = $cufd_bd->codigo_control;
+
+        $resCufd        = $this->cufdService->obtenerCufd($puntoventa, $sucursal, $resCuis);
+        $fecha_generado_cufd = Carbon::now()->toDateTimeString();
+
+        $guardar_cufd = SiatCufd::create([
+            'estado' => "V",
+            'codigo' => $resCufd->RespuestaCufd->codigo,
+            'codigo_control' => $resCufd->RespuestaCufd->codigoControl,
+            'direccion' => $resCufd->RespuestaCufd->direccion,
+            'fecha_vigencia' => new Carbon($resCufd->RespuestaCufd->fechaVigencia),
+            'fecha_generado' => $fecha_generado_cufd,
+            'sucursal_id' => $sucursal_db->id,
+            'numero_factura' => 0
+        ]);
 
 
-        $resCuis     = SiatCui::where('fecha_expiracion', '>=', $fecha_actual)
-            ->where('sucursal_id', $codigoSucursal)
-            ->orderBy('id', 'desc')
-            ->first();
-        //var_dump('CUIS PRIMARIO: ' . $resCuis->RespuestaCuis->codigo);
+        $fechaFin        = Carbon::now();
+        $pvfechaInicio     = (new Carbon($cufd_bd->fecha_generado))->addMinutes(1)->format("Y-m-d\TH:i:s.v");
+        $pvfechaFin        = (new Carbon($cufd_bd->fecha_generado))->addMinutes(3)->format("Y-m-d\TH:i:s.v");
 
-        if (!$evento)
-            die('ERROR: No se encontro el evento');
-
-        $service = SiatFactory::obtenerServicioFacturacion($this->configService->config, $resCuis->codigo_cui, $resCufd->codigo, $codigoControlAntiguo);
-
-        //$service->setConfig((array)$config);
-        //$service->codigoControl = $codigoControlAntiguo;
-      //  dd($facturas);
-        $res = $service->recepcionPaqueteFactura(
-            $facturas,
-            $evento->codigoRecepcionEventoSignificativo,
-            SiatInvoice::TIPO_EMISION_OFFLINE,
-            $tipoFactura,
-            $cafc
+        $evento         = $this->emisionPaqueteService->obtenerListadoEventos($sucursal, $puntoventa, $codigoEvento);
+        $resEvento         = $this->emisionPaqueteService->registroEvento(
+            $resCuis,
+            $resCufd->RespuestaCufd->codigo,
+            $sucursal,
+            $puntoventa,
+            $evento,
+            $cufdAntiguo,
+            $pvfechaInicio,
+            $pvfechaFin
         );
-        return dd($res); 
-        $this->test_log("RESULTADO RECEPCION PAQUETE\n=============================");
-        $this->test_log($res);
-        return $res;
+
+        if (!isset($resEvento->RespuestaListaEventos->codigoRecepcionEventoSignificativo)) {
+            /* print_r($resEvento);
+            die("No se pudo registrar el evento significativo\n"); */
+            return $resEvento;
+        }
+       /*  $this->emisionPaqueteService->test_log($resEvento); */
+        $facturas         = $this->emisionPaqueteService->construirFacturas2(
+            $sucursal,
+            $puntoventa,
+            $cantidadFacturas,
+            $this->configService->documentoSector,
+            $this->configService->codigoActividad,
+            $this->configService->codigoProductoSin,
+            $pvfechaInicio,
+            $cufdAntiguo,
+            null,
+            $arrayVentas,
+        );
+
+        $res = $this->emisionPaqueteService->testPaquetes($sucursal, $puntoventa, $facturas, $codigoControlAntiguo, $this->configService->tipoFactura, $resEvento->RespuestaListaEventos, $cafc);
+        if (isset($res->RespuestaServicioFacturacion->codigoRecepcion)) {
+            $res = $this->emisionPaqueteService->testRecepcionPaquete($sucursal, $puntoventa, $this->configService->documentoSector, $this->configService->tipoFactura, $res->RespuestaServicioFacturacion->codigoRecepcion);
+            return  $res;
+            /* print_r($res); */
+        }
+
+        /* $this->emisionPaqueteService->test_log($pvfechaInicio);
+        $this->emisionPaqueteService->test_log($pvfechaFin); */
     }
- */
+
+
     public function index()
     {
         $fecha_actual = Carbon::now()->toDateString();
@@ -144,7 +157,8 @@ class EventoSignificativoController extends Controller
         /* dd($request); */
         $fecha_inicial = $request->fecha_inicial;
         $fecha_final = $request->fecha_final;
-        $evento_significativo = $request->evento_significativo_id;
+        $evento_significativo = EventoSignificativo::find($request->evento_significativo_id);
+        
 
 
         $fecha_actual = Carbon::now()->toDateString();
@@ -154,13 +168,12 @@ class EventoSignificativoController extends Controller
 
         $ventas = Venta::where('sucursal_id', Auth::user()->sucursals[0]->id)
             ->whereBetween('fecha_venta', [$fecha_inicial, $fecha_final])
-            ->where('ventas.evento_significativo_id', $evento_significativo)
-            ->where('estado', 1)
-            ->where('evento_significativo_id', "<>", null)
+            ->where('ventas.evento_significativo_id', $evento_significativo->id)
+            ->where('estado', 0)
+            ->where('ventas.evento_significativo_id', "<>", null)
             ->get();
 
-
-
+          /*   dd($ventas); */
         return view('siat.eventos_significativos.index', compact('eventos_significativos', 'ventas', 'fecha_actual'));
     }
 }

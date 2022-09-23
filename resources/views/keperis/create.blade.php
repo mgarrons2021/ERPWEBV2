@@ -75,13 +75,15 @@
                                     <input type="number" class="form-control  @error('cantidad_sellado') is-invalid @enderror" id="cantidad_sellado" name="cantidad_cocido" step="any" placeholder="0,00">
                                 </div>
                             </div>
-                            
+
                             <div class="col-md-8">
                                 <div class="form-group">
-                                    <label for="cantidad_sellado"> Keperi Sellado <span class="required">*</span></label>
-                                    <input type="number" class="form-control  @error('cantidad_sellado') is-invalid @enderror" id="cantidad_sellado" name="cantidad_sellado" step="any" placeholder="0,00">
+                                    <label for="temperatura_maxima"> Temperatura Maxima Alcanzada <span class="required">*</span></label>
+                                    <input type="number" class="form-control  @error('temperatura_maxima') is-invalid @enderror" id="temperatura_maxima" name="temperatura_maxima" step="any" placeholder="0,00">
                                 </div>
                             </div>
+                            
+                          
                             
                             
                             
@@ -89,6 +91,13 @@
                                 <div class="form-group">
                                     <label for="cantidad_enviado"> Keperi Enviado <span class="required">*</span></label>
                                     <input type="number" class="form-control  @error('cantidad_enviado') is-invalid @enderror" id="cantidad_enviado" name="cantidad_enviado" step="any" placeholder="0,00">
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="veces_volcado"> Veces Volcado <span class="required">*</span></label>
+                                    <input type="number" class="form-control  @error('veces_volcado') is-invalid @enderror" id="veces_volcado" name="veces_volcado" step="any" placeholder="0,00">
                                 </div>
                             </div>
                             

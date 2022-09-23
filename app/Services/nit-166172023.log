@@ -76689,3 +76689,244 @@ stdClass Object
 2022-09-22T00:58:07.000
 [2022-09-22 01:02:12]#
 2022-09-22T00:59:37.000
+[2022-09-22 09:44:21]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 843280
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-22 10:34:21]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 843552
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-22 10:43:10]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 843759
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-22 10:53:29]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 844054
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-22 11:00:06]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 844295
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-22 11:08:38]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 844505
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-22 11:31:58]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 844722
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-22 11:32:00]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-22 11:32:00]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 920
+                    [descripcion] => EL PARAMETRO ARCHIVO ES INVALIDO: Formato de XML no cumple con el XSD:cvc-datatype-valid.1.2.1: '' is not a valid value for 'decimal'.
+                    [numeroArchivo] => 0
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-22 11:32:00]#
+2022-09-22T11:28:33.000
+[2022-09-22 11:32:00]#
+2022-09-22T11:30:23.000
+[2022-09-22 11:41:13]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 844757
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-22 11:54:28]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 844879
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-22 11:54:32]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-22 11:54:32]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 920
+                    [descripcion] => EL PARAMETRO ARCHIVO ES INVALIDO: Formato de XML no cumple con el XSD:cvc-datatype-valid.1.2.1: '' is not a valid value for 'decimal'.
+                    [numeroArchivo] => 0
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-09-22 11:54:32]#
+2022-09-22T11:42:06.000
+[2022-09-22 11:54:32]#
+2022-09-22T11:43:56.000
+[2022-09-22 12:03:29]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 844953
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-22 12:03:31]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-22 12:03:31]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => 30dfd34f-3a90-11ed-a210-e15771e2917e
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-22 12:03:33]#
+2022-09-22T11:55:36.000
+[2022-09-22 12:03:33]#
+2022-09-22T11:57:26.000
+[2022-09-22 13:11:54]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 847292
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-22 13:11:58]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-22 13:11:58]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => c0d6c00d-3a99-11ed-984d-8755a3df40da
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-22 13:56:17]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-22 13:56:17]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => f1f4b2a7-3a9f-11ed-b7d5-03319eb05c74
+            [transaccion] => 1
+        )
+
+)
+
+[2022-09-22 14:11:23]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-09-22 14:11:23]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => 0d80a1d8-3aa2-11ed-8dee-4bddae25dc8b
+            [transaccion] => 1
+        )
+
+)
+

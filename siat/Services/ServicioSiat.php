@@ -123,12 +123,12 @@ class ServicioSiat
 			/* dd($data,$action); */
 			/* dd($data); */
 			$res = $client->__soapCall($action, $data);
-			$this->debug("CABECERAS SOLICITUD\n================\n", 0);
+			/* $this->debug("CABECERAS SOLICITUD\n================\n", 0);
 			$this->debug($client->__getLastRequestHeaders(), 0);
 			$this->debug("DATOS SOLICITUD\n================\n", 0);
 			$this->debug($client->__getLastRequest() . "\n\n", 0);
 			$this->debug("RESPUESTA\n================\n", 0);
-			$this->debug($client->__getLastResponse() . "\n\n", 0);
+			$this->debug($client->__getLastResponse() . "\n\n", 0); */
 			return $res;
 		}
 		catch(\SoapFault $e)

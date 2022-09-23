@@ -9,5 +9,17 @@ class Keperi extends Model
 {
     use HasFactory;
     protected $table = 'keperis';
-    protected $fillable = ['fecha','cantidad_kilos','cantidad_crudo','cantidad_marinado','cantidad_enviado','cantidad_cocido','cantidad_sellado','nombre_usuario'];
+    protected $fillable = [
+    'fecha',
+    'cantidad_kilos',
+    'cantidad_crudo',
+    'cantidad_marinado',
+    'cantidad_enviado',
+    'cantidad_cocido',
+    'cantidad_sellado',
+    'nombre_usuario',
+    'temperatura_maxima',
+    'veces_volcado',
+
+];
 }

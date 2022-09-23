@@ -65,18 +65,17 @@
 
                                     <div class="form-group">
                                         <label for="fecha_actual">Fecha Inicio Contingencia</label>
-                                        <input type="datetime-local" class="form-control" name="fecha_inicio" value="{{ $fecha_actual }}">
+                                        <input type="datetime-local" class="form-control" id="fecha_inicio" name="fecha_inicio" value="{{ $fecha_actual }}">
                                     </div>
                                 </div>
 
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="fecha_actual">Fecha Fin Contingencia</label>
-                                        <input type="datetime-local" class="form-control" name="fecha_fin">
+                                        <input type="datetime-local" class="form-control" id="fecha_fin" name="fecha_fin">
                                     </div>
                                 </div>
                                 <input type="hidden" id="ventas" name="ventas" value="{{$ventas}}">
-
                             </div>
                         </div>
                     </div>
@@ -96,11 +95,8 @@
                                     <th>Sucursal</th>
                                     <th>Motivo Contingencia</th>
                                     <th>Estado</th>
-
-                                    <th></th>
                                 </thead>
                                 <tbody>
-                                    
                                     @foreach ($ventas as $venta)
                                     <tr>
                                         <td>{{ $venta->id }}</td>
@@ -122,13 +118,7 @@
                                         @else
                                         <td> <span class="badge badge-warning"> Anulado </span></td>
                                         @endif
-
-                                        <td>
-                                            <div class="dropdown" style="position: absolute;">
-                                            </div>
-                                        </td>
                                     </tr>
-
                                     @endforeach
                                 </tbody>
                             </table>
@@ -136,7 +126,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-warning">Generar Evento Significativo</button>
+                    <button type="button" id="registrar_facturas_paquetes" class="btn btn-warning">Registrar Facturar Paquetes</button>
                     <button type="button" class="btn btn-dark">Close</button>
                 </div>
             </form>
@@ -145,33 +135,7 @@
 </section>
 
 @endsection
-
-
 @section('scripts')
-
-<script type="text/javascript" src="//cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script>
-<script type="text/javascript" src="//cdn.datatables.net/buttons/1.3.1/js/buttons.bootstrap4.min.js"></script>
-<script type="text/javascript" src="//cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-<script type="text/javascript" src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/pdfmake.min.js"></script>
-<script type="text/javascript" src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/vfs_fonts.js"></script>
-<script type="text/javascript" src="//cdn.datatables.net/buttons/1.3.1/js/buttons.html5.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-
-{{-- <script>
-    $('#modalAnulacion').on('show.bs.modal', function(e) {
-        let id = $(e.relatedTarget).data('id');
-        var modal = $(this)
-        console.log(modal)
-        //Guardamos el resultado en un input dentro del modal de nombre mnombre
-        modal.find('.modal-header #venta_id').html("Anular Factura " + " " + id)
-        modal.find('.modal-body #venta_id').val(id)
-
-    });
-</script> --}}
-
-
-
 @section('page_js')
 <script>
     $('#table').DataTable({
@@ -233,13 +197,33 @@
 </script>
 
 <script>
-    $(document).ready(function() {
-        $('#evento_significativo').select2();
+    const csrfToken = document.head.querySelector(
+        "[name~=csrf-token][content]"
+    ).content;
+    let registrar_facturas_paquetes = document.getElementById('registrar_facturas_paquetes');
+    let fecha_inicio = document.getElementById("fecha_inicio");
+    let fecha_fin = document.getElementById("fecha_fin");
+    let ventas = document.getElementById('ventas');
+    let ruta = "{{ route('eventos_significativos.generar_evento_significativo') }}";
+    let rutaIndex = "{{ route('eventos_significativos.index') }}";
+    registrar_facturas_paquetes.addEventListener('click', (e) => {
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            },
+            url: ruta,
+            type: 'POST',
+            data: {
+                fecha_inicio: fecha_inicio.value,
+                fecha_fin: fecha_fin.value,
+                ventas: ventas.value,
+            },
+            success: function(res) {
+                console.log(res);
+            }
+        })
     });
 </script>
-
-
-
 @endsection
 @endsection
 @section('page_css')

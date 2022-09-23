@@ -37,9 +37,8 @@ class EmisionPaqueteController extends Controller
     {
         $sucursal = 0;
         $puntoventa = 0;
-               //patrick y jhonatan
-        $cantidad = 3;  /* CANTIDAD FACTURAS */
-        $cafc     = "1011917833B0D"; //'101B4283AAD6D';
+        $cantidadFacturas = 3;
+        $cafc     = "1011917833B0D";
         $codigoEvento = 1;
         $fecha_generica = Carbon::now();
         $sucursal_db = Sucursal::where('codigo_fiscal', $sucursal)->first();
@@ -67,13 +66,11 @@ class EmisionPaqueteController extends Controller
             'numero_factura' => 0
         ]);
 
-        /* for ($i = 0; $i < 70; $i++) { */
-        # code...
-        /*   dd($cufd_bd); */
+
         $fechaFin        = Carbon::now();
         $pvfechaInicio     = (new Carbon($cufd_bd->fecha_generado))->addMinutes(1)->format("Y-m-d\TH:i:s.v");
         $pvfechaFin        = (new Carbon($cufd_bd->fecha_generado))->addMinutes(3)->format("Y-m-d\TH:i:s.v");
-        /*   dd($pvfechaInicio, $pvfechaFin); */
+
         $evento         = $this->emisionPaqueteService->obtenerListadoEventos($sucursal, $puntoventa, $codigoEvento);
         $resEvento         = $this->emisionPaqueteService->registroEvento(
             $resCuis,
@@ -94,7 +91,7 @@ class EmisionPaqueteController extends Controller
         $facturas         = $this->emisionPaqueteService->construirFacturas(
             $sucursal,
             $puntoventa,
-            $cantidad,
+            $cantidadFacturas,
             $this->configService->documentoSector,
             $this->configService->codigoActividad,
             $this->configService->codigoProductoSin,
@@ -111,6 +108,5 @@ class EmisionPaqueteController extends Controller
 
         $this->emisionPaqueteService->test_log($pvfechaInicio);
         $this->emisionPaqueteService->test_log($pvfechaFin);
-        /* } */
     }
 }

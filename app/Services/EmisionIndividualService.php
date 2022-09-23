@@ -70,10 +70,60 @@ class EmisionIndividualService
             $detalle->actividadEconomica    = $codigoActividad;
             $detalle->codigoProducto        = $dataFactura['detalle_venta'][$i]['plato_id'];
             $detalle->codigoProductoSin        = $codigoProductoSin;
-            $detalle->descripcion            = $dataFactura['detalle_venta'][$i]['plato'];
+            $detalle->descripcion            = "Keperi";
             $detalle->precioUnitario        = $dataFactura['detalle_venta'][$i]['costo'];
             $detalle->montoDescuento        = 0;
             $detalle->subTotal                = $dataFactura['detalle_venta'][$i]['subtotal'];
+            $subTotal += $detalle->subTotal;
+            $factura->detalle[] = $detalle;
+        }
+        $factura->cabecera->razonSocialEmisor    = $this->configService->config->razonSocial;
+        $factura->cabecera->municipio            = 'Santa Cruz de la Sierra';
+        $factura->cabecera->telefono            = '78555410';
+        $factura->cabecera->numeroFactura        = $dataFactura['venta']['numero_factura'];
+        $factura->cabecera->codigoSucursal        = $dataFactura['sucursal']['codigo_fiscal'];
+        $factura->cabecera->direccion            = $dataFactura['sucursal']['direccion'];
+        $factura->cabecera->codigoPuntoVenta    = $codigoPuntoVenta;
+        $factura->cabecera->fechaEmision        = date('Y-m-d\TH:i:s.v');
+        $factura->cabecera->nombreRazonSocial    = $dataFactura['cliente']['nombre'];
+        $factura->cabecera->codigoTipoDocumentoIdentidad    = 5; //NIT 
+        $factura->cabecera->numeroDocumento        = 166172023;
+        $factura->cabecera->codigoCliente        = $dataFactura['cliente']['id']; //Codigo Unico Asignado por el sistema de facturacion (ID DEL CLIENTE)
+        $factura->cabecera->codigoMetodoPago    = 1;
+        $factura->cabecera->montoTotal            = $dataFactura['venta']['total_venta'];
+        $factura->cabecera->montoTotalMoneda    = $factura->cabecera->montoTotal;
+        $factura->cabecera->montoTotalSujetoIva    = $factura->cabecera->montoTotal;
+        $factura->cabecera->descuentoAdicional    = 0;
+        $factura->cabecera->codigoMoneda        = 1; //BOLIVIANO
+        $factura->cabecera->tipoCambio            = 1;
+        $factura->cabecera->cuf            = $dataFactura['venta']['cuf'];
+        $factura->cabecera->usuario              = $dataFactura['user']['name'] . " " . $dataFactura['user']['apellido'];
+        return $factura;
+    }
+
+    function construirFactura3($codigoPuntoVenta = 0, $codigoSucursal = 0, $modalidad = 0, $documentoSector = 1, $codigoActividad = '620100', $codigoProductoSin = '', $dataFactura = null)
+    {
+       /*  dd($dataFactura); */
+        $subTotal = 0;
+        $factura = null;
+        $detailClass = InvoiceDetail::class;
+        if ($modalidad == ServicioSiat::MOD_ELECTRONICA_ENLINEA) {
+            if ($documentoSector == DocumentTypes::FACTURA_COMPRA_VENTA)
+                $factura = new ElectronicaCompraVenta();
+        } else {
+            if ($documentoSector == DocumentTypes::FACTURA_COMPRA_VENTA)
+                $factura = new CompraVenta();
+        }
+        for ($i = 0; $i < sizeof($dataFactura['detalle_venta']); $i++) {
+            $detalle = new $detailClass();
+            $detalle->cantidad                = $dataFactura['detalle_venta'][$i]->cantidad;
+            $detalle->actividadEconomica    = $codigoActividad;
+            $detalle->codigoProducto        = $dataFactura['detalle_venta'][$i]->plato_id;
+            $detalle->codigoProductoSin        = $codigoProductoSin;
+            $detalle->descripcion            = $dataFactura['detalle_venta'][$i]->plato->nombre;
+            $detalle->precioUnitario        = $dataFactura['detalle_venta'][$i]->precio;
+            $detalle->montoDescuento        = 0;
+            $detalle->subTotal                = $dataFactura['detalle_venta'][$i]->subtotal;
             $subTotal += $detalle->subTotal;
             $factura->detalle[] = $detalle;
         }
@@ -162,7 +212,7 @@ class EmisionIndividualService
         $factura->cabecera->montoTotalSujetoIva    = $factura->cabecera->montoTotal;
         $factura->cabecera->descuentoAdicional    = 0;
         $factura->cabecera->codigoMoneda        = 1; //BOLIVIANO
-        
+
         $factura->cabecera->tipoCambio            = 1;
         $factura->cabecera->usuario                = 'MonoBusiness User 01';
 

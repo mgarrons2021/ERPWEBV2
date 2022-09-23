@@ -47,14 +47,23 @@
                                         <input type="text" class="form-control" name="cantidad_marinado" value="{{$keperi->cantidad_marinado}}" readonly>
                                     </div>
                                 </div>
-                                
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="precio_producto">Keperi Sellado<span class="required">*</span></label>
-                                        <input type="number" class="form-control" name="cantidad_sellado" value="{{$keperi->cantidad_sellado}}" step="any"  readonly>
+                                        <label for="precio_producto">Temperatura Maxima Alcanzada<span class="required">*</span></label>
+                                        <input type="number" class="form-control" name="temperatura_maxima" value="{{$keperi->temperatura_maxima}}" step="any"  readonly>
                                     </div>
                                 </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="precio_producto">Veces Volcado<span class="required">*</span></label>
+                                        <input type="number" class="form-control" name="veces_volcado" value="{{$keperi->veces_volcado}}" step="any"  readonly>
+                                    </div>
+                                </div>
+                                
+
+                               
 
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -69,6 +78,8 @@
                                         <input type="number" class="form-control" name="cantidad_enviado" value="{{$keperi->cantidad_enviado}}" step="any" required>
                                     </div>
                                 </div>
+
+                                
                             </div>
                             <div class="col-md-6">
                                 <button type="submit" class="btn btn-primary" tabindex="7">Guardar</button>

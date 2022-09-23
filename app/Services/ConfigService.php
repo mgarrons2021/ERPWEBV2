@@ -31,7 +31,7 @@ class ConfigService{
             'codigoSistema' => '722907F2BAECC0B26025FE7',
             'nit'           =>  166172023,
             'razonSocial'   => 'DONESCO S.R.L',
-            'modalidad'     => ServicioSiat::MOD_COMPUTARIZADA_ENLINEA,  /* Electronica en linea */
+            'modalidad'     => ServicioSiat::MOD_ELECTRONICA_ENLINEA,  /* Electronica en linea */
             'ambiente'      => ServicioSiat::AMBIENTE_PRUEBAS,
             'pubCert'		=> MOD_SIAT_DIR . SB_DS . 'certs' . SB_DS . 'terminalx' . SB_DS . 'DONESCO_SRL_CER.pem',
 	        'privCert'		=> MOD_SIAT_DIR . SB_DS . 'certs' . SB_DS . 'terminalx' . SB_DS . 'DONESCO_S.R.L._CER.pem', 

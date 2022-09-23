@@ -69,12 +69,21 @@
                                     <th class="text-center" style="color: #fff;">% Hidratado Marinado</th>
                                     
                                     <th class="text-center" style="color: #fff;">Keperi Cocido</th>
-                                    <th class="text-center" style="color: #fff;">Keperi Sellado</th>
+                                    
                                     
                                     <th class="text-center" style="color: #fff;">Keperi Enviado</th>
+                                    <th class="text-center" style="color: #fff;">% Enviado</th>
+                                    
                                     <th class="text-center" style="color: #fff;">Diferencia Keperi</th>
+                                    
+                                    <th class="text-center" style="color: #fff;">% Diferencia/Enviado</th>
+                                    
+
                                     <th class="text-center" style="color: #fff;">% Deshidratacion</th>
-                                    {{-- <th class="text-center" style="color: #fff;">% Deshidratado despues Cocido</th> --}}
+
+                                    <th class="text-center" style="color: #fff;"> Veces Volcado</th>
+                                    <th class="text-center" style="color: #fff;"> Temperatura Maxima Alcanzada</th>
+                                   
                                     <th class="text-center" style="color: #fff;">% Rendimiento</th>
                                     <th style="color: #fff;"></th>
                                 </thead>
@@ -83,12 +92,16 @@
                                     <tr>
                                         @php
                                         
-                                        $deshidratado_cocido = $keperi->cantidad_sellado/$keperi->cantidad_crudo-1;
+                                        $deshidratado_cocido = $keperi->cantidad_cocido/$keperi->cantidad_crudo-1;
                                         /* $hidratado_marinado = +($keperi->cantidad_crudo / $keperi->cantidad_marinado-1)*100; */
                                         $hidratado_marinado = (($keperi->cantidad_marinado/$keperi->cantidad_crudo)-1)*100;
-                                        $diferencia = $keperi->cantidad_sellado - $keperi->cantidad_enviado;
-                                        $deshidratado = (($keperi->cantidad_crudo - $keperi->cantidad_sellado)/$keperi->cantidad_crudo ) *100 ;
+                                        $diferencia = $keperi->cantidad_cocido - $keperi->cantidad_enviado;
+                                        $deshidratado = (($keperi->cantidad_crudo - $keperi->cantidad_cocido)/$keperi->cantidad_crudo ) *100 ;
                                         $inflado = ( $keperi->cantidad_crudo/ $keperi->cantidad_marinado) *100 ;
+
+                                        $porcentajeEnviado = ($keperi->cantidad_enviado /$keperi->cantidad_cocido)*100;
+                                        $porcentajeDiferenciaEnviado = ($diferencia/$keperi->cantidad_crudo)*100;
+
 
                                         $rendimiento = ($keperi->cantidad_enviado/$keperi->cantidad_crudo)*100
  
@@ -103,16 +116,25 @@
                                         <td class="text-center"> <span class="badge badge-success">^</span> {{number_format($hidratado_marinado,2)}} %</td>
                                         <td class="text-center">{{$keperi->cantidad_cocido }} kg </td>
                                         
-                                        <td class="text-center">{{$keperi->cantidad_sellado }} kg </td>
+                                        
                                         @if (isset($keperi->cantidad_enviado))
                                         <td class="text-center"> {{$keperi->cantidad_enviado}} kg </td>
                                         @else
                                         <td class="text-center"> <span class="badge badge-warning"> No registrado </span> </td>
                                         @endif
+                                        
+                                        <td class="text-center"> {{number_format($porcentajeEnviado,2) }} % </td>
+
 
                                         <td class="text-center">{{$diferencia}} kg </td>
+
+
+                                        <td class="text-center">{{number_format($porcentajeDiferenciaEnviado)}} % </td>
                                         <td class="text-center"> <span class="badge badge-danger"> - </span> {{ number_format($deshidratado,2)}} % </td>
-                                        {{-- <td class="text-center">{{ number_format($deshidratado_cocido,2)}} % </td> --}}
+
+                                        <td class="text-center">{{$keperi->veces_volcado}} Veces </td>
+                                        <td class="text-center">{{$keperi->temperatura_maxima}} °C </td>
+                                        
                                         <td class="text-center">{{ number_format($rendimiento,2)}} % </td>
                                        
                                        
