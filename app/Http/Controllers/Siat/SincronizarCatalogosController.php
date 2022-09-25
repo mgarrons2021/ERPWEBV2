@@ -24,7 +24,7 @@ class SincronizarCatalogosController extends Controller
             'codigoSistema' => '722907F2BAECC0B26025FE7',
             'nit'           => 166172023,
             'razonSocial'   => 'DONESCO S.R.L',
-            'modalidad'     => ServicioSiat::MOD_COMPUTARIZADA_ENLINEA,
+            'modalidad'     => ServicioSiat::MOD_ELECTRONICA_ENLINEA,
             'ambiente'      => ServicioSiat::AMBIENTE_PRUEBAS,
             'tokenDelegado'    => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJET05FU0NPXzAyMyIsImNvZGlnb1Npc3RlbWEiOiI3MjI5MDdGMkJBRUNDMEIyNjAyNUZFNyIsIm5pdCI6Ikg0c0lBQUFBQUFBQUFETTBNek0wTnpJd01nWUE3bHFjcHdrQUFBQT0iLCJpZCI6NTE5NjgyLCJleHAiOjE2NjQ1ODI0MDAsImlhdCI6MTY2MDgyOTA0NCwibml0RGVsZWdhZG8iOjE2NjE3MjAyMywic3Vic2lzdGVtYSI6IlNGRSJ9.8ubSTM8oYEuY7pHiNQYbNj6I87koRUqzOqsQ341VMKwA8Y_A9nh_qA4ttCdY-6HywevMQ4Ov64I-w7S3k47NYw',
             /* 'pubCert'		=> MOD_SIAT_DIR . SB_DS . 'certs' . SB_DS . 'terminalx' . SB_DS . 'certificado.pem',
@@ -342,23 +342,34 @@ class SincronizarCatalogosController extends Controller
 
         $sucursal = 0;
         $this->sincronizarFechaHora($sucursal);
-         $this->sincronizarUnidadesMedidades($sucursal);
-         $this->sincronizarTiposPuntosVentas($sucursal);
+        $this->sincronizarMetodosPagos($sucursal);        
         $this->sincronizarTiposMonedas($sucursal);
-          $this->sincronizarTiposPuntosFacturas($sucursal);
         $this->sincronizarListadoPaises($sucursal);
-         $this->sincronizarDocumentosIdentidades($sucursal); 
+        $this->sincronizarTiposEmisiones($sucursal);
         $this->sincronizarMensajesServicios($sucursal);
-         $this->sincronizarMotivosAnulaciones($sucursal); 
+        $this->sincronizarTiposHabitaciones($sucursal); 
+        $this->sincronizarTiposPuntosVentas($sucursal);
+        $this->sincronizarUnidadesMedidades($sucursal);
+        $this->sincronizarMotivosAnulaciones($sucursal); 
+        $this->sincronizarProductosServicios($sucursal);
+        $this->sincronizarTiposPuntosFacturas($sucursal);
         $this->sincronizarTiposDocumentoSector($sucursal);
         $this->sincronizarListaLeyendasFactura($sucursal);   
+        $this->sincronizarDocumentosIdentidades($sucursal); 
         $this->sincronizarDocumentosIdentidades($sucursal);
         $this->sincronizarEventosSignificativos($sucursal); 
         $this->sincronizarListadoTotalActividades($sucursal);
-        $this->sincronizarProductosServicios($sucursal);
-          $this->sincronizarMetodosPagos($sucursal);        
-         $this->sincronizarTiposEmisiones($sucursal);
-        $this->sincronizarTiposHabitaciones($sucursal); 
+
+        $listado_total_actividades = ListadoTotalActividad::count();
+        if ($listado_total_actividades >= 0){
+            $res = "Sincronizacion Catalogo Exitosa";
+        }
+     
+       return response()->json([
+            'response' => $res
+        ]); 
+
+        
 
         $count = 0;
     }

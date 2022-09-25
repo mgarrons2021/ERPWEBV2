@@ -24,7 +24,7 @@ class CreateVentasTable extends Migration
             $table->string('tipo_pago');
             $table->string('lugar');
             $table->string('estado'); /* Estado Anulacion Siat */
-            $table->char('estado_emision')->default("N"); /* Si se emitio al servidor de Impuestos */
+            $table->char('estado_emision')->default("R"); /* Si se emitio al servidor de Impuestos */
             $table->string('nombre_delivery')->nullable();
             $table->string('codigo_control')->nullable();
             $table->string('cuf')->nullable();

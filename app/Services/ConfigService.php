@@ -13,7 +13,7 @@ class ConfigService{
     public $sucursal             = 0;
     public $puntoventa           = 0;
     public $cantFacturas        = 1000; /* Cantidad factura para hacer pruebas */
-    public $codigoEvento        = 1;
+    public $codigoEvento        = 0;
     public $evento             = null;
     /* public $fechaEmision        = date("Y-m-d\TH:i:s.v"); */
     public $codigoActividad    = '561110';  //SERVICIOS DE SUMINISTRO DE COMIDA CON SERVICIO

@@ -37,7 +37,7 @@ class VentaController extends Controller
             DB::beginTransaction();
             $fecha = Carbon::now()->toDateString();
             $hora_actual = Carbon::now()->toTimeString();
-            $modalidad = 1; //Computarizada en linea
+            $modalidad = 1; //Electronica en linea
             $tipoEmision = 1; //EN LINEA
             $tipoFactura = 1; //Factura derecho credito fiscal
 
@@ -81,7 +81,7 @@ class VentaController extends Controller
                 "numeroFactura" => $cufd->numero_factura,
                 "codigoPuntoVenta" => $puntoVenta,
                 "fechaEmision" => date('Y-m-d\TH:i:s.v'),
-                "modalidad" => ServicioSiat::MOD_COMPUTARIZADA_ENLINEA,
+                "modalidad" => ServicioSiat::MOD_ELECTRONICA_ENLINEA,
                 "tipoEmision" => SiatInvoice::TIPO_EMISION_ONLINE,
                 "tipoFactura" => SiatInvoice::FACTURA_DERECHO_CREDITO_FISCAL,
                 "codigoControl" => $cufd->codigo_control,
@@ -160,6 +160,16 @@ class VentaController extends Controller
 
             $emisionIndividualController = new EmisionIndividualController();
             $response = $emisionIndividualController->emisionIndividual($dataFactura);
+            if ($response->RespuestaServicioFacturacion->codigoEstado == 908){
+                $venta->update([
+                    'estado_emision' => 'V', /* Validada */
+                ]);
+            }else{
+                $venta->update([
+                    'estado_emision' => 'R', /* Rechazada */
+                ]);
+            }
+
 
             return response()->json([
                 'status' => true,

@@ -33,7 +33,8 @@ class VentaService
         }
         $venta->nro_transaccion = $cantidad_transacciones;
         $venta->estado = 1;
-        $venta->estado = 0;
+
+        $venta->estado_emision = "R";
         $venta->turnos_ingreso_id = $ventaData['turno_id'];
         $venta->user_id = $user->id;
         $venta->cliente_id = $ventaData['cliente_id'];

@@ -136,6 +136,67 @@
 
 @endsection
 @section('scripts')
+
+<script>
+    const csrfToken = document.head.querySelector(
+        "[name~=csrf-token][content]"
+    ).content;
+    let registrar_facturas_paquetes = document.getElementById('registrar_facturas_paquetes');
+    let fecha_inicio = document.getElementById("fecha_inicio");
+    let fecha_fin = document.getElementById("fecha_fin");
+    let ventas = document.getElementById('ventas');
+    let ruta = "{{ route('eventos_significativos.generar_evento_significativo') }}";
+    let rutaIndex = "{{ route('eventos_significativos.index') }}";
+    registrar_facturas_paquetes.addEventListener('click', (e) => {
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            },
+            url: ruta,
+            type: 'POST',
+            data: {
+                fecha_inicio: fecha_inicio.value,
+                fecha_fin: fecha_fin.value,
+                ventas: ventas.value,
+            },
+            success: function(res) {
+                console.log(res);
+                let codigo = res.RespuestaListaEventos.mensajesList.codigo;
+                let descripcion = res.RespuestaListaEventos.mensajesList.descripcion
+                if (codigo === 981){
+                    Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: "Error:"+ codigo,
+                            text: descripcion,
+                            showConfirmButton: true,
+                            timer: 3500,
+                            willClose: function() {
+                                window.location.href = rutaIndex;
+                            },
+                        })
+                }
+                /* Falta validar aun no se probó */
+                if (codigo === 908){
+                    Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: "Error:" + codigo,
+                            text: descripcion,
+                            showConfirmButton: true,
+                            timer: 3500,
+                            willClose: function() {
+                                window.location.href = rutaIndex;
+                            },
+                        })
+                }
+
+                
+                
+            }
+        })
+    });
+</script>
 @section('page_js')
 <script>
     $('#table').DataTable({
@@ -196,34 +257,6 @@
     });
 </script>
 
-<script>
-    const csrfToken = document.head.querySelector(
-        "[name~=csrf-token][content]"
-    ).content;
-    let registrar_facturas_paquetes = document.getElementById('registrar_facturas_paquetes');
-    let fecha_inicio = document.getElementById("fecha_inicio");
-    let fecha_fin = document.getElementById("fecha_fin");
-    let ventas = document.getElementById('ventas');
-    let ruta = "{{ route('eventos_significativos.generar_evento_significativo') }}";
-    let rutaIndex = "{{ route('eventos_significativos.index') }}";
-    registrar_facturas_paquetes.addEventListener('click', (e) => {
-        $.ajax({
-            headers: {
-                'X-CSRF-TOKEN': csrfToken
-            },
-            url: ruta,
-            type: 'POST',
-            data: {
-                fecha_inicio: fecha_inicio.value,
-                fecha_fin: fecha_fin.value,
-                ventas: ventas.value,
-            },
-            success: function(res) {
-                console.log(res);
-            }
-        })
-    });
-</script>
 @endsection
 @endsection
 @section('page_css')

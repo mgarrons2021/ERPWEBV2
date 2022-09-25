@@ -55,7 +55,8 @@
                                     <th>Total Venta </th>
                                     <th>Usuario</th>
                                     <th>Sucursal</th>
-                                    <th>Estado</th>
+                                    <th>Estado Siat</th>
+                                    <th>Estado Factura</th>
                                     <th>Accion</th>
                                 </thead>
                                 <tbody>
@@ -67,7 +68,15 @@
                                         <td>{{ $venta->tipo_pago }}</td>
                                         <td>{{ $venta->total_venta }} Bs</td>
                                         <td>{{ $venta->user->name }} {{$venta->user->apellido}}</td>
+
                                         <td>{{ $venta->sucursal->nombre }}</td>
+
+                                        @if($venta->estado_emision == "V")
+                                        <td> <span class="badge badge-success"> Validada por el Siat </span> </td>
+                                        @else 
+                                        <td> <span class="badge badge-warning"> Rechazada por el Siat </span> </td>
+                                        @endif
+
                                         @if($venta->estado == 1)
                                         <td> <span class="badge badge-success"> Vigente </span> </td>
                                         @else

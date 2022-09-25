@@ -39,6 +39,7 @@ class EventoSignificativoController extends Controller
 
     public function generar_evento_significativo(Request $request)
     {
+        
         $arrayVentas = [];
         $ventas = json_decode($request->ventas);
         /*  dd($ventas); */
@@ -146,6 +147,7 @@ class EventoSignificativoController extends Controller
         $ventas = Venta::where('sucursal_id', Auth::user()->sucursals[0]->id)
             ->where('fecha_venta', (new Carbon())->toDateString())
             ->where('estado', 1)
+            ->where('estado_emision','V')
             ->where('evento_significativo_id', "<>", null)
             ->get();
 
@@ -169,7 +171,8 @@ class EventoSignificativoController extends Controller
         $ventas = Venta::where('sucursal_id', Auth::user()->sucursals[0]->id)
             ->whereBetween('fecha_venta', [$fecha_inicial, $fecha_final])
             ->where('ventas.evento_significativo_id', $evento_significativo->id)
-            ->where('estado', 0)
+            ->where('estado', 1)
+            ->where('estado_emision','V')
             ->where('ventas.evento_significativo_id', "<>", null)
             ->get();
 

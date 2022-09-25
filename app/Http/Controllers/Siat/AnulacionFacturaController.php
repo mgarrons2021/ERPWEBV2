@@ -39,7 +39,9 @@ class AnulacionFacturaController extends Controller
         $fecha_actual =  Carbon::now()->toDateString();
         /* dd($fecha_actual); */
         $motivos_anulaciones =  MotivoAnulacion::all();
-        $ventas = Venta::where('fecha_venta', $fecha_actual)->get();
+        $ventas = Venta::where('fecha_venta', $fecha_actual)
+        ->where('estado_emision', 'V')
+        ->get();
 
         return view('siat.anulaciones_facturas.index', compact('fecha_actual', 'ventas', 'motivos_anulaciones'));
     }
@@ -50,7 +52,9 @@ class AnulacionFacturaController extends Controller
         $fecha_final = $request->fecha_final;
         $motivos_anulaciones =  MotivoAnulacion::all();
 
-        $ventas = Venta::whereBetween('fecha_venta', [$fecha_inicial, $fecha_final])->get();
+        $ventas = Venta::whereBetween('fecha_venta', [$fecha_inicial, $fecha_final])
+        ->where('estado_emision', 'V')
+        ->get();
 
         return view('siat.anulaciones_facturas.index', compact('ventas', 'motivos_anulaciones'));
     }

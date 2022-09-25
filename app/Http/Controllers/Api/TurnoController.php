@@ -28,17 +28,18 @@ class TurnoController extends Controller
             'codigoSistema' => '722907F2BAECC0B26025FE7',
             'nit'           =>  166172023,
             'razonSocial'   => 'DONESCO S.R.L',
-            'modalidad'     => ServicioSiat::MOD_COMPUTARIZADA_ENLINEA,
+            'modalidad'     => ServicioSiat::MOD_ELECTRONICA_ENLINEA,
             'ambiente'      => ServicioSiat::AMBIENTE_PRUEBAS,
             'tokenDelegado'    => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJET05FU0NPXzAyMyIsImNvZGlnb1Npc3RlbWEiOiI3MjI5MDdGMkJBRUNDMEIyNjAyNUZFNyIsIm5pdCI6Ikg0c0lBQUFBQUFBQUFETTBNek0wTnpJd01nWUE3bHFjcHdrQUFBQT0iLCJpZCI6NTE5NjgyLCJleHAiOjE2NjQ1ODI0MDAsImlhdCI6MTY2MDgyOTA0NCwibml0RGVsZWdhZG8iOjE2NjE3MjAyMywic3Vic2lzdGVtYSI6IlNGRSJ9.8ubSTM8oYEuY7pHiNQYbNj6I87koRUqzOqsQ341VMKwA8Y_A9nh_qA4ttCdY-6HywevMQ4Ov64I-w7S3k47NYw',
-            'pubCert'		=> MOD_SIAT_DIR . SB_DS . 'certs' . SB_DS . 'terminalx' . SB_DS . 'DONESCO_SRL_CER.pem',
-	        'privCert'		=> MOD_SIAT_DIR . SB_DS . 'certs' . SB_DS . 'terminalx' . SB_DS . 'DONESCO_S.R.L._CER.pem',  
+            'pubCert'        => MOD_SIAT_DIR . SB_DS . 'certs' . SB_DS . 'terminalx' . SB_DS . 'DONESCO_SRL_CER.pem',
+            'privCert'        => MOD_SIAT_DIR . SB_DS . 'certs' . SB_DS . 'terminalx' . SB_DS . 'DONESCO_S.R.L._CER.pem',
             'telefono'        => '34345435',
             'ciudad'        => 'SANTA CRUZ GC'
         ]);
     }
 
-   public function turn_register (Request $request) {
+    public function turn_register(Request $request)
+    {
         $user = $request->user_id;
         $user_id = User::find($request->user_id);
         $sucursal = Sucursal::find($request->sucursal_id);
@@ -60,7 +61,7 @@ class TurnoController extends Controller
             /* CREA CUFD CUANDO SE INGRESA NUEVO TURNO */
 
             $cuis = SiatCui::where('sucursal_id', $sucursal->id)->first();
-    
+
             if (is_null($cuis)) {
                 $response =  $this->obtenerCuis($codigoPuntoVenta, $sucursal->codigo_fiscal);
                 $obtener_cui = SiatCui::create([
@@ -74,23 +75,23 @@ class TurnoController extends Controller
             } else {
                 $resCufd =  $this->obtenerCufd($codigoPuntoVenta, $sucursal->codigo_fiscal, $cuis->codigo_cui, true);
             }
-             
+
             $guardar_cufd = SiatCufd::create([
-                'estado'=>"V",
+                'estado' => "V",
                 'codigo' => $resCufd->RespuestaCufd->codigo,
                 'codigo_control' => $resCufd->RespuestaCufd->codigoControl,
                 'direccion' => $resCufd->RespuestaCufd->direccion,
                 'fecha_vigencia' => new Carbon($resCufd->RespuestaCufd->fechaVigencia),
                 'fecha_generado' => $fecha_generado_cufd,
                 'sucursal_id' => $user_id->sucursals[0]->id,
-                'numero_factura'=>0
+                'numero_factura' => 0
             ]);
 
-    
+
             $response = [
                 'success' => true,
                 'tt' => $turno_am,
-                'responseSiat'=>$resCufd,
+                'responseSiat' => $resCufd,
                 'turno_id' => $turno->id
             ];
         } else {
@@ -102,7 +103,7 @@ class TurnoController extends Controller
             $turno->user_id = $user;
             $turno->sucursal_id = $sucursal;
             $turno->save();
-    
+
             $response = [
                 'success' => true,
                 'tt' => $turno_am,
@@ -110,10 +111,9 @@ class TurnoController extends Controller
             ];
         }
         return response()->json($response);
-       
     }
-    
-    
+
+
     public function update_state_turn(Request $request)
     {
         $id = $request->id;
@@ -159,8 +159,8 @@ class TurnoController extends Controller
 
         $turno = TurnoIngreso::find($turno_id);
 
-        $fact_first = Venta::select('numero_factura')->where('turnos_ingreso_id',$turno_id)->where('tipo_pago','<>','Comida Personal')->orderBy('id','asc')->limit(1)->first();
-        $fact_last= Venta::select('numero_factura')->where('turnos_ingreso_id',$turno_id)->where('tipo_pago','<>','Comida Personal')->orderBy('id','desc')->limit(1)->first();
+        $fact_first = Venta::select('numero_factura')->where('turnos_ingreso_id', $turno_id)->where('tipo_pago', '<>', 'Comida Personal')->orderBy('id', 'asc')->limit(1)->first();
+        $fact_last = Venta::select('numero_factura')->where('turnos_ingreso_id', $turno_id)->where('tipo_pago', '<>', 'Comida Personal')->orderBy('id', 'desc')->limit(1)->first();
 
         $json = [
             'ventas_fiscales' => $ventas_fiscales,
@@ -168,12 +168,11 @@ class TurnoController extends Controller
             'hora_inicio' => $turno->hora_inicio,
             'hora_fin' => $turno->hora_fin != null ? $turno->hora_fin : "00:00:00",
             'turno' => $turno->turno == 0 ? "AM" : "PM",
-            'primera_venta'=>$fact_first,
-            'ultima_venta'=>$fact_last
+            'primera_venta' => $fact_first,
+            'ultima_venta' => $fact_last
         ];
 
         return  response($json, 200)->header('Content-Type', 'application/json');
-
     }
 
     public function get_transaction(Request $request)
@@ -211,7 +210,6 @@ class TurnoController extends Controller
             ->first();
 
         return response(["turno" => $turno != null ? $turno : []], 200)->header('Content-Type', 'application/json');
-
     }
 
     function obtenerCuis($codigoPuntoVenta, $codigoSucursal, $new = false)
@@ -220,7 +218,7 @@ class TurnoController extends Controller
         $serviceCodigos->debug = true;
         $serviceCodigos->setConfig((array)$this->config);
         $resCuis = $serviceCodigos->cuis($codigoPuntoVenta, $codigoSucursal);
-       /*  dd($resCuis); */
+        /*  dd($resCuis); */
         return $resCuis;
     }
 

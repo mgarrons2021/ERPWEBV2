@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Request;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Invoices\SiatInvoice;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Services\ServicioFacturacionComputarizada;
+use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Services\ServicioFacturacionElectronica;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\SiatFactory;
 
 class AnulacionFacturaService
@@ -54,10 +55,10 @@ class AnulacionFacturaService
 			->whereDate('fecha_vigencia', '>=', $fecha_actual)
 			->orderBy('id', 'desc')->first(); */
 
-		$service = new ServicioFacturacionComputarizada();
+		$service = new ServicioFacturacionElectronica();
 		$service->setConfig((array)$this->configService->config);
 		$service->cufd = $cufd_id;
-		dd($service->cufd);
+	/* 	dd($service->cufd); */
 		$service->cuis = $resCuis->codigo_cui;
 		/* dd($motivo,$cuf,$sucursal,$puntoventa);  */
 		/* dd($motivo); */
