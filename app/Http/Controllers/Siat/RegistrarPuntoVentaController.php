@@ -3,17 +3,28 @@
 namespace App\Http\Controllers\Siat;
 
 use App\Http\Controllers\Controller;
+use App\Models\siat\DocumentoIdentidad;
 use App\Models\Siat\EventoSignificativo;
+use App\Models\Siat\LeyendaFactura;
+use App\Models\siat\ListadoPais;
+use App\Models\Siat\ListadoTotalActividad;
+use App\Models\Siat\MensajeServicio;
+use App\Models\Siat\MetodoPago;
 use App\Models\Siat\MotivoAnulacion;
+use App\Models\Siat\ProductoServicio;
 use Illuminate\Http\Request;
 use App\Models\Sucursal;
 use App\Services\CuisService;
 use App\Models\Siat\RegistroPuntoVenta;
 use App\Models\Siat\TipoDocumentoSector;
+use App\Models\Siat\TipoEmision;
 use App\Models\Siat\TipoFactura;
+use App\Models\Siat\TipoMoneda;
+use App\Models\Siat\UnidadMedida;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Services\ServicioSiat;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\SiatConfig;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Services\ServicioOperaciones;
+
 class RegistrarPuntoVentaController extends Controller
 {
     /**
@@ -48,8 +59,17 @@ class RegistrarPuntoVentaController extends Controller
         $motivos_anulaciones = MotivoAnulacion::all();
         $tipos_facturas = TipoFactura::all();
         $documentos_sectores = TipoDocumentoSector::all();
-        return view('siat.punto_venta.index',compact('puntos_ventas','eventos_significativos','motivos_anulaciones','tipos_facturas','documentos_sectores'));
-
+        $documentos_identidad = DocumentoIdentidad::all();
+        $leyendas_factura = LeyendaFactura::all();
+        $listados_paises = ListadoPais::all();
+        $mensajes_servicios = MensajeServicio::all();
+        $metodos_pagos = MetodoPago::all();
+        $productos_servicios = ProductoServicio::all();
+        $tipos_emisiones = TipoEmision::all();
+        $tipos_facturas = TipoFactura::all();
+        $tipos_monedas = TipoMoneda::all();
+        $unidades_medidas = UnidadMedida::all();
+        return view('siat.punto_venta.index', compact('puntos_ventas', 'eventos_significativos', 'motivos_anulaciones', 'tipos_facturas', 'documentos_sectores', 'documentos_identidad', 'leyendas_factura', 'listados_paises', 'mensajes_servicios', 'metodos_pagos','productos_servicios','tipos_emisiones','tipos_facturas','tipos_monedas','unidades_medidas'));
     }
 
     /**
@@ -60,7 +80,7 @@ class RegistrarPuntoVentaController extends Controller
     public function create()
     {
         $sucursales = Sucursal::all();
-        return view('siat.punto_venta.create',compact('sucursales'));
+        return view('siat.punto_venta.create', compact('sucursales'));
     }
 
     /**
@@ -102,15 +122,15 @@ class RegistrarPuntoVentaController extends Controller
     public function store(Request $request)
     {
         $nombrePuntoVenta =  Sucursal::select('nombre')
-        ->where('sucursals.id','=',$request->sucursal_id)
-        ->first();
-        
+            ->where('sucursals.id', '=', $request->sucursal_id)
+            ->first();
+
         $cuisService = new CuisService();
 
         $response = $cuisService->obtenerCuis(null, $request->sucursal_id, true);
         $service = new ServicioOperaciones();
         $service->setConfig((array)$this->config);
-        
+
         $service->cuis = $response->RespuestaCuis->codigo;
         $res = $service->registroPuntoVenta($request->sucursal_id, 2, $nombrePuntoVenta->nombre);
 
@@ -120,7 +140,6 @@ class RegistrarPuntoVentaController extends Controller
         $punto_venta->save();
 
         return redirect()->route('puntos_ventas.index');
-
     }
 
     /**

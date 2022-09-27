@@ -39,7 +39,7 @@ class EventoSignificativoController extends Controller
 
     public function generar_evento_significativo(Request $request)
     {
-        
+
         $arrayVentas = [];
         $ventas = json_decode($request->ventas);
         /*  dd($ventas); */
@@ -72,6 +72,7 @@ class EventoSignificativoController extends Controller
             ->where('sucursal_id', $sucursal_db->id)
             ->orderBy('id', 'desc')
             ->first();
+        
         $cufdAntiguo = $cufd_bd->codigo;
         $resCuis = $cuis_bd->codigo_cui;
 
@@ -113,7 +114,7 @@ class EventoSignificativoController extends Controller
             die("No se pudo registrar el evento significativo\n"); */
             return $resEvento;
         }
-       /*  $this->emisionPaqueteService->test_log($resEvento); */
+        /*  $this->emisionPaqueteService->test_log($resEvento); */
         $facturas         = $this->emisionPaqueteService->construirFacturas2(
             $sucursal,
             $puntoventa,
@@ -130,12 +131,20 @@ class EventoSignificativoController extends Controller
         $res = $this->emisionPaqueteService->testPaquetes($sucursal, $puntoventa, $facturas, $codigoControlAntiguo, $this->configService->tipoFactura, $resEvento->RespuestaListaEventos, $cafc);
         if (isset($res->RespuestaServicioFacturacion->codigoRecepcion)) {
             $res = $this->emisionPaqueteService->testRecepcionPaquete($sucursal, $puntoventa, $this->configService->documentoSector, $this->configService->tipoFactura, $res->RespuestaServicioFacturacion->codigoRecepcion);
+            if ($res->RespuestaListaEventos->mensajesList->codigo == 908) {
+                foreach ($ventas as $venta) {
+                    $venta_db = Venta::find($venta->id);
+                    $venta_db->estado_emision = "V";
+                    $venta_db->save();
+                }
+            }
             return  $res;
-            /* print_r($res); */
+        } else {
+            return response()->json([
+                "codigo" => 980,
+                "msj" => "Sin Respuesta"
+            ]);
         }
-
-        /* $this->emisionPaqueteService->test_log($pvfechaInicio);
-        $this->emisionPaqueteService->test_log($pvfechaFin); */
     }
 
 
@@ -147,7 +156,7 @@ class EventoSignificativoController extends Controller
         $ventas = Venta::where('sucursal_id', Auth::user()->sucursals[0]->id)
             ->where('fecha_venta', (new Carbon())->toDateString())
             ->where('estado', 1)
-            ->where('estado_emision','V')
+            ->where('estado_emision', 'P')
             ->where('evento_significativo_id', "<>", null)
             ->get();
 
@@ -160,7 +169,7 @@ class EventoSignificativoController extends Controller
         $fecha_inicial = $request->fecha_inicial;
         $fecha_final = $request->fecha_final;
         $evento_significativo = EventoSignificativo::find($request->evento_significativo_id);
-        
+
 
 
         $fecha_actual = Carbon::now()->toDateString();
@@ -172,11 +181,11 @@ class EventoSignificativoController extends Controller
             ->whereBetween('fecha_venta', [$fecha_inicial, $fecha_final])
             ->where('ventas.evento_significativo_id', $evento_significativo->id)
             ->where('estado', 1)
-            ->where('estado_emision','V')
+            ->where('estado_emision', 'P')
             ->where('ventas.evento_significativo_id', "<>", null)
             ->get();
 
-          /*   dd($ventas); */
+        /*   dd($ventas); */
         return view('siat.eventos_significativos.index', compact('eventos_significativos', 'ventas', 'fecha_actual'));
     }
 }

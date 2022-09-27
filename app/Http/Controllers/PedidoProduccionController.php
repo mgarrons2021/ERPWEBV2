@@ -206,7 +206,6 @@ class PedidoProduccionController extends Controller
         $pedidos_producciones = PedidoProduccion::whereDate('fecha', '=',  Carbon::now())
             ->join('sucursals', 'pedidos_produccion.sucursal_usuario_id', '=', 'sucursals.id')
             ->where('sucursals.id', '<>', 19)
-            ->where('sucursals.id', '<>', 20)
             ->where('sucursals.id', '<>', 2)
             ->get();
 
@@ -234,7 +233,6 @@ class PedidoProduccionController extends Controller
         $pedidos_producciones = PedidoProduccion::selectRaw('sucursals.*, pedidos_produccion.id,pedidos_produccion.fecha,pedidos_produccion.created_at ')->whereDate('fecha', '=',  $fecha_inicial)
             ->join('sucursals', 'pedidos_produccion.sucursal_usuario_id', '=', 'sucursals.id')
             ->where('sucursals.id', '<>', 19)
-            ->where('sucursals.id', '<>', 20)
             ->where('sucursals.id', '<>', 2)
             ->get();
         // dd($pedidos_producciones );

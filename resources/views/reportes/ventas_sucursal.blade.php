@@ -45,24 +45,24 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="card"></div>
-                    <div class="card-body">
+                <div class="card-body">
 
-                        <div class="table-responsive ">
-                            <table id="dtable" class="table">
-                                <thead style="background-color: #6777ef;">
-                                    <tr id="thead">
+                    <div class="table-responsive ">
+                        <table id="dtable" class="table">
+                            <thead style="background-color: #6777ef;">
+                                <tr id="thead">
 
-                                    </tr>
-                                </thead>
-                                <tbody id="tbody">
-                                </tbody>
-                            </table>
-                        </div>
-
+                                </tr>
+                            </thead>
+                            <tbody id="tbody">
+                            </tbody>
+                        </table>
                     </div>
+
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     </form>
@@ -78,14 +78,14 @@
 @section('scripts')
 
 @section('page_js')
-    <script type="text/javascript" src="//cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script>
-    <script type="text/javascript" src="//cdn.datatables.net/buttons/1.3.1/js/buttons.bootstrap4.min.js"></script>
+<script type="text/javascript" src="//cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="//cdn.datatables.net/buttons/1.3.1/js/buttons.bootstrap4.min.js"></script>
 
-    <script type="text/javascript" src="//cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-    <script type="text/javascript" src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/pdfmake.min.js"></script>
-    <script type="text/javascript" src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/vfs_fonts.js"></script>
-    <script type="text/javascript" src="//cdn.datatables.net/buttons/1.3.1/js/buttons.html5.min.js"></script>
+<script type="text/javascript" src="//cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script type="text/javascript" src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/pdfmake.min.js"></script>
+<script type="text/javascript" src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/vfs_fonts.js"></script>
+<script type="text/javascript" src="//cdn.datatables.net/buttons/1.3.1/js/buttons.html5.min.js"></script>
 {{-- <script src="https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.js"></script> --}}
 
@@ -98,12 +98,12 @@
     let thead = document.getElementById('thead');
     let tbody = document.getElementById('tbody');
     let date = new Date();
-    let fecha = (date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + (date.getDate()-1)).toString();
+    let fecha = (date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + (date.getDate() - 1)).toString();
 
     $(document).ready(function() {
 
         obtener(ruta + `fecha=${fecha}&fecha_a=${fecha}`);
-        
+
         /* $('#dtable').dataTable({
                     "bLengthChange": false,
                     "bPaginate": true,
@@ -156,7 +156,7 @@
         /* $('#dtable').dataTable({    
             destroy:true,
         });  */
-        
+
         fetch(rutaa, {
                 method: "GET",
                 headers: {
@@ -174,16 +174,16 @@
                     destroy:true,
                 } ); 
                  */
-                
+
                 //$('#dtable').dataTable().fnDestroy();
 
                 let plato = data.platos;
-                
+
                 plato.push({
                     'idplato': 'gaseosas',
                     'nombre': 'Gaseosas'
                 });
-            
+
                 plato.push({
                     'idplato': 'refrescos',
                     'nombre': 'Refrescos'
@@ -195,47 +195,44 @@
                 Swal.close();
 
                 //$('#dtable').DataTable();
-                
+
                 $('#dtable').dataTable({
                     "bLengthChange": false,
                     "bPaginate": true,
                     "bInfo": false,
-                    destroy:true,
+                    destroy: true,
                     responsive: true,
-                    "autoWidth": false, 
-                    language:{
-                        search:'Buscar:',
+                    "autoWidth": false,
+                    language: {
+                        search: 'Buscar:',
                         paginate: {
-                            first:      "Primero",
-                            previous:   "Anterior",
-                            next:       "Siguiente",
-                            last:       "Ultimo"
+                            first: "Primero",
+                            previous: "Anterior",
+                            next: "Siguiente",
+                            last: "Ultimo"
                         },
                     },
                     dom: 'Bftipr',
-                buttons: [{
-                    //Botón para Excel
-                    extend: 'excel',
-                    footer: true,
-                    title: 'Reporte Ventas',
-                    filename: 'reporte',
-                    //Aquí es donde generas el botón personalizado
-                    text: '<button class="btn btn-success">Exportar a Excel <i class="fas fa-file-excel"></i></button>'
-                },
-                //Botón para PDF
-                {
-                    extend: 'pdf',
-                    footer: true,
-                    title: 'Reporte Ventas',
-                    filename: 'reporte',
-                    text: '<button class="btn btn-danger">Exportar a PDF <i class="far fa-file-pdf"></i></button>',
-                    customize: function(pdfDocument) {        
-                    }
-                },
-                ]                    
+                    buttons: [{
+                            //Botón para Excel
+                            extend: 'excel',
+                            footer: true,
+                            title: 'Reporte Ventas',
+                            filename: 'reporte',
+                            //Aquí es donde generas el botón personalizado
+                            text: '<button class="btn btn-success">Exportar a Excel <i class="fas fa-file-excel"></i></button>'
+                        },
+                        //Botón para PDF
+                        {
+                            extend: 'pdf',
+                            footer: true,
+                            title: 'Reporte Ventas',
+                            filename: 'reporte',
+                            text: '<button class="btn btn-danger">Exportar a PDF <i class="far fa-file-pdf"></i></button>',
+                            customize: function(pdfDocument) {}
+                        },
+                    ]
                 });
-
-                            
                 /* $('#table').DataTable({
                 language: {
                     sProcessing: "Procesando...",
@@ -264,7 +261,7 @@
             }); */
 
             })
-            .catch((error) => console.error(error));  
+            .catch((error) => console.error(error));
     }
 
     function mostrarPlatos(platos) {
@@ -343,7 +340,6 @@
         let fecha2 = document.getElementById('fecha_final').value;
         obtener(ruta + `fecha=${fecha1}&fecha_a=${fecha2}`);
     }
-
 </script>
 
 

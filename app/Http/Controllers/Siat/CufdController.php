@@ -84,6 +84,9 @@ class CufdController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $cufd = SiatCufd::find($id);
+        $cufd->delete();
+
+        return redirect()->route('siat.cufd.index');
     }
 }

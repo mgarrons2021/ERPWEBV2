@@ -19,10 +19,13 @@ class MailFacturacionController extends Controller
         $data['clienteCorreo'] = $datosMail['clienteCorreo'];
         $data['fecha'] =  (new Carbon())->locale('es')->isoFormat(' D MMMM Y H:mm');
 
+        
+
         Mail::send('mails.EnvioFactura', $data, function ($m) use ($datosMail,$pdf) {
             $m->to($datosMail['clienteCorreo'], $datosMail['clienteCorreo'])
                 ->subject($datosMail['clienteNombre'])
-                ->attachData($pdf->output(), "Factura.pdf");
+                ->attachData($pdf->output(), "Factura.pdf")
+                ->attach(public_path()."/FacturasXML/facturaNro".$datosMail['venta']['numero_factura'].".xml");
         });
 
         return true;

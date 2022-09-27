@@ -1,4 +1,4 @@
-const csrfToken = document.head.querySelector(
+}const csrfToken = document.head.querySelector(
     "[name~=csrf-token][content]"
 ).content;
 
@@ -99,7 +99,9 @@ $(document).ready(function () {
 
                 precios.value= data.precio;
                 productonombre.value=data.producto_nombre;
-                unidad_medida.value = data.unidad_medida;               
+                unidad_medida.value = data.unidad_medida;             
+                
+                
 
             }else{
                 $("#producto")
@@ -128,9 +130,10 @@ agregar_insumo.addEventListener('click',function(){
         $("#errorproducto").addClass("d-none");
     }
 
-
     if(producto.value != "sin_seleccionar")
     {    
+    
+
         let tr = '<tr class="news" id="'+producto.value+'">'+
             '<td style="text-align: center;">'+productonombre.value+'</td>'+
             '<td style="text-align: center;">'+unidad_medida.value+'</td>'+
@@ -141,11 +144,8 @@ agregar_insumo.addEventListener('click',function(){
 
             '<td style="text-align: center;" class="precios" id="precio-'+producto.value+'"> '+precios.value+'</td>'+
             ' <td style="text-align: center;" class="td_subtotal" name="subtotal_enviado" id="subtotal-'+producto.value+'"> 0 </td>'+
-            '</tr>';          
-
+            '</tr>';         
         cuerpotabla.innerHTML+=tr;
-       
-        
     }
 
 });

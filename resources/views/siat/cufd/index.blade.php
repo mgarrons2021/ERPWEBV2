@@ -28,6 +28,7 @@
                                     <th style="color: #fff;text-align:center">Direccion </th>
                                     <th style="color: #fff;text-align:center">Estado</th>
                                     <th style="color: #fff;text-align:center">Sucursal</th>
+                                    <th style="color: #fff;text-align:center">Opciones</th>
                                 </thead>
                                 <tbody>
                                     @foreach ($cufds as $cufd)
@@ -44,6 +45,24 @@
                                         <td style="text-align:center"><span class="badge badge-warning"> Codigo Cufd Vencido </span></td>
                                         @endif
                                         <td style="text-align:center">{{$cufd->sucursal->nombre}}</td>
+                                        
+                                        <td>
+                                            <div class="dropdown" style="position: absolute;">
+                                                <a href="#" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="fas fa-ellipsis-v"></i>
+                                                </a>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                    
+                                                    <li>
+                                                        <form action="{{route('cufd.destroy',$cufd->id)}}" id="formulario-eliminar2" class="formulario-eliminar" method="POST">
+                                                            @csrf
+                                                            @method('Delete')
+                                                            <a class="dropdown-item" href="javascript:;" onclick="document.getElementById('formulario-eliminar2').submit()" id="enlace">Eliminar Cufd</a>
+                                                        </form>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -57,6 +76,7 @@
 </section>
 @endsection
 @section('scripts')
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 @section('page_js')
 <script>
     $('#table').DataTable({

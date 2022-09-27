@@ -683,6 +683,7 @@ use App\Http\Controllers\VentaController;
     Route::get('/cuis/create', [App\Http\Controllers\Siat\CuisController::class, 'create'])->name('cuis.create');
     Route::post('/cuis', [App\Http\Controllers\Siat\CuisController::class, 'store'])->name('cuis.store');
     Route::get('/cufd/index', [App\Http\Controllers\Siat\CufdController::class, 'index'])->name('cufd.index');
+    Route::delete('/cufd/{id}', [App\Http\Controllers\Siat\CufdController::class, 'destroy'])->name('cufd.destroy');
 
         /* REGISTRO PUNTO VENTA */
     Route::resource('puntos_ventas', RegistrarPuntoVentaController::class);

@@ -85,7 +85,6 @@
                         <div class="table-resposive">
                             <table class="table table-bordered table-md" id="table">
                                 <thead>
-                                    <th>ID</th>
                                     <th>Fecha Venta</th>
                                     <th>Hora Transaccion</th>
                                     <th>Nro Factura</th>
@@ -95,16 +94,16 @@
                                     <th>Sucursal</th>
                                     <th>Motivo Contingencia</th>
                                     <th>Estado</th>
+                                    <th>Estado Siat</th>
                                 </thead>
                                 <tbody>
                                     @foreach ($ventas as $venta)
                                     <tr>
-                                        <td>{{ $venta->id }}</td>
                                         <td>{{ $venta->fecha_venta }}</td>
                                         <td>{{ $venta->hora_venta }}</td>
                                         <td>{{ $venta->numero_factura }}</td>
                                         <td>{{ $venta->tipo_pago }}</td>
-                                        <td>{{ $venta->total_venta }} Bs</td>
+                                        <td>{{ number_format($venta->total_venta,2) }} Bs</td>
                                         <td>{{ $venta->user->name }} {{$venta->user->apellido}}</td>
                                         <td>{{ $venta->sucursal->nombre }}</td>
                                         @if(isset($venta->evento_significativo))
@@ -117,6 +116,16 @@
                                         <td> <span class="badge badge-success"> Vigente </span> </td>
                                         @else
                                         <td> <span class="badge badge-warning"> Anulado </span></td>
+                                        @endif
+
+                                        @if($venta->estado_emision == "V")
+                                        <td> <span class="badge badge-success"> Validada por el Siat </span> </td>
+                                        @endif
+                                        @if($venta->estado_emision == "R")
+                                        <td> <span class="badge badge-danger"> Rechazada por el Siat </span> </td>
+                                        @endif
+                                        @if($venta->estado_emision == "P")
+                                        <td> <span class="badge badge-warning"> Pendiente </span> </td>
                                         @endif
                                     </tr>
                                     @endforeach
@@ -148,6 +157,17 @@
     let ruta = "{{ route('eventos_significativos.generar_evento_significativo') }}";
     let rutaIndex = "{{ route('eventos_significativos.index') }}";
     registrar_facturas_paquetes.addEventListener('click', (e) => {
+        Swal.fire({
+            title: 'Enviando Facturas Por Paquete...',
+            allowEscapeKey: false,
+            icon: 'info',
+            allowOutsideClick: false,
+            background: '#19191a',
+            showConfirmButton: false,
+            onOpen: () => {
+                Swal.showLoading();
+            },
+        });
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': csrfToken
@@ -163,36 +183,33 @@
                 console.log(res);
                 let codigo = res.RespuestaListaEventos.mensajesList.codigo;
                 let descripcion = res.RespuestaListaEventos.mensajesList.descripcion
-                if (codigo === 981){
+                if (codigo === 981) {
                     Swal.fire({
-                            position: 'center',
-                            icon: 'error',
-                            title: "Error:"+ codigo,
-                            text: descripcion,
-                            showConfirmButton: true,
-                            timer: 3500,
-                            willClose: function() {
-                                window.location.href = rutaIndex;
-                            },
-                        })
+                        position: 'center',
+                        icon: 'error',
+                        title: "Codigo: " + codigo,
+                        text: "Mensaje: " + descripcion,
+                        showConfirmButton: true,
+                        timer: 3500,
+                    })
                 }
                 /* Falta validar aun no se probó */
-                if (codigo === 908){
+                if (codigo === 908) {
                     Swal.fire({
-                            position: 'center',
-                            icon: 'success',
-                            title: "Error:" + codigo,
-                            text: descripcion,
-                            showConfirmButton: true,
-                            timer: 3500,
-                            willClose: function() {
-                                window.location.href = rutaIndex;
-                            },
-                        })
+                        position: 'center',
+                        icon: 'success',
+                        title: "Error:" + codigo,
+                        text: descripcion,
+                        showConfirmButton: true,
+                        timer: 3500,
+                        willClose: function() {
+                            window.location.href = rutaIndex;
+                        },
+                    })
                 }
 
-                
-                
+
+
             }
         })
     });

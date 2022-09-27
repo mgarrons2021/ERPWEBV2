@@ -11,15 +11,15 @@ use Exception;
 use SoapFault;
 use App\Models\Venta;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\DocumentTypes;
-use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Services\ServicioSiat;
+use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Invoices\CompraVenta;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Invoices\SiatInvoice;
+use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Services\ServicioSiat;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Messages\SolicitudServicioRecepcionMasiva;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Messages\SolicitudServicioRecepcionPaquete;
-use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Invoices\CompraVenta;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Messages\SolicitudServicioRecepcionFactura;
+use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Messages\SolicitudServicioAnulacionFactura;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Messages\SolicitudServicioValidacionRecepcionMasiva;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Messages\SolicitudServicioValidacionRecepcionPaquete;
-use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Messages\SolicitudServicioAnulacionFactura;
 
 /**
  * Clase con servicios generales para la facturacion
@@ -56,6 +56,9 @@ class ServicioFacturacion extends ServicioSiat
 		//die($factura->cuf);
 		$factura->validate();
 		$facturaXml = $this->buildInvoiceXml($factura);
+
+		file_put_contents( public_path()."/FacturasXML/facturaNro".$factura->cabecera->numeroFactura.".xml",$facturaXml);
+
 		/* dd($facturaXml); */
 		//print $facturaXml;
 		//$facturaXml = file_get_contents('factura.xml');

@@ -73,7 +73,7 @@
 
                                         @if($venta->estado_emision == "V")
                                         <td> <span class="badge badge-success"> Validada por el Siat </span> </td>
-                                        @else 
+                                        @else
                                         <td> <span class="badge badge-warning"> Rechazada por el Siat </span> </td>
                                         @endif
 
@@ -151,6 +151,17 @@
     let ruta = "{{ route('anulacion_facturas.test_anulacion_factura') }}";
     let rutaIndex = "{{ route('anulacion_facturas.index') }}";
     anularButton.addEventListener('click', (e) => {
+        Swal.fire({
+            title: 'Intentado Anular...',
+            allowEscapeKey: false,
+            icon: 'info',
+            allowOutsideClick: false,
+            background: '#19191a',
+            showConfirmButton: false,
+            onOpen: () => {
+                Swal.showLoading();
+            },
+        });
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': csrfToken

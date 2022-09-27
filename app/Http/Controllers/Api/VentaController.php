@@ -26,13 +26,14 @@ use App\Http\Controllers\Siat\EmisionIndividualController;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\DocumentTypes;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Invoices\SiatInvoice;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Services\ServicioSiat;
-use PDF;
+
+use Barryvdh\DomPDF\Facade as PDF;
 
 class VentaController extends Controller
 {
     public function registerSale(Request $request)
     {
-        
+
         try {
             DB::beginTransaction();
             $fecha = Carbon::now()->toDateString();
@@ -43,7 +44,7 @@ class VentaController extends Controller
 
             $cantidad_visitas = 1;
             $sucursal_id = $request->sucursal;
-            $puntoVenta=1;
+            $puntoVenta = 0;
 
             /*  return response()->json($request->nit_ci); */
 
@@ -127,9 +128,7 @@ class VentaController extends Controller
                 $cliente->contador_visitas = $cantidad_visitas;
                 $cliente->save();
             }
-
             DB::commit();
-
             $dataFactura = [
                 'cliente' => $cliente,
                 'sucursal' => $sucursal,
@@ -138,58 +137,72 @@ class VentaController extends Controller
                 'detalle_venta' => $request->detalle_venta,
             ];
 
+            $mailFacturacionController = new MailFacturacionController();
+            //  return $request->detalle_venta;
 
 
+            if (!isset($request->evento_significativo_id)) {
+                $emisionIndividualController = new EmisionIndividualController();
+                $response = $emisionIndividualController->emisionIndividual($dataFactura);
+                if ($response->RespuestaServicioFacturacion->codigoEstado == 908) {
+                    $venta->update([
+                        'estado_emision' => 'V', /* Validada */
+                    ]);
+                } else {
+                    $venta->update([
+                        'estado_emision' => 'R', /* Rechazada */
+                    ]);
+                }
 
-/*             $mailFacturacionController = new MailFacturacionController();
-
-            $pdf = PDF::loadView('mails.FacturaPDF', [
-                "clienteNombre" => $cliente->nombre,
-                "clienteCorreo" => $cliente->correo,
-                "venta" => $venta,
-                "detalle_venta" => $request->detalle_venta,
-            ]);
-            $data = [
-                "clienteNombre" => $cliente->nombre,
-                "clienteCorreo" => $cliente->correo,
-                "venta" => $venta,
-                "detalle_venta" => $request->detalle_venta,
-            ];
-
-            $mailFacturacionController->sendEmail($data, $pdf); */
-
-            $emisionIndividualController = new EmisionIndividualController();
-            $response = $emisionIndividualController->emisionIndividual($dataFactura);
-            if ($response->RespuestaServicioFacturacion->codigoEstado == 908){
-                $venta->update([
-                    'estado_emision' => 'V', /* Validada */
+                $pdf = PDF::loadView('mails.FacturaPDF', [
+                    "clienteNombre" => $cliente->nombre,
+                    "clienteCorreo" => $cliente->correo,
+                    "venta" => $venta,
+                    "detalle_venta" => $request->detalle_venta,
                 ]);
-            }else{
-                $venta->update([
-                    'estado_emision' => 'R', /* Rechazada */
-                ]);
+
+                $data = [
+                    "clienteNombre" => $cliente->nombre,
+                    "clienteCorreo" => $cliente->correo,
+                    "venta" => $venta,
+                    "detalle_venta" => $request->detalle_venta,
+                ];
+
+                $mailFacturacionController->sendEmail($data, $pdf);
+                return response()->json([
+                    'status' => true,
+                    'msg' => "Venta registrada Exitosamente",
+                    'factura' => $dataFactura,
+                    'response_siat' => $response,
+                    'cantidad_visitas' => $cliente->contador_visitas,
+                    'cliente' => $cliente,
+                    'cuf' => $cuf,
+                    'idcliente' => $cliente->id,
+                    'leyenda' => $leyenda,
+                    'nro_factura' => $cufd->numero_factura,
+
+                ])->header('Content-Type', 'application/json');
+            } else {
+                return response()->json([
+                    'status' => true,
+                    'msg' => "Venta registrada Exitosamente",
+                    'factura' => $dataFactura,
+                    'cantidad_visitas' => $cliente->contador_visitas,
+                    'cliente' => $cliente,
+                    'cuf' => $cuf,
+                    'idcliente' => $cliente->id,
+                    'leyenda' => $leyenda,
+                    'nro_factura' => $cufd->numero_factura,
+
+                ])->header('Content-Type', 'application/json');
             }
-
-
-            return response()->json([
-                'status' => true,
-                'msg' => "Venta registrada Exitosamente",
-                'factura' => $dataFactura,
-                'response_siat' => $response,
-                'cantidad_visitas' => $cliente->contador_visitas,
-                'cliente' => $cliente,
-                'cuf' => $cuf,
-                'idcliente' => $cliente->id,
-                'leyenda' => $leyenda,
-                'nro_factura' => $cufd->numero_factura,
-
-            ])->header('Content-Type', 'application/json');
         } catch (\Exception $e) {
 
             DB::rollback();
             return response()->json([
                 'status' => false,
                 'msg' => $e->getMessage(),
+                'linea' => $e->getLine(),
             ])->header('Content-Type', 'application/json');
         }
     }
