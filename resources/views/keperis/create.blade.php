@@ -76,6 +76,13 @@
                                 </div>
                             </div>
 
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="cantidad_cortado"> Keperi Cortado <span class="required">*</span></label>
+                                    <input type="number" class="form-control  @error('cantidad_cortado') is-invalid @enderror" id="cantidad_cortado" name="cantidad_cortado" step="any" placeholder="0,00">
+                                </div>
+                            </div>
+
                             <div class="col-md-8">
                                 <div class="form-group">
                                     <label for="temperatura_maxima"> Temperatura Maxima Alcanzada <span class="required">*</span></label>
@@ -93,6 +100,8 @@
                                     <input type="number" class="form-control  @error('cantidad_enviado') is-invalid @enderror" id="cantidad_enviado" name="cantidad_enviado" step="any" placeholder="0,00">
                                 </div>
                             </div>
+
+                          
 
                             <div class="col-md-4">
                                 <div class="form-group">

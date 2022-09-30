@@ -3,22 +3,22 @@
 namespace App\Http\Controllers\Siat;
 
 use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Venta;
+use App\Models\Cliente;
+use App\Models\Sucursal;
+use App\Models\DetalleVenta;
 use Illuminate\Http\Request;
+use App\Models\Siat\SiatCui;
 use App\Services\CuisService;
 use App\Services\CufdService;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Controller;
-use App\Models\Cliente;
-use App\Models\DetalleVenta;
-use App\Models\Siat\EventoSignificativo;
-use App\Services\EventoSignificativoService;
-use App\Services\EmisionPaqueteService;
 use App\Models\Siat\SiatCufd;
 use App\Services\ConfigService;
-use App\Models\Siat\SiatCui;
-use App\Models\Sucursal;
-use App\Models\User;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Services\EmisionPaqueteService;
+use App\Models\Siat\EventoSignificativo;
+use App\Services\EventoSignificativoService;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\SiatFactory;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Invoices\SiatInvoice;
 
@@ -72,7 +72,7 @@ class EventoSignificativoController extends Controller
             ->where('sucursal_id', $sucursal_db->id)
             ->orderBy('id', 'desc')
             ->first();
-        
+
         $cufdAntiguo = $cufd_bd->codigo;
         $resCuis = $cuis_bd->codigo_cui;
 
@@ -82,6 +82,7 @@ class EventoSignificativoController extends Controller
         $fecha_generado_cufd = Carbon::now()->toDateTimeString();
 
         $guardar_cufd = SiatCufd::create([
+
             'estado' => "V",
             'codigo' => $resCufd->RespuestaCufd->codigo,
             'codigo_control' => $resCufd->RespuestaCufd->codigoControl,
@@ -131,14 +132,18 @@ class EventoSignificativoController extends Controller
         $res = $this->emisionPaqueteService->testPaquetes($sucursal, $puntoventa, $facturas, $codigoControlAntiguo, $this->configService->tipoFactura, $resEvento->RespuestaListaEventos, $cafc);
         if (isset($res->RespuestaServicioFacturacion->codigoRecepcion)) {
             $res = $this->emisionPaqueteService->testRecepcionPaquete($sucursal, $puntoventa, $this->configService->documentoSector, $this->configService->tipoFactura, $res->RespuestaServicioFacturacion->codigoRecepcion);
-            if ($res->RespuestaListaEventos->mensajesList->codigo == 908) {
-                foreach ($ventas as $venta) {
-                    $venta_db = Venta::find($venta->id);
-                    $venta_db->estado_emision = "V";
-                    $venta_db->save();
+            if (isset($res->RespuestaListaEventos)) {
+                if ($res->RespuestaListaEventos->mensajesList->codigo == 908) {
+                    foreach ($ventas as $venta) {
+                        $venta_db = Venta::find($venta->id);
+                        $venta_db->estado_emision = "V";
+                        $venta_db->save();
+                    }
                 }
+                return  $res;
+            } else {
+                return $res;
             }
-            return  $res;
         } else {
             return response()->json([
                 "codigo" => 980,

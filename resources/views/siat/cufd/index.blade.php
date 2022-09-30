@@ -15,8 +15,8 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
-
                     <div class="card-body">
+                        <a class="btn btn-outline-info" href="{{route('cufd.create')}}">Nuevo Cufd</a><br><br>
                         <div class="table-responsive">
                             <table class="table table-striped mt-15" id="table">
                                 <thead style="background-color: #6777ef;">
@@ -25,10 +25,10 @@
                                     <th style="color: #fff;text-align:center">Fecha de Expiracion</th>
                                     <th style="color: #fff;text-align:center">Codigo Generado</th>
                                     <th style="color: #fff;text-align:center">Codigo </th>
-                                    <th style="color: #fff;text-align:center">Direccion </th>
+
                                     <th style="color: #fff;text-align:center">Estado</th>
                                     <th style="color: #fff;text-align:center">Sucursal</th>
-                                    <th style="color: #fff;text-align:center">Opciones</th>
+                                    <th style="color: #fff;text-align:center"></th>
                                 </thead>
                                 <tbody>
                                     @foreach ($cufds as $cufd)
@@ -38,31 +38,31 @@
                                         <td style="text-align:center">{{$cufd->fecha_vigencia}}</td>
                                         <td style="text-align:center">{{$cufd->codigo}}</td>
                                         <td style="text-align:center">{{$cufd->codigo_control}}</td>
-                                        <td style="text-align:center">{{$cufd->direccion}}</td>
+
                                         @if ($fecha < $cufd->fecha_vigencia )
-                                        <td style="text-align:center"><span class="badge badge-success"> Codigo Cufd Activo </span></td>
-                                        @else
-                                        <td style="text-align:center"><span class="badge badge-warning"> Codigo Cufd Vencido </span></td>
-                                        @endif
-                                        <td style="text-align:center">{{$cufd->sucursal->nombre}}</td>
-                                        
-                                        <td>
-                                            <div class="dropdown" style="position: absolute;">
-                                                <a href="#" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="fas fa-ellipsis-v"></i>
-                                                </a>
-                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                    
-                                                    <li>
-                                                        <form action="{{route('cufd.destroy',$cufd->id)}}" id="formulario-eliminar2" class="formulario-eliminar" method="POST">
-                                                            @csrf
-                                                            @method('Delete')
-                                                            <a class="dropdown-item" href="javascript:;" onclick="document.getElementById('formulario-eliminar2').submit()" id="enlace">Eliminar Cufd</a>
-                                                        </form>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </td>
+                                            <td style="text-align:center"><span class="badge badge-success">Activo</span></td>
+                                            @else
+                                            <td style="text-align:center"><span class="badge badge-warning">Vencido</span></td>
+                                            @endif
+                                            <td style="text-align:center">{{$cufd->sucursal->nombre}}</td>
+
+                                            <td>
+                                                <div class="dropdown" style="position: absolute;">
+                                                    <a href="#" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="fas fa-ellipsis-v"></i>
+                                                    </a>
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+
+                                                        <li>
+                                                            <form action="{{route('cufd.destroy',$cufd->id)}}" id="formulario-eliminar2" class="formulario-eliminar" method="POST">
+                                                                @csrf
+                                                                @method('Delete')
+                                                                <a class="dropdown-item" href="javascript:;" onclick="document.getElementById('formulario-eliminar2').submit()" id="enlace">Eliminar Cufd</a>
+                                                            </form>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -103,7 +103,7 @@
             oAria: {
                 sSortAscending: ": Activar para ordenar la columna de manera ascendente",
                 sSortDescending: ": Activar para ordenar la columna de manera descendente"
-            }
+            },
         },
 
     });

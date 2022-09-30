@@ -281,6 +281,7 @@
     });
 </script>
 @endsection
+
 @section('page_js')
 <style>
     .card-color1 {

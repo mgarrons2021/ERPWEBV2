@@ -19,6 +19,7 @@ use App\Models\Turno;
 use App\Models\Siat\LeyendaFactura;
 use App\Models\ParteProduccion;
 use App\Models\Siat\EventoSignificativo;
+use App\Models\Siat\SiatCufd;
 use Illuminate\Support\Facades\DB;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Services\ServicioFacturacionCodigos;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Services\ServicioSiat;
@@ -81,11 +82,14 @@ Route::get('/get_compras', function (Request $request) {
     return response($respuesta, 200)->header('Content-Type', 'application/json');
 });
 
-Route::get('/getAutorization', function (Request $request) { //----------
-    $autorizaciones =  Autorizacion::where('sucursal_id', '=', $request->sucursal_id)->orderBy('id', 'desc')->first();;
+Route::get('/getCufd', function (Request $request) { //----------
+    $cufd =SiatCufd::where('sucursal_id', '=', $request->sucursal_id)
+        ->where('estado', 'V')
+        ->orderBy('id', 'desc')
+        ->first();
     $respuesta = [
         'success' => true,
-        'autorizaciones' => json_encode($autorizaciones)
+        'cufd' => json_encode($cufd)
     ];
     return response($respuesta, 200)->header('Content-Type', 'application/json');
 });
@@ -287,10 +291,13 @@ Route::get('sales_for_id', function (Request $request) {
     $venta = new Venta();
     $list_sales = $venta->sales_for_id($request->id);
     $list_sales_detail = $venta->getsalesDetail($request->id);
+    $obj = new LeyendaFactura();
+    $leyenda = $obj->getLeyenda();
     $response = [
         'success' => true,
         'ventas' => $list_sales,
         'venta_detalle' => $list_sales_detail,
+        'leyenda' => $leyenda,
     ];
     return response($response, 200)->header('Content-Type', 'application/json');
 });

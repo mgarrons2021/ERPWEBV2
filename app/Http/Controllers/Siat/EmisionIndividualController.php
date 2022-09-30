@@ -30,7 +30,7 @@ class EmisionIndividualController extends Controller
         $this->emisionIndividualService = new EmisionIndividualService();
     }
 
-    public function emisionIndividual( $dataFactura)
+    public function emisionIndividual($dataFactura)
     {
 
         $fecha_actual = Carbon::now();

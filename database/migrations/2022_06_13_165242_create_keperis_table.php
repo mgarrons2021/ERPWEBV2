@@ -20,8 +20,9 @@ class CreateKeperisTable extends Migration
             $table->decimal('cantidad_crudo',18,2);
             $table->decimal('cantidad_marinado',18,2);
             $table->decimal('cantidad_cocido',18,2);
+            $table->decimal('cantidad_cortado',18,2);
             
-            $table->decimal('cantidad_sellado',18,2);
+            
             $table->decimal('cantidad_enviado',18,2)->nullable();
             $table->string('nombre_usuario');
             $table->decimal('temperatura_maxima',2);

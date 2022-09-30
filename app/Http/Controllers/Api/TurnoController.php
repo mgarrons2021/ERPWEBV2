@@ -76,16 +76,26 @@ class TurnoController extends Controller
                 $resCufd =  $this->obtenerCufd($codigoPuntoVenta, $sucursal->codigo_fiscal, $cuis->codigo_cui, true);
             }
 
-            $guardar_cufd = SiatCufd::create([
-                'estado' => "V",
-                'codigo' => $resCufd->RespuestaCufd->codigo,
-                'codigo_control' => $resCufd->RespuestaCufd->codigoControl,
-                'direccion' => $resCufd->RespuestaCufd->direccion,
-                'fecha_vigencia' => new Carbon($resCufd->RespuestaCufd->fechaVigencia),
-                'fecha_generado' => $fecha_generado_cufd,
-                'sucursal_id' => $user_id->sucursals[0]->id,
-                'numero_factura' => 0
-            ]);
+            if($resCufd->RespuestaCufd->transaccion == true){
+
+                $guardar_cufd = SiatCufd::create([
+                    'estado' => "V",
+                    'codigo' => $resCufd->RespuestaCufd->codigo,
+                    'codigo_control' => $resCufd->RespuestaCufd->codigoControl,
+                    'direccion' => $resCufd->RespuestaCufd->direccion,
+                    'fecha_vigencia' => new Carbon($resCufd->RespuestaCufd->fechaVigencia),
+                    'fecha_generado' => $fecha_generado_cufd,
+                    'sucursal_id' => $user_id->sucursals[0]->id,
+                    'numero_factura' => 0
+                ]);
+
+                /* Invalidar Cufds anteriores */
+                $cufds_anteriores = SiatCufd::where('fecha_vigencia','>',$fecha_generado_cufd)
+                ->where('sucursal_id',$sucursal->id)
+                ->where('id' ,'<>',$guardar_cufd->id)
+                ->update(['estado'=> 'N']);  /* No vigente */ 
+            }
+
 
 
             $response = [

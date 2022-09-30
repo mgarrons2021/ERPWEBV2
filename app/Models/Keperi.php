@@ -16,7 +16,7 @@ class Keperi extends Model
     'cantidad_marinado',
     'cantidad_enviado',
     'cantidad_cocido',
-    'cantidad_sellado',
+    'cantidad_cortado',
     'nombre_usuario',
     'temperatura_maxima',
     'veces_volcado',

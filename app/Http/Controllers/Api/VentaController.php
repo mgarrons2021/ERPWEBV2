@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Error;
 use Exception;
 use Carbon\Carbon;
+use App\Custom\Letras;
 use App\Models\User;
 use App\Models\Venta;
 use App\Models\Cliente;
@@ -26,14 +27,14 @@ use App\Http\Controllers\Siat\EmisionIndividualController;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\DocumentTypes;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Invoices\SiatInvoice;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Services\ServicioSiat;
-
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Barryvdh\DomPDF\Facade as PDF;
+use Letras as GlobalLetras;
 
 class VentaController extends Controller
 {
     public function registerSale(Request $request)
     {
-
         try {
             DB::beginTransaction();
             $fecha = Carbon::now()->toDateString();
@@ -41,7 +42,6 @@ class VentaController extends Controller
             $modalidad = 1; //Electronica en linea
             $tipoEmision = 1; //EN LINEA
             $tipoFactura = 1; //Factura derecho credito fiscal
-
             $cantidad_visitas = 1;
             $sucursal_id = $request->sucursal;
             $puntoVenta = 0;
@@ -59,6 +59,9 @@ class VentaController extends Controller
             ];
 
             $clienteService = new ClienteService();
+            $numero_letras= new  Letras();
+            
+
             $cliente = $clienteService->registrarCliente($clienteData);
             $user = User::find($request->user_id);
             $sucursal = Sucursal::find($sucursal_id);
@@ -128,6 +131,7 @@ class VentaController extends Controller
                 $cliente->contador_visitas = $cantidad_visitas;
                 $cliente->save();
             }
+
             DB::commit();
             $dataFactura = [
                 'cliente' => $cliente,
@@ -138,9 +142,6 @@ class VentaController extends Controller
             ];
 
             $mailFacturacionController = new MailFacturacionController();
-            //  return $request->detalle_venta;
-
-
             if (!isset($request->evento_significativo_id)) {
                 $emisionIndividualController = new EmisionIndividualController();
                 $response = $emisionIndividualController->emisionIndividual($dataFactura);
@@ -153,16 +154,32 @@ class VentaController extends Controller
                         'estado_emision' => 'R', /* Rechazada */
                     ]);
                 }
+                // https://pilotosiat.impuestos.gob.bo/consulta/QR?nit=166172023&cuf=B5EB51F7ABA0DDF3C1BD0727A4BC50D1693F379A01B424663B3D6D74&numero=57&t=1
+                $qrcode = base64_encode(QrCode::format('svg')
+                    ->size(120)
+                    ->errorCorrection('H')
+                    ->generate('https://pilotosiat.impuestos.gob.bo/consulta/QR?nit=166172023&cuf=' . $venta->cuf . '&numero=' . $venta->numero_factura . '&t=1'));
+
+                $hora  = new Carbon( $venta->hora_venta );
+                $fecha = new Carbon( $venta->fecha_venta ); 
+
+                $total_texto = $numero_letras->convertir( $venta->total_venta );
 
                 $pdf = PDF::loadView('mails.FacturaPDF', [
                     "clienteNombre" => $cliente->nombre,
                     "clienteCorreo" => $cliente->correo,
+                    "clienteNit" => $cliente->ci_nit,
                     "venta" => $venta,
                     "detalle_venta" => $request->detalle_venta,
+                    "sucursal" => $sucursal,
+                    "qrcode" => $qrcode,
+                    "hora"=> $hora->format('h:i'),
+                    'fecha'=>$fecha->format('Y-m-d'),
+                    'total'=>$total_texto
                 ]);
 
                 $data = [
-                    "clienteNombre" => $cliente->nombre,
+                    "clienteNombre" => $cliente->nombre,   
                     "clienteCorreo" => $cliente->correo,
                     "venta" => $venta,
                     "detalle_venta" => $request->detalle_venta,

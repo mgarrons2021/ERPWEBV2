@@ -70,7 +70,7 @@ class EmisionIndividualService
             $detalle->actividadEconomica    = $codigoActividad;
             $detalle->codigoProducto        = $dataFactura['detalle_venta'][$i]['plato_id'];
             $detalle->codigoProductoSin        = $codigoProductoSin;
-            $detalle->descripcion            = "Keperi";
+            $detalle->descripcion            = $dataFactura['detalle_venta'][$i]['plato'];
             $detalle->precioUnitario        = $dataFactura['detalle_venta'][$i]['costo'];
             $detalle->montoDescuento        = 0;
             $detalle->subTotal                = $dataFactura['detalle_venta'][$i]['subtotal'];
@@ -86,8 +86,8 @@ class EmisionIndividualService
         $factura->cabecera->codigoPuntoVenta    = $codigoPuntoVenta;
         $factura->cabecera->fechaEmision        = date('Y-m-d\TH:i:s.v');
         $factura->cabecera->nombreRazonSocial    = $dataFactura['cliente']['nombre'];
-        $factura->cabecera->codigoTipoDocumentoIdentidad    = 5; //NIT 
-        $factura->cabecera->numeroDocumento        = 166172023;
+        $factura->cabecera->codigoTipoDocumentoIdentidad    = 1; //NIT 
+        $factura->cabecera->numeroDocumento        = $dataFactura['cliente']['ci_nit'];
         $factura->cabecera->codigoCliente        = $dataFactura['cliente']['id']; //Codigo Unico Asignado por el sistema de facturacion (ID DEL CLIENTE)
         $factura->cabecera->codigoMetodoPago    = 1;
         $factura->cabecera->montoTotal            = $dataFactura['venta']['total_venta'];
@@ -103,7 +103,7 @@ class EmisionIndividualService
 
     function construirFactura3($codigoPuntoVenta = 0, $codigoSucursal = 0, $modalidad = 0, $documentoSector = 1, $codigoActividad = '620100', $codigoProductoSin = '', $dataFactura = null)
     {
-       /*  dd($dataFactura); */
+        /*  dd($dataFactura); */
         $subTotal = 0;
         $factura = null;
         $detailClass = InvoiceDetail::class;

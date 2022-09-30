@@ -40,7 +40,7 @@ class AnulacionFacturaController extends Controller
         /* dd($fecha_actual); */
         $motivos_anulaciones =  MotivoAnulacion::all();
         $ventas = Venta::where('fecha_venta', $fecha_actual)
-        ->where('estado_emision', 'V')
+       /*  ->where('estado_emision', 'V') */
         ->get();
 
         return view('siat.anulaciones_facturas.index', compact('fecha_actual', 'ventas', 'motivos_anulaciones'));
@@ -69,7 +69,7 @@ class AnulacionFacturaController extends Controller
         /* dd($cuf); */
         $motivo = $request->codigo_clasificador;
         $anulacion_factura_service = new AnulacionFacturaService();
-        $res = $anulacion_factura_service->pruebasAnulacion($cuf,$cufd->codigo, $motivo, $sucursal_id);
+        $res = $anulacion_factura_service->pruebasAnulacion($cuf,"BQUFlQ10wUUFBNzzBCMjYwMjVGRTc=QnnCrGFwSUJLV1VIyOTA3RjJCQUVDQ", $motivo, $sucursal_id);
 
 
         if ($res->RespuestaServicioFacturacion->transaccion === true) {
