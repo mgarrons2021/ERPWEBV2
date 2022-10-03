@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Api;
 use Error;
 use Exception;
 use Carbon\Carbon;
-use App\Custom\Letras;
 use App\Models\User;
 use App\Models\Venta;
+use App\Custom\Letras;
 use App\Models\Cliente;
 use App\Models\Sucursal;
 use App\Models\DetalleVenta;
@@ -16,19 +16,20 @@ use App\Models\Autorizacion;
 use Illuminate\Http\Request;
 use App\Services\CufService;
 use App\Models\Siat\SiatCufd;
-use App\Models\Siat\LeyendaFactura;
-use App\Services\VentaService;
 use App\Models\RegistroVisita;
+use App\Services\VentaService;
 use App\Services\ClienteService;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade as PDF;
+use App\Models\Siat\LeyendaFactura;
 use App\Http\Controllers\Controller;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Http\Controllers\MailFacturacionController;
 use App\Http\Controllers\Siat\EmisionIndividualController;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\DocumentTypes;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Invoices\SiatInvoice;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Services\ServicioSiat;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
-use Barryvdh\DomPDF\Facade as PDF;
+
 use Letras as GlobalLetras;
 
 class VentaController extends Controller
@@ -71,6 +72,7 @@ class VentaController extends Controller
                 ->orderBy('id', 'desc')
                 ->first();
             /* return  response()->json($cufd); */
+
             $cufd->numero_factura++;
             $cufd->save();
             /*  */
@@ -220,6 +222,7 @@ class VentaController extends Controller
                 'status' => false,
                 'msg' => $e->getMessage(),
                 'linea' => $e->getLine(),
+                'file_name' => $e->getFile()
             ])->header('Content-Type', 'application/json');
         }
     }

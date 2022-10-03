@@ -11,7 +11,14 @@ class DetalleVenta extends Model
 
     protected $table = 'detalles_ventas';
 
-    protected $fillable = ['cantidad','precio','subtotal','plato_id','venta_id'];
+    protected $fillable = [
+        'cantidad',
+        'precio',
+        'descuento', 
+        'subtotal',
+        'plato_id',
+        'venta_id'
+    ];
 
     public function plato(){
         return $this->belongsTo(Plato::class);

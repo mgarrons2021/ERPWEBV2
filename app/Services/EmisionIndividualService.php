@@ -84,7 +84,7 @@ class EmisionIndividualService
         $factura->cabecera->codigoSucursal        = $dataFactura['sucursal']['codigo_fiscal'];
         $factura->cabecera->direccion            = $dataFactura['sucursal']['direccion'];
         $factura->cabecera->codigoPuntoVenta    = $codigoPuntoVenta;
-        $factura->cabecera->fechaEmision        = date('Y-m-d\TH:i:s.v');
+        $factura->cabecera->fechaEmision        = date("Y-m-d\TH:i:s.v", strtotime($dataFactura['venta']['created_at']));
         $factura->cabecera->nombreRazonSocial    = $dataFactura['cliente']['nombre'];
         $factura->cabecera->codigoTipoDocumentoIdentidad    = 1; //NIT 
         $factura->cabecera->numeroDocumento        = $dataFactura['cliente']['ci_nit'];

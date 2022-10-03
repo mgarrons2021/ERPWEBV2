@@ -85,14 +85,11 @@
 
                                     <tr>
                                         @php
-                                        $porcentaje = 100;
                                             $deshidratado_cocido = $keperi->cantidad_cocido/$keperi->cantidad_crudo-1;
                                             /* $hidratado_marinado = +($keperi->cantidad_crudo / $keperi->cantidad_marinado-1)*100; */
                                             $hidratado_marinado = (($keperi->cantidad_marinado/$keperi->cantidad_crudo)-1)*100;
 
-                                            $porcentajeDeshidratado =  (($keperi->cantidad_cocido/$keperi->cantidad_kilos)*100)-1;
-                                            
-                                            $porcentajeDeshidratadoFinal = ($porcentajeDeshidratado - $porcentaje)*100;
+                                            $porcentajeDeshidratado =  (($keperi->cantidad_cocido/$keperi->cantidad_kilos)-1)*100;
 
                                             $porcentajeCortado = ($keperi->cantidad_cortado/$keperi->cantidad_kilos)*100;
 
@@ -110,7 +107,9 @@
                                        <td class="text-center">{{$keperi->cantidad_marinado }} kg </td>
                                        <td class="text-center"> <span class="badge badge-success">^</span> {{number_format($hidratado_marinado,2)}} %</td>
                                        <td class="text-center">{{$keperi->cantidad_cocido }} kg </td> 
-                                       <td class="text-center">{{ number_format($porcentajeDeshidratadoFinal,2)  }} % </td> 
+
+
+                                       <td class="text-center">{{ abs(number_format($porcentajeDeshidratado,2))  }} % </td> 
                                        <td class="text-center">{{$keperi->cantidad_cortado }} kg </td>
                                        
 
@@ -123,6 +122,7 @@
                                         <td class="text-center"> <span class="badge badge-warning"> No registrado </span> </td>
                                         @endif
                                         
+
                                         <td class="text-center">{{$diferencia}} kg </td>
                                         <td class="text-center">{{number_format($porcentajeDiferenciaEnviado,2)}} % </td>
                                         <td class="text-center"> <span class="badge badge-danger"> - </span> {{ number_format($deshidratado,2)}} % </td>
@@ -217,4 +217,4 @@ font-size: 50px;
 background-color: red;
 
 }
-@endsect
+@endsection

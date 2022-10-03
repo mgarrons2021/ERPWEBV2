@@ -47,14 +47,12 @@ class EmisionIndividualController extends Controller
         $cuis = SiatCui::where('sucursal_id', $sucursal_id)
             ->where('estado', 'V')
             ->orderBy('id', 'desc')->first();
-        $cufd = SiatCufd::where('sucursal_id',$sucursal_id)
-            ->where('fecha_vigencia','<=',$fecha_actual)
+        $cufd = SiatCufd::where('sucursal_id', $sucursal_id)
+            ->where('fecha_vigencia', '<=', $fecha_actual)
             ->orderBy('id', 'desc')->first();
-        $factura = $this->emisionIndividualService->construirFactura2($puntoventa, $sucursalcodigoFiscal, $modalidad, $documentoSector, $codigoActividad, $codigoProductoSin,$dataFactura);
+        $factura = $this->emisionIndividualService->construirFactura2($puntoventa, $sucursalcodigoFiscal, $modalidad, $documentoSector, $codigoActividad, $codigoProductoSin, $dataFactura);
         /* dd($factura); */
         $res = $this->emisionIndividualService->testFactura($sucursalcodigoFiscal, $puntoventa, $factura, $tipoFactura);
         return $res;
-
     }
-
 }

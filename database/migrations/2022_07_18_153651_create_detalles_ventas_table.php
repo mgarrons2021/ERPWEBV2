@@ -17,6 +17,8 @@ class CreateDetallesVentasTable extends Migration
             $table->id();
             $table->decimal('cantidad',18,4);
             $table->decimal('precio',18,4);
+
+            $table->decimal('descuento',18,4);
             $table->decimal('subtotal',18,4);
 
             $table->unsignedBigInteger('plato_id');

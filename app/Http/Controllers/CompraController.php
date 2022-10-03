@@ -96,6 +96,7 @@ class CompraController extends Controller
 
     public function create()
     {
+
         /*  dd(session('lista_compra')); */
         $user = Auth::user();
         $fecha_actual = Carbon::now()->toDateString();
