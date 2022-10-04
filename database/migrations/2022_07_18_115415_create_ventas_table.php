@@ -19,8 +19,9 @@ class CreateVentasTable extends Migration
             $table->time('hora_venta');
             $table->integer('numero_factura')->nullable();
             $table->integer('nro_transaccion');
-          
             $table->decimal('total_venta',18,4)->nullable();
+            $table->decimal('total_descuento',18,4)->nullable();
+            $table->decimal('total_neto',18,4)->nullable();
             $table->string('tipo_pago');
             $table->string('lugar');
             $table->string('estado'); /* Estado Anulacion Siat */

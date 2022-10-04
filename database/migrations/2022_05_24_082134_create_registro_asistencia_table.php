@@ -18,6 +18,7 @@ class CreateRegistroAsistenciaTable extends Migration
             $table->date('fecha');
             $table->time('hora_entrada');
             $table->time('hora_salida');
+            $table->decimal('hora_trabajadas', 18, 4);
             $table->char('turno');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('sucursal_id');

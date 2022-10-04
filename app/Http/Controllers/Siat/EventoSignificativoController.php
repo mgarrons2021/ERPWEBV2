@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Siat;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Venta;
+use App\Custom\Letras;
 use App\Models\Cliente;
 use App\Models\Sucursal;
 use App\Models\DetalleVenta;
@@ -14,11 +15,14 @@ use App\Services\CuisService;
 use App\Services\CufdService;
 use App\Models\Siat\SiatCufd;
 use App\Services\ConfigService;
+use Barryvdh\DomPDF\Facade as PDF;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Services\EmisionPaqueteService;
 use App\Models\Siat\EventoSignificativo;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Services\EventoSignificativoService;
+use App\Http\Controllers\MailFacturacionController;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\SiatFactory;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Invoices\SiatInvoice;
 
@@ -130,14 +134,16 @@ class EventoSignificativoController extends Controller
         );
 
         $res = $this->emisionPaqueteService->testPaquetes($sucursal, $puntoventa, $facturas, $codigoControlAntiguo, $this->configService->tipoFactura, $resEvento->RespuestaListaEventos, $cafc);
+
         if (isset($res->RespuestaServicioFacturacion->codigoRecepcion)) {
             $res = $this->emisionPaqueteService->testRecepcionPaquete($sucursal, $puntoventa, $this->configService->documentoSector, $this->configService->tipoFactura, $res->RespuestaServicioFacturacion->codigoRecepcion);
-            if (isset($res->RespuestaListaEventos)) {
-                if ($res->RespuestaListaEventos->mensajesList->codigo == 908) {
+            if (isset($res->RespuestaServicioFacturacion)) {
+                if ($res->RespuestaServicioFacturacion->codigoEstado == 908) {
                     foreach ($ventas as $venta) {
                         $venta_db = Venta::find($venta->id);
                         $venta_db->estado_emision = "V";
                         $venta_db->save();
+                        $this->enviarCorreoaCliente($venta);
                     }
                 }
                 return  $res;
@@ -147,6 +153,7 @@ class EventoSignificativoController extends Controller
         } else {
             return response()->json([
                 "codigo" => 980,
+                "res" => $res,
                 "msj" => "Sin Respuesta"
             ]);
         }
@@ -192,5 +199,48 @@ class EventoSignificativoController extends Controller
 
         /*   dd($ventas); */
         return view('siat.eventos_significativos.index', compact('eventos_significativos', 'ventas', 'fecha_actual'));
+    }
+
+    public function enviarCorreoaCliente($venta)
+    {
+
+        $fecha = Carbon::now();
+        $hora = Carbon::now();
+
+        $venta = Venta::find($venta->id);
+        $sucursal = Sucursal::find($venta->sucursal_id);
+        $cliente = Cliente::find($venta->cliente_id);
+        $detalle_venta = DetalleVenta::where('venta_id', $venta->id)->get();
+
+        $numero_letras = new  Letras();
+        $mailFacturacionController = new MailFacturacionController();
+
+        $total_texto = $numero_letras->convertir(floatval($venta->total_neto));
+        $qrcode = base64_encode(QrCode::format('svg')
+            ->size(120)
+            ->errorCorrection('H')
+            ->generate('https://pilotosiat.impuestos.gob.bo/consulta/QR?nit=166172023&cuf=' . $venta->cuf . '&numero=' . $venta->numero_factura . '&t=1'));
+
+        $pdf = PDF::loadView('mails.FacturaPDF', [
+            "clienteNombre" => $cliente->nombre,
+            "clienteCorreo" => $cliente->correo,
+            "clienteNit" => $cliente->ci_nit,
+            "venta" => $venta,
+            "detalle_venta" => $detalle_venta,
+            "sucursal" => $sucursal,
+            "qrcode" => $qrcode,
+            "hora" => $hora->format('h:i'),
+            'fecha' => $fecha->format('Y-m-d'),
+            'total' => $total_texto
+        ]);
+
+        $data = [
+            "clienteNombre" => $cliente->nombre,
+            "clienteCorreo" => $cliente->correo,
+            "venta" => $venta,
+            "detalle_venta" => $detalle_venta,
+        ];
+
+        $mailFacturacionController->sendEmail($data, $pdf);
     }
 }

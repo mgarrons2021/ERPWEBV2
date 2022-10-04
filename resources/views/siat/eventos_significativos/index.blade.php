@@ -181,9 +181,10 @@
             },
             success: function(res) {
                 console.log(res);
-                let codigo = res.RespuestaListaEventos.mensajesList.codigo;
-                let descripcion = res.RespuestaListaEventos.mensajesList.descripcion
+                let codigo = res.RespuestaServicioFacturacion.codigo;
+                let descripcion = res.RespuestaServicioFacturacion.descripcion
                 if (codigo === 981) {
+                    Swal.close();
                     Swal.fire({
                         position: 'center',
                         icon: 'error',

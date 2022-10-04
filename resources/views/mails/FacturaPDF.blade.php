@@ -48,13 +48,13 @@
         table {
             table-layout: fixed;
         }
-        
+
         td {
             word-wrap: break-word
         }
-
     </style>
 </head>
+
 <body>
     <table width="100%">
         <tr style="text-align: left;width:100%">
@@ -105,6 +105,9 @@
             <td> {{ $fecha }} {{ $hora }} </td>
             <td style="text-align: right;"><strong>NIT/CI/CEX:</strong></td>
             <td> {{ $clienteNit }} </td>
+
+            <td style="text-align: right;"><strong>Cod. Cliente:</strong></td>
+            <td> {{ $ClienteId }} </td>
         </tr>
         <tr>
             <td><strong>Nombre/Razon Social:</strong></td>
@@ -121,6 +124,7 @@
                     <p>CODIGO <BR>PRODUCTO /<BR> SERVICIO</p>
                 </th>
                 <th class="">CANTIDAD</th>
+                <th class="">UNIDAD DE MEDIDA</th>
                 <th class="">DESCRIPCION</th>
                 <th class="">
                     <P>PRECIO<BR> UNITARIO</P>
@@ -133,11 +137,12 @@
             @foreach($detalle_venta as $item)
             <tr class="active-row">
                 <td style="text-align: center;">{{$item['plato_id']}}</td>
-                <td style="text-align: center;">{{$item['cantidad']}}</td>
-                <td style="text-align: center;">{{$item['plato']}}</td>
-                <td style="text-align: right;">{{$item['costo']}}</td>
-                <td style="text-align: right;">0</td>
-                <td style="text-align: right;">{{$item['subtotal']}}</td>
+                <td style="text-align: center;">{{ number_format($item['cantidad'],2) }}</td>
+                <td style="text-align: center;"> UNIDAD (SERVICIOS)</td><
+                <td style="text-align: center;">{{$item->plato->nombre}}</td>
+                <td style="text-align: right;">{{number_format($item->precio,2)}}</td>
+                <td style="text-align: right;">{{number_format($item->descuento,2)}}</td>
+                <td style="text-align: right;">{{number_format($item['subtotal'],2)}}</td>
             </tr>
             @endforeach
             <tr>
@@ -148,12 +153,12 @@
             <tr>
                 <td colspan="3"></td>
                 <td colspan="2" style="text-align: right;">DESCUENTO Bs.</td>
-                <td style="text-align: right;"> 0 </td>
+                <td style="text-align: right;"> {{ $venta['total_descuento'] }} </td>
             </tr>
             <tr>
                 <td colspan="3"></td>
                 <td colspan="2" style="text-align: right;">TOTAL Bs.</td>
-                <td style="text-align: right;"> {{ $venta['total_venta'] }} </td>
+                <td style="text-align: right;"> {{ number_format($venta['total_venta'] - $venta['total_descuento'],2) }} </td>
             </tr>
             <tr>
                 <td colspan="3" style="text-align: left;"> <b> Son: {{ $total }} 00/100 Bolivianos <b></td>
@@ -163,12 +168,12 @@
             <tr>
                 <td colspan="3"></td>
                 <td colspan="2" style="text-align: right;"><b>MONTO A PAGAR Bs. </b> </td>
-                <td style="text-align: right;"><b> {{ $venta['total_venta'] }} </b> </td>
+                <td style="text-align: right;"><b> {{ number_format($venta['total_venta'] - $venta['total_descuento'],2) }} </b> </td>
             </tr>
             <tr>
                 <td colspan="3"></td>
                 <td colspan="2" style="text-align: right;"><b>IMPORTE BASE CREDITO FISCAL Bs. </b> </td>
-                <td style="text-align: right;"> <b>{{ $venta['total_venta'] }} </b> </td>
+                <td style="text-align: right;"> <b>{{ number_format($venta['total_venta'] - $venta['total_descuento'],2) }} </b> </td>
             </tr>
         </tbody>
     </table>

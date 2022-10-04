@@ -79,10 +79,6 @@ class EventoSignificativoService
 		return $resEvento;
 	}
 
-
-
-
-
 	function registroEvento($cuis, $cufd, $sucursal, $puntoventa, object  $evento, $cufdAntiguo, $fechaInicio, $fechaFin)
 	{
 

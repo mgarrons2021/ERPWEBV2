@@ -57,7 +57,7 @@ class ServicioFacturacion extends ServicioSiat
 		$factura->validate();
 		$facturaXml = $this->buildInvoiceXml($factura);
 
-		file_put_contents( public_path()."/FacturasXML/facturaNro".$factura->cabecera->numeroFactura.".xml",$facturaXml);
+		file_put_contents(public_path() . "/FacturasXML/factura-" . $factura->cabecera->numeroDocumento . "-" . $factura->cabecera->numeroFactura . ".xml", $facturaXml);
 
 		/* dd($facturaXml); */
 		//print $facturaXml;
@@ -175,8 +175,8 @@ class ServicioFacturacion extends ServicioSiat
 		$tipoEmision = SiatInvoice::TIPO_EMISION_ONLINE,
 		$tipoFactura = SiatInvoice::FACTURA_DERECHO_CREDITO_FISCAL,
 		$cafc = null
-	)
-	 {
+	) {
+
 		$cafc            = "1011917833B0D";
 		try {
 			if (!count($facturas))
@@ -185,16 +185,22 @@ class ServicioFacturacion extends ServicioSiat
 			//##validate invoices
 			/* dd($facturas); */
 			foreach ($facturas as $factura) {
-
+				$venta = Venta::where('cuf', $factura->cabecera->cuf)->first();
 				//$factura->cufd = $this->cufd;
 				$factura->buildCuf(0, $this->modalidad, $tipoEmision, $tipoFactura, $this->codigoControl);
 				$factura->validate();
-				/* $facturaXml = $this->buildInvoiceXml($factura); */
+				$facturaXml = $this->buildInvoiceXml($factura);
+				file_put_contents(public_path() . "/FacturasXML/factura-" . $factura->cabecera->numeroDocumento . "-" . $factura->cabecera->numeroFactura . ".xml", $facturaXml);
+
 				//print_r($this->buildInvoiceXml($factura));
-				$xmlInvoices[] = $this->buildInvoiceXml($factura);
+				$xmlInvoices[] = $facturaXml;
+				/* Actualiza el Cuf antiguo (invalido) por uno nuevo (valido) */
+				$venta->update([
+					'cuf' => $factura->cabecera->cuf,
+				]);
 				/* dd($factura); */
 			}
-
+			/* print_r($facturas); */
 			//print_r($xmlInvoices);die();
 			$solicitud = new SolicitudServicioRecepcionPaquete();
 			$solicitud->cafc					= $cafc;
@@ -225,7 +231,7 @@ class ServicioFacturacion extends ServicioSiat
 
 			$this->wsdl = $facturas[0]->getEndpoint($this->modalidad, $this->ambiente);
 			$res = $this->callAction('recepcionPaqueteFactura', $data);
-			return $res;
+			return  $res;
 		} catch (SoapFault $e) {
 			echo $e->getMessage();
 		}

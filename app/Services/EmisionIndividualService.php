@@ -72,8 +72,8 @@ class EmisionIndividualService
             $detalle->codigoProductoSin        = $codigoProductoSin;
             $detalle->descripcion            = $dataFactura['detalle_venta'][$i]['plato'];
             $detalle->precioUnitario        = $dataFactura['detalle_venta'][$i]['costo'];
-            $detalle->montoDescuento        = 0;
-            $detalle->subTotal                = $dataFactura['detalle_venta'][$i]['subtotal'];
+            $detalle->montoDescuento        = $dataFactura['detalle_venta'][$i]['descuento'];
+            $detalle->subTotal                = $dataFactura['detalle_venta'][$i]['subtotal'] - $dataFactura['detalle_venta'][$i]['descuento'];
             $subTotal += $detalle->subTotal;
             $factura->detalle[] = $detalle;
         }
@@ -90,7 +90,7 @@ class EmisionIndividualService
         $factura->cabecera->numeroDocumento        = $dataFactura['cliente']['ci_nit'];
         $factura->cabecera->codigoCliente        = $dataFactura['cliente']['id']; //Codigo Unico Asignado por el sistema de facturacion (ID DEL CLIENTE)
         $factura->cabecera->codigoMetodoPago    = 1;
-        $factura->cabecera->montoTotal            = $dataFactura['venta']['total_venta'];
+        $factura->cabecera->montoTotal            = $dataFactura['venta']['total_neto'];
         $factura->cabecera->montoTotalMoneda    = $factura->cabecera->montoTotal;
         $factura->cabecera->montoTotalSujetoIva    = $factura->cabecera->montoTotal;
         $factura->cabecera->descuentoAdicional    = 0;
@@ -122,8 +122,8 @@ class EmisionIndividualService
             $detalle->codigoProductoSin        = $codigoProductoSin;
             $detalle->descripcion            = $dataFactura['detalle_venta'][$i]->plato->nombre;
             $detalle->precioUnitario        = $dataFactura['detalle_venta'][$i]->precio;
-            $detalle->montoDescuento        = 0;
-            $detalle->subTotal                = $dataFactura['detalle_venta'][$i]->subtotal;
+            $detalle->montoDescuento        = $dataFactura['detalle_venta'][$i]->descuento;
+            $detalle->subTotal                = $dataFactura['detalle_venta'][$i]['subtotal'] - $dataFactura['detalle_venta'][$i]['descuento'];
             $subTotal += $detalle->subTotal;
             $factura->detalle[] = $detalle;
         }
@@ -134,13 +134,13 @@ class EmisionIndividualService
         $factura->cabecera->codigoSucursal        = $dataFactura['sucursal']['codigo_fiscal'];
         $factura->cabecera->direccion            = $dataFactura['sucursal']['direccion'];
         $factura->cabecera->codigoPuntoVenta    = $codigoPuntoVenta;
-        $factura->cabecera->fechaEmision        = date('Y-m-d\TH:i:s.v');
+        $factura->cabecera->fechaEmision        =  date("Y-m-d\TH:i:s.v", strtotime($dataFactura['venta']['created_at']));
         $factura->cabecera->nombreRazonSocial    = $dataFactura['cliente']['nombre'];
-        $factura->cabecera->codigoTipoDocumentoIdentidad    = 5; //NIT 
-        $factura->cabecera->numeroDocumento        = 166172023;
+        $factura->cabecera->codigoTipoDocumentoIdentidad    = 1; //NIT 
+        $factura->cabecera->numeroDocumento        = $dataFactura['cliente']['ci_nit'];
         $factura->cabecera->codigoCliente        = $dataFactura['cliente']['id']; //Codigo Unico Asignado por el sistema de facturacion (ID DEL CLIENTE)
         $factura->cabecera->codigoMetodoPago    = 1;
-        $factura->cabecera->montoTotal            = $dataFactura['venta']['total_venta'];
+        $factura->cabecera->montoTotal            = $dataFactura['venta']['total_neto'];
         $factura->cabecera->montoTotalMoneda    = $factura->cabecera->montoTotal;
         $factura->cabecera->montoTotalSujetoIva    = $factura->cabecera->montoTotal;
         $factura->cabecera->descuentoAdicional    = 0;

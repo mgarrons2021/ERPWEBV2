@@ -26,6 +26,8 @@ class VentaService
         $venta->fecha_venta = Carbon::now();
         $venta->hora_venta = $hora_actual;
         $venta->total_venta = $ventaData['total_venta'];
+        $venta->total_descuento = $ventaData['total_descuento'];
+        $venta->total_neto = $ventaData['total_neto'];
         $venta->tipo_pago = $ventaData['tipo_pago'];
         $venta->lugar = $ventaData['lugar'];
         if ($ventaData['lugar'] == "Delivery") {
@@ -53,34 +55,22 @@ class VentaService
         $turno->save();
 
         $venta->numero_factura = $ventaData['numero_factura'];
-
-        $autorizacion =  Autorizacion::where('sucursal_id', $ventaData['sucursal'])->where('estado', 0)->first();
         if ($ventaData['tipo_pago'] != 'Comida Personal') {
-            //ultimo registro de autorizaciones, incrementar factura 
-            if (is_null($autorizacion) != true) {
-                $autorizacion->nro_factura = intval($autorizacion->nro_factura) + 1;
-                $autorizacion->save();
-            }
-           /*  $venta->numero_factura = $autorizacion->nro_factura; */
-            $venta->codigo_control = $ventaData['codigo_control'];
             $venta->qr = $ventaData['qr'];
-            $venta->autorizacion_id = $autorizacion->id;
         } else {
             $venta->numero_factura = 0;
-            $venta->codigo_control = '0';
             $venta->qr = '0';
-            $venta->autorizacion_id = $autorizacion->id;
         }
 
         return $venta->save() ? $venta : "";
     }
 
-    public function registrarDetalleVenta($detalle,$venta_id)
+    public function registrarDetalleVenta($detalle, $venta_id)
     {
         $detalle_venta = new DetalleVenta();
         $detalle_venta->cantidad = $detalle["cantidad"];
         $detalle_venta->precio = $detalle["costo"];
-        $detalle_venta->precio = $detalle["descuento"];
+        $detalle_venta->descuento = $detalle["descuento"];
         $detalle_venta->subtotal = $detalle["subtotal"];
         $detalle_venta->plato_id = $detalle["plato_id"];
         $detalle_venta->venta_id = $venta_id;

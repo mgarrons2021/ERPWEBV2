@@ -2,44 +2,44 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Bono;
-use App\Models\Cargo;
-use App\Models\CategoriaSancion;
-use App\Models\CargoSucursal;
-use App\Models\Categoria;
-use App\Models\Contrato;
-use App\Models\Descuento;
-use App\Models\DetalleContrato;
-use App\Models\Educacion;
-use App\Models\Evaluacion;
-use App\Models\EvaluacionUser;
-use App\Models\EvaluacionUser2;
-use App\Models\ExperienciaLaboral;
-use App\Models\Habilidad;
-use App\Models\RegistroAsistencia;
-use App\Models\RegistroTarea;
-use App\Models\Sucursal;
-use App\Models\Sanciones;
-use App\Models\Tarea;
-use App\Models\TareaUser;
-use App\Models\Turno;
-use App\Models\TurnoIngreso;
-use Illuminate\Http\Request;
-use App\Models\User;
-use App\Models\UserTarea;
-use App\Models\Vacacion;
-use App\Models\Venta;
 use COM;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
-use LaraIzitoast\Toaster;
-use LaraIzitoast\LaraIzitoastServiceProvider;
-use Spatie\Permission\Models\Role;
-use Carbon\Carbon;
 use DateTime;
 use Exception;
-use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+use App\Models\User;
+use App\Models\Bono;
+use App\Models\Cargo;
+use App\Models\Tarea;
+use App\Models\Venta;
+use App\Models\Turno;
+use App\Models\Vacacion;
+use App\Models\Contrato;
+use App\Models\Sucursal;
+use App\Models\UserTarea;
+use App\Models\Sanciones;
+use App\Models\Descuento;
+use App\Models\Habilidad;
+use LaraIzitoast\Toaster;
+use App\Models\TareaUser;
+use App\Models\Educacion;
+use App\Models\Categoria;
+use App\Models\Evaluacion;
+use Illuminate\Support\Str;
+use App\Models\TurnoIngreso;
+use Illuminate\Http\Request;
+use App\Models\RegistroTarea;
+use App\Models\CargoSucursal;
+use App\Models\EvaluacionUser;
+use App\Models\EvaluacionUser2;
+use App\Models\DetalleContrato;
+use App\Models\CategoriaSancion;
 use Illuminate\Support\Facades\DB;
+use App\Models\ExperienciaLaboral;
+use Spatie\Permission\Models\Role;
+use App\Models\RegistroAsistencia;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use LaraIzitoast\LaraIzitoastServiceProvider;
 
 
 class UserController extends Controller
@@ -105,7 +105,6 @@ class UserController extends Controller
             $contratar_personal->foto = $destinationPath . $filename;
         }
         $contratar_personal->save();
-
 
         if ($contratar_personal->save()) {
             for ($i = 0; $i < sizeof($request->habilidades); $i++) {
@@ -539,8 +538,7 @@ class UserController extends Controller
 
     public function marcar_asistencia(Request $request)
     {
-        $user_log = Auth::user();
-        $sucursal_usuario = $user_log->sucursals[0]->id;
+       
         $mensaje_de_alerta = "";
         $user = User::where('codigo', $request->get('codigo'))->first();
         $fecha = Carbon::now()->format('Y-m-d');
@@ -587,7 +585,6 @@ class UserController extends Controller
                 ->where('user_id',$user->id)
                 ->get();
                 
-
                 $horas_trabajadas_am = $hora_entrada->diffInHours($hora_entrada_final_am[0]->hora_entrada); 
                 
                  $hora_final = DB::table('registro_asistencia')

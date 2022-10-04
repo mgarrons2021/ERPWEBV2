@@ -60,8 +60,8 @@ class VentaController extends Controller
             ];
 
             $clienteService = new ClienteService();
-            $numero_letras= new  Letras();
-            
+            $numero_letras = new  Letras();
+
 
             $cliente = $clienteService->registrarCliente($clienteData);
             $user = User::find($request->user_id);
@@ -96,10 +96,13 @@ class VentaController extends Controller
             $cuf = $cufService->buildCuf($dataCuf);
 
 
+
             /*  return response()->json( ["cuf"=>$cufService->cabecera->cuf]); */
             $ventaData = collect([
                 'user_id' => $request->user_id,
                 'total_venta' => $request->total_venta,
+                'total_descuento' => $request->total_descuento,
+                'total_neto' => $request->total_venta - $request->total_descuento,
                 'tipo_pago' => $request->tipo_pago,
                 'lugar' => $request->lugar,
                 'delivery' => $request->delivery,
@@ -162,26 +165,28 @@ class VentaController extends Controller
                     ->errorCorrection('H')
                     ->generate('https://pilotosiat.impuestos.gob.bo/consulta/QR?nit=166172023&cuf=' . $venta->cuf . '&numero=' . $venta->numero_factura . '&t=1'));
 
-                $hora  = new Carbon( $venta->hora_venta );
-                $fecha = new Carbon( $venta->fecha_venta ); 
+                $hora  = new Carbon($venta->hora_venta);
+                $fecha = new Carbon($venta->fecha_venta);
 
-                $total_texto = $numero_letras->convertir( $venta->total_venta );
-
+                $total_texto = $numero_letras->convertir(floatval($venta->total_neto));
+                $detalle_venta = DetalleVenta::where('venta_id', $venta->id);
                 $pdf = PDF::loadView('mails.FacturaPDF', [
                     "clienteNombre" => $cliente->nombre,
                     "clienteCorreo" => $cliente->correo,
                     "clienteNit" => $cliente->ci_nit,
+                    "ClienteId" => $cliente->id,
                     "venta" => $venta,
-                    "detalle_venta" => $request->detalle_venta,
+                    "detalle_venta" => $detalle_venta,
                     "sucursal" => $sucursal,
                     "qrcode" => $qrcode,
-                    "hora"=> $hora->format('h:i'),
-                    'fecha'=>$fecha->format('Y-m-d'),
-                    'total'=>$total_texto
+                    "hora" => $hora->format('h:i'),
+                    'fecha' => $fecha->format('Y-m-d'),
+                    'total' => $total_texto
                 ]);
 
                 $data = [
-                    "clienteNombre" => $cliente->nombre,   
+                    
+                    "clienteNombre" => $cliente->nombre,
                     "clienteCorreo" => $cliente->correo,
                     "venta" => $venta,
                     "detalle_venta" => $request->detalle_venta,

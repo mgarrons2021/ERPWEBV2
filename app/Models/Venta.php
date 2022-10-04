@@ -15,8 +15,11 @@ class Venta extends Model
     protected $table = 'ventas';
     protected $fillable =
     [
-        'fecha_venta', 'hora_venta', 'numero_factura', 'nro_transaccion', 'total_venta', 'tipo_pago', 'estado', 'estado_emision', 'user_id', 'cliente_id',
-        'sucursal_id', 'turnos_ingreso_id', 'codigo_control', 'qr', 'cuf', 'evento_significativo_id'
+        'fecha_venta', 'hora_venta', 'numero_factura', 'nro_transaccion',
+        'total_venta', 'total_descuento','total_neto',
+        'tipo_pago', 'estado', 'estado_emision', 'user_id', 
+        'cliente_id','sucursal_id', 'turnos_ingreso_id', 
+        'codigo_control', 'qr', 'cuf', 'evento_significativo_id'
     ];
 
     public function user()

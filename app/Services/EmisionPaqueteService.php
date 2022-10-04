@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Services;
 
 use App\Models\Siat\EventoSignificativo;
@@ -97,12 +98,12 @@ class EmisionPaqueteService
             $factura = $this->emisionIndividualService->construirFactura3($puntoventa, $sucursal, $this->configService->config->modalidad, $documentoSector, $codigoActividad, $codigoProductoSin, $arrayFacturas[$i]);
             $factura->cabecera->nitEmisor = $this->configService->config->nit;
             $factura->cabecera->razonSocialEmisor = $this->configService->config->razonSocial;
-            $factura->cabecera->fechaEmision = $fechaEmision ?: date('Y-m-d\TH:i:s.v');
+            $factura->cabecera->fechaEmision = $fechaEmision ?: ('Y-m-d\TH:i:s.v');
             $factura->cabecera->cufd = $cufdAntiguo;
             $factura->cabecera->cafc = $cafc;
             $facturas[] = $factura;
 
-            $fechaEmision = date('Y-m-d\TH:i:s.v', strtotime($fechaEmision) + 10);
+           /*  $fechaEmision = date('Y-m-d\TH:i:s.v', strtotime($fechaEmision) + 10); */
         }
         return $facturas;
     }
@@ -161,6 +162,7 @@ class EmisionPaqueteService
         while ($res->RespuestaServicioFacturacion->codigoDescripcion == 'PENDIENTE') {
             /*  echo "REINTENTANTO RESPUESTA RECEPCION PAQUETE\n=====================\n"; */
             $res = $this->testRecepcionPaquete($codigoSucursal, $codigoPuntoVenta, $documentoSector, $tipoFactura, $codigoRecepcion);
+            
         }
         /* echo "RESPUESTA RECEPCION PAQUETE\n=====================\n";
         print_r($res); */
