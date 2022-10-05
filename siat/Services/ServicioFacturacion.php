@@ -10,6 +10,7 @@ namespace SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Services;
 use Exception;
 use SoapFault;
 use App\Models\Venta;
+use Carbon\Carbon;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\DocumentTypes;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Invoices\CompraVenta;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Invoices\SiatInvoice;
@@ -195,13 +196,15 @@ class ServicioFacturacion extends ServicioSiat
 				//print_r($this->buildInvoiceXml($factura));
 				$xmlInvoices[] = $facturaXml;
 				/* Actualiza el Cuf antiguo (invalido) por uno nuevo (valido) */
+
+				$fecha_emision = new Carbon($factura->cabecera->fechaEmision);
+				$fecha_emision_formateada = strtotime($fecha_emision);
 				$venta->update([
 					'cuf' => $factura->cabecera->cuf,
+					'fecha_venta'=> (new Carbon ($fecha_emision_formateada))->toDateString(),
+					'hora_venta'=> (new Carbon ($fecha_emision_formateada))->toTimeString(),
 				]);
-				/* dd($factura); */
 			}
-			/* print_r($facturas); */
-			//print_r($xmlInvoices);die();
 			$solicitud = new SolicitudServicioRecepcionPaquete();
 			$solicitud->cafc					= $cafc;
 			$solicitud->cantidadFacturas		= count($facturas);
@@ -271,7 +274,6 @@ class ServicioFacturacion extends ServicioSiat
 			$solicitud->toArray()
 		];
 
-		/* dd($data); */
 		$this->wsdl = SiatInvoice::getWsdl($this->modalidad, $this->ambiente, $documentoSector);
 		$res = $this->callAction('validacionRecepcionPaqueteFactura', $data);
 		return $res;

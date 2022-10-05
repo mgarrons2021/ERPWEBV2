@@ -154,7 +154,7 @@ class PedidoController extends Controller
     {
         if (isset($request->producto_id)) {
             $producto = Producto::find($request->producto_id);
-            $categoria_nombre=$producto->categoria->nombre;
+            $categoria_nombre = $producto->categoria->nombre;
             $categoria_id = $producto->categoria->id;
             $producto_proveedor = Producto_Proveedor::where('producto_id', $request->producto_id)->first();
             //dd($producto_proveedor);
@@ -171,7 +171,7 @@ class PedidoController extends Controller
                         'producto_nombre' => $producto->nombre,
                         'unidad_medida' => $producto->unidad_medida_compra->nombre,
                         'precio' => $producto_proveedor->precio,
-                        'categoria'=>$categoria_nombre,
+                        'categoria' => $categoria_nombre,
                         'categoria_id' => $categoria_id,
                         'success' => true
                     ]
@@ -202,7 +202,7 @@ class PedidoController extends Controller
             /* Recibo por Inputs */
             "cantidad_solicitada" => $request->detallePedido['cantidad_solicitada'],
             "precio" => $request->detallePedido['precio'],
-            "subtotal_solicitado" =>$request->detallePedido['cantidad_solicitada']*$request->detallePedido['precio'],
+            "subtotal_solicitado" => $request->detallePedido['cantidad_solicitada'] * $request->detallePedido['precio'],
             "producto_id" => $producto->id,
             "producto_nombre" => $producto->nombre,
             "unidad_medida" => $unidad_medida,
@@ -248,7 +248,7 @@ class PedidoController extends Controller
                 $detalle_pedido->save();
             }
         }
-        
+
         if (sizeof($request->detallesAEditar_id) != 0) {
             foreach ($request->detallesAEditar_id as $index => $detalleEditar) {
                 $detalle_pedido = DetallePedido::find($detalleEditar);
@@ -518,65 +518,101 @@ class PedidoController extends Controller
         return view('pedidos_producciones.detalleReporteP', compact('pedidos_detalle', 'fecha_inicial', 'fecha_final'));
     }
 
-    public function total_insumos_solicitados(Request $request){
+    public function total_insumos_solicitados(Request $request)
+    {
         $categoria_insumos = Categoria::all();
 
-        $fecha_inicial =$request->fecha_inicial;
+        $fecha_inicial = $request->fecha_inicial;
         $fecha_final = $request->fecha_final;
         $categoria_id = $request->categoria_id;
 
         $insumos_solicitados = Producto::selectRaw('productos.nombre, detalle_pedidos.cantidad_solicitada, detalle_pedidos.cantidad_enviada')
-        ->join('pedidos','pedidos.producto_id','=','productos.id')
-        ->join('detalle_pedidos','detalle_pedidos.pedido_id','=','productos.id')
-        ->join('categorias','categorias.producto_id','=','productos.id')
-        ->where('productos.estado',1)
-        ->where('productos.categoria_id',$categoria_id)
-        ->whereBetween('pedidos.fecha_pedido',[$fecha_inicial,$fecha_final])
-        ->get();
+            ->join('pedidos', 'pedidos.producto_id', '=', 'productos.id')
+            ->join('detalle_pedidos', 'detalle_pedidos.pedido_id', '=', 'productos.id')
+            ->join('categorias', 'categorias.producto_id', '=', 'productos.id')
+            ->where('productos.estado', 1)
+            ->where('productos.categoria_id', $categoria_id)
+            ->whereBetween('pedidos.fecha_pedido', [$fecha_inicial, $fecha_final])
+            ->get();
 
-        return view('pedidos.total_insumos_solicitados', compact('categoria_insumos','insumos_solicitados'));
-        
+        return view('pedidos.total_insumos_solicitados', compact('categoria_insumos', 'insumos_solicitados'));
     }
+
+    public function reporteInsumosEnviados(Request $request)
+    {
+        if (isset($request->fecha_inicial) && isset($request->fecha_final)) {
+
+            $fecha_inicial = $request->fecha_inicial;
+            $fecha_final = $request->fecha_final;
+            $fecha = Carbon::now()->toDateString();
+
+            $detalle_pedidos =  DB::select("SELECT productos.nombre as NombreProducto,
+            SUM(detalle_pedidos.cantidad_enviada) as cantidadenviado, 
+           
+            SUM(detalle_pedidos.subtotal_enviado) as TotalEnviada 
+            from pedidos 
+            JOIN detalle_pedidos on detalle_pedidos.pedido_id = pedidos.id 
+            JOIN productos on productos.id = detalle_pedidos.producto_id 
+            WHERE pedidos.fecha_pedido BETWEEN '$fecha_inicial' and '$fecha_final' 
+            GROUP BY productos.nombre");
+            return view('pedidos.reporteInsumosEnviados', compact('fecha', 'detalle_pedidos', 'fecha_inicial', 'fecha_final'));
+        } else {
+
+            $fecha_inicial = Carbon::now()->toDateString();
+            $fecha_final = Carbon::now()->toDateString();
+            $fecha = Carbon::now()->toDateString();
+
+            $detalle_pedidos =  DB::select("SELECT productos.nombre as NombreProducto, 
+            sum(detalle_pedidos.cantidad_enviada) as cantidadenviado, 
+           
+             SUM(detalle_pedidos.subtotal_enviado) as TotalEnviada 
+                    from pedidos
+                    join detalle_pedidos on detalle_pedidos.pedido_id = pedidos.id 
+                    join productos on productos.id = detalle_pedidos.producto_id 
+                    WHERE pedidos.fecha_pedido BETWEEN '$fecha_inicial' and '$fecha_final' 
+                    GROUP BY productos.nombre");
+            return view('pedidos.reporteInsumosEnviados', compact('fecha','detalle_pedidos', 'fecha_inicial', 'fecha_final'))->with('error');
+        }
+    }
+
 
     public function pedido_especial()
     {
         $categorias = Categoria::all();
         $productos = Producto::all();
         $fecha_actual = Carbon::now()->addDay(1)->locale('es')->isoFormat('dddd');
-        
+
         //dd($fecha_actual);
 
-        $dia = InsumosDias::where('dia',$fecha_actual)->first();
-        
+        $dia = InsumosDias::where('dia', $fecha_actual)->first();
+
         //dd($dia->id);
-        
-        $productos_predefinidos= ProductosInsumos::selectRaw('productos.nombre,productos_insumos.*,productos.categoria_id')        
-        ->join('productos','productos.id','=','productos_insumos.producto_id')
-        ->where('productos_insumos.insumos_dias_id',1)
-        ->orWhere('productos_insumos.insumos_dias_id',$dia->id)
-        ->orderBy('productos.categoria_id','ASC')
-        ->get();    
-        
+
+        $productos_predefinidos = ProductosInsumos::selectRaw('productos.nombre,productos_insumos.*,productos.categoria_id')
+            ->join('productos', 'productos.id', '=', 'productos_insumos.producto_id')
+            ->where('productos_insumos.insumos_dias_id', 1)
+            ->orWhere('productos_insumos.insumos_dias_id', $dia->id)
+            ->orderBy('productos.categoria_id', 'ASC')
+            ->get();
+
         //$prod=$productos_predefinidos->distinct()->get();
-        
+
         //dd($productos_predefinidos);
 
         //dd($productos_predefinidos  ); 
 
         /*where( 'insumos_dias_id',1 )
             ->where('insumos_dias_id',$dia->id )->get() */
-        
+
         //dd($productos_predefinidos);
 
         //echo sizeof(  $productos_predefinidos[0]->producto->productos_proveedores)>0?'si':'no';
         //echo $productos_predefinidos[0]->producto->unidad_medida_compra->nombre;
         //dd($productos_predefinidos[0]->producto->productos_proveedores[0]); 
-        return view( 'pedidos.pedido_especial' , compact('categorias','productos','productos_predefinidos'));
-
-
+        return view('pedidos.pedido_especial', compact('categorias', 'productos', 'productos_predefinidos'));
     }
 
-    public function pedido_especial_store( Request $request )
+    public function pedido_especial_store(Request $request)
     {
         //guardar pedido
         $user_log = Auth::id();
@@ -585,7 +621,7 @@ class PedidoController extends Controller
         $pedido2 = new Pedido();
         $pedido3 = new Pedido();
         //1 CARNES
-        $pedido->fecha_actual = Carbon::now()->toDateString();    
+        $pedido->fecha_actual = Carbon::now()->toDateString();
         $pedido->fecha_pedido = $request->fecha_pedido;
         $pedido->estado = 'P'; //CREADO EN PENDIENTE
         $pedido->user_id = Auth::id();
@@ -594,65 +630,63 @@ class PedidoController extends Controller
         $pedido->save();
         $total = 0;
         //2  INSUMOS
-        $pedido2->fecha_actual = Carbon::now()->toDateString();    
+        $pedido2->fecha_actual = Carbon::now()->toDateString();
         $pedido2->fecha_pedido = $request->fecha_pedido;
         $pedido2->estado = 'P'; //CREADO EN PENDIENTE
         $pedido2->user_id = Auth::id();
         $pedido2->sucursal_principal_id = $user->sucursals[0]->id;
         $pedido2->sucursal_secundaria_id = 2;
         $pedido2->save();
-        $total2 = 0; 
+        $total2 = 0;
         //3 VERDURAS
-        $pedido3->fecha_actual = Carbon::now()->toDateString();    
+        $pedido3->fecha_actual = Carbon::now()->toDateString();
         $pedido3->fecha_pedido = $request->fecha_pedido;
         $pedido3->estado = 'P'; //CREADO EN PENDIENTE
         $pedido3->user_id = Auth::id();
         $pedido3->sucursal_principal_id = $user->sucursals[0]->id;
         $pedido3->sucursal_secundaria_id = 2;
         $pedido3->save();
-        $total3 = 0; 
+        $total3 = 0;
 
-        $subtotales=$request->subtotales;
-        $stock=$request->stocks;
-        $productos=$request->idproductos;
+        $subtotales = $request->subtotales;
+        $stock = $request->stocks;
+        $productos = $request->idproductos;
         $precios = $request->precios;
-        $categorias=$request->categorias;
+        $categorias = $request->categorias;
         //dd($subtotales);
-        foreach ($productos as $index =>  $item) {                    
-            if($stock[$index]>0)
-            {
-//falta controlar los subtotales
-                $detalle_pedido = new DetallePedido();    
+        foreach ($productos as $index =>  $item) {
+            if ($stock[$index] > 0) {
+                //falta controlar los subtotales
+                $detalle_pedido = new DetallePedido();
                 $detalle_pedido->cantidad_solicitada = $stock[$index];
                 $detalle_pedido->precio = $precios[$index];
                 $detalle_pedido->subtotal_solicitado = $detalle_pedido->cantidad_solicitada * $detalle_pedido->precio;
                 $detalle_pedido->producto_id = $item;
 
-                if( $categorias[$index] == 4 || $categorias[$index] == 5   ){
+                if ($categorias[$index] == 4 || $categorias[$index] == 5) {
                     $detalle_pedido->pedido_id = $pedido->id;
                     $total += floatval($detalle_pedido->subtotal_solicitado);
-                }else if(  $categorias[$index] == 14 || $categorias[$index] == 9 || $categorias[$index] == 10 || $categorias[$index] == 11 || $categorias[$index] == 13    ){//no comestible mas
+                } else if ($categorias[$index] == 14 || $categorias[$index] == 9 || $categorias[$index] == 10 || $categorias[$index] == 11 || $categorias[$index] == 13) { //no comestible mas
                     $detalle_pedido->pedido_id = $pedido2->id;
                     $total2 += floatval($detalle_pedido->subtotal_solicitado);
-                }else if(   $categorias[$index] == 8 || $categorias[$index] == 7 || $categorias[$index] == 12  ){
+                } else if ($categorias[$index] == 8 || $categorias[$index] == 7 || $categorias[$index] == 12) {
                     $detalle_pedido->pedido_id = $pedido3->id;
                     $total3 += floatval($detalle_pedido->subtotal_solicitado);
                 }
 
                 $detalle_pedido->save();
-
             }
         }
 
         $pedido->update([
             'total_solicitado' =>  $total,
-        ]); 
+        ]);
         $pedido2->update([
             'total_solicitado' =>  $total2,
-        ]); 
+        ]);
         $pedido3->update([
             'total_solicitado' =>  $total3,
-        ]); 
+        ]);
 
         return response()->json(
             [
@@ -660,5 +694,4 @@ class PedidoController extends Controller
             ]
         );
     }
-
 }

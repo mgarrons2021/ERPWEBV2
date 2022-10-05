@@ -55,6 +55,7 @@ class KeperiController extends Controller
         $keperi->cantidad_enviado = $request->cantidad_enviado;
         $keperi->cantidad_cocido = $request->cantidad_cocido;
         $keperi->cantidad_cortado = $request->cantidad_cortado;
+        $keperi->descuentos_bandejas = $request->descuentos_bandejas;
         
         $keperi->nombre_usuario = $request->nombre_usuario;
         $keperi->temperatura_maxima = $request->temperatura_maxima;
@@ -104,6 +105,7 @@ class KeperiController extends Controller
         $keperi->cantidad_marinado = $request->cantidad_marinado;
         $keperi->cantidad_enviado = $request->cantidad_enviado;
         $keperi->cantidad_cocido = $request->cantidad_cocido;
+        $keperi->descuentos_bandejas = $request->descuentos_bandejas;
 
         $keperi->cantidad_cortado = $request->cantidad_cortado;
     

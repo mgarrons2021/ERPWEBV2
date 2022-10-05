@@ -101,6 +101,14 @@
                                 </div>
                             </div>
 
+                              
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="descuentos_bandejas"> Descuento Bandeja Cortado <span class="required">*</span></label>
+                                    <input type="number" class="form-control  @error('descuentos_bandejas') is-invalid @enderror" id="descuentos_bandejas" name="descuentos_bandejas" step="any" placeholder="0,00">
+                                </div>
+                            </div>
+
                           
 
                             <div class="col-md-4">

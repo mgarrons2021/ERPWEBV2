@@ -84,8 +84,7 @@
                                         <td class="text-center">{{$pedido->fecha_actual}}</td>
                                         <td class="text-center">{{$pedido->fecha_pedido}} </td>
                                         <td class="text-center">{{$hora_solicitado}}</td>
-
-                                         <td class="text-center">{{$pedido->sucursal_principal->nombre}}</td>
+                                        <td class="text-center">{{$pedido->sucursal_principal->nombre}}</td>
                                         <td class="text-center">{{$pedido->user->name}}</td>
                                         <td class="text-center">{{$pedido->total_solicitado}} Bs</td>
                                         <td class="text-center">

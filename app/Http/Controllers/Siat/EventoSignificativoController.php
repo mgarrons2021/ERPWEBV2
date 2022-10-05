@@ -225,6 +225,7 @@ class EventoSignificativoController extends Controller
             "clienteNombre" => $cliente->nombre,
             "clienteCorreo" => $cliente->correo,
             "clienteNit" => $cliente->ci_nit,
+            "ClienteId" => $cliente->id,
             "venta" => $venta,
             "detalle_venta" => $detalle_venta,
             "sucursal" => $sucursal,

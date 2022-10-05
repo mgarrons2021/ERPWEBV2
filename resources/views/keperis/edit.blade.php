@@ -50,6 +50,13 @@
 
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label for="descuentos_bandejas">Descuento Bandeja Cortado<span class="required">*</span></label>
+                                        <input type="text" class="form-control" name="descuentos_bandejas" value="{{$keperi->descuentos_bandejas}}" >
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
                                         <label for="precio_producto">Temperatura Maxima Alcanzada<span class="required">*</span></label>
                                         <input type="number" class="form-control" name="temperatura_maxima" value="{{$keperi->temperatura_maxima}}" step="any"  >
                                     </div>

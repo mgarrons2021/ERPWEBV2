@@ -169,7 +169,7 @@ class VentaController extends Controller
                 $fecha = new Carbon($venta->fecha_venta);
 
                 $total_texto = $numero_letras->convertir(floatval($venta->total_neto));
-                $detalle_venta = DetalleVenta::where('venta_id', $venta->id);
+                $detalle_venta = DetalleVenta::where('venta_id', $venta->id)->get();
                 $pdf = PDF::loadView('mails.FacturaPDF', [
                     "clienteNombre" => $cliente->nombre,
                     "clienteCorreo" => $cliente->correo,

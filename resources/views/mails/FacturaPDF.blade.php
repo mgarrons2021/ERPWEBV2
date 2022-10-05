@@ -63,9 +63,10 @@
                 <pre>
                 <strong>DONESCO S.R.L
                 {{$sucursal['nombre']}}</strong>
+                Nro Punto de Venta 0
                 {{ $sucursal['direccion'] }}
                 Teléfono: 78555410
-                Santa Cruz
+                Santa Cruz de la Sierra
                 </pre>
                 </p>
             </td>
@@ -105,13 +106,12 @@
             <td> {{ $fecha }} {{ $hora }} </td>
             <td style="text-align: right;"><strong>NIT/CI/CEX:</strong></td>
             <td> {{ $clienteNit }} </td>
-
-            <td style="text-align: right;"><strong>Cod. Cliente:</strong></td>
-            <td> {{ $ClienteId }} </td>
         </tr>
         <tr>
-            <td><strong>Nombre/Razon Social:</strong></td>
+            <td ><strong>Nombre/Razon Social:</strong></td>
             <td>{{ $clienteNombre}} </td>
+            <td style="text-align: right;"><strong>Cod. Cliente:</strong></td>
+            <td> {{ $ClienteId }} </td>
         </tr>
     </table>
 
@@ -138,7 +138,7 @@
             <tr class="active-row">
                 <td style="text-align: center;">{{$item['plato_id']}}</td>
                 <td style="text-align: center;">{{ number_format($item['cantidad'],2) }}</td>
-                <td style="text-align: center;"> UNIDAD (SERVICIOS)</td><
+                <td style="text-align: center;"> UNIDAD (SERVICIOS)</td>
                 <td style="text-align: center;">{{$item->plato->nombre}}</td>
                 <td style="text-align: right;">{{number_format($item->precio,2)}}</td>
                 <td style="text-align: right;">{{number_format($item->descuento,2)}}</td>
@@ -146,32 +146,32 @@
             </tr>
             @endforeach
             <tr>
-                <td colspan="3"></td>
+                <td colspan="4"></td>
                 <td colspan="2" style="text-align: right;">SUBTOTAL Bs.</td>
                 <td style="text-align: right;"> {{ $venta['total_venta'] }} </td>
             </tr>
             <tr>
-                <td colspan="3"></td>
+                <td colspan="4"></td>
                 <td colspan="2" style="text-align: right;">DESCUENTO Bs.</td>
                 <td style="text-align: right;"> {{ $venta['total_descuento'] }} </td>
             </tr>
             <tr>
-                <td colspan="3"></td>
+                <td colspan="4"></td>
                 <td colspan="2" style="text-align: right;">TOTAL Bs.</td>
                 <td style="text-align: right;"> {{ number_format($venta['total_venta'] - $venta['total_descuento'],2) }} </td>
             </tr>
             <tr>
-                <td colspan="3" style="text-align: left;"> <b> Son: {{ $total }} 00/100 Bolivianos <b></td>
+                <td colspan="4" style="text-align: left;"> <b> Son: {{ $total }} 00/100 Bolivianos <b></td>
                 <td colspan="2" style="text-align: right;">MONTO GIFT CARD Bs.</td>
                 <td style="text-align: right;"> 0 </td>
             </tr>
             <tr>
-                <td colspan="3"></td>
+                <td colspan="4"></td>
                 <td colspan="2" style="text-align: right;"><b>MONTO A PAGAR Bs. </b> </td>
                 <td style="text-align: right;"><b> {{ number_format($venta['total_venta'] - $venta['total_descuento'],2) }} </b> </td>
             </tr>
             <tr>
-                <td colspan="3"></td>
+                <td colspan="4"></td>
                 <td colspan="2" style="text-align: right;"><b>IMPORTE BASE CREDITO FISCAL Bs. </b> </td>
                 <td style="text-align: right;"> <b>{{ number_format($venta['total_venta'] - $venta['total_descuento'],2) }} </b> </td>
             </tr>

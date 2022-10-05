@@ -24,7 +24,8 @@
     use App\Http\Controllers\PedidoProduccionController;
     use App\Http\Controllers\TraspasoController;
     use App\Http\Controllers\AsignarStockController;
-    use App\Http\Controllers\PostulantesController;
+use App\Http\Controllers\ChanchoController;
+use App\Http\Controllers\PostulantesController;
     use App\Http\Controllers\ParteProduccionController;
 
     use App\Models\CajaChica;
@@ -482,7 +483,7 @@ use App\Http\Controllers\VentaController;
 
         Route::get('/pedidos/pedido_especial', [App\Http\Controllers\PedidoController::class, 'pedido_especial'])->name('pedidos.pedido_especial');
         Route::post('/pedidos/pedido_especial_store', [App\Http\Controllers\PedidoController::class, 'pedido_especial_store'])->name('pedidos.pedido_especial_store');
-
+        Route::get('/pedidos/reporteInsumosEnviados', [App\Http\Controllers\PedidoController::class, 'reporteInsumosEnviados'])->name('pedidos.reporteInsumosEnviados');
         Route::get('/productosinsumos/create', [App\Http\Controllers\ProductosInsumosController::class, 'create'])->name('productosinsumos.create');
         Route::post('/productosinsumos/store', [App\Http\Controllers\ProductosInsumosController::class, 'store'])->name('productosinsumos.store');
         Route::post('/productosinsumos/destroy', [App\Http\Controllers\ProductosInsumosController::class, 'destroy'])->name('productosinsumos.destroy');
@@ -703,5 +704,8 @@ use App\Http\Controllers\VentaController;
     Route::get('/anulacion_facturas/index', [App\Http\Controllers\Siat\AnulacionFacturaController::class, 'index'])->name('anulacion_facturas.index');
     Route::post('/anulacion_facturas/filtrar_facturas', [AnulacionFacturaController::class, 'filtrar_facturas'])->name('anulacion_facturas.filtrar_facturas');
     Route::post('/anulacion_facturas/test_anulacion_factura', [App\Http\Controllers\Siat\AnulacionFacturaController::class, 'test_anulacion_factura'])->name('anulacion_facturas.test_anulacion_factura');    //filtrar_facturas
+
+
+    Route::resource('chanchos', ChanchoController::class);
 
 

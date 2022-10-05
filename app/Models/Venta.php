@@ -16,9 +16,9 @@ class Venta extends Model
     protected $fillable =
     [
         'fecha_venta', 'hora_venta', 'numero_factura', 'nro_transaccion',
-        'total_venta', 'total_descuento','total_neto',
-        'tipo_pago', 'estado', 'estado_emision', 'user_id', 
-        'cliente_id','sucursal_id', 'turnos_ingreso_id', 
+        'total_venta', 'total_descuento', 'total_neto',
+        'tipo_pago', 'estado', 'estado_emision', 'user_id',
+        'cliente_id', 'sucursal_id', 'turnos_ingreso_id',
         'codigo_control', 'qr', 'cuf', 'evento_significativo_id'
     ];
 
@@ -64,28 +64,28 @@ class Venta extends Model
 
     public function getSales($fecha_inicio, $fecha_fin, $sucursal)
     {
-
         $fecha = Carbon::now()->toDateString();
-
         if (isset($fecha_inicio) && isset($fecha_fin)) {
-            $sql = "select (@rownum:=@rownum+1) AS nro_registro,ventas.id , ventas.fecha_venta ,users.name as user, ventas.hora_venta , turnos_ingreso_id as turno , ventas.tipo_pago, ventas.total_venta, ventas.estado,
+          /*   return $fecha_inicio; */
+            $plates = Venta::where('sucursal_id', $sucursal)->whereBetween('fecha_venta', [$fecha_inicio, $fecha_fin])->get();
+            /* $sql = "select (@rownum:=@rownum+1) AS nro_registro,ventas.id , ventas.fecha_venta ,users.name as user, ventas.hora_venta , turnos_ingreso_id as turno , ventas.tipo_pago, ventas.total_venta, ventas.estado,
                 ventas.numero_factura,ventas.lugar , ventas.nro_transaccion,turnos_ingresos.turno
                 from (SELECT @rownum:=0) r,ventas 
                 inner join users on users.id= ventas.user_id
                 inner join turnos_ingresos on turnos_ingresos.id= ventas.turnos_ingreso_id
-                where ventas.fecha_venta
-                between $fecha_inicio and $fecha_fin
-                and ventas.sucursal_id = $sucursal";
-            $plates = DB::select($sql);
+                where ventas.fecha_venta between $fecha_inicio and $fecha_fin and ventas.sucursal_id = $sucursal";
+            $plates = DB::select($sql); */
             return $plates;
         } else {
-            $sql = "select (@rownum:=@rownum+1) AS nro_registro,ventas.id , ventas.fecha_venta , users.name as user, ventas.hora_venta , turnos_ingreso_id as turno , ventas.tipo_pago , ventas.total_venta , ventas.estado, 
+           /*  return $sucursal; */
+            $plates = Venta::where('sucursal_id', $sucursal)->whereBetween('fecha_venta', [$fecha, $fecha])->get();
+            /* $sql = "select (@rownum:=@rownum+1) AS nro_registro,ventas.id , ventas.fecha_venta , users.name as user, ventas.hora_venta , turnos_ingreso_id as turno , ventas.tipo_pago , ventas.total_venta , ventas.estado, 
             ventas.numero_factura,ventas.lugar, ventas.nro_transaccion,turnos_ingresos.turno
             from (SELECT @rownum:=0) r,ventas  
             inner join users on users.id= ventas.user_id       
             inner join turnos_ingresos on turnos_ingresos.id= ventas.turnos_ingreso_id
             where ventas.fecha_venta between $fecha and $fecha and ventas.sucursal_id = $sucursal";
-            $plates = DB::select($sql);
+            $plates = DB::select($sql); */
             return $plates;
         }
     }

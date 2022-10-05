@@ -40,14 +40,9 @@
                             </form>
                         </div>
                     </div>
-
                 </div>
             </div>
-
-
-
             <div class="col-lg-12">
-
                 <div class="card">
                     <div class="card-header">
                         <h4>Reporte Detallado Produccion </h4>
@@ -56,13 +51,10 @@
 
                         <table class="table table-hover" id="table">
                             <thead class="table-hover table-info">
-
                                 <th style="text-align: center;"> Sucursal </th>
                                 <th style="text-align: center;"> Produccion Solicitada </th>
                                 <th style="text-align: center;"> Produccion Enviada </th>
                                 <th style="text-align: center;"> Ver Detalle </th>
-
-
                             </thead>
 
                             <tbody>

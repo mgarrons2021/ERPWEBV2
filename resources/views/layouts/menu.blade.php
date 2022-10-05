@@ -85,9 +85,11 @@
                         <li class="nav-item "> <a href="{{ route('pedidos.reporteZumos') }}">Hoja de Zumos y Salzas </a> </li>
                         <li class="nav-item "> <a href="{{route('pedidos_producciones.reporteProduccion')}}">Hoja de Produccion </a> </li>
                         <li class="nav-item "> <a href="{{route('asignar_stock.reporteCarnicos')}}">Hoja de Carnes </a> </li>
+                        <li class="nav-item "> <a href="{{route('pedidos.reporteInsumosEnviados')}}">Reporte Insumos Enviados </a> </li>
                         <li class="nav-item "> <a href="{{route('pedidos_producciones.reporteProduccionEnviada')}}">Produccion Enviada </a> </li>
                         <li class="nav-item "> <a href="{{route('keperis.index')}}">Control Keperi </a> </li>
                         <li class="nav-item "> <a href="{{route('costos_cuadriles.index')}}">Cortes Cuadriles </a> </li>
+                        <li class="nav-item "> <a href="{{route('chanchos.create')}}">Control Chancho </a> </li>
                         @endrole
                 </ul>
         </li>
