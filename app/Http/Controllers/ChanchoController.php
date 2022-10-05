@@ -67,7 +67,8 @@ class ChanchoController extends Controller
      */
     public function show($id)
     {
-        //
+        $chancho = Chancho::find($id);
+        return view('chanchos.show', compact('chancho'));
     }
 
     /**

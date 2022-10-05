@@ -21,7 +21,7 @@
                             <table class="table table-striped mt-15 " id="table">
                                 <thead style="background-color: #6777ef;">
                                     <!---->
-                                    <!--<th style="display:none;">ID</th>-->
+                                    <th class="text-center">ID</th>
                                     <th class="text-center" style="color: #fff;">Fecha Corte</th>
                                     <th class="text-center" style="color: #fff;">Personal Encargado</th>
                                     <th class="text-center" style="color: #fff;">Costilla en Kilos</th>
@@ -42,9 +42,10 @@
                                 <tbody>
                                     @foreach ($chanchos as $chancho)
                                     <tr>
-                                      {{--   <td  class="text-center">
-                                            <a href="{{route('chanchos.show', $chancho->id)}}">{{$chancho->id}} </a>
-                                        </td> --}}
+                                        <td  class="text-center">
+                                            <a href="{{route('chanchos.show', $chancho->id)}}">{{$chancho->id}} </a> 
+                                        </td>
+
                                         <td  class="text-center">{{$chancho->fecha}}</td>
                                         <td  class="text-center">{{$chancho->usuario}}</td>
                                         <td  class="text-center">{{$chancho->costilla_kilos}}</td>
@@ -57,10 +58,6 @@
                                         <td  class="text-center">{{$chancho->pierna_horneado}}</td>
                                         <td  class="text-center">{{$chancho->pierna_cortada}}</td>
                                         <td  class="text-center">{{$chancho->chancho_enviado}}</td>
-                                       
-
-                                        
-
                                         
                                         <td  class="text-center">
                                             <div class="dropdown" style="position: absolute;">
@@ -68,8 +65,8 @@
                                                     <i class="fas fa-ellipsis-v"></i>
                                                 </a>
                                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                    <li><a class="dropdown-item" href="{{ route('chanchos.edit', $chancho->id) }}">Editar</a></li>
-                                                    <li><a href="#" class="dropdown-item" data-id="{{ $chancho->id }}" onclick="deleteItem(this)">Eliminar</a></li>
+                                                   {{--  <li><a class="dropdown-item" href="{{ route('chanchos.edit', $chancho->id) }}">Editar</a></li>
+                                                    <li><a href="#" class="dropdown-item" data-id="{{ $chancho->id }}" onclick="deleteItem(this)">Eliminar</a></li> --}}
                                                 </ul>
 
                                             </div>
@@ -122,7 +119,7 @@
                     let id = e.getAttribute('data-id');
                     $.ajax({
                         type: 'DELETE',
-                        url: '{{ route('chanchos.destroy', '') }}/' + id,
+                        /* url: '{{ route('chanchos.destroy', '') }}/' + id, */
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
@@ -156,8 +153,8 @@
     }
 </script>
 <script>
-    let
-        $('.formulario-eliminar2').submit(function(e) {
+
+       /*  $('.formulario-eliminar2').submit(function(e) {
             console.log()
             e.preventDefault();
             Swal.fire({
@@ -174,7 +171,7 @@
                     this.submit();
                 }
             })
-        });
+        }); */
 </script>
 @section('page_js')
 <script>

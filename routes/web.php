@@ -706,6 +706,15 @@ use App\Http\Controllers\VentaController;
     Route::post('/anulacion_facturas/test_anulacion_factura', [App\Http\Controllers\Siat\AnulacionFacturaController::class, 'test_anulacion_factura'])->name('anulacion_facturas.test_anulacion_factura');    //filtrar_facturas
 
 
-    Route::resource('chanchos', ChanchoController::class);
+    
+
+    Route::get('/chanchos', [App\Http\Controllers\ChanchoController::class, 'index'])->name('chanchos.index');
+    Route::get('/chanchos/create', [App\Http\Controllers\ChanchoController::class, 'create'])->name('chanchos.create');
+    Route::post('/chanchos', [App\Http\Controllers\ChanchoController::class, 'store'])->name('chanchos.store');
+    Route::get('/chanchos/edit/{id}', [App\Http\Controllers\ChanchoController::class, 'edit'])->name('chanchos.edit');
+    Route::put('/chanchos/{id}', [App\Http\Controllers\ChanchoController::class, 'update'])->name('chanchos.update');
+    Route::get('/chanchos/show/{id}', [App\Http\Controllers\ChanchoController::class, 'show'])->name('chanchos.show');
+    Route::delete('/chanchos/{id}', [\App\Http\Controllers\ChanchoController::class, 'destroy'])->name('chanchos.destroy');
+    Route::post('/chanchos/filtrarchanchos', [ChanchoController::class, 'filtrarchanchos'])->name('chanchos.filtrarKeperis');
 
 
