@@ -17,7 +17,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="nombre">Nombre Actividad<span class="required">*</span></label>
-                                        <input type="text" class="form-control  @error('nombre') is-invalid @enderror" name=" nombre" placeholder="Nombre de la tarea..">
+                                        <input type="text" class="form-control  @error('nombre') is-invalid @enderror" id="actividad" name=" nombre" placeholder="Nombre de la tarea..">
                                         @error('nombre')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -29,7 +29,7 @@
                                     <div class="form-group">
                                         <label for="sucursal_id">Defina la Sucursal<span class="required">*</span></label>
                                         <div class="selectric-hide-select">
-                                            <select name="sucursal_id" class="form-control selectric">
+                                            <select name="sucursal_id" id="sucursal" class="form-control selectric">
                                                 @foreach($sucursales as $sucursal)
                                                 <option value="{{$sucursal->id}}">{{$sucursal->nombre}}</option>
                                                 @endforeach
@@ -41,7 +41,7 @@
                                     <div class="form-group">
                                         <label for="cargo_id">Defina el Cargo<span class="required">*</span></label>
                                         <div class="selectric-hide-select">
-                                            <select name="cargo_id" class="form-control selectric">
+                                            <select name="cargo_id" id="cargo" class="form-control selectric">
                                                 @foreach($cargos as $cargo)
                                                 <option value="{{$cargo->id}}">{{$cargo->nombre_cargo}}</option>
                                                 @endforeach
@@ -126,4 +126,23 @@
         </div>
     </div>
 </section>
+@endsection
+@section('scripts')
+<script>
+    $(document).ready(function() {
+    $("#sucursal").select2();
+});
+</script>
+
+<script>
+    $(document).ready(function() {
+    $("#cargo").select2();
+});
+</script>
+
+<script>
+    $(document).ready(function() {
+    $("#turno").select2();
+});
+</script>
 @endsection

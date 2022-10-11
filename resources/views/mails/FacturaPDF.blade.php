@@ -108,7 +108,7 @@
             <td> {{ $clienteNit }} </td>
         </tr>
         <tr>
-            <td ><strong>Nombre/Razon Social:</strong></td>
+            <td><strong>Nombre/Razon Social:</strong></td>
             <td>{{ $clienteNombre}} </td>
             <td style="text-align: right;"><strong>Cod. Cliente:</strong></td>
             <td> {{ $ClienteId }} </td>
@@ -142,23 +142,23 @@
                 <td style="text-align: center;">{{$item->plato->nombre}}</td>
                 <td style="text-align: right;">{{number_format($item->precio,2)}}</td>
                 <td style="text-align: right;">{{number_format($item->descuento,2)}}</td>
-                <td style="text-align: right;">{{number_format($item['subtotal'],2)}}</td>
+                <td style="text-align: right;">{{number_format($item['subtotal']-$item->descuento,2)}}</td>
             </tr>
             @endforeach
             <tr>
                 <td colspan="4"></td>
                 <td colspan="2" style="text-align: right;">SUBTOTAL Bs.</td>
-                <td style="text-align: right;"> {{ $venta['total_venta'] }} </td>
+                <td style="text-align: right;"> {{ number_format($venta['total_neto'],2) }} </td>
             </tr>
             <tr>
                 <td colspan="4"></td>
                 <td colspan="2" style="text-align: right;">DESCUENTO Bs.</td>
-                <td style="text-align: right;"> {{ $venta['total_descuento'] }} </td>
+                <td style="text-align: right;"> 0.00 </td>
             </tr>
             <tr>
                 <td colspan="4"></td>
                 <td colspan="2" style="text-align: right;">TOTAL Bs.</td>
-                <td style="text-align: right;"> {{ number_format($venta['total_venta'] - $venta['total_descuento'],2) }} </td>
+                <td style="text-align: right;"> {{ number_format($venta['total_neto'],2) }} </td>
             </tr>
             <tr>
                 <td colspan="4" style="text-align: left;"> <b> Son: {{ $total }} 00/100 Bolivianos <b></td>
@@ -168,12 +168,12 @@
             <tr>
                 <td colspan="4"></td>
                 <td colspan="2" style="text-align: right;"><b>MONTO A PAGAR Bs. </b> </td>
-                <td style="text-align: right;"><b> {{ number_format($venta['total_venta'] - $venta['total_descuento'],2) }} </b> </td>
+                <td style="text-align: right;"><b> {{ number_format($venta['total_neto'],2) }} </b> </td>
             </tr>
             <tr>
                 <td colspan="4"></td>
                 <td colspan="2" style="text-align: right;"><b>IMPORTE BASE CREDITO FISCAL Bs. </b> </td>
-                <td style="text-align: right;"> <b>{{ number_format($venta['total_venta'] - $venta['total_descuento'],2) }} </b> </td>
+                <td style="text-align: right;"> <b>{{ number_format($venta['total_neto'],2) }} </b> </td>
             </tr>
         </tbody>
     </table>

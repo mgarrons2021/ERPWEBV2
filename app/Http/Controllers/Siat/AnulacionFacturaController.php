@@ -40,8 +40,8 @@ class AnulacionFacturaController extends Controller
         /* dd($fecha_actual); */
         $motivos_anulaciones =  MotivoAnulacion::all();
         $ventas = Venta::where('fecha_venta', $fecha_actual)
-       /*  ->where('estado_emision', 'V') */
-        ->get();
+            /*  ->where('estado_emision', 'V') */
+            ->get();
 
         return view('siat.anulaciones_facturas.index', compact('fecha_actual', 'ventas', 'motivos_anulaciones'));
     }
@@ -53,8 +53,8 @@ class AnulacionFacturaController extends Controller
         $motivos_anulaciones =  MotivoAnulacion::all();
 
         $ventas = Venta::whereBetween('fecha_venta', [$fecha_inicial, $fecha_final])
-        ->where('estado_emision', 'V')
-        ->get();
+            ->where('estado_emision', 'V')
+            ->get();
 
         return view('siat.anulaciones_facturas.index', compact('ventas', 'motivos_anulaciones'));
     }
@@ -65,11 +65,14 @@ class AnulacionFacturaController extends Controller
         $venta = Venta::find($request->venta_id);
         $sucursal_id = $venta->sucursal_id;
         $cuf = $venta->cuf;
-        $cufd = SiatCufd::find($venta->cufd_id);
+        /* $cufd = SiatCufd::find($venta->cufd_id); */
+        $cufd = SiatCufd::where('estado', 'V')->where('sucursal_id',$sucursal_id)
+            ->orderBy('id', 'desc')->first();
+
         /* dd($cuf); */
         $motivo = $request->codigo_clasificador;
         $anulacion_factura_service = new AnulacionFacturaService();
-        $res = $anulacion_factura_service->pruebasAnulacion($cuf,"BQUFlQ10wUUFBNzzBCMjYwMjVGRTc=QnnCrGFwSUJLV1VIyOTA3RjJCQUVDQ", $motivo, $sucursal_id);
+        $res = $anulacion_factura_service->pruebasAnulacion($cuf, $cufd->codigo, $motivo, $sucursal_id);
 
 
         if ($res->RespuestaServicioFacturacion->transaccion === true) {
@@ -102,7 +105,7 @@ class AnulacionFacturaController extends Controller
     function prueba_anulacion()
     {
         $sucursal = 0;
-        $puntoventa = 0;
+        $puntoventa = 1;
 
         $resCuis     = $this->cuisService->obtenerCuis($puntoventa, $sucursal, true);
         $resCufd    = $this->cufdService->obtenerCufd($puntoventa, $sucursal, $resCuis->RespuestaCuis->codigo, true);

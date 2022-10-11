@@ -1,4 +1,4 @@
-}const csrfToken = document.head.querySelector(
+const csrfToken = document.head.querySelector(
     "[name~=csrf-token][content]"
 ).content;
 

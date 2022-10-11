@@ -20,6 +20,7 @@ class CreateDetallesVentasTable extends Migration
 
             $table->decimal('descuento',18,4)->nullable();
             $table->decimal('subtotal',18,4);
+            $table->decimal('subtotal_neto',18,4);
 
             $table->unsignedBigInteger('plato_id');
             $table->unsignedBigInteger('venta_id');

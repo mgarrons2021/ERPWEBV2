@@ -65,10 +65,10 @@ class EventoSignificativoController extends Controller
         /* dd($arrayVentas[0]['detalle_venta'][0]->plato); */
         $evento_significativo = EventoSignificativo::find($ventas[0]->evento_significativo_id);
         $sucursal = 0;
-        $puntoventa = 0;
+        $puntoventa = 1;
         $cantidadFacturas = count($ventas);
-        $cafc     = "1011917833B0D";
-        $codigoEvento = 1;
+        $cafc     = "1011917833B0D";  /* Maybe el CAFC doesnt belongs to the new system register????? */
+        $codigoEvento = 5;
         $fecha_generica = Carbon::now();
         $sucursal_db = Sucursal::where('codigo_fiscal', $sucursal)->first();
         $cufd_bd = SiatCufd::find($ventas[0]->cufd_id);
@@ -83,6 +83,7 @@ class EventoSignificativoController extends Controller
         $codigoControlAntiguo     = $cufd_bd->codigo_control;
 
         $resCufd        = $this->cufdService->obtenerCufd($puntoventa, $sucursal, $resCuis);
+       /*  dd($resCufd); */
         $fecha_generado_cufd = Carbon::now()->toDateTimeString();
 
         $guardar_cufd = SiatCufd::create([

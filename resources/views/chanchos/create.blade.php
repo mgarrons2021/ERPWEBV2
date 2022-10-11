@@ -115,16 +115,19 @@
                             
                         </div>
 
+                        <label for="chancho_enviado"> Lechon Cortado <span >*</span></label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend"><span class="input-group-text">Kg</span></div>
+                            <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="lechon_cortado" step="any">
+                            <div class="input-group-append"><span class="input-group-text">.00</span></div>
+                        </div>
+
                         <label for="chancho_enviado"> Chancho Enviado  <span >*</span></label>
                         <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text">Kg</span>
-                            </div>
+                            <div class="input-group-prepend"><span class="input-group-text">Kg</span></div>
                             <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="chancho_enviado" step="any">
-                            <div class="input-group-append">
-                              <span class="input-group-text">.00</span>
-                            </div>
-                          </div>
+                            <div class="input-group-append"><span class="input-group-text">.00</span></div>
+                        </div>
                                   
                     </div>
                      

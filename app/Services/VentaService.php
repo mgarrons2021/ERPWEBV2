@@ -72,6 +72,7 @@ class VentaService
         $detalle_venta->precio = $detalle["costo"];
         $detalle_venta->descuento = $detalle["descuento"];
         $detalle_venta->subtotal = $detalle["subtotal"];
+        $detalle_venta->subtotal_neto = $detalle_venta["subtotal"] - $detalle["descuento"];
         $detalle_venta->plato_id = $detalle["plato_id"];
         $detalle_venta->venta_id = $venta_id;
         $detalle_venta->save();

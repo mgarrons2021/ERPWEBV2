@@ -93,7 +93,7 @@ class Venta extends Model
     public function getsalesDetail($venta_id)
     {
 
-        $sql = "select platos.nombre , detalles_ventas.cantidad , detalles_ventas.precio , detalles_ventas.subtotal
+        $sql = "select platos.nombre , detalles_ventas.cantidad , detalles_ventas.precio , detalles_ventas.subtotal, detalles_ventas.descuento as descuento
         from ventas 
         JOIN detalles_ventas on detalles_ventas.venta_id = ventas.id
         JOIN platos on platos.id = detalles_ventas.plato_id
@@ -169,9 +169,8 @@ class Venta extends Model
 
     public function sales_for_id($id_venta)
     {
-
-        $venta = Venta::selectRaw("ventas.numero_factura,ventas.cuf,clientes.id as clienteid , clientes.contador_visitas, autorizaciones.nro_autorizacion, ventas.sucursal_id as sucursal,   sucursals.nombre as sucursal_nombre, ventas.codigo_control,  clientes.telefono,autorizaciones.fecha_fin,autorizaciones.nit,ventas.fecha_venta,ventas.hora_venta,
-        clientes.nombre,clientes.ci_nit, ventas.total_venta , ventas.tipo_pago,ventas.qr,clientes.telefono")
+        $venta = Venta::selectRaw("ventas.numero_factura,ventas.cuf,clientes.id as idcliente , clientes.contador_visitas, autorizaciones.nro_autorizacion, ventas.sucursal_id as sucursal,   sucursals.nombre as sucursal_nombre, ventas.codigo_control,  clientes.telefono,autorizaciones.fecha_fin,autorizaciones.nit,ventas.fecha_venta,ventas.hora_venta,
+        clientes.nombre,clientes.ci_nit, ventas.total_venta , ventas.total_descuento, ventas.total_neto,ventas.tipo_pago,ventas.qr,clientes.telefono, clientes.correo, sucursals.direccion, sucursals.codigo_fiscal")
             ->join('sucursals', 'sucursals.id', '=', 'ventas.sucursal_id')
             ->Leftjoin('clientes', 'clientes.id', '=', 'ventas.cliente_id')
             ->Leftjoin('autorizaciones', 'autorizaciones.id', '=', 'ventas.autorizacion_id')

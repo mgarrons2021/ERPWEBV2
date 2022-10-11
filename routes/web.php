@@ -715,6 +715,6 @@ use App\Http\Controllers\VentaController;
     Route::put('/chanchos/{id}', [App\Http\Controllers\ChanchoController::class, 'update'])->name('chanchos.update');
     Route::get('/chanchos/show/{id}', [App\Http\Controllers\ChanchoController::class, 'show'])->name('chanchos.show');
     Route::delete('/chanchos/{id}', [\App\Http\Controllers\ChanchoController::class, 'destroy'])->name('chanchos.destroy');
-    Route::post('/chanchos/filtrarchanchos', [ChanchoController::class, 'filtrarchanchos'])->name('chanchos.filtrarKeperis');
+    Route::post('/chanchos/filtrarChanchos', [\App\Http\Controllers\ChanchoController::class, 'filtrarChanchos'])->name('chanchos.filtrarChanchos');
 
 

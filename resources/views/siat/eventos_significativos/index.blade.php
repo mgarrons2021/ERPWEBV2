@@ -181,8 +181,8 @@
             },
             success: function(res) {
                 console.log(res);
-                let codigo = res.RespuestaServicioFacturacion.codigo;
-                let descripcion = res.RespuestaServicioFacturacion.descripcion
+                let codigo = res.RespuestaServicioFacturacion.codigoEstado;
+                let descripcion = res.RespuestaServicioFacturacion.codigoDescripcion
                 if (codigo === 981) {
                     Swal.close();
                     Swal.fire({
@@ -196,10 +196,11 @@
                 }
                 /* Falta validar aun no se probó */
                 if (codigo === 908) {
+                    Swal.close();
                     Swal.fire({
                         position: 'center',
                         icon: 'success',
-                        title: "Error:" + codigo,
+                        title: "Codigo::" + codigo,
                         text: descripcion,
                         showConfirmButton: true,
                         timer: 3500,

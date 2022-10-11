@@ -201,8 +201,6 @@ class ServicioFacturacion extends ServicioSiat
 				$fecha_emision_formateada = strtotime($fecha_emision);
 				$venta->update([
 					'cuf' => $factura->cabecera->cuf,
-					'fecha_venta'=> (new Carbon ($fecha_emision_formateada))->toDateString(),
-					'hora_venta'=> (new Carbon ($fecha_emision_formateada))->toTimeString(),
 				]);
 			}
 			$solicitud = new SolicitudServicioRecepcionPaquete();

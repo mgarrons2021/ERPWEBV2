@@ -15,7 +15,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header" style="justify-content: center;">
-                        <h4>PAGOS DEL {{$fecha_inicial_parseada}} HASTA EL {{$fecha_final_parseada}}</h4>
+                        <h4>CHEQUES EMITIDOS DEL {{$fecha_inicial_parseada}} HASTA EL {{$fecha_final_parseada}}</h4>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered" id="table">

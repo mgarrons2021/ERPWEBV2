@@ -229,7 +229,7 @@ class UserController extends Controller
         $user->estado = $request->get('estado');
         /* $mi_imagen = public_path() . '/imgages/products/mi_imagen.jpg'; */
         if ($request->hasFile("foto")) {
-            if (isset($user->foto)  ) {
+            if (isset($user->foto)) {
                 unlink($user->foto);
                 $file = $request->file('foto');
                 $destinationPath = 'img/contratos/';
@@ -354,7 +354,7 @@ class UserController extends Controller
         $user_login = Auth::id();
         $user = User::find($user_login);
         $fecha_actual = Carbon::now()->locale('es')->isoFormat('dddd');
-
+        
         if (isset($user->cargosucursales[0])) {
             $cargo_id = $user->cargosucursals[0]->id;
         }
@@ -371,8 +371,7 @@ class UserController extends Controller
 
         $tareas = Tarea::where('cargo_id', '=', $cargo_id)
             ->where('sucursal_id', Auth::user()->sucursals[0]->id)
-            ->where('dia_semana', $fecha_actual)
-            ->orWhere('dia_semana', 'todos')
+            ->whereIn('dia_semana', array('todos', $fecha_actual))
             ->get();
 
         // dd($tareas);
@@ -396,15 +395,15 @@ class UserController extends Controller
     {
         //dd($request);
         $user = User::find($id);
-        
+
         $fecha_actual = Carbon::now()->format('Y-m-d');
-        
-        
-        $tareas = Tarea::where('cargo_id', '=', $user->cargosucursales[0]->id)
-        ->where('sucursal_id', Auth::user()->sucursals[0]->id)
-        ->where('dia_semana', $fecha_actual)
-        ->orWhere('dia_semana', 'todos')
-        ->get();
+
+
+        $tareas = Tarea::where('cargo_id', '=', $user->cargosucursals[0]->id)
+            ->where('sucursal_id', Auth::user()->sucursals[0]->id)
+            ->where('dia_semana', $fecha_actual)
+            ->whereIn('dia_semana', array('todos', $fecha_actual))
+            ->get();
         /* dd($tareas); */
         $user->tareas()->attach($request->tareas);
         $pivot = TareaUser::where('user_id', $user->id)->whereDate('created_at', $fecha_actual)->get();
@@ -455,17 +454,17 @@ class UserController extends Controller
             ->get();
 
         $tareas_posturno = Tarea::where('cargo_id', '=', $cargo_id)
-            ->where('sucursal_id', $sucursal_usuario )
+            ->where('sucursal_id', $sucursal_usuario)
             ->where('turno', 'Post Turno')
             ->get();
 
         //dd($tareas_ingreso);
 
         $fecha = Carbon::now();
-        
+
         $tarea_user = TareaUser::whereBetween('created_at', [$fecha->startOfDay()->format('Y-m-d H:i:s'), $fecha->endOfDay()->format('Y-m-d H:i:s')])
-        ->where('user_id', $user->id)
-        ->get();
+            ->where('user_id', $user->id)
+            ->get();
 
         /* dd($tarea_user);  */
         return view('personales.tareas.actividadesUsuario', compact('user', 'fecha', 'tareas_ingreso', 'tareas_preturno', 'tareas_despacho', 'tareas_turno', 'tareas_posturno', 'tarea_user'));
@@ -504,11 +503,11 @@ class UserController extends Controller
             ->where('turno', 'Post Turno')
             ->get();
         /* dd($tareas); */
-        
+
         $tarea_user = TareaUser::whereBetween('created_at', [$fecha->startOfDay()->format('Y-m-d H:i:s'), $fecha->endOfDay()->format('Y-m-d H:i:s')])
-        ->where('user_id', $user->id)
-        ->get();
-        
+            ->where('user_id', $user->id)
+            ->get();
+
         return view('personales.tareas.actividadesUsuario', compact(
             'user',
             'fecha',
@@ -538,14 +537,14 @@ class UserController extends Controller
 
     public function marcar_asistencia(Request $request)
     {
-       
+
         $mensaje_de_alerta = "";
         $user = User::where('codigo', $request->get('codigo'))->first();
         $fecha = Carbon::now()->format('Y-m-d');
         $hora_entrada_p =  Carbon::now()->format('H:i:s');
         $hora_entrada =  new Carbon($hora_entrada_p);
         /* dd($hora_entrada); */
- 
+
         if ($user == null) {
             $mensaje_de_alerta = "Codigo de Usuario Incorrecto";
             return redirect()->route('marcadoAsistencia')->with('mensaje', $mensaje_de_alerta);
@@ -565,40 +564,39 @@ class UserController extends Controller
             ]);
             $mensaje_de_alerta = "Registro de Ingreso Exitoso";
             return redirect()->route('marcadoAsistencia')->with('mensaje', $mensaje_de_alerta);
-
         } else {
-            
+
 
             if ($hora_salida_am[0]->hora_salida == "00:00:00") {
 
                 $venta_turno_am = TurnoIngreso::select('ventas')
-                ->where('turno',0)  /* 0 es Am 1 es Pm  */
-                ->where('fecha',$fecha)
-                ->where('sucursal_id',$user->sucursals[0]->id)
-                ->get();
+                    ->where('turno', 0)  /* 0 es Am 1 es Pm  */
+                    ->where('fecha', $fecha)
+                    ->where('sucursal_id', $user->sucursals[0]->id)
+                    ->get();
                 /* dd($venta_turno_am); */
 
-                $hora_entrada_final_am =DB::table('registro_asistencia')
-                ->select('hora_entrada')
-                ->where('fecha',$fecha)
-                ->where('turno',0)
-                ->where('user_id',$user->id)
-                ->get();
-                
-                $horas_trabajadas_am = $hora_entrada->diffInHours($hora_entrada_final_am[0]->hora_entrada); 
-                
-                 $hora_final = DB::table('registro_asistencia')
-                ->where('user_id', $user->id)
-                ->update([
-                    'hora_salida' => $hora_entrada,   
-                    'horas_trabajadas' => $horas_trabajadas_am, 
-                ]); 
-                
-           
+                $hora_entrada_final_am = DB::table('registro_asistencia')
+                    ->select('hora_entrada')
+                    ->where('fecha', $fecha)
+                    ->where('turno', 0)
+                    ->where('user_id', $user->id)
+                    ->get();
+
+                $horas_trabajadas_am = $hora_entrada->diffInHours($hora_entrada_final_am[0]->hora_entrada);
+
+                $hora_final = DB::table('registro_asistencia')
+                    ->where('user_id', $user->id)
+                    ->update([
+                        'hora_salida' => $hora_entrada,
+                        'horas_trabajadas' => $horas_trabajadas_am,
+                    ]);
+
+
                 $mensaje_de_alerta = "Registro de Salida Exitoso";
                 return redirect()->route('marcadoAsistencia')->with('mensaje', $mensaje_de_alerta);
             } else {
-                
+
                 if ($hora_salida_pm == null) {
                     RegistroAsistencia::create([
                         'fecha' => $fecha,
@@ -612,35 +610,35 @@ class UserController extends Controller
                     return redirect()->route('marcadoAsistencia')->with('mensaje', $mensaje_de_alerta);
                 } else {
 
-                
+
                     if ($hora_salida_pm[0]->hora_salida == "00:00:00") {
 
                         $venta_turno_pm = TurnoIngreso::select('ventas')
-                        ->where('turno',1)  /* 0 es Am 1 es Pm  */
-                        ->where('fecha',$fecha)
-                        ->where('sucursal_id',$user->sucursals[0]->id)
-                        ->get();
+                            ->where('turno', 1)  /* 0 es Am 1 es Pm  */
+                            ->where('fecha', $fecha)
+                            ->where('sucursal_id', $user->sucursals[0]->id)
+                            ->get();
 
                         dd($venta_turno_pm);
 
-                        $hora_entrada_final_pm =DB::table('registro_asistencia')
-                        ->select('hora_entrada')
-                        ->where('fecha',$fecha)
-                        ->where('turno',1)
-                        ->where('user_id',$user->id)
-                        ->get();
-                        
-                        $horas_trabajadas_pm = $hora_entrada->diffInHours($hora_entrada_final_pm[0]->hora_entrada); 
-                        
-                        
+                        $hora_entrada_final_pm = DB::table('registro_asistencia')
+                            ->select('hora_entrada')
+                            ->where('fecha', $fecha)
+                            ->where('turno', 1)
+                            ->where('user_id', $user->id)
+                            ->get();
+
+                        $horas_trabajadas_pm = $hora_entrada->diffInHours($hora_entrada_final_pm[0]->hora_entrada);
+
+
                         $hora_final = DB::table('registro_asistencia')
-                        ->where('user_id', $user->id)
-                        ->where('turno', 1)
-                        ->update([
-                            'hora_salida' => $hora_entrada,
-                            'horas_trabajadas' => $horas_trabajadas_pm
-                        ]);
-                        
+                            ->where('user_id', $user->id)
+                            ->where('turno', 1)
+                            ->update([
+                                'hora_salida' => $hora_entrada,
+                                'horas_trabajadas' => $horas_trabajadas_pm
+                            ]);
+
                         $mensaje_de_alerta = "Registro de Salida Exitoso";
                         return redirect()->route('marcadoAsistencia')->with('mensaje', $mensaje_de_alerta);
                     } else {
@@ -660,11 +658,11 @@ class UserController extends Controller
 
         $user_rol = Auth::user()->roles[0]->id;
         $user_sucursal = Auth::user()->sucursals[0]->id;
-        if ($user_rol ==3){
+        if ($user_rol == 3) {
             $registros = RegistroAsistencia::where('fecha', Carbon::now()->format('Y-m-d'))
-            ->where('sucursal_id',$user_sucursal)
-            ->get();
-        }else{
+                ->where('sucursal_id', $user_sucursal)
+                ->get();
+        } else {
             $registros = RegistroAsistencia::where('fecha', Carbon::now()->format('Y-m-d'))->get();
         }
 
@@ -677,7 +675,7 @@ class UserController extends Controller
         $fecha_marcado_final = $request->get('fecha_final');
         $sucursal_id = $request->get('sucursal_id');
 
-        
+
         $sucursales = Sucursal::all();
 
         if ($sucursal_id != 0) {
@@ -821,7 +819,6 @@ class UserController extends Controller
 
     public function obtenerTotales()
     {
-        
     }
 
     public function mostrarUsuarios()

@@ -97,18 +97,21 @@
         <table>
             <thead>
                 <tr class="centrado">
+                    <th class="producto">Categoria</th>
                     <th class="producto">Insumo</th>
                     <th class="cantidad">Cantidad</th>
                     <th class="unidad_medida">U.M.</th>
                 </tr>
             </thead>
             <tbody  class="centrado">
-                @foreach ($pedido->detalle_pedidos as $detalle)
+                @foreach ($detallePedido as $detalle)
                 <tr>
-                    <td class="producto">{{$detalle->producto->nombre}}</td>
+                    <td class="producto">{{$detalle->nombreCategoria}}</td>
+                    <td class="producto">{{$detalle->nombre}}</td>
                     <td class="cantidad">{{$detalle->cantidad_solicitada}}</td>
-                    @if(isset($detalle->producto->unidad_medida_venta->nombre))
-                    <td class="unidad_medida">{{$detalle->producto->unidad_medida_venta->nombre}}</td>
+
+                    @if(isset($detalle->UnidadMedidaNombre))
+                    <td class="unidad_medida">{{$detalle->UnidadMedidaNombre}}</td>
                     @else
                     <td class="unidad_medida">Sin UM</td>
                     @endif

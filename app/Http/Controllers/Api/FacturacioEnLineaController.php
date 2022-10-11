@@ -29,13 +29,13 @@ class FacturacioEnLineaController extends Controller
     public function __construct()
     {
         $this->config = new SiatConfig([
-            'nombreSistema' => 'MAGNOREST',
-            'codigoSistema' => '722907F2BAECC0B26025FE7',
+            'nombreSistema' => 'MAGNORESTv2',
+            'codigoSistema' => '72422DD433BE8177DC71FE6',
             'nit'           => 166172023,
             'razonSocial'   => 'DONESCO S.R.L',
-            'modalidad'     => ServicioSiat::MOD_COMPUTARIZADA_ENLINEA,
+            'modalidad'     => ServicioSiat::MOD_ELECTRONICA_ENLINEA,
             'ambiente'      => ServicioSiat::AMBIENTE_PRUEBAS,
-            'tokenDelegado'    => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJET05FU0NPXzAyMyIsImNvZGlnb1Npc3RlbWEiOiI3MjI5MDdGMkJBRUNDMEIyNjAyNUZFNyIsIm5pdCI6Ikg0c0lBQUFBQUFBQUFETTBNek0wTnpJd01nWUE3bHFjcHdrQUFBQT0iLCJpZCI6NTE5NjgyLCJleHAiOjE2NjQ1ODI0MDAsImlhdCI6MTY2MDgyOTA0NCwibml0RGVsZWdhZG8iOjE2NjE3MjAyMywic3Vic2lzdGVtYSI6IlNGRSJ9.8ubSTM8oYEuY7pHiNQYbNj6I87koRUqzOqsQ341VMKwA8Y_A9nh_qA4ttCdY-6HywevMQ4Ov64I-w7S3k47NYw',
+            'tokenDelegado'    => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJET05FU0NPXzAyMyIsImNvZGlnb1Npc3RlbWEiOiI3MjQyMkRENDMzQkU4MTc3REM3MUZFNiIsIm5pdCI6Ikg0c0lBQUFBQUFBQUFETTBNek0wTnpJd01nWUE3bHFjcHdrQUFBQT0iLCJpZCI6NTE5NjgyLCJleHAiOjE2NjcyNjA4MDAsImlhdCI6MTY2NTI0MDIyOCwibml0RGVsZWdhZG8iOjE2NjE3MjAyMywic3Vic2lzdGVtYSI6IlNGRSJ9.5ZkQ6815VtUXK07ieWTBit6roArGNK2ZIq90W7TdGhzUnotYE7C31nSv-XrifFTSVrEKRgtwiNlDie8wdkrMJg',
             /* 'pubCert'		=> MOD_SIAT_DIR . SB_DS . 'certs' . SB_DS . 'terminalx' . SB_DS . 'certificado.pem',
           'privCert'		=> MOD_SIAT_DIR . SB_DS . 'certs' . SB_DS . 'terminalx' . SB_DS . 'llave_privada.pem', */
             'telefono'        => '34345435',
@@ -86,6 +86,7 @@ class FacturacioEnLineaController extends Controller
             'codigo' => $resCufd->RespuestaCufd->codigo,
             'codigo_control' => $resCufd->RespuestaCufd->codigoControl,
             'direccion' => $resCufd->RespuestaCufd->direccion,
+            'numero_factura'=> 0,
             'fecha_vigencia' => new Carbon($resCufd->RespuestaCufd->fechaVigencia),
             'fecha_generado' => $fecha,
             'sucursal_id' => $sucursal->id,

@@ -27,6 +27,7 @@ class CreateChanchosTable extends Migration
             $table->decimal('pierna_horneado');
             $table->decimal('pierna_cortada');
 
+            $table->decimal('lechon_cortado');
             $table->decimal('chancho_enviado');
 
             $table->timestamps();

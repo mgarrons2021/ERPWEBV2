@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Keperi;
+use App\Models\PedidoProduccion;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -15,9 +16,30 @@ class KeperiController extends Controller
      */
     public function index()
     {
-        $keperis= Keperi::latest()->take(5)->get();
-        
-        return view('keperis.index',compact('keperis'));
+        $fecha = Carbon::now()->toDateString();
+
+        $keperis= Keperi::latest()
+        ->take(5)
+        ->get();
+
+        $keperi_bufetera = PedidoProduccion::selectRaw('platos.nombre, detalle_pedidos_produccion.cantidad_solicitada')
+        ->join('detalle_pedidos_produccion','detalle_pedidos_produccion.pedido_produccion_id','=','pedidos_produccion.id')
+        ->join('platos','platos.id','=',' detalle_pedidos_produccion.plato_id')
+        ->where('detalle_pedidos_produccion.plato_id',17)
+        ->where('fecha',$fecha)
+        ->first();
+
+        $keperi_120 = PedidoProduccion::selectRaw('platos.nombre, detalle_pedidos_produccion.cantidad_solicitada')
+        ->join('detalle_pedidos_produccion','detalle_pedidos_produccion.pedido_produccion_id','=','pedidos_produccion.id')
+        ->join('platos','platos.id','=',' detalle_pedidos_produccion.plato_id')
+        ->where('detalle_pedidos_produccion.plato_id',49)
+        ->where('fecha',$fecha)
+        ->first();
+
+
+
+
+        return view('keperis.index',compact('keperis','keperi_bufetera','keperi_120'));
     }
 
     public function filtrarKeperis(Request $request){

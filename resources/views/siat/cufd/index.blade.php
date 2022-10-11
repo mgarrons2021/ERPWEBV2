@@ -39,30 +39,30 @@
                                         <td style="text-align:center">{{$cufd->codigo}}</td>
                                         <td style="text-align:center">{{$cufd->codigo_control}}</td>
 
-                                        @if ($fecha < $cufd->fecha_vigencia )
-                                            <td style="text-align:center"><span class="badge badge-success">Activo</span></td>
-                                            @else
-                                            <td style="text-align:center"><span class="badge badge-warning">Vencido</span></td>
-                                            @endif
-                                            <td style="text-align:center">{{$cufd->sucursal->nombre}}</td>
+                                        @if ($cufd->estado=='V')
+                                        <td style="text-align:center"><span class="badge badge-success">Activo</span></td>
+                                        @endif
+                                        @if ($cufd->estado=='N')
+                                        <td style="text-align:center"><span class="badge badge-warning">Vencido</span></td>
+                                        @endif
+                                        <td style="text-align:center">{{$cufd->sucursal->nombre}}</td>
+                                        <td>
+                                            <div class="dropdown" style="position: absolute;">
+                                                <a href="#" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="fas fa-ellipsis-v"></i>
+                                                </a>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 
-                                            <td>
-                                                <div class="dropdown" style="position: absolute;">
-                                                    <a href="#" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <i class="fas fa-ellipsis-v"></i>
-                                                    </a>
-                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-
-                                                        <li>
-                                                            <form action="{{route('cufd.destroy',$cufd->id)}}" id="formulario-eliminar2" class="formulario-eliminar" method="POST">
-                                                                @csrf
-                                                                @method('Delete')
-                                                                <a class="dropdown-item" href="javascript:;" onclick="document.getElementById('formulario-eliminar2').submit()" id="enlace">Eliminar Cufd</a>
-                                                            </form>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </td>
+                                                    <li>
+                                                        <form action="{{route('cufd.destroy',$cufd->id)}}" id="formulario-eliminar2" class="formulario-eliminar" method="POST">
+                                                            @csrf
+                                                            @method('Delete')
+                                                            <a class="dropdown-item" href="javascript:;" onclick="document.getElementById('formulario-eliminar2').submit()" id="enlace">Eliminar Cufd</a>
+                                                        </form>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>

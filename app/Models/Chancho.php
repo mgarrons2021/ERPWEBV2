@@ -23,6 +23,7 @@ class Chancho extends Model
         'pierna_marinado',
         'pierna_horneado',
         'pierna_cortada',
+        'lechon_cortado',
         'chancho_enviado'
     ];
 }

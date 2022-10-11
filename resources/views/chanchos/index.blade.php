@@ -13,6 +13,41 @@
     <div class="section-body">
         <div class="row">
             <div class="col-lg-12">
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Seleccione la fecha a Filtrar</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive" style="overflow-x: hidden">
+                            <form action="{{route('chanchos.filtrarChanchos')}}" method="POST">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-md-6">
+
+                                        <div class="input-daterange input-group" id="datepicker">
+                                            <span class="input-group-addon "><strong>Fecha De:</strong> </span>
+                                            <input type="date" id="fecha_inicial" class="input-sm form-control" name="fecha_inicial" value="" required/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+
+                                        <div class="input-daterange input-group" id="datepicker">
+                                            <span class="input-group-addon "><strong>A:</strong> </span>
+                                            <input type="date" id="fecha_final" class="input-sm form-control" name="fecha_final" value="" required/>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="card-footer">
+                                    <div class="col-md-4" style="margin: 0 auto;">
+                                        <input class="form-control btn btn-primary" type="submit" value="Filtrar" id="filtrar" name="filtrar">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
                 <div class="card">
                     <div class="card-body">
                         <a class="btn btn-outline-info" href="{{route('chanchos.create')}}">Nuevo Control</a><br><br>
@@ -25,39 +60,90 @@
                                     <th class="text-center" style="color: #fff;">Fecha Corte</th>
                                     <th class="text-center" style="color: #fff;">Personal Encargado</th>
                                     <th class="text-center" style="color: #fff;">Costilla en Kilos</th>
+                                    
                                     <th class="text-center" style="color: #fff;">Costilla Marinado</th>
+                                    <th class="text-center" style="color: #fff;">% Costilla Marinado</th>
+
                                     <th class="text-center" style="color: #fff;">Costilla Horneado</th>
+                                    <th class="text-center" style="color: #fff;">% Costilla Horneado</th>
+
                                     <th class="text-center" style="color: #fff;">Costilla Cortado</th>
+                                    <th class="text-center" style="color: #fff;">% Deshidratado Costilla </th>
 
                                     <th class="text-center" style="color: #fff;">Pierna en Kilos</th>
                                     <th class="text-center" style="color: #fff;">Pierna Marinado</th>
-                                    <th class="text-center" style="color: #fff;">Pierna Horneado</th>
-                                    <th class="text-center" style="color: #fff;">Pierna Cortado</th>
+                                    <th class="text-center" style="color: #fff;">% Pierna Marinado</th>
 
+                                    <th class="text-center" style="color: #fff;">Pierna Horneado</th>
+                                    <th class="text-center" style="color: #fff;">% Pierna Horneado</th>
+
+                                    <th class="text-center" style="color: #fff;">Pierna Cortado</th>
+                                    <th class="text-center" style="color: #fff;">% Deshidratado Pierna </th>
+
+                                    <th class="text-center" style="color: #fff;">Total Chancho Solicitado</th>
+                                    <th class="text-center" style="color: #fff;">Total Lechon Cortado</th>
                                     <th class="text-center" style="color: #fff;">Total Chancho Enviado</th>
+
+                                    <th class="text-center" style="color: #fff;">Diferencia Cortado/Enviado</th>
                                     
                                     <th class="text-center" style="color: #fff;"></th>
 
                                 </thead>
                                 <tbody>
                                     @foreach ($chanchos as $chancho)
+
+                                    @php
+                                        /* Indicadores Marinado */
+                                        $porcentajeCostillaMarinado = (($chancho->costilla_marinado/$chancho->costilla_kilos)-1)*100;
+                                        $porcentajePiernaMarinado = (($chancho->pierna_marinado/$chancho->pierna_kilos)-1)*100;
+                                    
+                                        /* Indicadores Horneado */
+                                        $porcentajeCostillaHorneado = (($chancho->costilla_horneado/$chancho->costilla_kilos)-1)*100;
+                                        $porcentajePiernaHorneado = (($chancho->pierna_horneado/$chancho->pierna_kilos)-1)*100;
+
+                                        /* Indicadores DisHidratado */
+                                        $deshidratadoCostilla = (($chancho->costilla_horneado/$chancho->costilla_kilos)*100)-1;
+                                        $deshidratadoPierna = (($chancho->pierna_horneado/$chancho->pierna_kilos)*100)-1;
+
+                                        /* Indicadores Diferencias */
+                                        $diferenciaCortadoEnviado = $chancho->lechon_cortado - $chancho->chancho_enviado;
+                                    @endphp
+
                                     <tr>
-                                        <td  class="text-center">
-                                            <a href="{{route('chanchos.show', $chancho->id)}}">{{$chancho->id}} </a> 
-                                        </td>
+                                        <td  class="text-center"><a href="{{route('chanchos.show', $chancho->id)}}">{{$chancho->id}} </a> </td>
 
                                         <td  class="text-center">{{$chancho->fecha}}</td>
                                         <td  class="text-center">{{$chancho->usuario}}</td>
-                                        <td  class="text-center">{{$chancho->costilla_kilos}}</td>
-                                        <td  class="text-center">{{$chancho->costilla_marinado}}</td>
-                                        <td  class="text-center">{{$chancho->costilla_horneado}}</td>
-                                        <td  class="text-center">{{$chancho->costilla_cortado}}</td>
+                                        <td  class="text-center">{{$chancho->costilla_kilos}} Kg</td>
+                                        <td  class="text-center">{{$chancho->costilla_marinado}}Kg </td>
+                                        <td  class="text-center">{{number_format($porcentajeCostillaMarinado,2)}}</td>
+                                        
+                                        <td  class="text-center">{{$chancho->costilla_horneado}}Kg </td>
+                                        <td  class="text-center">{{number_format($porcentajeCostillaHorneado,2)}}</td>
 
-                                        <td  class="text-center">{{$chancho->pierna_kilos}}</td>
-                                        <td  class="text-center">{{$chancho->pierna_marinado}}</td>
+                                        <td  class="text-center">{{$chancho->costilla_cortado}}Kg </td>
+                                        <td  class="text-center">{{number_format($deshidratadoCostilla,2)}}</td>
+
+                                        <td  class="text-center">{{$chancho->pierna_kilos}}Kg </td>
+                                        <td  class="text-center">{{$chancho->pierna_marinado}}Kg </td>
+                                        <td  class="text-center">{{number_format($porcentajePiernaMarinado,2)}}</td>
+
                                         <td  class="text-center">{{$chancho->pierna_horneado}}</td>
+                                        <td  class="text-center">{{number_format($porcentajePiernaHorneado,2)}}</td>
+
                                         <td  class="text-center">{{$chancho->pierna_cortada}}</td>
+                                        <td  class="text-center">{{number_format($deshidratadoPierna,2)}}</td>
+                                        
+                                        @if(isset($chanchoSolicitado->total_chancho_solicitado))
+                                        <td  class="text-center">{{$chanchoSolicitado->total_chancho_solicitado}} Kg</td>
+                                        @else
+                                        <td  class="text-center">Sin Datos</td>
+                                        @endif
+
+                                        <td  class="text-center">{{$chancho->lechon_cortado}}</td>
                                         <td  class="text-center">{{$chancho->chancho_enviado}}</td>
+                                        <td  class="text-center">{{$diferenciaCortadoEnviado}} Kg</td>
+                                        
                                         
                                         <td  class="text-center">
                                             <div class="dropdown" style="position: absolute;">
@@ -202,7 +288,7 @@
         },
         columnDefs: [{
             orderable: false,
-            targets: 6
+            targets: 19
         }]
     });
 </script>

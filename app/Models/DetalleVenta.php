@@ -16,6 +16,7 @@ class DetalleVenta extends Model
         'precio',
         'descuento', 
         'subtotal',
+        'subtotal_neto',
         'plato_id',
         'venta_id'
     ];

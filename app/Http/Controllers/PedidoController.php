@@ -134,8 +134,20 @@ class PedidoController extends Controller
     public function editPedidoEnviado($id)
     {
         $pedido = Pedido::find($id);
+
+        $detallePedido = DetallePedido::selectRaw('detalle_pedidos.id,productos.nombre,detalle_pedidos.cantidad_solicitada,
+         detalle_pedidos.cantidad_enviada ,unidades_medidas_ventas.nombre as UnidadMedidaNombre,productos.categoria_id,
+         detalle_pedidos.precio, detalle_pedidos.subtotal_enviado, detalle_pedidos.subtotal_solicitado , categorias.nombre as nombreCategoria')
+        ->where('pedido_id', '=', $id)
+        ->join('productos','productos.id','=','detalle_pedidos.producto_id')
+        ->join('categorias','categorias.id','=','productos.categoria_id')
+        ->join('unidades_medidas_ventas','unidades_medidas_ventas.id','=','productos.unidad_medida_venta_id')
+        ->orderBy('categorias.nombre', 'ASC')
+        ->orderBy('productos.nombre', 'ASC')
+        ->get();
+
         $categorias = Categoria::all();
-        return view('pedidos.editPedidoEnviado', compact('pedido', 'categorias'));
+        return view('pedidos.editPedidoEnviado', compact('pedido', 'categorias','detallePedido'));
     }
 
     public function update(Request $request, $id)
@@ -323,10 +335,25 @@ class PedidoController extends Controller
     public function VaucherPdf($id)
     {
         $pedido = Pedido::find($id);
+        $pedido->detalle_pedidos()->where(function($query){
+            $query->join('productos','detalle_pedidos.producto_id','=','productos.id')
+            ->orderBy('productos.categoria_id','DESC');
+        })->get();
+    
+   
         $pedido->estado_impresion = 'Y';
         $pedido->save();
-        $detallePedido = DetallePedido::where('pedido_id', '=', $id);
+        
+        $detallePedido = DetallePedido::selectRaw('productos.nombre,detalle_pedidos.cantidad_solicitada,unidades_medidas_ventas.nombre as UnidadMedidaNombre,productos.categoria_id,categorias.nombre as nombreCategoria')
+        ->where('pedido_id', '=', $id)
+        ->join('productos','productos.id','=','detalle_pedidos.producto_id')
+        ->join('categorias','categorias.id','=','productos.categoria_id')
+        ->join('unidades_medidas_ventas','unidades_medidas_ventas.id','=','productos.unidad_medida_venta_id')
+        ->orderBy('categorias.nombre', 'ASC')
+        ->orderBy('productos.nombre', 'ASC')
+        ->get();
 
+        /* dd($detallePedido[0]->UnidadMedidaNombre);  */
         view()->share('pedidos.pedidosVaucher', $pedido);
         view()->share('pedidos.pedidosVaucher', $detallePedido);
 
@@ -561,6 +588,7 @@ class PedidoController extends Controller
             $fecha_inicial = Carbon::now()->toDateString();
             $fecha_final = Carbon::now()->toDateString();
             $fecha = Carbon::now()->toDateString();
+            
 
             $detalle_pedidos =  DB::select("SELECT productos.nombre as NombreProducto, 
             sum(detalle_pedidos.cantidad_enviada) as cantidadenviado, 

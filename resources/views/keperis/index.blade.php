@@ -62,14 +62,14 @@
                                 <thead style="background-color: #6777ef;">
                                     <th class="text-center" style="color: #fff;">Fecha de Cortado</th>
                                     <th class="text-center" style="color: #fff;">Funcionario Encargado</th>
-                                    <th class="text-center" style="color: #fff;">Keperi Kilos</th>
-                                    <th class="text-center" style="color: #fff;">Keperi Para Producir</th>
+                                    <th class="text-center" style="color: #fff;">Keperi Crudo</th>
+                                    <th class="text-center" style="color: #fff;">Keperi Solicitado</th>
                                     <th class="text-center" style="color: #fff;">Keperi Marinado</th>
                                     <th class="text-center" style="color: #fff;">% Hidratado Marinado</th>
                                     <th class="text-center" style="color: #fff;">Keperi Horneado</th>
                                     <th class="text-center" style="color: #fff;">% Deshidratado</th>
                                     <th class="text-center" style="color: #fff;">Keperi Cortado</th>
-                                    <th class="text-center" style="color: #fff;">Descuento Bandeja Cortado</th>
+                                
 
                                     
                                     <th class="text-center" style="color: #fff;">Diferencia Keperi</th> 
@@ -95,8 +95,10 @@
 
                                             $porcentajeCortado = ($keperi->cantidad_cortado/$keperi->cantidad_kilos)*100;
 
-                                            $diferencia = $keperi->cantidad_cortado - $keperi->cantidad_enviado;
-                                            $deshidratado = (($keperi->cantidad_crudo - $keperi->cantidad_cocido)/$keperi->cantidad_crudo ) *100 ;
+                                            $diferencia = $keperi->cantidad_cocido - $keperi->cantidad_cortado;
+
+                                            $deshidratado = (($keperi->cantidad_enviado / $keperi->cantidad_crudo)-1) *100 ;
+                                            
                                             $inflado = ( $keperi->cantidad_crudo/ $keperi->cantidad_marinado) *100 ;
                                             $porcentajeDiferenciaEnviado = ($diferencia/$keperi->cantidad_crudo)*100;
                                             $rendimiento = ($keperi->cantidad_enviado/$keperi->cantidad_crudo)*100
@@ -113,7 +115,7 @@
 
                                        <td class="text-center">{{ abs(number_format($porcentajeDeshidratado,2))  }} % </td> 
                                        <td class="text-center">{{$keperi->cantidad_cortado }} kg </td>
-                                       <td class="text-center">{{$keperi->descuentos_bandejas }} kg </td>
+                                 
                                        <td class="text-center">{{$diferencia}} kg </td>
                                        
 

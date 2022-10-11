@@ -13,7 +13,7 @@ class DetallePedidoProduccion extends Model
     protected $fillable = [
         'precio',
         'cantidad_solicitada',
-        ' cantidad_enviada',
+        'cantidad_enviada',
         'subtotal_solicitado',
         'subtotal_enviado',
         'pedido_produccion_id',

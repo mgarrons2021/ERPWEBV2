@@ -128,12 +128,12 @@
                                     <td style="text-align: center;" colspan="6"> SIN PEDIDOS </td>
                                     </tr>
                                     @endif
-                                    @foreach($pedido->detalle_pedidos as $index => $detalle )
+                                    @foreach($detallePedido as $index => $detalle )
                                     <tr>
-                                        <td style="text-align: center;">{{$detalle->producto->nombre}}</td>
+                                        <td style="text-align: center;">{{$detalle->nombre}}</td>
 
-                                        @if(isset($detalle->producto->unidad_medida_venta->nombre))
-                                        <td style="text-align: center;">{{$detalle->producto->unidad_medida_venta->nombre}}</td>
+                                        @if(isset($detalle->UnidadMedidaNombre))
+                                        <td style="text-align: center;">{{$detalle->UnidadMedidaNombre}}</td>
                                         @else
                                         <td>S/U</td>
                                         @endif

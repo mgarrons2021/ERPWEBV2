@@ -50,7 +50,7 @@ class EmisionIndividualService
         $this->configService = new ConfigService();
     }
 
-    function construirFactura2($codigoPuntoVenta = 0, $codigoSucursal = 0, $modalidad = 0, $documentoSector = 1, $codigoActividad = '620100', $codigoProductoSin = '', $dataFactura = null)
+    function construirFactura2($codigoPuntoVenta = 1, $codigoSucursal = 0, $modalidad = 0, $documentoSector = 1, $codigoActividad = '620100', $codigoProductoSin = '', $dataFactura = null)
     {
         $subTotal = 0;
         $factura = null;
@@ -74,6 +74,7 @@ class EmisionIndividualService
             $detalle->precioUnitario        = $dataFactura['detalle_venta'][$i]['costo'];
             $detalle->montoDescuento        = $dataFactura['detalle_venta'][$i]['descuento'];
             $detalle->subTotal                = $dataFactura['detalle_venta'][$i]['subtotal'] - $dataFactura['detalle_venta'][$i]['descuento'];
+
             $subTotal += $detalle->subTotal;
             $factura->detalle[] = $detalle;
         }
