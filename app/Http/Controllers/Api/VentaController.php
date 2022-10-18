@@ -45,7 +45,7 @@ class VentaController extends Controller
             $tipoFactura = 1; //Factura derecho credito fiscal
             $cantidad_visitas = 1;
             $sucursal_id = $request->sucursal;
-            $puntoVenta = 0;
+            $puntoVenta = 1;
 
             /*  return response()->json($request->nit_ci); */
 

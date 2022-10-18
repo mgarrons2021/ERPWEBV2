@@ -12,7 +12,7 @@ class ConfigService
     public $config;
 
     public $sucursal             = 0;
-    public $puntoventa           = 0;
+    public $puntoventa           = 1;
     public $cantFacturas        = 1000; /* Cantidad factura para hacer pruebas */
     public $codigoEvento        = 0;
     public $evento             = null;

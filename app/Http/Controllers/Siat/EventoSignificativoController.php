@@ -65,7 +65,7 @@ class EventoSignificativoController extends Controller
         /* dd($arrayVentas[0]['detalle_venta'][0]->plato); */
         $evento_significativo = EventoSignificativo::find($ventas[0]->evento_significativo_id);
         $sucursal = 0;
-        $puntoventa = 0;
+        $puntoventa = 1;
         $cantidadFacturas = count($ventas);
         $cafc     = "1011917833B0D";  /* Maybe el CAFC doesnt belongs to the new system register????? */
         $codigoEvento = $evento_significativo->codigo_clasificador;
@@ -130,7 +130,7 @@ class EventoSignificativoController extends Controller
             $this->configService->codigoProductoSin,
             $pvfechaInicio,
             $cufdAntiguo,
-            null,
+            $cafc,
             $arrayVentas,
         );
 

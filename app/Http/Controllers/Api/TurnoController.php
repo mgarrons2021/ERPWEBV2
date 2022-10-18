@@ -44,7 +44,7 @@ class TurnoController extends Controller
         $user_id = User::find($request->user_id);
         $sucursal = Sucursal::find($request->sucursal_id);
         
-        $codigoPuntoVenta  = 0;
+        $codigoPuntoVenta  = 1;
         $fecha_generado_cufd = Carbon::now()->toDateTimeString();
         $fecha = Carbon::now()->format('Y-m-d H:i');
         $turno_am = DB::select("select turno from turnos_ingresos where fecha = '$fecha' and user_id = '$user' and turno = 0 and sucursal_id='$sucursal->id' ");

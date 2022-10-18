@@ -34,7 +34,7 @@ class EmisionIndividualController extends Controller
     {
 
         $fecha_actual = Carbon::now();
-        $puntoventa = 0;
+        $puntoventa = 1;
 
         $sucursal_id = $dataFactura['sucursal']['id'];
         $sucursalcodigoFiscal = $dataFactura['sucursal']['codigo_fiscal'];
