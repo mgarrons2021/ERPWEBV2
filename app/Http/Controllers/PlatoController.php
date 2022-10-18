@@ -23,8 +23,8 @@ class PlatoController extends Controller
      */
     public function index()
     {
-        $categorias_platos = CategoriaPlato::all();
         $platos= Plato::all();
+        $categorias_platos = CategoriaPlato::all();
     
         return view('platos.index', compact('categorias_platos','platos'));
     }
@@ -183,6 +183,19 @@ class PlatoController extends Controller
             return view('recetas.create', compact('categoria_plato', 'recetas', 'productos', 'proveedores','plato'));
         }
         
+    }
+
+    public function filtrarPlatos(Request $request){
+        /* dd($request); */
+      $categorias_platos = CategoriaPlato::all();
+      $categoria_plato_id = $request->categoria_plato_id;
+
+      $platos = Plato::join('platos_sucursales','platos_sucursales.plato_id','=','platos.id')
+      ->where('platos_sucursales.categoria_plato_id',$categoria_plato_id)
+      ->get();
+
+
+        return view('platos.index',compact('platos','categorias_platos'));
     }
 
     public function showPdf($id){

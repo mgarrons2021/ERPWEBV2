@@ -1,4 +1,5 @@
 <?php
+
 namespace SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Invoices;
 
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Message;
@@ -12,11 +13,11 @@ abstract class SiatInvoice extends Message
 	const 	FACTURA_DERECHO_CREDITO_FISCAL = 1;
 	const 	FACTURA_SIN_DERECHO_CREDITO_FISCAL = 2;
 	const 	FACTURA_DOCUMENTO_AJUSTE = 3;
-	
+
 	const 	TIPO_EMISION_ONLINE 	= 1;
 	const 	TIPO_EMISION_OFFLINE 	= 2;
 	const 	TIPO_EMISION_MASIVA 	= 3;
-	
+
 	/**
 	 * @var InvoiceHeader
 	 */
@@ -25,13 +26,13 @@ abstract class SiatInvoice extends Message
 	 * @var InvoiceDetail[]
 	 */
 	public	$detalle = [];
-	
-	
+
+
 	protected	$required = [];
 	protected	$nsData = [];
-	
+
 	public		$endpoint;
-    
+
 	public function __construct()
 	{
 		$this->xmlAllFields = true;
@@ -49,53 +50,46 @@ abstract class SiatInvoice extends Message
 	public function calculaDigitoMod11(string $cadena, int $numDig, int $limMult, bool $x10)
 	{
 		$cadenaSrc = $cadena;
-		
+
 		$mult = $suma = $i = $n = $dig = 0;
-		
+
 		if (!$x10) $numDig = 1;
-		
-		for($n = 1; $n <= $numDig; $n++) 
-		{
+
+		for ($n = 1; $n <= $numDig; $n++) {
 			$suma = 0;
 			$mult = 2;
-			for($i = strlen($cadena) - 1; $i >= 0; $i--) 
-			{
-				$cadestr = $cadena[$i];//substr($cadena, $i, $i + 1);
+			for ($i = strlen($cadena) - 1; $i >= 0; $i--) {
+				$cadestr = $cadena[$i]; //substr($cadena, $i, $i + 1);
 				$intNum = (int)($cadestr);
 				//echo 'cadestr: ', $cadestr, "\n";
 				//echo 'intNum: ', $intNum, "\n";
 				$suma += ($mult * $intNum);
-				if(++$mult > $limMult) $mult = 2;
+				if (++$mult > $limMult) $mult = 2;
 			}
-			if ($x10) 
-			{
+			if ($x10) {
 				$dig = (($suma * 10) % 11) % 10;
-			}
-			else 
-			{
+			} else {
 				$dig = $suma % 11;
 			}
-			if ($dig == 10) 
-			{
+			if ($dig == 10) {
 				$cadena .= "1";
 			}
-			if ($dig == 11) 
-			{
+			if ($dig == 11) {
 				$cadena .= "0";
 			}
 			if ($dig < 10) {
-				
+
 				//$cadena .= String.valueOf(dig);
 				$cadena .= $dig;
 			}
 			//echo "Dig: ", $dig, "\n";
 		}
-		
+
 		$modulo = substr($cadena, strlen($cadena) - $numDig, strlen($cadena));
-		
+
 		//echo $cadena, "\n";
 		//echo 'Calculado modulo 11: ', $cadenaSrc, " => ", $modulo, "\n";
-		
+
 		return $modulo;
 	}
 	public function buildCuf($sucursalNro, $modalidad, $tipoEmision, $tipoFactura, $codigoControl)
@@ -105,7 +99,9 @@ abstract class SiatInvoice extends Message
 		$tipoSector 		= str_pad($this->cabecera->codigoDocumentoSector, 2, '0', STR_PAD_LEFT);
 		$numeroFactura 		= str_pad($this->cabecera->numeroFactura, 10, '0', STR_PAD_LEFT);
 		$numeroPuntoVenta 	= str_pad($this->cabecera->codigoPuntoVenta, 4, '0', STR_PAD_LEFT);
-		$fechaHora 			= date('YmdHisv', strtotime($this->cabecera->fechaEmision));//date('YmdHisv');
+		$fechaHora 			= date('YmdHisv', strtotime($this->cabecera->fechaEmision)); //date('YmdHisv');
+
+
 		/*
 		$nitEmisor 			= str_pad('123456789', 13, '0', STR_PAD_LEFT);
 		$sucursalNro 		= str_pad('0', 4, '0', STR_PAD_LEFT);
@@ -114,11 +110,12 @@ abstract class SiatInvoice extends Message
 		$numeroPuntoVenta 	= str_pad('0', 4, '0', STR_PAD_LEFT);
 		$fechaHora 			= '20190113163721231';
 		*/
-		
+
+		/* print_r("Servicio Facturacion: ".$nitEmisor . "-" . $fechaHora . "-" . $modalidad . "-" . $tipoEmision . "-" . $tipoFactura . "-" . $tipoSector . "-" . $numeroFactura . "-" . $numeroPuntoVenta) . "<br>"; */
 		$cadena 		= "{$nitEmisor}{$fechaHora}{$sucursalNro}{$modalidad}{$tipoEmision}{$tipoFactura}{$tipoSector}{$numeroFactura}{$numeroPuntoVenta}";
 		$verificador 	= $this->calculaDigitoMod11($cadena, 1, 9, false);
 		//$b16_str 		= $this->bcdechex(ltrim($cadena . $verificador));
-		$b16_str 		= strtoupper( $this->bcdechex( $cadena . $verificador ) );
+		$b16_str 		= strtoupper($this->bcdechex($cadena . $verificador));
 		$this->cabecera->cuf = $b16_str . $codigoControl;
 		//die("cadena length: ". strlen($cadena) ."\nverificador: $verificador\nb16_str: $b16_str\nCUF: {$this->header->cuf}\n");
 		/*
@@ -130,14 +127,14 @@ abstract class SiatInvoice extends Message
 		echo 'CUF: ', $this->cabecera->cuf, "\n";
 		//*/
 	}
-	public function bcdechex($dec) 
+	public function bcdechex($dec)
 	{
 		$hex = '';
 		do {
 			$last = bcmod($dec, 16);
-			$hex = dechex($last).$hex;
+			$hex = dechex($last) . $hex;
 			$dec = bcdiv(bcsub($dec, $last), 16);
-		} while($dec>0);
+		} while ($dec > 0);
 		return $hex;
 	}
 	public function getUrl($ticket = true)
@@ -146,7 +143,8 @@ abstract class SiatInvoice extends Message
 	}
 	public static function buildUrl($nit, $cuf, $nroFactura)
 	{
-		$url = sprintf("https://pilotosiat.impuestos.gob.bo/consulta/QR?nit=%d&cuf=%s&numero=%d&t=%d",
+		$url = sprintf(
+			"https://pilotosiat.impuestos.gob.bo/consulta/QR?nit=%d&cuf=%s&numero=%d&t=%d",
 			$nit,
 			$cuf,
 			$nroFactura,
@@ -183,12 +181,12 @@ abstract class SiatInvoice extends Message
 	 */
 	public static function buildFromXmlFile($filename)
 	{
-		if( !is_file($filename) )
+		if (!is_file($filename))
 			throw new Exception('Invalid invoice file');
 		$obj = simplexml_load_file($filename, static::class);
 		return $obj;
 	}
-	public function getEndpoint( $modalidad, $ambiente )
+	public function getEndpoint($modalidad, $ambiente)
 	{
 		return self::getWsdl($modalidad, $ambiente, $this->cabecera->codigoDocumentoSector);
 	}
@@ -206,18 +204,17 @@ abstract class SiatInvoice extends Message
 	}
 	public static function getWsdl($modalidad, $ambiente, $documentoSector)
 	{
-		if( $documentoSector == DocumentTypes::FACTURA_SERV_BASICOS )
+		if ($documentoSector == DocumentTypes::FACTURA_SERV_BASICOS)
 			return $ambiente == 1 ? "" : "https://pilotosiatservicios.impuestos.gob.bo/v2/ServicioFacturacionServicioBasico?wsdl";
-		if( $documentoSector == DocumentTypes::FACTURA_COMPRA_VENTA )
+		if ($documentoSector == DocumentTypes::FACTURA_COMPRA_VENTA)
 			return $ambiente == 1 ? "" : "https://pilotosiatservicios.impuestos.gob.bo/v2/ServicioFacturacionCompraVenta?wsdl";
-		if( $documentoSector == DocumentTypes::FACTURA_ENT_FINANCIERA )
+		if ($documentoSector == DocumentTypes::FACTURA_ENT_FINANCIERA)
 			return $ambiente == 1 ? "" : "https://pilotosiatservicios.impuestos.gob.bo/v2/ServicioFacturacionEntidadFinanciera?wsdl";
-		
-		if( ServicioSiat::MOD_ELECTRONICA_ENLINEA == $modalidad )
-		{
+
+		if (ServicioSiat::MOD_ELECTRONICA_ENLINEA == $modalidad) {
 			return $ambiente == 1 ? '' : 'https://pilotosiatservicios.impuestos.gob.bo/v2/ServicioFacturacionElectronica?wsdl';
 		}
-		
+
 		return $ambiente == 1 ? '' : 'https://pilotosiatservicios.impuestos.gob.bo/v2/ServicioFacturacionComputarizada?wsdl';
 	}
 }

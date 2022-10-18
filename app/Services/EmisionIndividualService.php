@@ -50,6 +50,58 @@ class EmisionIndividualService
         $this->configService = new ConfigService();
     }
 
+    
+
+    function construirFactura3($codigoPuntoVenta = 0, $codigoSucursal = 0, $modalidad = 0, $documentoSector = 1, $codigoActividad = '620100', $codigoProductoSin = '', $dataFactura = null)
+    {
+        /*  dd($dataFactura); */
+        $subTotal = 0;
+        $factura = null;
+        $detailClass = InvoiceDetail::class;
+        if ($modalidad == ServicioSiat::MOD_ELECTRONICA_ENLINEA) {
+            if ($documentoSector == DocumentTypes::FACTURA_COMPRA_VENTA)
+                $factura = new ElectronicaCompraVenta();
+        } else {
+            if ($documentoSector == DocumentTypes::FACTURA_COMPRA_VENTA)
+                $factura = new CompraVenta();
+        }
+        for ($i = 0; $i < sizeof($dataFactura['detalle_venta']); $i++) {
+            $detalle = new $detailClass();
+            $detalle->cantidad                = $dataFactura['detalle_venta'][$i]->cantidad;
+            $detalle->actividadEconomica    = $codigoActividad;
+            $detalle->codigoProducto        = $dataFactura['detalle_venta'][$i]->plato_id;
+            $detalle->codigoProductoSin        = $codigoProductoSin;
+            $detalle->descripcion            = $dataFactura['detalle_venta'][$i]->plato->nombre;
+            $detalle->precioUnitario        = $dataFactura['detalle_venta'][$i]->precio;
+            $detalle->montoDescuento        = $dataFactura['detalle_venta'][$i]->descuento;
+            $detalle->subTotal                = $dataFactura['detalle_venta'][$i]['subtotal'] - $dataFactura['detalle_venta'][$i]['descuento'];
+            $subTotal += $detalle->subTotal;
+            $factura->detalle[] = $detalle;
+        }
+        $factura->cabecera->razonSocialEmisor    = $this->configService->config->razonSocial;
+        $factura->cabecera->municipio            = 'Santa Cruz de la Sierra';
+        $factura->cabecera->telefono            = '78555410';
+        $factura->cabecera->numeroFactura        = $dataFactura['venta']['numero_factura'];
+        $factura->cabecera->codigoSucursal        = $dataFactura['sucursal']['codigo_fiscal'];
+        $factura->cabecera->direccion            = $dataFactura['sucursal']['direccion'];
+        $factura->cabecera->codigoPuntoVenta    = $codigoPuntoVenta;
+        $factura->cabecera->fechaEmision        =  date("Y-m-d\TH:i:s.v", strtotime($dataFactura['venta']['created_at']));
+        $factura->cabecera->nombreRazonSocial    = $dataFactura['cliente']['nombre'];
+        $factura->cabecera->codigoTipoDocumentoIdentidad    = $dataFactura['venta']->documento_identidad->codigo_clasificador; //Tipo de Documento (Ci,Nit,PassPort etc) 
+        $factura->cabecera->numeroDocumento        = $dataFactura['cliente']['ci_nit'];
+        $factura->cabecera->codigoCliente        = $dataFactura['cliente']['id']; //Codigo Unico Asignado por el sistema de facturacion (ID DEL CLIENTE)
+        $factura->cabecera->codigoMetodoPago    = 1;
+        $factura->cabecera->montoTotal            = $dataFactura['venta']['total_neto'];
+        $factura->cabecera->montoTotalMoneda    = $factura->cabecera->montoTotal;
+        $factura->cabecera->montoTotalSujetoIva    = $factura->cabecera->montoTotal;
+        $factura->cabecera->descuentoAdicional    = 0;
+        $factura->cabecera->codigoMoneda        = 1; //BOLIVIANO
+        $factura->cabecera->tipoCambio            = 1;
+        $factura->cabecera->cuf            = $dataFactura['venta']['cuf'];
+        $factura->cabecera->usuario              = $dataFactura['user']['name'] . " " . $dataFactura['user']['apellido'];
+        return $factura;
+    }
+
     function construirFactura2($codigoPuntoVenta = 1, $codigoSucursal = 0, $modalidad = 0, $documentoSector = 1, $codigoActividad = '620100', $codigoProductoSin = '', $dataFactura = null)
     {
         $subTotal = 0;
@@ -87,57 +139,7 @@ class EmisionIndividualService
         $factura->cabecera->codigoPuntoVenta    = $codigoPuntoVenta;
         $factura->cabecera->fechaEmision        = date("Y-m-d\TH:i:s.v", strtotime($dataFactura['venta']['created_at']));
         $factura->cabecera->nombreRazonSocial    = $dataFactura['cliente']['nombre'];
-        $factura->cabecera->codigoTipoDocumentoIdentidad    = 1; //NIT 
-        $factura->cabecera->numeroDocumento        = $dataFactura['cliente']['ci_nit'];
-        $factura->cabecera->codigoCliente        = $dataFactura['cliente']['id']; //Codigo Unico Asignado por el sistema de facturacion (ID DEL CLIENTE)
-        $factura->cabecera->codigoMetodoPago    = 1;
-        $factura->cabecera->montoTotal            = $dataFactura['venta']['total_neto'];
-        $factura->cabecera->montoTotalMoneda    = $factura->cabecera->montoTotal;
-        $factura->cabecera->montoTotalSujetoIva    = $factura->cabecera->montoTotal;
-        $factura->cabecera->descuentoAdicional    = 0;
-        $factura->cabecera->codigoMoneda        = 1; //BOLIVIANO
-        $factura->cabecera->tipoCambio            = 1;
-        $factura->cabecera->cuf            = $dataFactura['venta']['cuf'];
-        $factura->cabecera->usuario              = $dataFactura['user']['name'] . " " . $dataFactura['user']['apellido'];
-        return $factura;
-    }
-
-    function construirFactura3($codigoPuntoVenta = 0, $codigoSucursal = 0, $modalidad = 0, $documentoSector = 1, $codigoActividad = '620100', $codigoProductoSin = '', $dataFactura = null)
-    {
-        /*  dd($dataFactura); */
-        $subTotal = 0;
-        $factura = null;
-        $detailClass = InvoiceDetail::class;
-        if ($modalidad == ServicioSiat::MOD_ELECTRONICA_ENLINEA) {
-            if ($documentoSector == DocumentTypes::FACTURA_COMPRA_VENTA)
-                $factura = new ElectronicaCompraVenta();
-        } else {
-            if ($documentoSector == DocumentTypes::FACTURA_COMPRA_VENTA)
-                $factura = new CompraVenta();
-        }
-        for ($i = 0; $i < sizeof($dataFactura['detalle_venta']); $i++) {
-            $detalle = new $detailClass();
-            $detalle->cantidad                = $dataFactura['detalle_venta'][$i]->cantidad;
-            $detalle->actividadEconomica    = $codigoActividad;
-            $detalle->codigoProducto        = $dataFactura['detalle_venta'][$i]->plato_id;
-            $detalle->codigoProductoSin        = $codigoProductoSin;
-            $detalle->descripcion            = $dataFactura['detalle_venta'][$i]->plato->nombre;
-            $detalle->precioUnitario        = $dataFactura['detalle_venta'][$i]->precio;
-            $detalle->montoDescuento        = $dataFactura['detalle_venta'][$i]->descuento;
-            $detalle->subTotal                = $dataFactura['detalle_venta'][$i]['subtotal'] - $dataFactura['detalle_venta'][$i]['descuento'];
-            $subTotal += $detalle->subTotal;
-            $factura->detalle[] = $detalle;
-        }
-        $factura->cabecera->razonSocialEmisor    = $this->configService->config->razonSocial;
-        $factura->cabecera->municipio            = 'Santa Cruz de la Sierra';
-        $factura->cabecera->telefono            = '78555410';
-        $factura->cabecera->numeroFactura        = $dataFactura['venta']['numero_factura'];
-        $factura->cabecera->codigoSucursal        = $dataFactura['sucursal']['codigo_fiscal'];
-        $factura->cabecera->direccion            = $dataFactura['sucursal']['direccion'];
-        $factura->cabecera->codigoPuntoVenta    = $codigoPuntoVenta;
-        $factura->cabecera->fechaEmision        =  date("Y-m-d\TH:i:s.v", strtotime($dataFactura['venta']['created_at']));
-        $factura->cabecera->nombreRazonSocial    = $dataFactura['cliente']['nombre'];
-        $factura->cabecera->codigoTipoDocumentoIdentidad    = 1; //NIT 
+        $factura->cabecera->codigoTipoDocumentoIdentidad    = $dataFactura['venta']->documento_identidad->codigo_clasificador; //NIT 
         $factura->cabecera->numeroDocumento        = $dataFactura['cliente']['ci_nit'];
         $factura->cabecera->codigoCliente        = $dataFactura['cliente']['id']; //Codigo Unico Asignado por el sistema de facturacion (ID DEL CLIENTE)
         $factura->cabecera->codigoMetodoPago    = 1;
@@ -285,9 +287,8 @@ class EmisionIndividualService
 
         $cuis = SiatCui::where('sucursal_id', $sucursal_DB->id)
             ->where('estado', 'V')
-            ->orderBy('id', 'desc')->first();
-
-        //dd($cuis);
+            ->orderBy('id', 'desc')
+            ->first();
 
         $cufd = SiatCufd::where('sucursal_id', $sucursal_DB->id)
             ->whereDate('fecha_vigencia', '>=', $fecha_actual)
@@ -297,8 +298,6 @@ class EmisionIndividualService
         $service = SiatFactory::obtenerServicioFacturacion($this->configService->config, $cuis->codigo_cui, $cufd->codigo, $cufd->codigo_control);
         $service->codigoControl = $cufd->codigo_control;
         $res = $service->recepcionFactura($factura, SiatInvoice::TIPO_EMISION_ONLINE, $tipoFactura);
-        /*  $this->test_log("RESULTADO RECEPCION FACTURA\n=============================");*/
-        /* $this->test_log($res);  */
         return $res;
     }
 

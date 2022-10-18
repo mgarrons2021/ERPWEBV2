@@ -26,8 +26,12 @@
               @endif
             </div>
             <h5 class="card-title">Nombre del Plato: {{$plato->nombre}}</h5>
-            <p class="card-text">Categoria plato : {{ $plato->categoria_plato->nombre }}</p>
+            
+            @if( isset($plato->unidad_medida_compra->nombre) && isset($plato->unidad_medida_venta->nombre)  )
             <p class="card-text">UMC: {{ $plato->unidad_medida_compra->nombre }} - UMV : {{ $plato->unidad_medida_venta->nombre }} </p>
+            @else 
+            <p>SIN UMC - UMV</p>
+            @endif
             
             <p class="card-text"><small class="text-muted">@if($plato->estado == 1)
                 <td> <span class="badge badge-success"> Ofertado</span></td>

@@ -23,8 +23,8 @@ class VentaService
         $user = User::find($ventaData['user_id']);
 
         $venta = new Venta();
-        $venta->fecha_venta = Carbon::now();
-        $venta->hora_venta = $hora_actual;
+        $venta->fecha_venta = $ventaData['fechaEmision'];
+        $venta->hora_venta = $ventaData['fechaEmision'];
         $venta->total_venta = $ventaData['total_venta'];
         $venta->total_descuento = $ventaData['total_descuento'];
         $venta->total_neto = $ventaData['total_neto'];
@@ -49,9 +49,14 @@ class VentaService
         $turno->nro_transacciones++;
         $venta->nro_transaccion = $turno->nro_transacciones;
         $venta->evento_significativo_id = $ventaData['evento_significativo_id'];
+        $venta->leyenda_factura_id = $ventaData['leyenda_factura_id'];
+        $venta->documento_identidad_id = $ventaData['documento_identidad_id'];
+
+
         $venta->cuf = $ventaData['cuf'];
         $venta->cufd_id = $ventaData['cufd_id'];
         $venta->estado_emision = 'P';
+        $venta->created_at = $ventaData['fechaEmision'];
         $turno->save();
 
         $venta->numero_factura = $ventaData['numero_factura'];

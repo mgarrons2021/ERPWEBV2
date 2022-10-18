@@ -344,7 +344,7 @@ class SincronizarCatalogosController extends Controller
         
         
         $this->sincronizarTiposDocumentoSector($sucursal);
-        /*  
+         
         $this->sincronizarMetodosPagos($sucursal);    
         $this->sincronizarTiposPuntosFacturas($sucursal);
         $this->sincronizarUnidadesMedidades($sucursal);
@@ -366,19 +366,16 @@ class SincronizarCatalogosController extends Controller
         $this->sincronizarMensajesServicios($sucursal);
         $this->sincronizarFechaHora($sucursal);
        
-
-        
-        
         $this->sincronizarDocumentosIdentidades($sucursal);
-        $this->sincronizarListadoTotalActividades($sucursal); */
+        $this->sincronizarListadoTotalActividades($sucursal);
 
-        $listado_total_actividades = ListadoTotalActividad::count();
+       /*  $listado_total_actividades = ListadoTotalActividad::count();
         if ($listado_total_actividades >= 0){
             $res = "Sincronizacion Catalogo Exitosa";
-        }
+        } */
      
        return response()->json([
-            'response' => $res
+            'response' => "Sincronizacion Catalogo Exitosa"
         ]); 
 
         

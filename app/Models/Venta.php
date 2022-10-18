@@ -6,6 +6,9 @@ use App\Models\Siat\EventoSignificativo;
 use App\Models\Siat\SiatCufd;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Siat\DocumentoSector;
+use App\Models\siat\DocumentoIdentidad;
+use App\Models\Siat\LeyendaFactura;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
@@ -19,7 +22,8 @@ class Venta extends Model
         'total_venta', 'total_descuento', 'total_neto',
         'tipo_pago', 'estado', 'estado_emision', 'user_id',
         'cliente_id', 'sucursal_id', 'turnos_ingreso_id',
-        'codigo_control', 'qr', 'cuf', 'evento_significativo_id'
+        'codigo_control', 'qr', 'cuf', 'evento_significativo_id',
+        'documento_identidad_id', 'leyenda_factura_id'
     ];
 
     public function user()
@@ -62,11 +66,21 @@ class Venta extends Model
         return $this->belongsTo(SiatCufd::class);
     }
 
+    public function documento_identidad()
+    {
+        return $this->belongsTo(DocumentoIdentidad::class);
+    }
+
+    public function leyenda_factura()
+    {
+        return $this->belongsTo(LeyendaFactura::class);
+    }
+
     public function getSales($fecha_inicio, $fecha_fin, $sucursal)
     {
         $fecha = Carbon::now()->toDateString();
         if (isset($fecha_inicio) && isset($fecha_fin)) {
-          /*   return $fecha_inicio; */
+            /*   return $fecha_inicio; */
             $plates = Venta::where('sucursal_id', $sucursal)->whereBetween('fecha_venta', [$fecha_inicio, $fecha_fin])->get();
             /* $sql = "select (@rownum:=@rownum+1) AS nro_registro,ventas.id , ventas.fecha_venta ,users.name as user, ventas.hora_venta , turnos_ingreso_id as turno , ventas.tipo_pago, ventas.total_venta, ventas.estado,
                 ventas.numero_factura,ventas.lugar , ventas.nro_transaccion,turnos_ingresos.turno
@@ -77,7 +91,7 @@ class Venta extends Model
             $plates = DB::select($sql); */
             return $plates;
         } else {
-           /*  return $sucursal; */
+            /*  return $sucursal; */
             $plates = Venta::where('sucursal_id', $sucursal)->whereBetween('fecha_venta', [$fecha, $fecha])->get();
             /* $sql = "select (@rownum:=@rownum+1) AS nro_registro,ventas.id , ventas.fecha_venta , users.name as user, ventas.hora_venta , turnos_ingreso_id as turno , ventas.tipo_pago , ventas.total_venta , ventas.estado, 
             ventas.numero_factura,ventas.lugar, ventas.nro_transaccion,turnos_ingresos.turno

@@ -15,6 +15,7 @@ class Compra extends Model
         'total',
         'fecha_compra',
         'estado',
+        'glosa',
         'tipo_comprobante',
         'user_id',
         'sucursal_id',

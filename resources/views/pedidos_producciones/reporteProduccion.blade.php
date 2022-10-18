@@ -138,7 +138,6 @@
 
 
 @section('page_js')
-
 <script>
   $(document).ready(function() {
     $('#table').DataTable({

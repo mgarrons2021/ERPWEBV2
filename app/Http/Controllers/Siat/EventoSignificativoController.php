@@ -65,10 +65,10 @@ class EventoSignificativoController extends Controller
         /* dd($arrayVentas[0]['detalle_venta'][0]->plato); */
         $evento_significativo = EventoSignificativo::find($ventas[0]->evento_significativo_id);
         $sucursal = 0;
-        $puntoventa = 1;
+        $puntoventa = 0;
         $cantidadFacturas = count($ventas);
         $cafc     = "1011917833B0D";  /* Maybe el CAFC doesnt belongs to the new system register????? */
-        $codigoEvento = 5;
+        $codigoEvento = $evento_significativo->codigo_clasificador;
         $fecha_generica = Carbon::now();
         $sucursal_db = Sucursal::where('codigo_fiscal', $sucursal)->first();
         $cufd_bd = SiatCufd::find($ventas[0]->cufd_id);
@@ -83,7 +83,7 @@ class EventoSignificativoController extends Controller
         $codigoControlAntiguo     = $cufd_bd->codigo_control;
 
         $resCufd        = $this->cufdService->obtenerCufd($puntoventa, $sucursal, $resCuis);
-       /*  dd($resCufd); */
+        /*  dd($resCufd); */
         $fecha_generado_cufd = Carbon::now()->toDateTimeString();
 
         $guardar_cufd = SiatCufd::create([
@@ -135,6 +135,7 @@ class EventoSignificativoController extends Controller
         );
 
         $res = $this->emisionPaqueteService->testPaquetes($sucursal, $puntoventa, $facturas, $codigoControlAntiguo, $this->configService->tipoFactura, $resEvento->RespuestaListaEventos, $cafc);
+        /* print_r( "TestPaquete" + $res); */
 
         if (isset($res->RespuestaServicioFacturacion->codigoRecepcion)) {
             $res = $this->emisionPaqueteService->testRecepcionPaquete($sucursal, $puntoventa, $this->configService->documentoSector, $this->configService->tipoFactura, $res->RespuestaServicioFacturacion->codigoRecepcion);
@@ -222,7 +223,7 @@ class EventoSignificativoController extends Controller
             ->errorCorrection('H')
             ->generate('https://pilotosiat.impuestos.gob.bo/consulta/QR?nit=166172023&cuf=' . $venta->cuf . '&numero=' . $venta->numero_factura . '&t=1'));
 
-        $pdf = PDF::loadView('mails.FacturaPDF', [
+        $pdf = PDF::loadView('mails.FacturaVaucherPDF', [
             "clienteNombre" => $cliente->nombre,
             "clienteCorreo" => $cliente->correo,
             "clienteNit" => $cliente->ci_nit,

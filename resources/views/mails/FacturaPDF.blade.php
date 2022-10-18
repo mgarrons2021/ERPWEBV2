@@ -89,12 +89,6 @@
                 {{ $venta['cuf'] }}
             </td>
         </tr>
-        <tr style="text-align: left;" width="100%">
-            <td style="width:10%;vertical-align:text-top;">
-                ACTIVIDAD
-            </td>
-            <td style="width:20%;vertical-align:text-top;">RESTAURANTE</td>
-        </tr>
     </table>
 
     <h3>FACTURA</h3>

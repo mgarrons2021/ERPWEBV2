@@ -54,7 +54,8 @@
                             <thead class="table-hover table-info">
 
                                 <th style="text-align: center;"> Nombre Producto </th>
-                                <th style="text-align: center;"> U.M. </th>
+                                
+                                <th style="text-align: center;"> Insumos Solicitados </th>
                                 <th style="text-align: center;"> Insumos Enviados </th>
                                 <th style="text-align: center;"> Sub Total </th>
 
@@ -72,7 +73,12 @@
                                     $SubtotalEnviado+=$pedido->TotalEnviada;
                                     @endphp
                                     <td style="text-align: center;">{{$pedido->NombreProducto }}</td>
-                                    <td style="text-align: center;">{{$pedido->unidad_medida }}</td>
+                                   <!--  @if(isset($pedido->unidadNombre))
+                                    <td style="text-align: center;">{{$pedido->unidadNombre }}</td>
+                                    @else
+                                    <td class="text-center">Sin Um</td>
+                                    @endif  -->
+                                    <td style="text-align: center;">{{$pedido->cantidadSolicitado}}</td>  
                                     <td style="text-align: center;">{{$pedido->cantidadenviado}}</td>  
                                     <td style="text-align: center;">{{$pedido->TotalEnviada}}</td>         
                                 </tr>

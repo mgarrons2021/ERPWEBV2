@@ -20,6 +20,8 @@ class CufService
 		$tipoFactura = $dataCuf['tipoFactura'];
 		$codigoControl = $dataCuf['codigoControl'];
 
+		/* print_r("CufService: " . $nitEmisor . "-" . $fechaHora . "-" . $modalidad . "-" . $tipoEmision . "-" . $tipoFactura . "-" . $tipoSector . "-" . $numeroFactura . "-" . $numeroPuntoVenta) . "<br>"; */
+
 		$cadena 		= "{$nitEmisor}{$fechaHora}{$sucursalNro}{$modalidad}{$tipoEmision}{$tipoFactura}{$tipoSector}{$numeroFactura}{$numeroPuntoVenta}";
 		$verificador 	= $this->calculaDigitoMod11($cadena, 1, 9, false);
 		$b16_str 		= strtoupper($this->bcdechex($cadena . $verificador));

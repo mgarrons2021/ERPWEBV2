@@ -38,6 +38,12 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="glosa">Glosa</label>
+                                        <input type="text" name="glosa" id="glosa" class="form-control" value="" placeholder="Glosa de la Factura...">
+                                    </div>
+                                </div>
 
                             <div class="row" id="div_nro_factura" name="div_nro_factura">
                                 <div class="col-md-4">

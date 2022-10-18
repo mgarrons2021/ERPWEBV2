@@ -114,8 +114,11 @@ class VentaController extends Controller
                 'qr' => $request->qr,
                 'numero_factura' => $cufd->numero_factura,
                 'evento_significativo_id' => $request->evento_significativo_id,
+                'leyenda_factura_id' => $leyenda->id,
+                'documento_identidad_id' => $request->documento_identidad_id,
                 'cuf' => $cuf,
                 'cufd_id' => $cufd->id,
+                "fechaEmision" => $dataCuf['fechaEmision']
             ]);
 
             $ventaService = new VentaService();
@@ -167,10 +170,12 @@ class VentaController extends Controller
 
                 $hora  = new Carbon($venta->hora_venta);
                 $fecha = new Carbon($venta->fecha_venta);
+                $leyenda_factura = LeyendaFactura::all()->random(1)->first();
 
                 $total_texto = $numero_letras->convertir(floatval($venta->total_neto));
                 $detalle_venta = DetalleVenta::where('venta_id', $venta->id)->get();
-                $pdf = PDF::loadView('mails.FacturaPDF', [
+
+                $pdf = PDF::loadView('mails.FacturaVaucherPDF', [
                     "clienteNombre" => $cliente->nombre,
                     "clienteCorreo" => $cliente->correo,
                     "clienteNit" => $cliente->ci_nit,
@@ -181,11 +186,11 @@ class VentaController extends Controller
                     "qrcode" => $qrcode,
                     "hora" => $hora->format('h:i'),
                     'fecha' => $fecha->format('Y-m-d'),
-                    'total' => $total_texto
+                    'total' => $total_texto,
+                    'leyenda' => $leyenda_factura
                 ]);
 
                 $data = [
-                    
                     "clienteNombre" => $cliente->nombre,
                     "clienteCorreo" => $cliente->correo,
                     "venta" => $venta,

@@ -251,7 +251,7 @@
                     @endif
                 </tr>
                 <tr>
-                    <th>Usuaro:</th>
+                    <th>Usuario:</th>
                     @if(isset($compra->user->name))
                     <td>{{$compra->user->name}}</td>
                     @else

@@ -13,6 +13,36 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
+                    <div class="card-header">
+                        <h4>Seleccione la Categoria a Filtrar</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive" style="overflow-x: hidden">
+                            <form action="{{route('platos.filtrarPlatos')}}" method="POST">
+                                @csrf
+                                <div class="row">
+                                  
+                                    <div class="col-md-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon "><strong>Categoria:</strong> </span>
+                                            <select name="categoria_plato_id" id="categoria_plato_id" class="form-control selectric">
+                                                @foreach($categorias_platos as $categoria_plato)
+                                                <option value="{{$categoria_plato->id}}">{{$categoria_plato->nombre}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="col-md-4" style="margin: 0 auto;">
+                                        <input class="form-control btn btn-primary" type="submit" value="Filtrar" id="filtrar" name="filtrar">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
                     <div class="card-header titulo">
                       Gestión de platos  &nbsp 
                         <a class="btn btn-primary" href="{{ route('platos.create') }}">Agregar</a><br><br>
@@ -21,17 +51,26 @@
                         <div>
                             <table  id="table"  class="table  table-bordered dt-responsive nowrap" style="width: 100%;">
                                 <thead class="table-primary">
+                                
                                     <th class="text-center">Nombre Plato</th>
+                                    <th class="text-center">Categoria Plato</th>
                                     <th class="text-center">Estado</th>
                                     <th class="text-center">Costo del plato</th>
                                     <th></th>
                                 </thead>
                                 <tbody>
                                     @foreach ($platos as $plato)
+
+                                    
                                     <tr>
                                         <td class="text-center ">
                                             <a href="{{ route('platos.show', $plato->id) }}" value="{{ $plato->nombre }}">{{ $plato->nombre}} </a>
                                         </td>
+                                        @if(isset($plato->platos_sucursales[0]->categoria_plato) )
+                                        <td class="text-center">{{$plato->platos_sucursales[0]->categoria_plato->nombre}}</td>
+                                        @else
+                                        <td class="text-center">Sin Categoria</td>
+                                        @endif
 
                                         @if ($plato->estado == 1)
                                         <td class="text-center"> <span class="badge badge-success"> Ofertado </span></td>
@@ -99,6 +138,7 @@
 @section('page_js')
 <script>
     $(document).ready(function() {
+        
     $('#table').DataTable({
         language: {
             sProcessing: "Procesando...",
@@ -126,7 +166,7 @@
         },
         columnDefs: [{
             orderable: false,
-            targets: 4
+            targets: 3
         }]
   
     });

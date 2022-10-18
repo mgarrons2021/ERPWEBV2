@@ -18,6 +18,7 @@ class CreateComprasTable extends Migration
             $table->date('fecha_compra');
             $table->char('tipo_comprobante');
             $table->char('estado');
+            $table->string('glosa');
             $table->decimal('total', 18, 4);
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('sucursal_id');

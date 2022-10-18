@@ -23,10 +23,11 @@
                                 <th style="text-align: center; "> Fecha de Pago </th>
                                 <th style="text-align: center; "> Nro Cuenta </th>
                                 <th style="text-align: center; "> Nro Cheque </th>
+                                <th style="text-align: center; "> Nro Comprobante </th>
                                 <th style="text-align: center;">Monto Cancelado</th>
                             </thead>
                             <tbody>
-                                
+
                                 @php $total_pagos =0; @endphp
                                 @foreach($pagos as $pago)
                                 @php $total_pagos+=$pago->total @endphp
@@ -34,13 +35,14 @@
                                     <td class="text-center">{{$pago->fecha}}</td>
                                     <td class="text-center">{{$pago->nro_cuenta}}</td>
                                     <td class="text-center">{{$pago->nro_cheque}}</td>
+                                    <td class="text-center">{{$pago->nro_comprobante}}</td>
                                     <td class="text-center table-success">{{$pago->total}} Bs</td>
                                 </tr>
                                 @endforeach
-                                
+
                             </tbody>
                             <tfoot>
-                                <th style="text-align: center;" colspan="3" class="table-info">TOTAL PAGADO</th>
+                                <th style="text-align: center;" colspan="4" class="table-info">TOTAL PAGADO</th>
                                 <th style="text-align: center;" class="table-success">{{ $total_pagos}} Bs</th>
                             </tfoot>
                         </table>
@@ -59,6 +61,7 @@
                                     <tr>
                                         <th style="text-align: center;">Fecha de Compra</th>
                                         <th style="text-align: center;">Sucursal</th>
+                                        <th style="text-align: center;">Nro Comprobante</th>
                                         <th style="text-align: center;">Estado</th>
                                         <th style="text-align: center;">Total Compra</th>
                                     </tr>
@@ -71,6 +74,14 @@
                                     <tr>
                                         <td class="text-center ">{{$compra->fecha_compra}}</td>
                                         <td class="text-center ">{{$compra->sucursal->nombre}}</td>
+                                        <td class="text-center ">
+                                            @if( isset($compra->comprobante_recibo))
+                                            {{$compra->comprobante_recibo->nro_recibo}}
+                                            @endif
+                                            @if( isset($compra->comprobante_factura))
+                                            {{$compra->comprobante_factura->numero_factura}}
+                                            @endif
+                                        </td>
                                         <td class="text-center ">
                                             @if($compra->estado=='N')
                                             <div class="badge badge-pill badge-danger ">Sin Pagar</div>
@@ -88,7 +99,7 @@
                                     @endforeach
                                 </tbody>
                                 <tfoot>
-                                    <th style="text-align: center;" colspan="3" class="table-info">TOTAL COMPRAS PAGADAS</th>
+                                    <th style="text-align: center;" colspan="4" class="table-info">TOTAL COMPRAS PAGADAS</th>
                                     <th style="text-align: center;" class="table-success">{{ $total_compras}} Bs</th>
 
                                 </tfoot>
@@ -109,6 +120,7 @@
                                     <tr>
                                         <th style="text-align: center;">Fecha de Compra</th>
                                         <th style="text-align: center;">Sucursal</th>
+                                        <th style="text-align: center;">Nro Comprobante</th>
                                         <th style="text-align: center;">Estado</th>
                                         <th style="text-align: center;">Total Compra</th>
                                     </tr>
@@ -121,6 +133,14 @@
                                     <tr>
                                         <td class="text-center ">{{$compra->fecha_compra}}</td>
                                         <td class="text-center ">{{$compra->sucursal->nombre}}</td>
+                                        <td class="text-center ">
+                                            @if( isset($compra->comprobante_recibo))
+                                            {{$compra->comprobante_recibo->nro_recibo}}
+                                            @endif
+                                            @if( isset($compra->comprobante_factura))
+                                            {{$compra->comprobante_factura->numero_factura}}
+                                            @endif
+                                        </td>
                                         <td class="text-center ">
                                             @if($compra->estado=='N')
                                             <div class="badge badge-pill badge-danger ">Sin Pagar</div>
@@ -138,9 +158,8 @@
                                     @endforeach
                                 </tbody>
                                 <tfoot>
-                                    <th style="text-align: center;" colspan="3" class="table-info">TOTAL COMPRAS POR PAGAR</th>
+                                    <th style="text-align: center;" colspan="4" class="table-info">TOTAL COMPRAS POR PAGAR</th>
                                     <th style="text-align: center;" class="table-success">{{ $total_compras}} Bs</th>
-
                                 </tfoot>
                             </table>
                         </div>
@@ -153,15 +172,15 @@
 @endsection
 @section('page_js')
 
-    <script type="text/javascript" src="//cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script>
-    <script type="text/javascript" src="//cdn.datatables.net/buttons/1.3.1/js/buttons.bootstrap4.min.js"></script>
+<script type="text/javascript" src="//cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="//cdn.datatables.net/buttons/1.3.1/js/buttons.bootstrap4.min.js"></script>
 
-    <script type="text/javascript" src="//cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-    <script type="text/javascript" src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/pdfmake.min.js"></script>
-    <script type="text/javascript" src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/vfs_fonts.js"></script>
-    <script type="text/javascript" src="//cdn.datatables.net/buttons/1.3.1/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+<script type="text/javascript" src="//cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script type="text/javascript" src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/pdfmake.min.js"></script>
+<script type="text/javascript" src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/vfs_fonts.js"></script>
+<script type="text/javascript" src="//cdn.datatables.net/buttons/1.3.1/js/buttons.html5.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 
 
 <script>
@@ -192,26 +211,25 @@
             }
         },
         dom: 'Bftipr',
-            buttons: [{
-                    //Botón para Excel
-                    extend: 'excel',
-                    footer: true,
-                    title: 'Inventarios',
-                    filename: 'Inventario',
-                    //Aquí es donde generas el botón personalizado
-                    text: '<button class="btn btn-success">Exportar a Excel <i class="fas fa-file-excel"></i></button>'
-                },
-                //Botón para PDF
-                {
-                    extend: 'pdf',
-                    footer: true,
-                    title: 'Inventarios',
-                    filename: 'Inventario',
-                    text: '<button class="btn btn-danger">Exportar a PDF <i class="far fa-file-pdf"></i></button>',
-                    customize: function(pdfDocument) {        
-                    }
-                },
-            ]
+        buttons: [{
+                //Botón para Excel
+                extend: 'excel',
+                footer: true,
+                title: 'Inventarios',
+                filename: 'Inventario',
+                //Aquí es donde generas el botón personalizado
+                text: '<button class="btn btn-success">Exportar a Excel <i class="fas fa-file-excel"></i></button>'
+            },
+            //Botón para PDF
+            {
+                extend: 'pdf',
+                footer: true,
+                title: 'Inventarios',
+                filename: 'Inventario',
+                text: '<button class="btn btn-danger">Exportar a PDF <i class="far fa-file-pdf"></i></button>',
+                customize: function(pdfDocument) {}
+            },
+        ]
     });
     $('#table2').DataTable({
 
@@ -240,29 +258,28 @@
             }
         },
         dom: 'Bftipr',
-            buttons: [{
-                    //Botón para Excel
-                    extend: 'excel',
-                    footer: true,
-                    title: 'Inventarios',
-                    filename: 'Inventario',
-                    //Aquí es donde generas el botón personalizado
-                    text: '<button class="btn btn-success">Exportar a Excel <i class="fas fa-file-excel"></i></button>'
-                },
-                //Botón para PDF
-                {
-                    extend: 'pdf',
-                    footer: true,
-                    title: 'Inventarios',
-                    filename: 'Inventario',
-                    text: '<button class="btn btn-danger">Exportar a PDF <i class="far fa-file-pdf"></i></button>',
-                    customize: function(pdfDocument) {        
-                    }
-                },
-            ]
+        buttons: [{
+                //Botón para Excel
+                extend: 'excel',
+                footer: true,
+                title: 'Inventarios',
+                filename: 'Inventario',
+                //Aquí es donde generas el botón personalizado
+                text: '<button class="btn btn-success">Exportar a Excel <i class="fas fa-file-excel"></i></button>'
+            },
+            //Botón para PDF
+            {
+                extend: 'pdf',
+                footer: true,
+                title: 'Inventarios',
+                filename: 'Inventario',
+                text: '<button class="btn btn-danger">Exportar a PDF <i class="far fa-file-pdf"></i></button>',
+                customize: function(pdfDocument) {}
+            },
+        ]
     });
 
-     $('#table3').DataTable({
+    $('#table3').DataTable({
 
         language: {
             sProcessing: "Procesando...",
@@ -289,26 +306,25 @@
             }
         },
         dom: 'Bftipr',
-            buttons: [{
-                    //Botón para Excel
-                    extend: 'excel',
-                    footer: true,
-                    title: 'Inventarios',
-                    filename: 'Inventario',
-                    //Aquí es donde generas el botón personalizado
-                    text: '<button class="btn btn-success">Exportar a Excel <i class="fas fa-file-excel"></i></button>'
-                },
-                //Botón para PDF
-                {
-                    extend: 'pdf',
-                    footer: true,
-                    title: 'Inventarios',
-                    filename: 'Inventario',
-                    text: '<button class="btn btn-danger">Exportar a PDF <i class="far fa-file-pdf"></i></button>',
-                    customize: function(pdfDocument) {        
-                    }
-                },
-            ]
+        buttons: [{
+                //Botón para Excel
+                extend: 'excel',
+                footer: true,
+                title: 'Inventarios',
+                filename: 'Inventario',
+                //Aquí es donde generas el botón personalizado
+                text: '<button class="btn btn-success">Exportar a Excel <i class="fas fa-file-excel"></i></button>'
+            },
+            //Botón para PDF
+            {
+                extend: 'pdf',
+                footer: true,
+                title: 'Inventarios',
+                filename: 'Inventario',
+                text: '<button class="btn btn-danger">Exportar a PDF <i class="far fa-file-pdf"></i></button>',
+                customize: function(pdfDocument) {}
+            },
+        ]
     });
 </script>
 @endsection

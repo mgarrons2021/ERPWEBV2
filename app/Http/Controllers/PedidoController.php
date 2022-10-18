@@ -532,6 +532,7 @@ class PedidoController extends Controller
         $pedidos_detalle = DB::select("SELECT sucursals.nombre as sucursal_nombre,
             productos.nombre as NombreProducto, unidades_medidas_ventas.nombre as um,
             sum(detalle_pedidos.cantidad_enviada) as cantidadenviado,
+            SUM(detalle_pedidos.cantidad_solicitada) as cantidad_solicitada, 
             detalle_pedidos.precio as precio,
             SUM(detalle_pedidos.subtotal_enviado) as TotalEnviada 
             from pedidos 
@@ -574,12 +575,14 @@ class PedidoController extends Controller
             $fecha = Carbon::now()->toDateString();
 
             $detalle_pedidos =  DB::select("SELECT productos.nombre as NombreProducto,
-            SUM(detalle_pedidos.cantidad_enviada) as cantidadenviado, 
-           
+            SUM(detalle_pedidos.cantidad_solicitada) as cantidadSolicitado,  
+            SUM(detalle_pedidos.cantidad_enviada) as cantidadenviado,  
             SUM(detalle_pedidos.subtotal_enviado) as TotalEnviada 
+            
             from pedidos 
             JOIN detalle_pedidos on detalle_pedidos.pedido_id = pedidos.id 
             JOIN productos on productos.id = detalle_pedidos.producto_id 
+            JOIN unidades_medidas_ventas ON unidades_medidas_ventas.id = productos.unidad_medida_venta_id
             WHERE pedidos.fecha_pedido BETWEEN '$fecha_inicial' and '$fecha_final' 
             GROUP BY productos.nombre");
             return view('pedidos.reporteInsumosEnviados', compact('fecha', 'detalle_pedidos', 'fecha_inicial', 'fecha_final'));
@@ -591,14 +594,17 @@ class PedidoController extends Controller
             
 
             $detalle_pedidos =  DB::select("SELECT productos.nombre as NombreProducto, 
+            SUM(detalle_pedidos.cantidad_solicitada) as cantidadSolicitado,  
             sum(detalle_pedidos.cantidad_enviada) as cantidadenviado, 
-           
              SUM(detalle_pedidos.subtotal_enviado) as TotalEnviada 
+             
                     from pedidos
                     join detalle_pedidos on detalle_pedidos.pedido_id = pedidos.id 
                     join productos on productos.id = detalle_pedidos.producto_id 
+                    JOIN unidades_medidas_ventas ON unidades_medidas_ventas.id = productos.unidad_medida_venta_id
                     WHERE pedidos.fecha_pedido BETWEEN '$fecha_inicial' and '$fecha_final' 
                     GROUP BY productos.nombre");
+
             return view('pedidos.reporteInsumosEnviados', compact('fecha','detalle_pedidos', 'fecha_inicial', 'fecha_final'))->with('error');
         }
     }

@@ -103,7 +103,7 @@ class EmisionPaqueteService
             $factura->cabecera->cafc = $cafc;
             $facturas[] = $factura;
 
-           /*  $fechaEmision = date('Y-m-d\TH:i:s.v', strtotime($fechaEmision) + 10); */
+            /*  $fechaEmision = date('Y-m-d\TH:i:s.v', strtotime($fechaEmision) + 10); */
         }
         return $facturas;
     }
@@ -111,7 +111,7 @@ class EmisionPaqueteService
     function testPaquetes($codigoSucursal, $codigoPuntoVenta, array $facturas, $codigoControlAntiguo, $tipoFactura, $evento, $cafc = null)
     {
         $sucursal = Sucursal::where('codigo_fiscal', $codigoSucursal)->first();
-
+        print_r("CAFC de TestPaquete: ",$cafc);
         $resCuis = $this->cuisService->obtenerCuis($codigoPuntoVenta, $codigoSucursal);
         //$resCufd = $this->cufdService->obtenerCufd($codigoPuntoVenta, $codigoSucursal, $resCuis->RespuestaCuis->codigo);
 
@@ -162,7 +162,6 @@ class EmisionPaqueteService
         while ($res->RespuestaServicioFacturacion->codigoDescripcion == 'PENDIENTE') {
             /*  echo "REINTENTANTO RESPUESTA RECEPCION PAQUETE\n=====================\n"; */
             $res = $this->testRecepcionPaquete($codigoSucursal, $codigoPuntoVenta, $documentoSector, $tipoFactura, $codigoRecepcion);
-            
         }
         /* echo "RESPUESTA RECEPCION PAQUETE\n=====================\n";
         print_r($res); */

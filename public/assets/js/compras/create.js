@@ -22,6 +22,7 @@ let nombre_producto = document.getElementById("nombre_producto");
 let cantidad = document.getElementById("cantidad");
 let subtotal = document.getElementById("subtotal");
 let precio = document.getElementById("precio");
+let glosa = document.getElementById("glosa");
 var total_compra = 0;
 let agregar_detalle = document.getElementById("agregar_detalle");
 let producto = document.getElementById("producto");
@@ -208,6 +209,7 @@ if (usuario_rol.value == "Contabilidad") {
                             recibo: nro_recibo.value,
                             sucursal_id: sucursalid.value,
                             banco:banco.value,
+                            glosa: glosa.value,
                             nro_cuenta:nro_cuenta.value,
                             nro_cheque:nro_cheque.value,
                         }),
@@ -255,6 +257,7 @@ if (usuario_rol.value == "Contabilidad") {
                             autorizacion: nro_autorizacion.value,
                             control: cod_control.value,
                             sucursal_id: sucursalid.value,
+                            glosa: glosa.value,
                             banco:banco.value,
                             nro_cuenta:nro_cuenta.value,
                             nro_cheque:nro_cheque.value,
@@ -303,6 +306,7 @@ if (usuario_rol.value == "Contabilidad") {
                             t_comprobante: tipo_comprobante.value,
                             sucursal_id: sucursalid.value,
                             banco:banco.value,
+                            glosa:glosa.value,
                             nro_cuenta:nro_cuenta.value,
                             nro_cheque:nro_cheque.value,
                         }),
@@ -356,6 +360,7 @@ if (usuario_rol.value == "Contabilidad") {
                     compra_total: total_compra,
                     t_comprobante: tipo_comprobante.value,
                     recibo: nro_recibo.value,
+                    glosa: glosa.value,
                     sucursal_id: sucursalid.value,
                 }),
                 headers: {
@@ -399,6 +404,7 @@ if (usuario_rol.value == "Contabilidad") {
                     compra_total: total_compra,
                     t_comprobante: tipo_comprobante.value,
                     factura: nro_factura.value,
+                    golsa: glosa.value,
                     autorizacion: nro_autorizacion.value,
                     control: cod_control.value,
                     sucursal_id: sucursalid.value,
@@ -442,6 +448,7 @@ if (usuario_rol.value == "Contabilidad") {
                 method: "POST",
                 body: JSON.stringify({
                     proveedor_id: proveedorid.value,
+                    glosa: glosa.value,
                     compra_total: total_compra,
                     t_comprobante: tipo_comprobante.value,
                     sucursal_id: sucursalid.value,

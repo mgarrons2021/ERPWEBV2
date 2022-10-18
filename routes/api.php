@@ -18,6 +18,8 @@ use App\Models\PlatoSucursal;
 use App\Models\Turno;
 use App\Models\Siat\LeyendaFactura;
 use App\Models\ParteProduccion;
+use App\Models\siat\DocumentoIdentidad;
+use App\Models\Siat\DocumentoSector;
 use App\Models\Siat\EventoSignificativo;
 use App\Models\Siat\SiatCufd;
 use Illuminate\Support\Facades\DB;
@@ -145,6 +147,31 @@ Route::get('/getSignifficantEvents', function () {
 
     ];
     return response($response, 200)->header('Content-Type', 'application/json');
+});
+
+Route::get('/getSectorDocuments', function () {
+    $documento_sector = new DocumentoSector();
+    $documentoSectores = $documento_sector->getSectorDocuments();
+
+    $response= [
+        'success'=> true,
+        'documentoSectores' => $documentoSectores
+    ];
+    return response($response, 200)->header('Content-Type', 'application/json');
+    
+});
+
+
+Route::get('/getIdentityDocuments', function () {
+    $documento_identidad = new DocumentoIdentidad();
+    $documentosIdentidades = $documento_identidad->getIdentityDocuments();
+
+    $response= [
+        'success'=> true,
+        'documentosIdentidades' => $documentosIdentidades
+    ];
+    return response($response, 200)->header('Content-Type', 'application/json');
+    
 });
 
 

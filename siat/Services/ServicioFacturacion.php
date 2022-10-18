@@ -53,7 +53,6 @@ class ServicioFacturacion extends ServicioSiat
 		$factura->cabecera->nitEmisor 	= $this->nit;
 		$factura->cabecera->cufd		= $this->cufd;
 		$factura->buildCuf(0, $this->modalidad, $tipoEmision, $tipoFactura, $this->codigoControl);
-
 		//die($factura->cuf);
 		$factura->validate();
 		$facturaXml = $this->buildInvoiceXml($factura);
@@ -78,7 +77,8 @@ class ServicioFacturacion extends ServicioSiat
 		$solicitud->codigoDocumentoSector 	= $factura->cabecera->codigoDocumentoSector;
 		$solicitud->tipoFacturaDocumento	= $tipoFactura;
 		$solicitud->codigoEmision			= $tipoEmision;
-		$solicitud->fechaEnvio				= date("Y-m-d\TH:i:s.v");
+		//$solicitud->fechaEnvio				= date("Y-m-d\TH:i:s.v");
+		$solicitud->fechaEnvio				= $factura->cabecera->fechaEmision;
 		$solicitud->codigoSucursal			= $factura->cabecera->codigoSucursal;
 		$solicitud->codigoPuntoVenta		= $factura->cabecera->codigoPuntoVenta;
 		//print_r($solicitud);die;
@@ -178,7 +178,6 @@ class ServicioFacturacion extends ServicioSiat
 		$cafc = null
 	) {
 
-		$cafc            = "1011917833B0D";
 		try {
 			if (!count($facturas))
 				throw new Exception('Invalid siat invoices, the service requires atleast one invoice');

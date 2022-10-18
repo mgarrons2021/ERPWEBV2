@@ -189,13 +189,14 @@ class CompraController extends Controller
     }
     public function registrarCompra(Request $request)
     {
-       /*  dd($request); */
+        /* dd($request); */
         $user = Auth::user();
         try {
             DB::beginTransaction();
 
             $compra = new Compra();
             $compra->total = $request->compra_total;
+            $compra->glosa = $request->glosa;
             $compra->fecha_compra = Carbon::now()->toDateString();
             $compra->user_id = Auth::id();
             $compra->sucursal_id = $request->sucursal_id;
