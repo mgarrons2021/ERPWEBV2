@@ -172,6 +172,7 @@
                 <a href="" class="nav-link has-dropdown"><i class="fas fa-bookmark"></i> <span>Reportes</span></a>
                 <ul class="dropdown-menu">
                         <li class="nav-item"> <a href="{{ route('ventas.ventas_sucursal') }}">Ventas por Sucursal</a> </li>
+                        <li class="nav-item"> <a href="{{ route('reportes.index') }}">Costo General</a> </li>
                 </ul>
 
         </li>
@@ -184,7 +185,6 @@
                         <li class="nav-item"> <a href="{{ route('puntos_ventas.index') }}">Sincr. de Catalogos</a> </li>
                         <li class="nav-item"> <a href="{{ route('eventos_significativos.index') }}">Emision de Paquetes</a> </li>
                         <li class="nav-item"> <a href="{{ route('anulacion_facturas.index') }}">Anulacion de Facturas</a> </li>
-                       
                 </ul>
         </li>
         @endrole

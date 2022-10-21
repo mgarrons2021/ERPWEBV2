@@ -186,9 +186,11 @@ class ServicioFacturacion extends ServicioSiat
 			/* dd($facturas); */
 			foreach ($facturas as $factura) {
 				$venta = Venta::where('cuf', $factura->cabecera->cuf)->first();
+				/* print_r("1ER CUF : " . $factura->cabecera->cuf . "<br>"); */
 				//$factura->cufd = $this->cufd;
 				$factura->buildCuf(0, $this->modalidad, $tipoEmision, $tipoFactura, $this->codigoControl);
 				$factura->validate();
+				/* print_r("2DO CUF : " . $factura->cabecera->cuf . "<br>"); */
 				$facturaXml = $this->buildInvoiceXml($factura);
 				file_put_contents(public_path() . "/FacturasXML/factura-" . $factura->cabecera->numeroDocumento . "-" . $factura->cabecera->numeroFactura . ".xml", $facturaXml);
 
@@ -198,9 +200,9 @@ class ServicioFacturacion extends ServicioSiat
 
 				$fecha_emision = new Carbon($factura->cabecera->fechaEmision);
 				$fecha_emision_formateada = strtotime($fecha_emision);
-				$venta->update([
+				/* $venta->update([
 					'cuf' => $factura->cabecera->cuf,
-				]);
+				]); */
 			}
 			$solicitud = new SolicitudServicioRecepcionPaquete();
 			$solicitud->cafc					= $cafc;

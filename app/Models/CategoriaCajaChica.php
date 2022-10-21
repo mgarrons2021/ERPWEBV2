@@ -12,5 +12,10 @@ class CategoriaCajaChica extends Model
 
     protected $fillable = [
         'nombre',
+        'para_costo',
     ];
+    public function para_costo(){
+        return $this->hasMany(DetalleCajaChica::class);
+    } 
+
 }

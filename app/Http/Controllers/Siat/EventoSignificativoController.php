@@ -64,11 +64,13 @@ class EventoSignificativoController extends Controller
         }
         /* dd($arrayVentas[0]['detalle_venta'][0]->plato); */
         $evento_significativo = EventoSignificativo::find($ventas[0]->evento_significativo_id);
+       /*  dd($evento_significativo); */
         $sucursal = 0;
         $puntoventa = 1;
         $cantidadFacturas = count($ventas);
-        $cafc     = "1011917833B0D";  /* Maybe el CAFC doesnt belongs to the new system register????? */
+        $arrayEventosCafc = array(5, 6, 7);
         $codigoEvento = $evento_significativo->codigo_clasificador;
+        $cafc     = in_array($codigoEvento, $arrayEventosCafc) ? "1011917833B0D" : null;  /* Maybe el CAFC doesnt belongs to the new system register????? */
         $fecha_generica = Carbon::now();
         $sucursal_db = Sucursal::where('codigo_fiscal', $sucursal)->first();
         $cufd_bd = SiatCufd::find($ventas[0]->cufd_id);
@@ -76,7 +78,7 @@ class EventoSignificativoController extends Controller
             ->where('sucursal_id', $sucursal_db->id)
             ->orderBy('id', 'desc')
             ->first();
-
+        /* dd($cufd_bd); */
         $cufdAntiguo = $cufd_bd->codigo;
         $resCuis = $cuis_bd->codigo_cui;
 
@@ -87,7 +89,6 @@ class EventoSignificativoController extends Controller
         $fecha_generado_cufd = Carbon::now()->toDateTimeString();
 
         $guardar_cufd = SiatCufd::create([
-
             'estado' => "V",
             'codigo' => $resCufd->RespuestaCufd->codigo,
             'codigo_control' => $resCufd->RespuestaCufd->codigoControl,

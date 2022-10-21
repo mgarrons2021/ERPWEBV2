@@ -9,7 +9,7 @@
 <section class="section">
 
     <div class="section-header">
-        <h1 class="text-center">Reporte de Ventas por Sucursal </h1>
+        <h1 class="text-center">Reporte de Ventas por Sucursal</h1>
     </div>
 
     <div class="card-body">

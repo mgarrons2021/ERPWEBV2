@@ -88,7 +88,7 @@ class VentaController extends Controller
                 "codigoPuntoVenta" => $puntoVenta,
                 "fechaEmision" => date('Y-m-d\TH:i:s.v'),
                 "modalidad" => ServicioSiat::MOD_ELECTRONICA_ENLINEA,
-                "tipoEmision" => SiatInvoice::TIPO_EMISION_ONLINE,
+                "tipoEmision" => $request->evento_significativo_id == null ? SiatInvoice::TIPO_EMISION_ONLINE : SiatInvoice::TIPO_EMISION_OFFLINE,
                 "tipoFactura" => SiatInvoice::FACTURA_DERECHO_CREDITO_FISCAL,
                 "codigoControl" => $cufd->codigo_control,
             ];
@@ -150,19 +150,20 @@ class VentaController extends Controller
             ];
 
             $mailFacturacionController = new MailFacturacionController();
-            if (!isset($request->evento_significativo_id)) {
-                $emisionIndividualController = new EmisionIndividualController();
-                $response = $emisionIndividualController->emisionIndividual($dataFactura);
-                if ($response->RespuestaServicioFacturacion->codigoEstado == 908) {
-                    $venta->update([
-                        'estado_emision' => 'V', /* Validada */
-                    ]);
-                } else {
-                    $venta->update([
-                        'estado_emision' => 'R', /* Rechazada */
-                    ]);
+            if (!isset($request->evento_significativo_id) || $request->evento_significativo_id == 2) {
+                if (!isset($request->evento_significativo_id)) {
+                    $emisionIndividualController = new EmisionIndividualController();
+                    $response = $emisionIndividualController->emisionIndividual($dataFactura);
+                    if ($response->RespuestaServicioFacturacion->codigoEstado == 908) {
+                        $venta->update([
+                            'estado_emision' => 'V', /* Validada */
+                        ]);
+                    } else {
+                        $venta->update([
+                            'estado_emision' => 'R', /* Rechazada */
+                        ]);
+                    }
                 }
-                // https://pilotosiat.impuestos.gob.bo/consulta/QR?nit=166172023&cuf=B5EB51F7ABA0DDF3C1BD0727A4BC50D1693F379A01B424663B3D6D74&numero=57&t=1
                 $qrcode = base64_encode(QrCode::format('svg')
                     ->size(120)
                     ->errorCorrection('H')
@@ -202,7 +203,7 @@ class VentaController extends Controller
                     'status' => true,
                     'msg' => "Venta registrada Exitosamente",
                     'factura' => $dataFactura,
-                    'response_siat' => $response,
+                    'response_siat' => isset($response) ? $response : "",
                     'cantidad_visitas' => $cliente->contador_visitas,
                     'cliente' => $cliente,
                     'cuf' => $cuf,

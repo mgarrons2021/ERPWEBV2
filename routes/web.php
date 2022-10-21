@@ -667,6 +667,15 @@ Route::group(['middleware' => ['auth', 'role:Super Admin']], function () {
 //formulariodoficacion
 Route::get('/reportes/ventas_sucursal', [App\Http\Controllers\VentaController::class, 'ventas_sucursal'])->name('ventas.ventas_sucursal');
 
+Route::get('/reportes/ventas_por_sucursal', [App\Http\Controllers\ReporteController::class, 'index'])->name('reportes.ventas_por_sucursal');
+Route::get('/reportes/costo_totales', [App\Http\Controllers\ReporteController::class, 'index'])->name('reportes.index');
+// Route::post('/reportes/costo_totales', [App\Http\Controllers\ReporteController::class, 'parteProduccion'])->name('reportes.costo_totales');
+
+Route::post('/reportes/ventas_por_sucursal', [App\Http\Controllers\ReporteController::class, 'cajaChica'])->name('reportes.porSucursal');
+//Route::post('/reportes/ventas_por_sucursal', [App\Http\Controllers\ReporteController::class, 'parteProduccion'])->name('reportes.parteProduccion');
+
+
+
 
 /* RUTAS FACTURACION EN LINEA */
 Route::get('/cuis/index', [App\Http\Controllers\Siat\CuisController::class, 'index'])->name('cuis.index');

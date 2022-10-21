@@ -76930,3 +76930,409 @@ stdClass Object
 
 )
 
+[2022-10-19 08:38:06]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 930939
+            [transaccion] => 1
+        )
+
+)
+
+[2022-10-19 08:49:46]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 930965
+            [transaccion] => 1
+        )
+
+)
+
+[2022-10-19 09:17:47]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 931060
+            [transaccion] => 1
+        )
+
+)
+
+[2022-10-19 09:26:38]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 931196
+            [transaccion] => 1
+        )
+
+)
+
+[2022-10-19 09:40:42]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 931340
+            [transaccion] => 1
+        )
+
+)
+
+[2022-10-19 09:46:38]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 931410
+            [transaccion] => 1
+        )
+
+)
+
+[2022-10-19 09:46:40]#
+2022-10-19T09:42:09.000
+[2022-10-19 09:46:40]#
+2022-10-19T09:43:39.000
+[2022-10-19 09:51:44]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 931491
+            [transaccion] => 1
+        )
+
+)
+
+[2022-10-19 09:51:46]#
+2022-10-19T09:48:06.000
+[2022-10-19 09:51:46]#
+2022-10-19T09:49:36.000
+[2022-10-19 10:03:24]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 931547
+            [transaccion] => 1
+        )
+
+)
+
+[2022-10-19 10:03:29]#
+2022-10-19T09:53:11.000
+[2022-10-19 10:03:29]#
+2022-10-19T09:54:41.000
+[2022-10-19 10:11:40]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 931578
+            [transaccion] => 1
+        )
+
+)
+
+[2022-10-19 10:11:42]#
+2022-10-19T10:04:52.000
+[2022-10-19 10:11:42]#
+2022-10-19T10:06:22.000
+[2022-10-19 10:17:06]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 931611
+            [transaccion] => 1
+        )
+
+)
+
+[2022-10-19 10:17:08]#
+2022-10-19T10:13:06.000
+[2022-10-19 10:17:08]#
+2022-10-19T10:14:36.000
+[2022-10-19 10:43:53]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 931748
+            [transaccion] => 1
+        )
+
+)
+
+[2022-10-19 12:05:40]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 931999
+            [transaccion] => 1
+        )
+
+)
+
+[2022-10-19 12:06:40]#
+2022-10-19T12:02:57.000
+[2022-10-19 12:06:40]#
+2022-10-19T12:04:27.000
+[2022-10-19 12:57:10]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 932101
+            [transaccion] => 1
+        )
+
+)
+
+[2022-10-19 12:57:12]#
+2022-10-19T12:47:08.000
+[2022-10-19 12:57:12]#
+2022-10-19T12:48:38.000
+[2022-10-19 14:00:37]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 932154
+            [transaccion] => 1
+        )
+
+)
+
+[2022-10-19 14:00:38]#
+2022-10-19T13:56:35.000
+[2022-10-19 14:00:38]#
+2022-10-19T13:58:05.000
+[2022-10-19 14:17:13]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 932277
+            [transaccion] => 1
+        )
+
+)
+
+[2022-10-19 14:17:15]#
+2022-10-19T14:14:40.000
+[2022-10-19 14:17:15]#
+2022-10-19T14:16:10.000
+[2022-10-19 14:32:33]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 932388
+            [transaccion] => 1
+        )
+
+)
+
+[2022-10-19 14:32:35]#
+2022-10-19T14:24:13.000
+[2022-10-19 14:32:35]#
+2022-10-19T14:25:43.000
+[2022-10-19 14:58:14]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 932436
+            [transaccion] => 1
+        )
+
+)
+
+[2022-10-19 14:58:16]#
+2022-10-19T14:54:16.000
+[2022-10-19 14:58:16]#
+2022-10-19T14:55:46.000
+[2022-10-19 15:03:58]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 932448
+            [transaccion] => 1
+        )
+
+)
+
+[2022-10-19 15:04:01]#
+2022-10-19T14:59:42.000
+[2022-10-19 15:04:01]#
+2022-10-19T15:01:12.000
+[2022-10-19 15:07:55]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 932451
+            [transaccion] => 1
+        )
+
+)
+
+[2022-10-19 15:08:00]#
+2022-10-19T15:05:25.000
+[2022-10-19 15:08:00]#
+2022-10-19T15:06:55.000
+[2022-10-19 15:12:33]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 932457
+            [transaccion] => 1
+        )
+
+)
+
+[2022-10-19 15:12:42]#
+2022-10-19T15:09:16.000
+[2022-10-19 15:12:42]#
+2022-10-19T15:10:46.000
+[2022-10-19 15:29:49]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 932495
+            [transaccion] => 1
+        )
+
+)
+
+[2022-10-19 15:29:52]#
+2022-10-19T15:22:10.000
+[2022-10-19 15:29:52]#
+2022-10-19T15:23:40.000
+[2022-10-21 08:08:04]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 937713
+            [transaccion] => 1
+        )
+
+)
+
+[2022-10-21 08:08:05]#
+2022-10-20T16:40:37.000
+[2022-10-21 08:08:05]#
+2022-10-20T16:42:07.000
+[2022-10-21 08:15:31]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 937718
+            [transaccion] => 1
+        )
+
+)
+
+[2022-10-21 08:15:32]#
+2022-10-21T08:12:11.000
+[2022-10-21 08:15:32]#
+2022-10-21T08:13:41.000
+[2022-10-21 08:59:30]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 937778
+            [transaccion] => 1
+        )
+
+)
+
+[2022-10-21 08:59:31]#
+2022-10-21T08:17:49.000
+[2022-10-21 08:59:31]#
+2022-10-21T08:19:19.000
+[2022-10-21 09:03:06]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 937790
+            [transaccion] => 1
+        )
+
+)
+
+[2022-10-21 09:03:07]#
+2022-10-21T09:00:57.000
+[2022-10-21 09:03:07]#
+2022-10-21T09:02:27.000
+[2022-10-21 10:05:35]#
+stdClass Object
+(
+    [RespuestaListaEventos] => stdClass Object
+        (
+            [codigoRecepcionEventoSignificativo] => 938051
+            [transaccion] => 1
+        )
+
+)
+
+[2022-10-21 10:05:37]#
+2022-10-21T09:04:33.000
+[2022-10-21 10:05:37]#
+2022-10-21T09:06:03.000
+[2022-10-21 10:24:43]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-10-21 10:24:43]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => Array
+                (
+                    [0] => stdClass Object
+                        (
+                            [codigo] => 965
+                            [descripcion] => EL CONTRIBUYENTE NO CUENTA CON FIRMA VIGENTE REGISTRADA: Vigencia de certificado desde 2022-09-19T16:36:02.000, hasta 2022-10-19T16:36:02.000
+                            [numeroArchivo] => 0
+                        )
+
+                    [1] => stdClass Object
+                        (
+                            [codigo] => 965
+                            [descripcion] => EL CONTRIBUYENTE NO CUENTA CON FIRMA VIGENTE REGISTRADA: Vigencia de certificado desde 2022-09-19T16:36:02.000, hasta 2022-10-19T16:36:02.000
+                            [numeroArchivo] => 1
+                        )
+
+                    [2] => stdClass Object
+                        (
+                            [codigo] => 965
+                            [descripcion] => EL CONTRIBUYENTE NO CUENTA CON FIRMA VIGENTE REGISTRADA: Vigencia de certificado desde 2022-09-19T16:36:02.000, hasta 2022-10-19T16:36:02.000
+                            [numeroArchivo] => 2
+                        )
+
+                )
+
+            [transaccion] => 
+        )
+
+)
+

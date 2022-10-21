@@ -18,6 +18,7 @@ class DetalleCajaChica extends Model
         'nro_comprobante',
         'categoria_caja_chica_id',
         'caja_chica_id',
+        'para_costo'
     ];
 
     public function caja_chica(){

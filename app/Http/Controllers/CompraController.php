@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cargo;
 use App\Models\Compra;
 use App\Models\ComprobanteFactura;
 use App\Models\ComprobanteRecibo;
@@ -337,7 +338,7 @@ class CompraController extends Controller
         return response()->json(['success' => true], 200);
     }
 
-    public function obtenerDetallePago(){
-
+    public function obtenerDetallePago()
+    {
     }
 }

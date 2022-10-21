@@ -9,7 +9,7 @@
 <section class="section">
 
     <div class="section-header">
-        <h1 class="text-center">Reporte de Seguimiento de Actividades </h1>
+        <h1 class="text-center">Reporte de Seguimiento de Actividades</h1>
     </div>
     <form action="{{ route('personales.reporteSeguimientoActividades') }}" method="POST">
     <div class="card-body">

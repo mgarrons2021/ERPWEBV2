@@ -181,8 +181,12 @@
             },
             success: function(res) {
                 console.log(res);
-                let codigo = res.RespuestaServicioFacturacion.codigoEstado;
-                let descripcion = res.RespuestaServicioFacturacion.codigoDescripcion
+                let codigo = res.RespuestaServicioFacturacion != undefined ? res.RespuestaServicioFacturacion.codigoEstado : "";
+                let descripcion = res.RespuestaServicioFacturacion != undefined ? res.RespuestaServicioFacturacion.codigoDescripcion : "";
+                if (res.RespuestaListaEventos != undefined) {
+                    codigo = res.RespuestaListaEventos.mensajesList.codigo;
+                    descripcion = res.RespuestaListaEventos.mensajesList.descripcion;
+                }
                 if (codigo === 981) {
                     Swal.close();
                     Swal.fire({
