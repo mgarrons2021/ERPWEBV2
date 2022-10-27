@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-
+use App\Models\DetalleInventario;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -32,6 +32,14 @@ class DatabaseSeeder extends Seeder
         $this->call(TareaSeeder::class);
         $this->call(CategoriaCajaChicaSeeder::class);
         $this->call(DiasSeeder::class);
+        $this->call(ComprasSeeder::class);
+        $this->call(DetalleCompraSeeder::class);
+        $this->call(InventarioSeeder::class);
+        $this->call(DetalleInventarioSeeder::class);
+        $this->call(PedidoSeeder::class);
+        $this->call(DetallePedidoSeeder::class);
+        $this->call(EliminacionSeeder::class);
+
         // \App\Models\User::factory(10)->create();
     }
 }

@@ -184,13 +184,8 @@ class EventoSignificativoController extends Controller
         $fecha_inicial = $request->fecha_inicial;
         $fecha_final = $request->fecha_final;
         $evento_significativo = EventoSignificativo::find($request->evento_significativo_id);
-
-
-
         $fecha_actual = Carbon::now()->toDateString();
         $eventos_significativos = EventoSignificativo::all();
-
-
 
         $ventas = Venta::where('sucursal_id', Auth::user()->sucursals[0]->id)
             ->whereBetween('fecha_venta', [$fecha_inicial, $fecha_final])

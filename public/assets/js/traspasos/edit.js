@@ -15,7 +15,7 @@ let agregar_traspasos = document.getElementById("agregar_traspaso");
 let actualizar_traspasos = document.getElementById("actualizar_traspasos");
 let producto = document.getElementById("producto");
 let cuerpotabla = document.getElementById("cuerpo_tabla");
-
+x
 /* VECTORES PARA GUARDAR LA INFORMACION CAPTURADA DE LOS STOCKS, SUBTOTALES Y ID'S DE LOS DETALLES DEL TRASPASO*/
 let array_stocks = [];
 let array_subtotales = [];

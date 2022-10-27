@@ -52,6 +52,7 @@ class VentaController extends Controller
             $clienteData = [
                 'cliente' => $request->cliente,
                 'ci_nit' => $request->nit_ci,
+                'complemento'=> $request->complemento,
                 'telefono' => $request->telefono,
                 'empresa' => $request->empresa,
                 'sucursal' => $request->sucursal,
@@ -95,9 +96,9 @@ class VentaController extends Controller
 
             $cuf = $cufService->buildCuf($dataCuf);
 
-
-
-            /*  return response()->json( ["cuf"=>$cufService->cabecera->cuf]); */
+            /* print_r($request->fecha_emision_manual + " " + $request->hora_emision_manual); */
+            $fecha_emision_manual = $request->fecha_emision_manual != null && $request->hora_emision_manual != null ? new Carbon($request->fecha_emision_manual . "T" . $request->hora_emision_manual . ".000000Z") : "";
+            /* return response()->json($fecha_emision_manual); */
             $ventaData = collect([
                 'user_id' => $request->user_id,
                 'total_venta' => $request->total_venta,
@@ -118,7 +119,7 @@ class VentaController extends Controller
                 'documento_identidad_id' => $request->documento_identidad_id,
                 'cuf' => $cuf,
                 'cufd_id' => $cufd->id,
-                "fechaEmision" => $dataCuf['fechaEmision']
+                "fechaEmision" => $fecha_emision_manual == "" ? $dataCuf['fechaEmision'] : $fecha_emision_manual,
             ]);
 
             $ventaService = new VentaService();
@@ -180,6 +181,7 @@ class VentaController extends Controller
                     "clienteNombre" => $cliente->nombre,
                     "clienteCorreo" => $cliente->correo,
                     "clienteNit" => $cliente->ci_nit,
+                    "ClienteComplemento" => $cliente->complemento,
                     "ClienteId" => $cliente->id,
                     "venta" => $venta,
                     "detalle_venta" => $detalle_venta,

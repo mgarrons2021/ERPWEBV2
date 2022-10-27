@@ -27,6 +27,7 @@ use App\Http\Controllers\AsignarStockController;
 use App\Http\Controllers\ChanchoController;
 use App\Http\Controllers\PostulantesController;
 use App\Http\Controllers\ParteProduccionController;
+use App\Http\Controllers\ProyeccionesVentasController;
 
 use App\Models\CajaChica;
 use App\Models\Sucursal;
@@ -145,6 +146,23 @@ Route::group(['middleware' => ['auth', 'role:Super Admin|Contabilidad|Chef Corpo
     Route::post('/asignar_stock/filtrarReporteCarnes', [AsignarStockController::class, 'filtrarReporteCarnes'])->name('asignar_stock.filtrarReporteCarnes');
     Route::post('/asignar_stock/actualizarStock', [AsignarStockController::class, 'actualizarStock'])->name('asignar_stock.actualizarStock');
 });
+
+/*Rutas Proyecciones_Ventas */
+Route::group(['middleware' => ['auth', 'role:Super Admin|Contabilidad|Chef Corporativo']], function () {
+    Route::get('/proyecciones_ventas', [App\Http\Controllers\ProyeccionesVentasController::class, 'index'])->name('proyecciones_ventas.index');
+    Route::get('/proyecciones_ventas/create', [App\Http\Controllers\ProyeccionesVentasController::class, 'create'])->name('proyecciones_ventas.create');
+    Route::get('/proyecciones_ventas/edit/{id}', [App\Http\Controllers\ProyeccionesVentasController::class, 'edit'])->name('proyecciones_ventas.edit');
+    Route::post('/proyecciones_ventas', [App\Http\Controllers\ProyeccionesVentasController::class, 'store'])->name('proyecciones_ventas.store');
+    Route::put('/proyecciones_ventas/{id}', [App\Http\Controllers\ProyeccionesVentasController::class, 'update'])->name('proyecciones_ventas.update');
+    Route::get('/proyecciones_ventas/show/{id}', [App\Http\Controllers\ProyeccionesVentasController::class, 'show'])->name('proyecciones_ventas.show');
+    Route::post('/proyecciones_ventas/guardarDetalle', [App\Http\Controllers\ProyeccionesVentasController::class, 'guardarDetalle'])->name('proyecciones_ventas.guardarDetalle');
+    Route::post('/proyecciones_ventas/eliminarDetalle', [App\Http\Controllers\ProyeccionesVentasController::class, 'eliminarDetalle'])->name('proyecciones_ventas.eliminarDetalle');
+    Route::post('/proyecciones_ventas/registrar_Stock', [App\Http\Controllers\ProyeccionesVentasController::class, 'store'])->name('proyecciones_ventas.registrar_Stock');
+    Route::get('/proyecciones_ventas/reporteCarnicos', [App\Http\Controllers\ProyeccionesVentasController::class, 'reporteCarnicos'])->name('proyecciones_ventas.reporteCarnicos');
+    Route::post('/proyecciones_ventas/filtrarReporteCarnes', [ProyeccionesVentasController::class, 'filtrarReporteCarnes'])->name('proyecciones_ventas.filtrarReporteCarnes');
+    Route::post('/proyecciones_ventas/actualizarStock', [ProyeccionesVentasController::class, 'actualizarStock'])->name('proyecciones_ventas.actualizarStock');
+});
+
 
 /*Rutas Inventario*/
 Route::resource('inventarios', InventarioController::class);
@@ -526,14 +544,22 @@ Route::group(['middleware' => ['auth', 'role:Super Admin|Encargado']], function 
 
 /*Rutas Eliminacion 1*/
 Route::group(['middleware' => ['auth', 'role:Super Admin|Encargado']], function () {
-    Route::resource('traspasos', TraspasoController::class);
+    /* Route::resource('traspasos', TraspasoController::class); */
+    Route::get('/traspasos', [App\Http\Controllers\TraspasoController::class, 'index'])->name('traspasos.index');
+    Route::get('/traspasos/create', [App\Http\Controllers\TraspasoController::class, 'create'])->name('traspasos.create');
+    Route::post('/traspasos', [App\Http\Controllers\TraspasoController::class, 'store'])->name('traspasos.store');
+    Route::get('/traspasos/edit/{id}', [App\Http\Controllers\TraspasoController::class, 'edit'])->name('traspasos.edit');
+    Route::put('/traspasos/{id}', [App\Http\Controllers\TraspasoController::class, 'update'])->name('traspasos.update');
+    Route::delete('/traspasos/{id}', [App\Http\Controllers\TraspasoController::class, 'destroy'])->name('traspasos.destroy');
+    Route::get('/traspasos/show/{id}', [App\Http\Controllers\TraspasoController::class, 'show'])->name('traspasos.show');
+
     Route::get('/traspasos', [App\Http\Controllers\TraspasoController::class, 'index'])->name('traspasos.index');
     Route::post('/traspasos/agregarDetalle', [App\Http\Controllers\TraspasoController::class, 'agregarDetalle'])->name('traspasos.agregarDetalle');
-    Route::post('/traspasos/eliminarDetalle', [TraspasoController::class, 'eliminarDetalle'])->name('traspasos.eliminarDetalle');
-    Route::post('/traspasos/obtenerDatosProducto', [TraspasoController::class, 'obtenerDatosProducto'])->name('traspasos.obtenerDatosProducto');
-    Route::post('/traspasos/registrarTraspaso', [TraspasoController::class, 'registrarTraspaso'])->name('traspasos.registrarTraspaso');
-    Route::post('/traspasos/actualizarTraspaso', [TraspasoController::class, 'actualizarTraspaso'])->name('traspasos.actualizarTraspaso');
-    Route::post('/traspasos/filtrar', [TraspasoController::class, 'filtrartraspaso'])->name('traspasos.filtrartraspaso');
+    Route::post('/traspasos/eliminarDetalle', [App\Http\Controllers\TraspasoController::class, 'eliminarDetalle'])->name('traspasos.eliminarDetalle');
+    Route::post('/traspasos/obtenerDatosProducto', [App\Http\Controllers\TraspasoController::class, 'obtenerDatosProducto'])->name('traspasos.obtenerDatosProducto');
+    Route::post('/traspasos/registrarTraspaso', [App\Http\Controllers\TraspasoController::class, 'registrarTraspaso'])->name('traspasos.registrarTraspaso');
+    Route::post('/traspasos/actualizarTraspaso', [App\Http\Controllers\TraspasoController::class, 'actualizarTraspaso'])->name('traspasos.actualizarTraspaso');
+    Route::post('/traspasos/filtrar',[App\Http\Controllers\TraspasoController::class, 'filtrartraspaso'])->name('traspasos.filtrartraspaso');
 });
 
 Route::resource('/costos_cuadriles', CostoCuadrilController::class);
@@ -552,8 +578,6 @@ Route::put('/keperis/{id}', [App\Http\Controllers\KeperiController::class, 'upda
 Route::get('/keperis/show/{id}', [App\Http\Controllers\KeperiController::class, 'show'])->name('keperis.show');
 Route::delete('/keperis/{id}', [\App\Http\Controllers\KeperiController::class, 'destroy'])->name('keperis.destroy');
 Route::post('/keperis/filtrarKeperis', [KeperiController::class, 'filtrarKeperis'])->name('keperis.filtrarKeperis');
-
-
 
 /*Rutas Reportes 1* */
 Route::group(['middleware' => ['auth', 'role:Super Admin|Encargado']], function () {
@@ -637,7 +661,6 @@ Route::group(['middleware' => ['auth', 'role:Super Admin|Encargado|Contabilidad|
 
 Route::post('/enviaremail', [App\Http\Controllers\MailController::class, 'sendEmail'])->name('mail.sendEmail');
 
-
 Route::group(['middleware' => ['auth', 'role:Super Admin|Contabilidad']], function () {
     Route::get('/manos_obras', [App\Http\Controllers\ManoObraController::class, 'index'])->name('manos_obras.index');
     Route::get('/manos_obras/create', [App\Http\Controllers\ManoObraController::class, 'create'])->name('manos_obras.create');
@@ -668,13 +691,14 @@ Route::group(['middleware' => ['auth', 'role:Super Admin']], function () {
 Route::get('/reportes/ventas_sucursal', [App\Http\Controllers\VentaController::class, 'ventas_sucursal'])->name('ventas.ventas_sucursal');
 
 Route::get('/reportes/ventas_por_sucursal', [App\Http\Controllers\ReporteController::class, 'index'])->name('reportes.ventas_por_sucursal');
+
+
 Route::get('/reportes/costo_totales', [App\Http\Controllers\ReporteController::class, 'index'])->name('reportes.index');
-// Route::post('/reportes/costo_totales', [App\Http\Controllers\ReporteController::class, 'parteProduccion'])->name('reportes.costo_totales');
+ Route::post('/reportes/costo_totales', [App\Http\Controllers\ReporteController::class, 'parteProduccion'])->name('reportes.costo_totales');
 
 Route::post('/reportes/ventas_por_sucursal', [App\Http\Controllers\ReporteController::class, 'cajaChica'])->name('reportes.porSucursal');
 //Route::post('/reportes/ventas_por_sucursal', [App\Http\Controllers\ReporteController::class, 'parteProduccion'])->name('reportes.parteProduccion');
-
-
+Route::get('/reportes/ajuste-inventario', [App\Http\Controllers\ReporteController::class, 'ajuste'])->name('reportes.ajuste');
 
 
 /* RUTAS FACTURACION EN LINEA */

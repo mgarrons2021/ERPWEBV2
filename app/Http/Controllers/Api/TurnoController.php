@@ -32,7 +32,7 @@ class TurnoController extends Controller
             'ambiente'      => ServicioSiat::AMBIENTE_PRUEBAS,
             'tokenDelegado'    => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJET05FU0NPXzAyMyIsImNvZGlnb1Npc3RlbWEiOiI3MjQyMkRENDMzQkU4MTc3REM3MUZFNiIsIm5pdCI6Ikg0c0lBQUFBQUFBQUFETTBNek0wTnpJd01nWUE3bHFjcHdrQUFBQT0iLCJpZCI6NTE5NjgyLCJleHAiOjE2NjcyNjA4MDAsImlhdCI6MTY2NTI0MDIyOCwibml0RGVsZWdhZG8iOjE2NjE3MjAyMywic3Vic2lzdGVtYSI6IlNGRSJ9.5ZkQ6815VtUXK07ieWTBit6roArGNK2ZIq90W7TdGhzUnotYE7C31nSv-XrifFTSVrEKRgtwiNlDie8wdkrMJg',
             'pubCert'        => MOD_SIAT_DIR . SB_DS . 'certs' . SB_DS . 'terminalx' . SB_DS . 'DONESCO_SRL_CER.pem',
-            'privCert'        => MOD_SIAT_DIR . SB_DS . 'certs' . SB_DS . 'terminalx' . SB_DS . 'DONESCO_S.R.L._CER.pem',
+            'privCert'        => MOD_SIAT_DIR . SB_DS . 'certs' . SB_DS . 'terminalx' . SB_DS . 'DONESCO_S.R.L..pem',
             'telefono'        => '34345435',
             'ciudad'        => 'SANTA CRUZ GC'
         ]);
@@ -43,7 +43,7 @@ class TurnoController extends Controller
         $user = $request->user_id;
         $user_id = User::find($request->user_id);
         $sucursal = Sucursal::find($request->sucursal_id);
-        
+
         $codigoPuntoVenta  = 1;
         $fecha_generado_cufd = Carbon::now()->toDateTimeString();
         $fecha = Carbon::now()->format('Y-m-d H:i');
@@ -65,6 +65,7 @@ class TurnoController extends Controller
 
             if (is_null($cuis)) {
                 $response =  $this->obtenerCuis($codigoPuntoVenta, $sucursal->codigo_fiscal);
+                /* return $response; */
                 $obtener_cui = SiatCui::create([
                     'fecha_generado' => $fecha,
                     'fecha_expiracion' =>  new Carbon($response->RespuestaCuis->fechaVigencia),

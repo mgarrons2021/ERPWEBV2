@@ -8,17 +8,25 @@ use Illuminate\Database\Eloquent\Model;
 class Cliente extends Model
 {
     use HasFactory;
-    protected $table ='clientes';
+    protected $table = 'clientes';
 
-    protected $fillable =['nombre','ci_nit','empresa','telefono','contador_visitas']; 
+    protected $fillable = [
+        'nombre',
+        'ci_nit',
+        'complemento',
+        'empresa',
+        'telefono',
+        'contador_visitas'
+    ];
 
 
-    public function ventas(){
+    public function ventas()
+    {
         return $this->hasMany(Venta::class);
     }
 
-    public function registros_visitas(){
+    public function registros_visitas()
+    {
         return $this->hasMany(RegistroVisita::class);
     }
-
 }

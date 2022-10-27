@@ -183,8 +183,10 @@ class Venta extends Model
 
     public function sales_for_id($id_venta)
     {
-        $venta = Venta::selectRaw("ventas.numero_factura,ventas.cuf,clientes.id as idcliente , clientes.contador_visitas, autorizaciones.nro_autorizacion, ventas.sucursal_id as sucursal,   sucursals.nombre as sucursal_nombre, ventas.codigo_control,  clientes.telefono,autorizaciones.fecha_fin,autorizaciones.nit,ventas.fecha_venta,ventas.hora_venta,
-        clientes.nombre,clientes.ci_nit, ventas.total_venta , ventas.total_descuento, ventas.total_neto,ventas.tipo_pago,ventas.qr,clientes.telefono, clientes.correo, sucursals.direccion, sucursals.codigo_fiscal")
+        $venta = Venta::selectRaw("ventas.numero_factura,ventas.cuf,clientes.id as idcliente , clientes.contador_visitas, autorizaciones.nro_autorizacion, ventas.sucursal_id as sucursal,  
+         sucursals.nombre as sucursal_nombre, ventas.codigo_control,  clientes.telefono,autorizaciones.fecha_fin,autorizaciones.nit,ventas.fecha_venta,ventas.hora_venta, ventas.evento_significativo_id,
+        clientes.nombre,clientes.ci_nit,clientes.complemento, ventas.total_venta , ventas.total_descuento, ventas.total_neto,ventas.tipo_pago,ventas.qr,clientes.telefono, clientes.correo, 
+        sucursals.direccion, sucursals.codigo_fiscal")
             ->join('sucursals', 'sucursals.id', '=', 'ventas.sucursal_id')
             ->Leftjoin('clientes', 'clientes.id', '=', 'ventas.cliente_id')
             ->Leftjoin('autorizaciones', 'autorizaciones.id', '=', 'ventas.autorizacion_id')

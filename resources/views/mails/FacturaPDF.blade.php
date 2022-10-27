@@ -99,7 +99,7 @@
             <td><strong>Fecha:</strong> </td>
             <td> {{ $fecha }} {{ $hora }} </td>
             <td style="text-align: right;"><strong>NIT/CI/CEX:</strong></td>
-            <td> {{ $clienteNit }} </td>
+            <td> {{ $clienteNit }} </td> <td> {{$ClienteComplemento}}</td>
         </tr>
         <tr>
             <td><strong>Nombre/Razon Social:</strong></td>

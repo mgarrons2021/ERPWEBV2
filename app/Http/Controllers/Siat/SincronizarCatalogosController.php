@@ -87,7 +87,7 @@ class SincronizarCatalogosController extends Controller
     {
 
         $sucursal = $sucursal_id;
-        $puntoventa = 1;
+        $puntoventa = 0;
 
         $cuisService = new CuisService();
         $resCuis     = $cuisService->obtenerCuis($puntoventa, $sucursal, true);
@@ -129,6 +129,8 @@ class SincronizarCatalogosController extends Controller
 
         $cuisService = new CuisService();
         $resCuis     = $cuisService->obtenerCuis($puntoventa, $sucursal, true);
+
+        /* print_r($resCuis); */
         $service     = new ServicioFacturacionSincronizacion($resCuis->RespuestaCuis->codigo);
         $service->setConfig((array)$this->config);
 
@@ -202,11 +204,11 @@ class SincronizarCatalogosController extends Controller
         $cuisService = new CuisService();
         $resCuis     = $cuisService->obtenerCuis($puntoventa, $sucursal, true);
         /* dd($resCuis->RespuestaCuis->codigo); */
-    
+
         $service     = new ServicioFacturacionSincronizacion($resCuis->RespuestaCuis->codigo);
         $service->setConfig((array)$this->config);
         $res = $service->sincronizarParametricaTipoDocumentoSector($sucursal, $puntoventa);
-   
+
         return $res;
         /* $tipoDocumentosSector = new SincronizarCatalogosService();
         $response = $tipoDocumentosSector->createTiposDocumentosSector($res);
@@ -341,8 +343,11 @@ class SincronizarCatalogosController extends Controller
     {
 
         $sucursal = 0;
+
+        $this->sincronizarListaLeyendasFactura($sucursal);   
         
-        
+      /*   $this->sincronizarDocumentosIdentidades($sucursal); 
+
         $this->sincronizarTiposDocumentoSector($sucursal);
          
         $this->sincronizarMetodosPagos($sucursal);    
@@ -355,30 +360,27 @@ class SincronizarCatalogosController extends Controller
         $this->sincronizarTiposHabitaciones($sucursal); 
         $this->sincronizarListadoPaises($sucursal);
         $this->sincronizarTiposEmisiones($sucursal);
-        $this->sincronizarDocumentosIdentidades($sucursal); 
         
     
         
-        $this->sincronizarMotivosAnulaciones($sucursal);   
-        $this->sincronizarEventosSignificativos($sucursal);
-        $this->sincronizarProductosServicios($sucursal); 
-        $this->sincronizarListaLeyendasFactura($sucursal);   
-        $this->sincronizarMensajesServicios($sucursal);
+        $this->sincronizarMotivosAnulaciones($sucursal);  
+         $this->sincronizarEventosSignificativos($sucursal); 
+        $this->sincronizarProductosServicios($sucursal);  */
+/*         $this->sincronizarMensajesServicios($sucursal);
         $this->sincronizarFechaHora($sucursal);
        
-        $this->sincronizarDocumentosIdentidades($sucursal);
-        $this->sincronizarListadoTotalActividades($sucursal);
+        $this->sincronizarListadoTotalActividades($sucursal);  */
 
-       /*  $listado_total_actividades = ListadoTotalActividad::count();
+        /*  $listado_total_actividades = ListadoTotalActividad::count();
         if ($listado_total_actividades >= 0){
             $res = "Sincronizacion Catalogo Exitosa";
         } */
-     
-       return response()->json([
-            'response' => "Sincronizacion Catalogo Exitosa"
-        ]); 
 
-        
+        return response()->json([
+            'response' => "Sincronizacion Catalogo Exitosa"
+        ]);
+
+
 
         $count = 0;
     }

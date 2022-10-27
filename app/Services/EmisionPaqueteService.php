@@ -30,7 +30,7 @@ class EmisionPaqueteService
     function obtenerListadoEventos($codigoSucursal = 0, $codigoPuntoVenta = 1, $buscarId = null)
     {
         $resCuis = $this->cuisService->obtenerCuis($codigoPuntoVenta, $codigoSucursal);
-        dd($resCuis);
+     /*    dd($resCuis); */
         //##obtener listado de eventos
         $serviceSync = new ServicioFacturacionSincronizacion($resCuis->RespuestaCuis->codigo);
         $serviceSync->setConfig((array)$this->configService->config);

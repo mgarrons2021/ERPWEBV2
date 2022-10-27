@@ -141,6 +141,7 @@ class EmisionIndividualService
         $factura->cabecera->nombreRazonSocial    = $dataFactura['cliente']['nombre'];
         $factura->cabecera->codigoTipoDocumentoIdentidad    = $dataFactura['venta']->documento_identidad->codigo_clasificador; //NIT 
         $factura->cabecera->numeroDocumento        = $dataFactura['cliente']['ci_nit'];
+        $factura->cabecera->complemento             = $dataFactura['cliente']['complemento'];
         $factura->cabecera->codigoCliente        = $dataFactura['cliente']['id']; //Codigo Unico Asignado por el sistema de facturacion (ID DEL CLIENTE)
         $factura->cabecera->codigoMetodoPago    = 1;
         $factura->cabecera->montoTotal            = $dataFactura['venta']['total_neto'];

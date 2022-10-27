@@ -126,7 +126,7 @@
 
     function obtener(rutaa) {
 
-        Swal.fire({
+        Swal.fire({ //alerta
             title: 'Cargando la informacion ...',
             allowEscapeKey: false,
             icon: 'info',
@@ -341,8 +341,5 @@
         obtener(ruta + `fecha=${fecha1}&fecha_a=${fecha2}`);
     }
 </script>
-
-
-
 
 @endsection

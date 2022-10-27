@@ -17,6 +17,7 @@
                 $table->id();
                 $table->date('fecha_venta');
                 $table->time('hora_venta');
+               
                 $table->integer('numero_factura')->nullable();
                 $table->integer('nro_transaccion');
                 $table->decimal('total_venta', 18, 4)->nullable();

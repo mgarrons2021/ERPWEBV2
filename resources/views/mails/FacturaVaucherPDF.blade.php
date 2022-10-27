@@ -58,7 +58,10 @@
             <p>NOMBRE/RAZON SOCIAL: {{$clienteNombre}}</p>
             <p>NIT/CI/CEX: {{$clienteNit}}</p>
             <p>COD. CLIENTE: {{$ClienteId}}</p>
-            <p>FECHA EMISION: {{$fecha}} {{$hora}}</p>
+            @php
+            $fecha_emision = date_create($fecha);
+            @endphp
+            <p>FECHA EMISION: {{ date_format($fecha_emision,"d/m/Y")}} {{$hora}}</p>
         </div>
         <p style="text-align: start;">-----------------------------------------------------------------------------------------</p>
         <p>DETALLE</p>

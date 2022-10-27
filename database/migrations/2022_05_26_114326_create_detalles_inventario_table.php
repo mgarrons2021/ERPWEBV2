@@ -23,13 +23,12 @@ class CreateDetallesInventarioTable extends Migration
             $table->unsignedBigInteger('inventario_id');
             $table->unsignedBigInteger('plato_id')->nullable();
             
-            $table->timestamps();
             
             $table->foreign('producto_id')->on('productos')->references('id');
             $table->foreign('inventario_id')->on('inventarios')->references('id')->onDelete('cascade')->onUpdate('cascade');
-
-            $table->foreign('plato_id')->on('platos')->references('id')->onDelete('cascade')->onUpdate('cascade');
-                                                                                               
+            
+            $table->foreign('plato_id')->on('platos')->references('id')->onDelete('cascade')->onUpdate('cascade');                                                                                      
+            $table->timestamps();
         });
     }
 

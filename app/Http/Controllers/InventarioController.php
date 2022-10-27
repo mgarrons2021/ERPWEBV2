@@ -243,7 +243,7 @@ class InventarioController extends Controller
         }
 
         /*ENVASE TECNOPOR*/
-        if ($producto_id == 165) {
+      /*   if ($producto_id == 165) {
             $filete_en_unidades = $request->detalleInventario['stock'] * 400;
             $precio_por_unidad_filete = $subtotal / $filete_en_unidades;
             $nuevo_precio = $precio_por_unidad_filete;
@@ -251,7 +251,7 @@ class InventarioController extends Controller
             $nueva_subtotal = $nuevo_precio * $nueva_cantidad;
             $nueva_UM_nombre = "Und";
             $nueva_UM_id = 8;
-        }
+        } */
 
         /*PLATANOS*/
         if ($producto_id == 45) {

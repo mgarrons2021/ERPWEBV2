@@ -52,6 +52,7 @@ class TraspasoController extends Controller
 
     public function show($id)
     {
+        
         $traspaso = Traspaso::find($id);
         return view('traspasos.show', compact('traspaso'));
     }

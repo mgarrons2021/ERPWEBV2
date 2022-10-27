@@ -17,22 +17,29 @@
             <form action="{{ route('reportes.porSucursal') }}" method="POST" class="form-horizontal">
                 @csrf
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="input-daterange input-group" id="datepicker">
                             <span class="input-group-addon "><strong>Fecha De:</strong> </span>
                             <input type="date" id="fecha_inicial" class="input-sm form-control" name="fecha_inicial" value="" />
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
 
                         <div class="input-daterange input-group" id="datepicker">
                             <span class="input-group-addon "><strong>A:</strong> </span>
                             <input type="date" id="fecha_final" class="input-sm form-control" name="fecha_final" value="" />
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
+                        <select class="form-control"  id="turno" name="turno" aria-label="Default select example">
+                            <option selected>Turno</option>
+                            <option value="true" >Mañana</option>
+                            <option value= "false" >Tarde</option>
+                        </select>
+                    </div>
+                     <div class="col-md-3">
                         <select class="form-control"  id="sucursal" name="sucursal" aria-label="Default select example">
-                            <option selected>Open this select menu</option>
+                            <option selected>Sucursal</option>
                             @foreach($sucursales as $sucursal)
                             <option value="{{ $sucursal->id }}" >{{ $sucursal->nombre }}</option>
                             @endforeach

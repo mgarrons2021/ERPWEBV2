@@ -16,7 +16,7 @@ class CreateCategoriasCajaChicaTable extends Migration
         Schema::create('categorias_caja_chica', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->boolean('para_costo');
+            $table->boolean('para_costo')->nullable();
             $table->timestamps();
         });
     }

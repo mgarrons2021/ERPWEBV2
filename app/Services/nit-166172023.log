@@ -77336,3 +77336,35 @@ stdClass Object
 
 )
 
+[2022-10-27 14:06:10]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-10-27 14:06:10]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => fcd329e0-5621-11ed-92ac-f9958a7a0fb1
+            [transaccion] => 1
+        )
+
+)
+
+[2022-10-27 14:11:57]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-10-27 14:11:57]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => cba37fdf-5622-11ed-8f84-67a695ade12d
+            [transaccion] => 1
+        )
+
+)
+

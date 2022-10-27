@@ -45,6 +45,7 @@
                         <li class="nav-item{{ $activePage == 'asignar_stock' ? ' active' : '' }}"><a href="{{ route('asignar_stock.index') }}">Asignar Stock </a></li>
                         @endrole
                         <li class="nav-item{{ $activePage == 'inventarios' ? ' active' : '' }}"><a href="{{ route('inventarios.index') }}">Inventarios </a></li>
+                        <li class="nav-item{{ $activePage == 'proyecciones_ventas' ? ' active' : '' }}"><a href="{{ route('proyecciones_ventas.index') }}">Proyecciones de Ventas </a></li>
                         <li class="nav-item{{ $activePage == 'eliminaciones' ? ' active' : '' }}"><a href="{{ route('eliminaciones.index') }}">Eliminacion</a></li>
                         <li class="nav-item{{ $activePage == 'eliminaciones' ? ' active' : '' }}"><a href="{{ route('reciclajes.index') }}">Reciclaje</a></li>
                         <li class="nav-item{{ $activePage == 'traspasos' ? ' active' : '' }}"><a href="{{ route('traspasos.index') }}">Traspaso</a></li>
@@ -173,8 +174,8 @@
                 <ul class="dropdown-menu">
                         <li class="nav-item"> <a href="{{ route('ventas.ventas_sucursal') }}">Ventas por Sucursal</a> </li>
                         <li class="nav-item"> <a href="{{ route('reportes.index') }}">Costo General</a> </li>
+                        <li class="nav-item"> <a href="{{route('reportes.ajuste')}}">Ajuste de Inventario</a> </li>
                 </ul>
-
         </li>
         @role('Super Admin')
         <li class="dropdown">

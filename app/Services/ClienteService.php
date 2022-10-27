@@ -22,6 +22,7 @@ class ClienteService
                 $cliente->empresa = $clienteData['empresa'];
                 $cliente->correo = $clienteData['correo'];
                 $cliente->telefono = $clienteData['telefono'];
+                $cliente->complemento = $clienteData['complemento'];
                 $cliente->contador_visitas = $clienteData['sucursal'] == 18 ? $clienteData['cantidad_visitas'] : 0; //17 PIRAI, sino sera 0 sus visitas
                 return $cliente->save() ? $cliente : "";
             } else {
@@ -37,6 +38,9 @@ class ClienteService
                 }
                 if ($cliente->correo != $clienteData['correo']) {
                     $cliente->correo = $clienteData['correo'];
+                }
+                if ($cliente->complemento != $clienteData['complemento']) {
+                    $cliente->complemento = $clienteData['complemento'];
                 }
                 if ($cliente->nombre != $clienteData['cliente'] || $cliente['empresa'] != $clienteData['empresa'] || $cliente['telefono'] != $clienteData['telefono'] || $cliente['correo'] != $clienteData['correo']) {
                 }

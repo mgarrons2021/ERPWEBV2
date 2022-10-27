@@ -90,7 +90,7 @@
                                     </option>
                                     @endforeach
                                 </select>
-                                <p class="text-left text-danger d-none" id="errorproducto">Debe seleccionar un proveedor</p>
+                                <p class="text-left text-danger d-none" id="errorproducto">Seleccionar un proveedor</p>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -98,7 +98,7 @@
                                 <label for="producto">Producto<span class="required">*</span></label>
                                 <select name="producto" id="producto" class="form-select">
                                 </select>
-                                <p class="text-left text-danger d-none" id="errorproducto">Debe seleccionar un producto</p>
+                                <p class="text-left text-danger d-none" id="errorproducto">Seleccionar un producto</p>
                             </div>
                         </div>
                         <input type="hidden" id="nombre_productos" name="nombre_productos" class="form-control" value="">
