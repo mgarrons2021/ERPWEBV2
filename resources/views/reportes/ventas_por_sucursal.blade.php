@@ -72,20 +72,18 @@
                         <table id="dtable" class="table">
                             <thead style="background-color: #6777ef;">
                                 <tr id="thead">
-                                    <td style="color: white">Sucursal</td>
                                     <td style="color: white">Fecha</td>
-                                    <td style="color: white">Cliente</td>
+                                    <td style="color: white">Sucursal</td>
                                     <td style="color: white">Total Venta</td>
                                 </tr>
                             </thead>
                             <tbody id="tbody">
-
-                                @foreach($ventas as $venta)
-                                <tr>
-                                    <td>{{$venta->sucursal->nombre}} </td>
-                                    <td>{{$venta->fecha_venta}} </td>
-                                    <td>{{$venta->cliente->nombre }}</td>
-                                    <td>{{$venta->total_venta}} </td>
+                                
+                                @foreach($inventariosAM as $inv)
+                                <tr id="tbody">
+                                    <td>{{$inv->fecha}} </td>
+                                    <td>{{$inv->sucursal->nombre}} </td>
+                                    <td>{{$inv->total }}</td>
                                 </tr>
                                 @endforeach
                             </tbody>

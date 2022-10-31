@@ -198,12 +198,28 @@
                         timer: 3500,
                     })
                 }
-                /* Falta validar aun no se probó */
+                //VALIDADA
                 if (codigo === 908) {
                     Swal.close();
                     Swal.fire({
                         position: 'center',
                         icon: 'success',
+                        title: "Codigo::" + codigo,
+                        text: descripcion,
+                        showConfirmButton: true,
+                        timer: 3500,
+                        willClose: function() {
+                            window.location.href = rutaIndex;
+                        },
+                    })
+                }
+
+                //OBSERVADA
+                if (codigo === 904) {
+                    Swal.close();
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'warning',
                         title: "Codigo::" + codigo,
                         text: descripcion,
                         showConfirmButton: true,

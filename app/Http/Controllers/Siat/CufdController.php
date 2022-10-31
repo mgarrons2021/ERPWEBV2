@@ -49,7 +49,7 @@ class CufdController extends Controller
      */
     public function store(Request $request)
     {
-        $codigoPuntoVenta = 1;
+        $codigoPuntoVenta = 0;
         $sucursal = Sucursal::find($request->sucursal_id);
         $cuis = SiatCui::where('sucursal_id', $sucursal->id)
             ->where('estado', 'V')

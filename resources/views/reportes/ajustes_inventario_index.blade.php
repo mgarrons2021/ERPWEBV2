@@ -14,7 +14,7 @@
     </div>
     <div class="card-body">
         <div class="table-responsive" style="overflow-x: hidden">
-            <form action="{{ route('reportes.porSucursal') }}" method="POST" class="form-horizontal">
+            <form action="{{ route('reportes.ajuste_inventario') }}" method="POST" class="form-horizontal">
                 @csrf
                 <div class="row">
                     <div class="col-md-4">
@@ -30,23 +30,14 @@
                             <input type="date" id="fecha_final" class="input-sm form-control" name="fecha_final" value="" />
                         </div>
                     </div>
-                    {{-- <div class="col-md-3">
-                        <select class="form-control"  id="turno" name="turno" aria-label="Default select example">
-                            <option selected>Turno</option>
-                            <option value="true" >Mañana</option>
-                            <option value= "false" >Tarde</option>
-                        </select>
-                    </div> --}}
-                     <div class="col-md-4">
-                        <select class="form-control"  id="sucursal" name="sucursal" aria-label="Default select example">
+                    <div class="col-md-4">
+                        <select class="form-control" id="sucursal" name="sucursal" aria-label="Default select example">
                             <option selected>Sucursal</option>
                             @foreach($sucursales as $sucursal)
-                            <option value="{{ $sucursal->id }}" >{{ $sucursal->nombre }}</option>
+                            <option value="{{ $sucursal->id }}">{{ $sucursal->nombre }}</option>
                             @endforeach
                         </select>
                     </div>
-
-
                 </div>
                 <div class="card-footer">
                     <div class="col-md-4" style="margin: 0 auto;">
@@ -71,23 +62,27 @@
                     <div class="table-responsive ">
                         <table id="dtable" class="table">
                             <thead style="background-color: #6777ef;">
-                                    <td style="color: white">Item</td>
-                                    <td style="color: white">Inventario Inicial</td>
-                                {{-- <tr id="thead">
-                                    <td style="color: white">Cliente</td>
-                                    <td style="color: white">Total Venta</td>
-                                </tr> --}}
+                                <tr>
+                                    <td style="color: white">ID</td>
+                                    <td style="color: white">Fecha</td>
+                                    <td style="color: white">Sucursal</td>
+                                    <td style="color: white">Total</td>
+                                </tr>
+
                             </thead>
                             <tbody id="tbody">
-
-                                @foreach($detalles as $detalle)
+                                @foreach($inventariosAM as $inv)
                                 <tr>
-                                    <td>{{$detalle->producto->nombre}} </td>
-                                    <td>{{$detalle->stock}} </td>
+                                   
+                                    <td><a href="{{route('reportes.show',[$inv->id,$inv->fecha,$inv->sucursal_id])}}">{{$inv->id}}</a></td>
+                                    <td>{{$inv->fecha}} </td>
+                                    <td>{{$inv->sucursal->nombre}} </td>
+                                    <td>{{$inv->total}} </td>
+                                
                                 </tr>
                                 @endforeach
-                                    {{-- <td>{{$venta->cliente->nombre }}</td>
-                                    <td>{{$venta->total_venta}} </td> --}}
+
+
                             </tbody>
                         </table>
                     </div>

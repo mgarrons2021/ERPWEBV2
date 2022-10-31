@@ -14,7 +14,7 @@
     </ul>
 </aside>
 <style>
-.navvar{
+.navar{
 
 }
 </style>

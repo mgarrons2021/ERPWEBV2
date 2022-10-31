@@ -41,20 +41,20 @@ $(document).ready(function () {
     }); */
 
     /*ACTUALIZA LOS SUBTOTALES Y EL TOTAL INVENTARIO*/
-    $("body").on("keyup", ".stock", function () {
+    $("body").on( ".stock", function () {
         
-        for (let i in stocks_input) 
+        for (let i in stocks_input || stocks_input2) 
         {
             let stock = stocks_input[i];
             let stock2 = stocks_input2[i];
             
-            let venta_proyeccion_subtotal = td_subtotales[i];
-            venta_proyeccion_subtotal.value = stock.value * stock2.value;
+            let td_subtotales = td_subtotales[i];
+            venta_proyeccion_subtotal.value= stock.value + stock2;
         }
         
         let venta_proyeccion_subtotal = 0;
         
-        for (let j in td_subtotales) 
+    /*      for (let j in td_subtotales) 
         {
             if (
                 td_subtotales[j].innerHTML !== undefined &&
@@ -64,8 +64,8 @@ $(document).ready(function () {
             }
         }
 
-        td_total_pedido.innerHTML = total;
-
+        td_total_pedido.innerHTML = total; */
+ 
     });
 
     

@@ -71,5 +71,27 @@ class DetalleCompraSeeder extends Seeder
             'compra_id' => 1,
             'producto_id' => 14
         ]);
+        //------
+        DetalleCompra::create([
+            'cantidad' => 4.0,
+            'precio_compra' => 6.00,
+            'subtotal' =>6.00,
+            'compra_id' => 3,
+            'producto_id' => 13
+        ]);
+        DetalleCompra::create([
+            'cantidad' => 3.0,
+            'precio_compra' => 3.00,
+            'subtotal' => 3.00,
+            'compra_id' => 3,
+            'producto_id' => 5
+        ]);
+        DetalleCompra::create([
+            'cantidad' => 1.0,
+            'precio_compra' => 5.00,
+            'subtotal' => 5.00,
+            'compra_id' => 3,
+            'producto_id' => 4
+        ]);
     }
 }

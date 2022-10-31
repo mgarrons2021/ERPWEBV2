@@ -559,7 +559,7 @@ Route::group(['middleware' => ['auth', 'role:Super Admin|Encargado']], function 
     Route::post('/traspasos/obtenerDatosProducto', [App\Http\Controllers\TraspasoController::class, 'obtenerDatosProducto'])->name('traspasos.obtenerDatosProducto');
     Route::post('/traspasos/registrarTraspaso', [App\Http\Controllers\TraspasoController::class, 'registrarTraspaso'])->name('traspasos.registrarTraspaso');
     Route::post('/traspasos/actualizarTraspaso', [App\Http\Controllers\TraspasoController::class, 'actualizarTraspaso'])->name('traspasos.actualizarTraspaso');
-    Route::post('/traspasos/filtrar',[App\Http\Controllers\TraspasoController::class, 'filtrartraspaso'])->name('traspasos.filtrartraspaso');
+    Route::post('/traspasos/filtrar', [App\Http\Controllers\TraspasoController::class, 'filtrartraspaso'])->name('traspasos.filtrartraspaso');
 });
 
 Route::resource('/costos_cuadriles', CostoCuadrilController::class);
@@ -691,14 +691,15 @@ Route::group(['middleware' => ['auth', 'role:Super Admin']], function () {
 Route::get('/reportes/ventas_sucursal', [App\Http\Controllers\VentaController::class, 'ventas_sucursal'])->name('ventas.ventas_sucursal');
 
 Route::get('/reportes/ventas_por_sucursal', [App\Http\Controllers\ReporteController::class, 'index'])->name('reportes.ventas_por_sucursal');
-
+Route::post('/reportes/inventario_ajuste', [App\Http\Controllers\ReporteController::class, 'inventario'])->name('reportes.ajuste_inventario');
 
 Route::get('/reportes/costo_totales', [App\Http\Controllers\ReporteController::class, 'index'])->name('reportes.index');
- Route::post('/reportes/costo_totales', [App\Http\Controllers\ReporteController::class, 'parteProduccion'])->name('reportes.costo_totales');
+Route::post('/reportes/costo_totales', [App\Http\Controllers\ReporteController::class, 'parteProduccion'])->name('reportes.costo_totales');
 
 Route::post('/reportes/ventas_por_sucursal', [App\Http\Controllers\ReporteController::class, 'cajaChica'])->name('reportes.porSucursal');
 //Route::post('/reportes/ventas_por_sucursal', [App\Http\Controllers\ReporteController::class, 'parteProduccion'])->name('reportes.parteProduccion');
 Route::get('/reportes/ajuste-inventario', [App\Http\Controllers\ReporteController::class, 'ajuste'])->name('reportes.ajuste');
+Route::get('/reportes/ajuste-inventario-show/{id}/{fecha}/{sucursal}', [App\Http\Controllers\ReporteController::class, 'show'])->name('reportes.show');
 
 
 /* RUTAS FACTURACION EN LINEA */

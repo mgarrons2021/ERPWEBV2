@@ -77368,3 +77368,57 @@ stdClass Object
 
 )
 
+[2022-10-27 20:16:46]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-10-27 20:16:46]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => RECHAZADA
+            [codigoEstado] => 902
+            [mensajesList] => stdClass Object
+                (
+                    [codigo] => 965
+                    [descripcion] => EL CONTRIBUYENTE NO CUENTA CON FIRMA VIGENTE REGISTRADA: Vigencia de certificado desde 2022-10-25T13:16:01.000, hasta 2022-11-24T13:16:01.000
+                    [numeroArchivo] => 0
+                )
+
+            [transaccion] => 
+        )
+
+)
+
+[2022-10-28 09:03:00]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-10-28 09:03:00]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => ccfe4a34-56c0-11ed-875c-018d33b4ed81
+            [transaccion] => 1
+        )
+
+)
+
+[2022-10-28 09:08:36]#
+RESULTADO RECEPCION PAQUETE
+=============================
+[2022-10-28 09:08:36]#
+stdClass Object
+(
+    [RespuestaServicioFacturacion] => stdClass Object
+        (
+            [codigoDescripcion] => PENDIENTE
+            [codigoEstado] => 901
+            [codigoRecepcion] => 954495ba-56c1-11ed-b346-79d1c440e768
+            [transaccion] => 1
+        )
+
+)
+

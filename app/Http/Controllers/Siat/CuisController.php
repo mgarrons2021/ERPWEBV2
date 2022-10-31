@@ -29,7 +29,7 @@ class CuisController extends Controller
     {
         $cuisService = new CuisService(); 
         $sucursal = Sucursal::find($request->sucursal_id);
-        $puntoVenta=0;
+        $puntoVenta = 0;
         $response = $cuisService->obtenerCuis($puntoVenta,  $sucursal->codigo_fiscal);
         $respCrearCuis = $cuisService->createCuis($response, $request->sucursal_id);
         if ($respCrearCuis['status']) {

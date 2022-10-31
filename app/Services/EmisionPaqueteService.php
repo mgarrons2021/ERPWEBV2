@@ -30,7 +30,7 @@ class EmisionPaqueteService
     function obtenerListadoEventos($codigoSucursal = 0, $codigoPuntoVenta = 1, $buscarId = null)
     {
         $resCuis = $this->cuisService->obtenerCuis($codigoPuntoVenta, $codigoSucursal);
-     /*    dd($resCuis); */
+        /*    dd($resCuis); */
         //##obtener listado de eventos
         $serviceSync = new ServicioFacturacionSincronizacion($resCuis->RespuestaCuis->codigo);
         $serviceSync->setConfig((array)$this->configService->config);
@@ -40,7 +40,7 @@ class EmisionPaqueteService
         if (!$buscarId)
             return $eventsList;
 
-       /*  $nombre_evento = 'CORTE DEL SERVICIO DE INTERNET'; */
+        /*  $nombre_evento = 'CORTE DEL SERVICIO DE INTERNET'; */
         $evento = null;
         foreach ($eventsList->RespuestaListaParametricas->listaCodigos as $evt) {
             if ($evt->codigoClasificador == $buscarId) {
@@ -112,7 +112,7 @@ class EmisionPaqueteService
     function testPaquetes($codigoSucursal, $codigoPuntoVenta, array $facturas, $codigoControlAntiguo, $tipoFactura, $evento, $cafc = null)
     {
         $sucursal = Sucursal::where('codigo_fiscal', $codigoSucursal)->first();
-        print_r("CAFC de TestPaquete: ", $cafc);
+        /* print_r("CAFC de TestPaquete: ", $cafc); */
         $resCuis = $this->cuisService->obtenerCuis($codigoPuntoVenta, $codigoSucursal);
         //$resCufd = $this->cufdService->obtenerCufd($codigoPuntoVenta, $codigoSucursal, $resCuis->RespuestaCuis->codigo);
 
@@ -138,8 +138,8 @@ class EmisionPaqueteService
             $cafc
         );
         /*  return dd($res); */
-        $this->test_log("RESULTADO RECEPCION PAQUETE\n=============================");
-        $this->test_log($res);
+        /* $this->test_log("RESULTADO RECEPCION PAQUETE\n=============================");
+        $this->test_log($res);| */
         return $res;
     }
 
@@ -165,8 +165,8 @@ class EmisionPaqueteService
             /*  echo "REINTENTANTO RESPUESTA RECEPCION PAQUETE\n=====================\n"; */
             $res = $this->testRecepcionPaquete($codigoSucursal, $codigoPuntoVenta, $documentoSector, $tipoFactura, $codigoRecepcion);
         }
-        echo "RESPUESTA RECEPCION PAQUETE\n=====================\n";
-        print_r($res);
+        /* echo "RESPUESTA RECEPCION PAQUETE\n=====================\n";
+        print_r($res); */
         return $res;
     }
 

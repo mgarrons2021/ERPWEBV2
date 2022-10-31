@@ -89,6 +89,7 @@ class EmisionIndividualService
         $factura->cabecera->nombreRazonSocial    = $dataFactura['cliente']['nombre'];
         $factura->cabecera->codigoTipoDocumentoIdentidad    = $dataFactura['venta']->documento_identidad->codigo_clasificador; //Tipo de Documento (Ci,Nit,PassPort etc) 
         $factura->cabecera->numeroDocumento        = $dataFactura['cliente']['ci_nit'];
+        $factura->cabecera->complemento             = $dataFactura['cliente']['complemento'];
         $factura->cabecera->codigoCliente        = $dataFactura['cliente']['id']; //Codigo Unico Asignado por el sistema de facturacion (ID DEL CLIENTE)
         $factura->cabecera->codigoMetodoPago    = 1;
         $factura->cabecera->montoTotal            = $dataFactura['venta']['total_neto'];
@@ -102,7 +103,7 @@ class EmisionIndividualService
         return $factura;
     }
 
-    function construirFactura2($codigoPuntoVenta = 1, $codigoSucursal = 0, $modalidad = 0, $documentoSector = 1, $codigoActividad = '620100', $codigoProductoSin = '', $dataFactura = null)
+    function construirFactura2($codigoPuntoVenta = 0, $codigoSucursal = 0, $modalidad = 0, $documentoSector = 1, $codigoActividad = '620100', $codigoProductoSin = '', $dataFactura = null)
     {
         $subTotal = 0;
         $factura = null;

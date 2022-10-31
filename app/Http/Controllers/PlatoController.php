@@ -24,9 +24,13 @@ class PlatoController extends Controller
     public function index()
     {
         $platos= Plato::all();
+        $cantidadPlatos = Plato::where('costo_plato','<>',null)->count();
+        $sumaCosto = Plato::sum('costo_plato');
+        $costoPromedioTotal = $sumaCosto/$cantidadPlatos;
         $categorias_platos = CategoriaPlato::all();
+        
     
-        return view('platos.index', compact('categorias_platos','platos'));
+        return view('platos.index', compact('categorias_platos','platos','costoPromedioTotal'));
     }
 
     /**
@@ -194,8 +198,12 @@ class PlatoController extends Controller
       ->where('platos_sucursales.categoria_plato_id',$categoria_plato_id)
       ->get();
 
+      $cantidadPlatos = $platos->count();
+      $sumaCosto =$platos->sum('costo_plato');
 
-        return view('platos.index',compact('platos','categorias_platos'));
+      $costoPromedioTotal = $sumaCosto/$cantidadPlatos;
+
+    return view('platos.index',compact('platos','categorias_platos','costoPromedioTotal'));
     }
 
     public function showPdf($id){

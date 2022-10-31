@@ -37,7 +37,7 @@ class EmisionPaqueteController extends Controller
     {
         $sucursal = 0;
         $puntoventa = 1;
-        $cantidadFacturas = 3;
+        $cantidadFacturas = 500;
         $cafc     = "1011917833B0D";
         $codigoEvento = 1;
         $fecha_generica = Carbon::now();

@@ -33,14 +33,14 @@ class DetalleInventarioSeeder extends Seeder
             'stock' => 1,
             'precio' => 10.0,
             'subtotal' => 10.0,
-            'producto_id' => 10,
+            'producto_id' => 15,
             'inventario_id' => 2,
  
         ]);  DetalleInventario::create([
             'stock' => 2,
             'precio' => 22.0,
             'subtotal' => 22.0,
-            'producto_id' => 4,
+            'producto_id' => 13,
             'inventario_id' => 2,
       
         ]);  DetalleInventario::create([
@@ -68,7 +68,7 @@ class DetalleInventarioSeeder extends Seeder
             'stock' => 5,
             'precio' => 7.0,
             'subtotal' => 7.0,
-            'producto_id' => 6,
+            'producto_id' => 1,
             'inventario_id' => 2,
       
         ]);

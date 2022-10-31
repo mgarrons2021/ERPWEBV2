@@ -60,8 +60,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($platos as $plato)
-
-                                    
+                              
                                     <tr>
                                         <td class="text-center ">
                                             <a href="{{ route('platos.show', $plato->id) }}" value="{{ $plato->nombre }}">{{ $plato->nombre}} </a>
@@ -88,6 +87,7 @@
                                                 <a href="#" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" >
                                                     <i class="fas fa-ellipsis-v"> </i>
                                                 </a>
+
                                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                                     <li>
                                                         <a class="dropdown-item" href="{{ route('platos.edit', $plato->id) }}">Editar Plato</a>
@@ -105,6 +105,19 @@
                                     </tr>
                                     @endforeach
                                 </tbody>
+                                
+                            </table>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <th class="table-success"> Total Costo Promedio:</th>
+                                <td class="table-success">{{ number_format($costoPromedioTotal,2)}} Bs</td>
+                  
                             </table>
                         </div>
                     </div>

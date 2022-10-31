@@ -52,7 +52,7 @@ class VentaController extends Controller
             $clienteData = [
                 'cliente' => $request->cliente,
                 'ci_nit' => $request->nit_ci,
-                'complemento'=> $request->complemento,
+                'complemento' => $request->complemento,
                 'telefono' => $request->telefono,
                 'empresa' => $request->empresa,
                 'sucursal' => $request->sucursal,
@@ -81,13 +81,14 @@ class VentaController extends Controller
             $obj = new LeyendaFactura();
             $leyenda = $obj->getLeyenda();
 
+
             $dataCuf = [
                 "nitEmisor" => 166172023, /* Nit de la empresa */
                 "codigoSucursal" => $sucursal->codigo_fiscal, // "codigoSucursal" => $sucursal->codigo_fiscal,
                 "codigoDocumentoSector" => DocumentTypes::FACTURA_COMPRA_VENTA,
                 "numeroFactura" => $cufd->numero_factura,
                 "codigoPuntoVenta" => $puntoVenta,
-                "fechaEmision" => date('Y-m-d\TH:i:s.v'),
+                "fechaEmision" => $request->evento_significativo_id == null ? date('Y-m-d\TH:i:s.v') : new Carbon($request->fecha_emision_manual . "T" . $request->hora_emision_manual . ".000000Z"),
                 "modalidad" => ServicioSiat::MOD_ELECTRONICA_ENLINEA,
                 "tipoEmision" => $request->evento_significativo_id == null ? SiatInvoice::TIPO_EMISION_ONLINE : SiatInvoice::TIPO_EMISION_OFFLINE,
                 "tipoFactura" => SiatInvoice::FACTURA_DERECHO_CREDITO_FISCAL,
@@ -187,7 +188,7 @@ class VentaController extends Controller
                     "detalle_venta" => $detalle_venta,
                     "sucursal" => $sucursal,
                     "qrcode" => $qrcode,
-                    "hora" => $hora->format('h:i'),
+                    "hora" => $hora->isoFormat('H:mm'),
                     'fecha' => $fecha->format('Y-m-d'),
                     'total' => $total_texto,
                     'leyenda' => $leyenda_factura

@@ -64,7 +64,7 @@ class EventoSignificativoController extends Controller
         }
         /* dd($arrayVentas[0]['detalle_venta'][0]->plato); */
         $evento_significativo = EventoSignificativo::find($ventas[0]->evento_significativo_id);
-       /*  dd($evento_significativo); */
+        /*  dd($evento_significativo); */
         $sucursal = 0;
         $puntoventa = 1;
         $cantidadFacturas = count($ventas);
@@ -148,6 +148,14 @@ class EventoSignificativoController extends Controller
                         $venta_db->save();
                         $this->enviarCorreoaCliente($venta);
                     }
+                }else{
+                    if($res->RespuestaServicioFacturacion->codigoEstado== 904){
+                        foreach($ventas as $venta){
+                            $venta_db = Venta::find($venta->id);
+                            $venta_db->estado_emision = "O";
+                            $venta_db->save();
+                        }
+                    }
                 }
                 return  $res;
             } else {
@@ -180,7 +188,6 @@ class EventoSignificativoController extends Controller
 
     public function filtrarEventosSignificativos(Request $request)
     {
-        /* dd($request); */
         $fecha_inicial = $request->fecha_inicial;
         $fecha_final = $request->fecha_final;
         $evento_significativo = EventoSignificativo::find($request->evento_significativo_id);
@@ -194,18 +201,16 @@ class EventoSignificativoController extends Controller
             ->where('estado_emision', 'P')
             ->where('ventas.evento_significativo_id', "<>", null)
             ->get();
-
-        /*   dd($ventas); */
         return view('siat.eventos_significativos.index', compact('eventos_significativos', 'ventas', 'fecha_actual'));
     }
 
     public function enviarCorreoaCliente($venta)
     {
 
-        $fecha = Carbon::now();
-        $hora = Carbon::now();
-
         $venta = Venta::find($venta->id);
+        $fecha = new Carbon($venta->created_at);
+        $hora = new Carbon($venta->created_at);
+
         $sucursal = Sucursal::find($venta->sucursal_id);
         $cliente = Cliente::find($venta->cliente_id);
         $detalle_venta = DetalleVenta::where('venta_id', $venta->id)->get();
@@ -223,6 +228,7 @@ class EventoSignificativoController extends Controller
             "clienteNombre" => $cliente->nombre,
             "clienteCorreo" => $cliente->correo,
             "clienteNit" => $cliente->ci_nit,
+            "ClienteComplemento" => $cliente->complemento,
             "ClienteId" => $cliente->id,
             "venta" => $venta,
             "detalle_venta" => $detalle_venta,

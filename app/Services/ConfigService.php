@@ -21,8 +21,8 @@ class ConfigService
     public $codigoProductoSin    = '63310'; //COMPLETO DE RESTAURANTE 
     public $documentoSector    = DocumentTypes::FACTURA_COMPRA_VENTA;
     public $tipoFactura        = SiatInvoice::FACTURA_DERECHO_CREDITO_FISCAL;
-    /* public $cafc                 = null; */
-    public $cafc                 = "1011917833B0D";
+    public $cafc                 = null;
+    /* public $cafc                 = "1011917833B0D"; */
     public $resEvento             = null;
 
     public function __construct()

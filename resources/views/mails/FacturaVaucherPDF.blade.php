@@ -56,7 +56,11 @@
         <p style="text-align: start;">-----------------------------------------------------------------------------------------</p>
         <div style="text-align: start;">
             <p>NOMBRE/RAZON SOCIAL: {{$clienteNombre}}</p>
+            @if(is_null($ClienteComplemento))
             <p>NIT/CI/CEX: {{$clienteNit}}</p>
+            @else
+            <p>NIT/CI/CEX: {{$clienteNit}} - {{$ClienteComplemento}} </p>
+            @endif
             <p>COD. CLIENTE: {{$ClienteId}}</p>
             @php
             $fecha_emision = date_create($fecha);

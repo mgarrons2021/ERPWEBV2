@@ -8,7 +8,7 @@ use PDF;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Mail;
+use Illuminate\Support\Facades\Mail;
 
 class MailFacturacionController extends Controller
 {

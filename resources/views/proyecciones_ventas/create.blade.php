@@ -64,9 +64,7 @@
                                         <input type="number" class="form-control stock" id="venta_proyeccion_pm" style="text-align:center" name="venta_proyeccion_pm" value="venta_proyeccion_pm" step="any">
                                     </td>
                                     <td style="text-align: center;" class="venta_proyeccion_subtotal" name="venta_proyeccion_subtotal" id="venta_proyeccion_subtotal">
-                                        <?php
-                                        /* echo $venta_proyeccion_am * $venta_proyeccion_pm; */
-                                        ?> </td>
+                                        </td>
                                 </tr>
                                 <tr>
                                     <td style="text-align: center;">

@@ -344,44 +344,35 @@ class SincronizarCatalogosController extends Controller
 
         $sucursal = 0;
 
-        $this->sincronizarListaLeyendasFactura($sucursal);   
-        
-      /*   $this->sincronizarDocumentosIdentidades($sucursal); 
+        $this->sincronizarListaLeyendasFactura($sucursal);
+
+        $this->sincronizarDocumentosIdentidades($sucursal);
 
         $this->sincronizarTiposDocumentoSector($sucursal);
-         
-        $this->sincronizarMetodosPagos($sucursal);    
+
+        $this->sincronizarMetodosPagos($sucursal);
         $this->sincronizarTiposPuntosFacturas($sucursal);
         $this->sincronizarUnidadesMedidades($sucursal);
         $this->sincronizarTiposPuntosVentas($sucursal);
         $this->sincronizarTiposMonedas($sucursal);
 
 
-        $this->sincronizarTiposHabitaciones($sucursal); 
+        $this->sincronizarTiposHabitaciones($sucursal);
         $this->sincronizarListadoPaises($sucursal);
         $this->sincronizarTiposEmisiones($sucursal);
-        
-    
-        
-        $this->sincronizarMotivosAnulaciones($sucursal);  
-         $this->sincronizarEventosSignificativos($sucursal); 
-        $this->sincronizarProductosServicios($sucursal);  */
-/*         $this->sincronizarMensajesServicios($sucursal);
+
+
+
+        $this->sincronizarMotivosAnulaciones($sucursal);
+        $this->sincronizarEventosSignificativos($sucursal);
+        $this->sincronizarProductosServicios($sucursal);
+        $this->sincronizarMensajesServicios($sucursal);
         $this->sincronizarFechaHora($sucursal);
-       
-        $this->sincronizarListadoTotalActividades($sucursal);  */
 
-        /*  $listado_total_actividades = ListadoTotalActividad::count();
-        if ($listado_total_actividades >= 0){
-            $res = "Sincronizacion Catalogo Exitosa";
-        } */
-
+        $this->sincronizarListadoTotalActividades($sucursal);
         return response()->json([
             'response' => "Sincronizacion Catalogo Exitosa"
         ]);
 
-
-
-        $count = 0;
     }
 }

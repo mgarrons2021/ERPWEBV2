@@ -111,7 +111,7 @@ abstract class SiatInvoice extends Message
 		$fechaHora 			= '20190113163721231';
 		*/
 
-	/* 	print_r("<br>"."Siat Invoice : " . $nitEmisor . "-" . $fechaHora . "-" . $modalidad . "-" . $tipoEmision . "-" . $tipoFactura . "-" . $tipoSector . "-" . $numeroFactura . "-" . $numeroPuntoVenta) . "<br>"; */
+		/* print_r("<br>"."Siat Invoice : " . $nitEmisor . "-" . $fechaHora . "-" . $modalidad . "-" . $tipoEmision . "-" . $tipoFactura . "-" . $tipoSector . "-" . $numeroFactura . "-" . $numeroPuntoVenta) . "<br>"; */
 		$cadena 		= "{$nitEmisor}{$fechaHora}{$sucursalNro}{$modalidad}{$tipoEmision}{$tipoFactura}{$tipoSector}{$numeroFactura}{$numeroPuntoVenta}";
 		$verificador 	= $this->calculaDigitoMod11($cadena, 1, 9, false);
 		//$b16_str 		= $this->bcdechex(ltrim($cadena . $verificador));

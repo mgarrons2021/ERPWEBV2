@@ -26,7 +26,7 @@ class EventoSignificativoService
 
 	function pruebasEventos2($codigo_evento, $sucursal, $fecha_inicio_contingencia, $fecha_final_contingencia, $cufd_id)
 	{
-		$puntoventa = 1;
+		$puntoventa = 0;
 		$codigoEvento	=  $codigo_evento;
 		$fecha_generica = Carbon::now();
 		$sucursal_db = Sucursal::find($sucursal);

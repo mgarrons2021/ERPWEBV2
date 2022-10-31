@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\DetalleEliminacion;
 use App\Models\DetalleInventario;
 use Illuminate\Database\Seeder;
 
@@ -39,6 +40,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PedidoSeeder::class);
         $this->call(DetallePedidoSeeder::class);
         $this->call(EliminacionSeeder::class);
+        $this->call(DetalleEliminacionSeeder::class);
 
         // \App\Models\User::factory(10)->create();
     }
