@@ -50,9 +50,9 @@ class EmisionIndividualService
         $this->configService = new ConfigService();
     }
 
-    
 
-    function construirFactura3($codigoPuntoVenta = 0, $codigoSucursal = 0, $modalidad = 0, $documentoSector = 1, $codigoActividad = '620100', $codigoProductoSin = '', $dataFactura = null)
+
+    function construirFactura3($codigoPuntoVenta = 0, $codigoSucursal = 0, $modalidad = 0, $documentoSector = 1, $codigoActividad = '620100', $codigoProductoSin = '', $dataFactura = null, $codigoExcepcion = 0)
     {
         /*  dd($dataFactura); */
         $subTotal = 0;
@@ -85,9 +85,9 @@ class EmisionIndividualService
         $factura->cabecera->codigoSucursal        = $dataFactura['sucursal']['codigo_fiscal'];
         $factura->cabecera->direccion            = $dataFactura['sucursal']['direccion'];
         $factura->cabecera->codigoPuntoVenta    = $codigoPuntoVenta;
-        $factura->cabecera->fechaEmision        =  date("Y-m-d\TH:i:s.v", strtotime($dataFactura['venta']['created_at']));
-        $factura->cabecera->nombreRazonSocial    = $dataFactura['cliente']['nombre'];
-        $factura->cabecera->codigoTipoDocumentoIdentidad    = $dataFactura['venta']->documento_identidad->codigo_clasificador; //Tipo de Documento (Ci,Nit,PassPort etc) 
+        $factura->cabecera->fechaEmision        = date("Y-m-d\TH:i:s.v", strtotime($dataFactura['venta']['created_at']));
+        $factura->cabecera->nombreRazonSocial    = htmlspecialchars($dataFactura['cliente']['nombre']);
+        $factura->cabecera->codigoTipoDocumentoIdentidad    = $dataFactura['venta']->documento_identidad->codigo_clasificador; //NIT 
         $factura->cabecera->numeroDocumento        = $dataFactura['cliente']['ci_nit'];
         $factura->cabecera->complemento             = $dataFactura['cliente']['complemento'];
         $factura->cabecera->codigoCliente        = $dataFactura['cliente']['id']; //Codigo Unico Asignado por el sistema de facturacion (ID DEL CLIENTE)
@@ -100,10 +100,12 @@ class EmisionIndividualService
         $factura->cabecera->tipoCambio            = 1;
         $factura->cabecera->cuf            = $dataFactura['venta']['cuf'];
         $factura->cabecera->usuario              = $dataFactura['user']['name'] . " " . $dataFactura['user']['apellido'];
+        $factura->cabecera->codigoExcepcion  = $codigoExcepcion;
+        $factura->cabecera->leyenda             = $dataFactura['venta']->leyenda_factura->descripcion_leyenda;
         return $factura;
     }
 
-    function construirFactura2($codigoPuntoVenta = 0, $codigoSucursal = 0, $modalidad = 0, $documentoSector = 1, $codigoActividad = '620100', $codigoProductoSin = '', $dataFactura = null)
+    function construirFactura2($codigoPuntoVenta = 0, $codigoSucursal = 0, $modalidad = 0, $documentoSector = 1, $codigoActividad = '620100', $codigoProductoSin = '', $dataFactura = null, $codigoExcepcion)
     {
         $subTotal = 0;
         $factura = null;
@@ -139,7 +141,7 @@ class EmisionIndividualService
         $factura->cabecera->direccion            = $dataFactura['sucursal']['direccion'];
         $factura->cabecera->codigoPuntoVenta    = $codigoPuntoVenta;
         $factura->cabecera->fechaEmision        = date("Y-m-d\TH:i:s.v", strtotime($dataFactura['venta']['created_at']));
-        $factura->cabecera->nombreRazonSocial    = $dataFactura['cliente']['nombre'];
+        $factura->cabecera->nombreRazonSocial    = htmlspecialchars($dataFactura['cliente']['nombre']);
         $factura->cabecera->codigoTipoDocumentoIdentidad    = $dataFactura['venta']->documento_identidad->codigo_clasificador; //NIT 
         $factura->cabecera->numeroDocumento        = $dataFactura['cliente']['ci_nit'];
         $factura->cabecera->complemento             = $dataFactura['cliente']['complemento'];
@@ -153,6 +155,8 @@ class EmisionIndividualService
         $factura->cabecera->tipoCambio            = 1;
         $factura->cabecera->cuf            = $dataFactura['venta']['cuf'];
         $factura->cabecera->usuario              = $dataFactura['user']['name'] . " " . $dataFactura['user']['apellido'];
+        $factura->cabecera->codigoExcepcion  = $codigoExcepcion;
+        $factura->cabecera->leyenda             = $dataFactura['venta']->leyenda_factura->descripcion_leyenda;
         return $factura;
     }
 
@@ -282,7 +286,7 @@ class EmisionIndividualService
         return $factura;
     }
 
-    function testFactura($sucursal, $puntoventa, SiatInvoice $factura, $tipoFactura)
+    function testFactura($sucursal, $puntoventa, SiatInvoice $factura, $tipoFactura, $evento_significativo = null)
     {
         $fecha_actual = Carbon::now();
         $sucursal_DB = Sucursal::where('codigo_fiscal', $sucursal)->first();
@@ -299,7 +303,12 @@ class EmisionIndividualService
 
         $service = SiatFactory::obtenerServicioFacturacion($this->configService->config, $cuis->codigo_cui, $cufd->codigo, $cufd->codigo_control);
         $service->codigoControl = $cufd->codigo_control;
-        $res = $service->recepcionFactura($factura, SiatInvoice::TIPO_EMISION_ONLINE, $tipoFactura);
+
+        if ($evento_significativo == null) {
+            $res = $service->recepcionFactura($factura, SiatInvoice::TIPO_EMISION_ONLINE, $tipoFactura);
+        } else {
+            $res = $service->recepcionFactura($factura, SiatInvoice::TIPO_EMISION_OFFLINE, $tipoFactura, $evento_significativo);
+        }
         return $res;
     }
 

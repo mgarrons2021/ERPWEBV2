@@ -47,7 +47,7 @@ class ServicioFacturacion extends ServicioSiat
 	 * @return Object Retorna la respuesta del servicio web siat
 	 */
 
-	public function recepcionFactura(SiatInvoice $factura, $tipoEmision = SiatInvoice::TIPO_EMISION_ONLINE, $tipoFactura = SiatInvoice::FACTURA_DERECHO_CREDITO_FISCAL)
+	public function recepcionFactura(SiatInvoice $factura, $tipoEmision = SiatInvoice::TIPO_EMISION_ONLINE, $tipoFactura = SiatInvoice::FACTURA_DERECHO_CREDITO_FISCAL, $evento_significativo = null)
 	{
 		$factura->cabecera->razonSocialEmisor	= $this->razonSocial;
 		$factura->cabecera->nitEmisor 	= $this->nit;
@@ -59,6 +59,9 @@ class ServicioFacturacion extends ServicioSiat
 
 		file_put_contents(public_path() . "/FacturasXML/factura-" . $factura->cabecera->numeroDocumento . "-" . $factura->cabecera->numeroFactura . ".xml", $facturaXml);
 
+		if ($evento_significativo != null) {
+			return;
+		}
 		/* dd($facturaXml); */
 		//print $facturaXml;
 		//$facturaXml = file_get_contents('factura.xml');

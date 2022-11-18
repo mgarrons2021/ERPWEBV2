@@ -25,16 +25,6 @@ class ComprasSeeder extends Seeder
             'proveedor_id' => 4,
         ]);
         Compra::create([
-            'fecha_compra' => '2022-10-04',
-            'tipo_comprobante' => 'none',
-            'estado' => 'none',
-            'glosa' => 'none',
-            'total' => 39.0,
-            'user_id' => 3,
-            'sucursal_id'=> 11,
-            'proveedor_id' => 3,
-        ]);
-        Compra::create([
             'fecha_compra' => '2022-10-03',
             'tipo_comprobante' => 'none',
             'estado' => 'none',
@@ -44,5 +34,16 @@ class ComprasSeeder extends Seeder
             'sucursal_id'=> 11,
             'proveedor_id' => 5,
         ]);
+        Compra::create([
+            'fecha_compra' => '2022-10-04',
+            'tipo_comprobante' => 'none',
+            'estado' => 'none',
+            'glosa' => 'none',
+            'total' => 39.0,
+            'user_id' => 3,
+            'sucursal_id'=> 11,
+            'proveedor_id' => 3,
+        ]);
+      
     }
 }

@@ -69,6 +69,26 @@ class DetallePedidoSeeder extends Seeder
             'pedido_id' => 2,
             'producto_id' => 2
         ]);
+
+        //nueva tanda
+        DetallePedido::create([
+            'cantidad_solicitada' => 10.0,
+            'cantidad_enviada' => 15.0,
+            'precio' => 22.0,
+            'subtotal_solicitado' => 22.0,
+            'subtotal_enviado' =>  22.0,
+            'pedido_id' => 3,
+            'producto_id' => 9
+        ]);
+        DetallePedido::create([
+            'cantidad_solicitada' => 12.0,
+            'cantidad_enviada' => 16.0,
+            'precio' => 23.0,
+            'subtotal_solicitado' => 23.0,
+            'subtotal_enviado' =>  23.0,
+            'pedido_id' => 3,
+            'producto_id' => 11
+        ]);
        
     }
 }

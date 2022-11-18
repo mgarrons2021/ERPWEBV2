@@ -23,8 +23,9 @@
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered" id="table">
                                 <thead style="background-color: #6777ef;">
-                                    <th style="color: #fff;text-align:center">ID</th>
+                                    <th style="color: #fff;text-align:center">ID</th>                  
                                     <th style="color: #fff;text-align:center">Nombre</th>
+                                    <th style="color: #fff;text-align:center">Sub. Categoria</th>
                                     <th></th>
                                 </thead>
                                 <tbody>
@@ -33,8 +34,9 @@
                                         <td style="text-align:center">
                                             <a href="{{route('categorias_caja_chica.show', $categoria->id)}}" value="{{$categoria->id}}">{{$categoria->id}} </a>
                                         </td>
-
                                         <td style="text-align:center">{{$categoria->nombre}}</td>
+                                        <td style="text-align:center">{{$categoria->sub_categoria->sub_categoria}}</td>
+
                                         <td>
                                             <div class="dropdown" style="position: absolute;">
                                                 <a href="#" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">

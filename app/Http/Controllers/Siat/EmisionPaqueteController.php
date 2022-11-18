@@ -39,7 +39,7 @@ class EmisionPaqueteController extends Controller
         $puntoventa = 1;
         $cantidadFacturas = 500;
         $cafc     = "1011917833B0D";
-        $codigoEvento = 1;
+        $codigoEvento = 6;
         $fecha_generica = Carbon::now();
         $sucursal_db = Sucursal::where('codigo_fiscal', $sucursal)->first();
         $cufd_bd = SiatCufd::find($request->cufd_id);

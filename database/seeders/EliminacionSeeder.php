@@ -25,8 +25,17 @@ class EliminacionSeeder extends Seeder
             'turno_id' => 1
         ]);
         Eliminacion::create([
-            'fecha' => '2022-10-04',
+            'fecha' => '2022-10-03',
             'total' => 25.000,
+            'estado' =>'Con Eliminacion',
+            'user_id'=>3,
+            'sucursal_id' => 11,
+            'inventario_id' => 2,
+            'turno_id' => 1
+        ]);
+        Eliminacion::create([
+            'fecha' => '2022-10-04',
+            'total' => 2.000,
             'estado' =>'Con Eliminacion',
             'user_id'=>3,
             'sucursal_id' => 11,

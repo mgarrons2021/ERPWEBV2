@@ -65,8 +65,8 @@
                                         <td class="text-center ">
                                             <a href="{{ route('platos.show', $plato->id) }}" value="{{ $plato->nombre }}">{{ $plato->nombre}} </a>
                                         </td>
-                                        @if(isset($plato->platos_sucursales[0]->categoria_plato) )
-                                        <td class="text-center">{{$plato->platos_sucursales[0]->categoria_plato->nombre}}</td>
+                                        @if(isset($plato->nombre_categoria) )
+                                        <td class="text-center">{{$plato->nombre_categoria}}</td>
                                         @else
                                         <td class="text-center">Sin Categoria</td>
                                         @endif

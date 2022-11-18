@@ -19,6 +19,14 @@
                                         <div class="form-group">
                                             <label for="nombre">Nombre <span class="required">*</span></label>
                                             <input type="text" class="form-control  @error('nombre') is-invalid @enderror" name="nombre" placeholder="Nombre de la Categoria...">
+                                            <label for="nombre">Categoria de Gastos <span class="required">*</span></label>
+                                            <div class="selectric-hide-select">
+                                            <select name="sub_categoria_id" class="form-control selectric" placeholder="Seleccione Sub Categoria">                            
+                                                <option> Seleeciones Categoria </option>
+                                                @foreach($subCategorias as $subcategoria)
+                                                <option value="{{$subcategoria->id}}">{{$subcategoria->sub_categoria}}</option>
+                                                @endforeach
+                                            </select>
                                             @error('nombre')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

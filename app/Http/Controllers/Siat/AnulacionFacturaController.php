@@ -105,7 +105,7 @@ class AnulacionFacturaController extends Controller
     function prueba_anulacion()
     {
         $sucursal = 0;
-        $puntoventa = 1;
+        $puntoventa = 0;
 
         $resCuis     = $this->cuisService->obtenerCuis($puntoventa, $sucursal, true);
         $resCufd    = $this->cufdService->obtenerCufd($puntoventa, $sucursal, $resCuis->RespuestaCuis->codigo, true);

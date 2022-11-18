@@ -10,6 +10,7 @@
                         <li class="nav-item{{ $activePage == 'roles' ? ' active' : '' }}"><a href="{{ route('cargos.index') }}" class="nav-link" href="layout-transparent.html">Cargos</a></li>
                         <li class="nav-item{{ $activePage == 'proveedores' ? ' active' : '' }}"><a href="{{ route('proveedores.index') }}" class="nav-link" href="layout-transparent.html">Proveedores</a></li>
                         <li class="nav-item{{ $activePage == 'roles' ? ' active' : '' }}"><a href="{{ route('roles.index') }}" class="nav-link" href="layout-transparent.html">Roles</a></li>
+                        
                 </ul>
         </li>
         @endrole
@@ -26,8 +27,6 @@
                         <li class="nav-item{{ $activePage == 'roles' ? ' active' : '' }}"><a href="{{ route('autorizaciones.ventas_fiscales') }}" class="nav-link">Reporte Ventas Fiscales</a></li>
                         <li class="nav-item{{ $activePage == 'roles' ? ' active' : '' }}"><a href="{{ route('pedidos_producciones.reporte_inventario') }}" class="nav-link">Reporte Inventario Fiscal</a></li>
                         <li class="nav-item{{ $activePage == 'roles' ? ' active' : '' }}"><a href="{{ route('horarios.planillaHorarios') }}" class="nav-link">Planilla Horario</a></li>
-
-
 
                 </ul>
         </li>
@@ -137,12 +136,17 @@
                 <a href="" class="nav-link has-dropdown"><i class="fas fa-shopping-cart"></i> <span> Contabilidad</span></a>
                 <ul class="dropdown-menu">
                         <li class="nav-item "> <a href="{{ route('compras.index') }}">Compras </a> </li>
-                        <li class="nav-item "> <a href="{{ route('cajas_chicas.index') }}">Caja Chica</a> </li>
+                        <li class="nav-item "> <a href="{{ route('cajas_chicas.index') }}">Caja Chica</a> </li>     
                         @role('Super Admin|Contabilidad' )
+                        <li class="nav-item "> <a href="{{ route('gastos_administrativos.index') }}">Gastos Admin.</a> </li>
+                        <li class="nav-item "> <a href="{{ route('categorias_gastos_administrativos.index') }}">Cat. Gastos Admin.</a> </li>
                         <li class="nav-item "> <a href="{{ route('categorias_caja_chica.index') }}">Cat. Caja Chica</a> </li>
+                        <li class="nav-item "> <a href="{{ route('subcategoria.indexSubcategoria') }}">Sub.Categorias</a> </li>
                         <li class="nav-item "> <a href="{{ route('pagos.index') }}">Pagos </a> </li>
                         <li class="nav-item "> <a href="{{ route('contabilidad.reporteProveedores') }}">Compras y Pagos</a> </li>
-                        <li class="nav-item "> <a href="{{ route('contabilidad.reporteCajaChica') }}">Reporte de Caja Chica</a> </li>
+                        <li class="nav-item "> <a href="{{ route('contabilidad.reporteCajaChica') }}">Reporte de Caja Chica</a></li>
+                        <li class="nav-item "> <a href="{{ route('contabilidad.indexReporteGastos') }}">Reporte de Gastos</a></li>
+                        <li class="nav-item "> <a href="{{ route('contabilidad.consolidadoCajaChica') }}">Consolidado Caja Chica</a> </li>
                         @endrole
                 </ul>
         </li>
@@ -175,6 +179,7 @@
                         <li class="nav-item"> <a href="{{ route('ventas.ventas_sucursal') }}">Ventas por Sucursal</a> </li>
                         <li class="nav-item"> <a href="{{ route('reportes.index') }}">Costo General</a> </li>
                         <li class="nav-item"> <a href="{{route('reportes.ajuste')}}">Ajuste de Inventario</a> </li>
+                        <li class="nav-item"> <a href="{{route('reportes.ajuste_semanal')}}">Ajuste de Inventario Semanal</a> </li>
                 </ul>
         </li>
         @role('Super Admin')

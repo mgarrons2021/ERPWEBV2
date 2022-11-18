@@ -85,7 +85,7 @@ Route::get('/get_compras', function (Request $request) {
 });
 
 Route::get('/getCufd', function (Request $request) { //----------
-    $cufd =SiatCufd::where('sucursal_id', '=', $request->sucursal_id)
+    $cufd = SiatCufd::where('sucursal_id', '=', $request->sucursal_id)
         ->where('estado', 'V')
         ->orderBy('id', 'desc')
         ->first();
@@ -153,12 +153,11 @@ Route::get('/getSectorDocuments', function () {
     $documento_sector = new DocumentoSector();
     $documentoSectores = $documento_sector->getSectorDocuments();
 
-    $response= [
-        'success'=> true,
+    $response = [
+        'success' => true,
         'documentoSectores' => $documentoSectores
     ];
     return response($response, 200)->header('Content-Type', 'application/json');
-    
 });
 
 
@@ -166,12 +165,11 @@ Route::get('/getIdentityDocuments', function () {
     $documento_identidad = new DocumentoIdentidad();
     $documentosIdentidades = $documento_identidad->getIdentityDocuments();
 
-    $response= [
-        'success'=> true,
+    $response = [
+        'success' => true,
         'documentosIdentidades' => $documentosIdentidades
     ];
     return response($response, 200)->header('Content-Type', 'application/json');
-    
 });
 
 
@@ -319,12 +317,15 @@ Route::get('sales_for_id', function (Request $request) {
     $list_sales = $venta->sales_for_id($request->id);
     $list_sales_detail = $venta->getsalesDetail($request->id);
     $obj = new LeyendaFactura();
-    $leyenda = $obj->getLeyenda();
+    $leyenda = $obj->getLeyendaSale($list_sales["leyendaID"]);
+
+
+
     $response = [
         'success' => true,
         'ventas' => $list_sales,
-        'venta_detalle' => $list_sales_detail,
         'leyenda' => $leyenda,
+        'venta_detalle' => $list_sales_detail,
     ];
     return response($response, 200)->header('Content-Type', 'application/json');
 });

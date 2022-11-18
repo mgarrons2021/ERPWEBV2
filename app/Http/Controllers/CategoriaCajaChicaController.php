@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CategoriaCajaChica;
+use App\Models\SubCategoria;
 use Illuminate\Http\Request;
 
 class CategoriaCajaChicaController extends Controller
@@ -15,7 +16,9 @@ class CategoriaCajaChicaController extends Controller
 
     public function create()
     {
-        return view('categorias_caja_chica.create');
+        $subCategorias = SubCategoria::all();
+
+        return view('categorias_caja_chica.create',compact('subCategorias'));
     }
 
     public function store(Request $request)
@@ -26,6 +29,7 @@ class CategoriaCajaChicaController extends Controller
 
         $categoria_caja_chica= new CategoriaCajaChica();
         $categoria_caja_chica->nombre =$request->get('nombre');
+        $categoria_caja_chica->sub_categoria_id =$request->get('sub_categoria_id');
         $categoria_caja_chica->save();
        
         return redirect()->route('categorias_caja_chica.index');
@@ -50,8 +54,10 @@ class CategoriaCajaChicaController extends Controller
         $categoria_caja_chica= CategoriaCajaChica::find($id);
         $request->validate([
             'nombre' => 'required' 
+     
         ]);
         $categoria_caja_chica->nombre =$request->get('nombre');
+    
         $categoria_caja_chica->save();
 
         return redirect()->route('categorias_caja_chica.index');
@@ -63,6 +69,23 @@ class CategoriaCajaChicaController extends Controller
         $categoria_caja_chica->delete();
         return response()->json(['success' => true], 200);
 
+    }
+
+    //PARA LAS SUBCATEGORIAS
+    public function indexSubcategoria(){
+        $subcategorias = SubCategoria::all();
+       // dd($subcategoria);
+        return view('contabilidad.subcategoria',compact('subcategorias'));
+    }
+    public function createSubCategoria(Request $request){
+
+        $request->validate([
+            'subcategoria' => 'required' 
+        ]);
+        $nuevaSubcategoria = new SubCategoria();
+        $nuevaSubcategoria->sub_categoria = $request->get('subcategoria');
+        $nuevaSubcategoria->save();
+        return redirect()->route('subcategoria.indexSubcategoria');
     }
 
 

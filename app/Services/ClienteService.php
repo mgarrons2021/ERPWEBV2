@@ -17,7 +17,7 @@ class ClienteService
         } else {
             if (is_null($cliente)) {
                 $cliente = new Cliente();
-                $cliente->nombre = $clienteData['cliente'];
+                $cliente->nombre = $clienteData['cliente'] ;
                 $cliente->ci_nit = $clienteData['ci_nit'];
                 $cliente->empresa = $clienteData['empresa'];
                 $cliente->correo = $clienteData['correo'];

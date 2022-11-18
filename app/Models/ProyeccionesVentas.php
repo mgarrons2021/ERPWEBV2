@@ -21,13 +21,14 @@ class ProyeccionesVentas extends Model
     'user_id',
     'sucursal_id'];
 
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
     public function detalle_asignar_stock(){
         return $this->hasMany(DetalleProyeccionesVentas::class);
     }
 
     public function sucursal(){
         return $this->belongsTo(Sucursal::class);
-    }
-   
-
+    }   
 }

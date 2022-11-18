@@ -28,8 +28,8 @@ class PedidoSeeder extends Seeder
         ]);
         Pedido::Create([
             'id' => 2,
-            'fecha_actual' => '2022-10-04',
-            'fecha_pedido' => '2022-10-04',
+            'fecha_actual' => '2022-10-03',
+            'fecha_pedido' => '2022-10-03',
             'total_solicitado' => 25,
             'total_enviado' => 20,
             'estado' => 'A',
@@ -38,5 +38,18 @@ class PedidoSeeder extends Seeder
             'sucursal_principal_id' => 11,
             'sucursal_secundaria_id' => 2
         ]);
+        Pedido::Create([
+            'id' => 3,
+            'fecha_actual' => '2022-10-04',
+            'fecha_pedido' => '2022-10-04',
+            'total_solicitado' => 22,
+            'total_enviado' => 25,
+            'estado' => 'A',
+            'estado_impresion' => 'N',
+            'user_id' =>3,
+            'sucursal_principal_id' => 11,
+            'sucursal_secundaria_id' => 14
+        ]);
     }
+
 }

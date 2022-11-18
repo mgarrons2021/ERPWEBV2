@@ -23,4 +23,9 @@ class LeyendaFactura extends Model
         $eventos_significativos = LeyendaFactura::find($numero_random);
         return $eventos_significativos;
     }
+
+    public function getLeyendaSale($leyenda_id){
+        $leyenda = LeyendaFactura::find($leyenda_id);
+        return $leyenda;
+    }
 }

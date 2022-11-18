@@ -12,7 +12,7 @@ class ConfigService
     public $config;
 
     public $sucursal             = 0;
-    public $puntoventa           = 1;
+    public $puntoventa           = 0;
     public $cantFacturas        = 1000; /* Cantidad factura para hacer pruebas */
     public $codigoEvento        = 0;
     public $evento             = null;
@@ -36,10 +36,11 @@ class ConfigService
             'ambiente'      => ServicioSiat::AMBIENTE_PRUEBAS,
             'pubCert'        => MOD_SIAT_DIR . SB_DS . 'certs' . SB_DS . 'terminalx' . SB_DS . 'DONESCO_SRL_CER.pem',
             'privCert'        => MOD_SIAT_DIR . SB_DS . 'certs' . SB_DS . 'terminalx' . SB_DS . 'DONESCO_S.R.L..pem',
-            'tokenDelegado' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJET05FU0NPXzAyMyIsImNvZGlnb1Npc3RlbWEiOiI3MjQyMkRENDMzQkU4MTc3REM3MUZFNiIsIm5pdCI6Ikg0c0lBQUFBQUFBQUFETTBNek0wTnpJd01nWUE3bHFjcHdrQUFBQT0iLCJpZCI6NTE5NjgyLCJleHAiOjE2NjcyNjA4MDAsImlhdCI6MTY2NTI0MDIyOCwibml0RGVsZWdhZG8iOjE2NjE3MjAyMywic3Vic2lzdGVtYSI6IlNGRSJ9.5ZkQ6815VtUXK07ieWTBit6roArGNK2ZIq90W7TdGhzUnotYE7C31nSv-XrifFTSVrEKRgtwiNlDie8wdkrMJg',
+            'tokenDelegado' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJET05FU0NPXzAyMyIsImNvZGlnb1Npc3RlbWEiOiI3MjQyMkRENDMzQkU4MTc3REM3MUZFNiIsIm5pdCI6Ikg0c0lBQUFBQUFBQUFETTBNek0wTnpJd01nWUE3bHFjcHdrQUFBQT0iLCJpZCI6NTE5NjgyLCJleHAiOjE2Njk5MzkyMDAsImlhdCI6MTY2NzMwOTA5Miwibml0RGVsZWdhZG8iOjE2NjE3MjAyMywic3Vic2lzdGVtYSI6IlNGRSJ9.VPieRnSYnLGywOTNZnWlrYCnJEhzCrKh4UecDByyE_VzXf76CuJecCf_PG3PCRfFS85pwRYKlhd2xSuHYxcObw',
             'telefono'      => '34345435',
             'ciudad'        => 'SANTA CRUZ GC'
 
         ]);
     }
 }
+ 

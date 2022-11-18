@@ -9,6 +9,7 @@ use App\Models\Siat\SiatCufd;
 use App\Services\CufdService;
 use App\Services\CuisService;
 use App\Http\Controllers\Controller;
+use App\Services\ConfigService;
 use App\Services\EmisionIndividualService;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\SiatConfig;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\DocumentTypes;
@@ -21,20 +22,22 @@ class EmisionIndividualController extends Controller
 {
     public $cuisService;
     public $cufdService;
+    public $configService;
     public $emisionIndividualService;
 
     public function __construct()
     {
         $this->cuisService = new CuisService();
         $this->cufdService = new CufdService();
+        $this->configService = new ConfigService();
         $this->emisionIndividualService = new EmisionIndividualService();
     }
 
-    public function emisionIndividual($dataFactura)
+    public function emisionIndividual($dataFactura, $evento_significativo = null, $codigoExcepcion)
     {
 
         $fecha_actual = Carbon::now();
-        $puntoventa = 0;
+        $puntoventa = $this->configService->puntoventa;
 
         $sucursal_id = $dataFactura['sucursal']['id'];
         $sucursalcodigoFiscal = $dataFactura['sucursal']['codigo_fiscal'];
@@ -50,9 +53,9 @@ class EmisionIndividualController extends Controller
         $cufd = SiatCufd::where('sucursal_id', $sucursal_id)
             ->where('fecha_vigencia', '<=', $fecha_actual)
             ->orderBy('id', 'desc')->first();
-        $factura = $this->emisionIndividualService->construirFactura2($puntoventa, $sucursalcodigoFiscal, $modalidad, $documentoSector, $codigoActividad, $codigoProductoSin, $dataFactura);
+        $factura = $this->emisionIndividualService->construirFactura3($puntoventa, $sucursalcodigoFiscal, $modalidad, $documentoSector, $codigoActividad, $codigoProductoSin, $dataFactura, $codigoExcepcion);
         /* dd($factura); */
-        $res = $this->emisionIndividualService->testFactura($sucursalcodigoFiscal, $puntoventa, $factura, $tipoFactura);
+        $res = $this->emisionIndividualService->testFactura($sucursalcodigoFiscal, $puntoventa, $factura, $tipoFactura, $evento_significativo);
         return $res;
     }
 }

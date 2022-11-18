@@ -6,11 +6,19 @@ use App\Http\Controllers\Controller;
 use App\Models\Siat\RegistroPuntoVenta;
 use App\Models\Siat\SiatCui;
 use App\Models\Sucursal;
+use App\Services\ConfigService;
 use App\Services\CuisService;
 use Illuminate\Http\Request;
 
 class CuisController extends Controller
 {
+
+    public $configService;
+
+    public function __construct()
+    {
+        $this->configService = new ConfigService();
+    }
 
 
     public function index()
@@ -27,9 +35,9 @@ class CuisController extends Controller
 
     public function store(Request $request)
     {
-        $cuisService = new CuisService(); 
+        $cuisService = new CuisService();
         $sucursal = Sucursal::find($request->sucursal_id);
-        $puntoVenta = 0;
+        $puntoVenta = $this->configService->puntoventa;
         $response = $cuisService->obtenerCuis($puntoVenta,  $sucursal->codigo_fiscal);
         $respCrearCuis = $cuisService->createCuis($response, $request->sucursal_id);
         if ($respCrearCuis['status']) {
@@ -42,8 +50,8 @@ class CuisController extends Controller
             } else {
                 return response()->json(["status" => false, "error" => "Sin Codigo de Respuesta"]);
             }
-        }else{
-           return $respCrearCuis;
+        } else {
+            return $respCrearCuis;
         }
     }
 }

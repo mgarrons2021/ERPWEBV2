@@ -24,6 +24,9 @@ class CajaChica extends Model
     public function sucursal(){
         return $this->belongsTo(Sucursal::class);
     }
+    public function categoria_caja_chica(){
+        return $this->belongsTo(CategoriaCajaChica::class);
+    }
 
     public function detalles_caja_chica(){
         return $this->hasMany(DetalleCajaChica::class);

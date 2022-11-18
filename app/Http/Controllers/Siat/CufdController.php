@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Siat\SiatCufd;
 use App\Models\Siat\SiatCui;
 use App\Models\Sucursal;
+use App\Services\ConfigService;
 use App\Services\CufdService;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -14,9 +15,11 @@ class CufdController extends Controller
 {
 
     public $cufdService;
+    public $configService;
     public function __construct()
     {
         $this->cufdService = new CufdService();
+        $this->configService = new ConfigService();
     }
     /**
      * Display a listing of the resource.
@@ -49,7 +52,7 @@ class CufdController extends Controller
      */
     public function store(Request $request)
     {
-        $codigoPuntoVenta = 0;
+        $codigoPuntoVenta = $this->configService->puntoventa;
         $sucursal = Sucursal::find($request->sucursal_id);
         $cuis = SiatCui::where('sucursal_id', $sucursal->id)
             ->where('estado', 'V')
@@ -69,10 +72,10 @@ class CufdController extends Controller
             'numero_factura' => 0
         ]);
 
-        SiatCufd::where('estado','V')
-        ->where('id','<>',$newCufd->id)
-        ->where('sucursal_id',$sucursal->id)
-        ->update(['estado'=>'N']);
+        SiatCufd::where('estado', 'V')
+            ->where('id', '<>', $newCufd->id)
+            ->where('sucursal_id', $sucursal->id)
+            ->update(['estado' => 'N']);
 
         return redirect()->route('cufd.index');
     }

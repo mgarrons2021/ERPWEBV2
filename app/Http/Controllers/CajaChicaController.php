@@ -3,13 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\CajaChica;
+use App\Models\CajaChicaSubCategoria;
 use App\Models\CategoriaCajaChica;
 use App\Models\DetalleCajaChica;
+use App\Models\DetalleGastosAdministrativos;
+use App\Models\GastosAdministrativos;
 use App\Models\Sucursal;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Collection;
 
 class CajaChicaController extends Controller
 {
@@ -31,22 +35,21 @@ class CajaChicaController extends Controller
         $sucursales = Sucursal::all();
         $fecha_marcado_inicial = $request->get('fecha_inicial');
         $fecha_marcado_final = $request->get('fecha_final');
-        
-        if($user->roles[0]->id==3){
-            $cajas_chicas = CajaChica::whereBetween('fecha', [$fecha_marcado_inicial, $fecha_marcado_final])->where('sucursal_id',$user->sucursals[0]->id)->get();
-        }else{
-           
-                //dd('true');
-                $cajas_chicas = CajaChica::whereBetween('fecha', [$fecha_marcado_inicial, $fecha_marcado_final])->get();
+
+        if ($user->roles[0]->id == 3) {
+            $cajas_chicas = CajaChica::whereBetween('fecha', [$fecha_marcado_inicial, $fecha_marcado_final])->where('sucursal_id', $user->sucursals[0]->id)->get();
+        } else {
+
+            //dd('true');
+            $cajas_chicas = CajaChica::whereBetween('fecha', [$fecha_marcado_inicial, $fecha_marcado_final])->get();
         }
 
-        return view('cajas_chicas.index', compact('cajas_chicas') );
+        return view('cajas_chicas.index', compact('cajas_chicas'));
     }
 
     public function create()
     {
         $fecha_actual = Carbon::now()->locale('es')->isoFormat('dddd, D MMMM Y');
-
         $categorias_caja_chica = CategoriaCajaChica::all();
         return view('cajas_chicas.create', compact('categorias_caja_chica', 'fecha_actual'));
     }
@@ -148,7 +151,221 @@ class CajaChicaController extends Controller
         $fecha_marcado_inicial = Carbon::now()->startOfDay();
         $fecha_marcado_final = Carbon::now()->endOfDay();
         $registros = CajaChica::whereBetween('fecha', [Carbon::now()->startOfDay()->format('Y-m-d'), Carbon::now()->endOfDay()->format('Y-m-d')])->get();
-        return view('contabilidad.reportes.reporteCajaChica', compact('sucursales','registros', 'fecha_marcado_inicial', 'fecha_marcado_final'));
+        return view('contabilidad.reportes.reporteCajaChica', compact('sucursales', 'registros', 'fecha_marcado_inicial', 'fecha_marcado_final'));
+    }
+    public function consolidadoCajaChica()
+    {
+        $sucursales = Sucursal::all();
+        $fecha_marcado_inicial = Carbon::now()->startOfDay();
+        $fecha_marcado_final = Carbon::now()->endOfDay();
+        $total_egresoFactura = 0;
+        $total_egresoRecibo = 0;
+        $collectionFinalFactura = [];
+        $collectionFinalRecibo = [];
+        return view('contabilidad.reportes.consolidadoCajaChica', compact('total_egresoFactura', 'total_egresoRecibo', 'sucursales', 'collectionFinalFactura', 'collectionFinalRecibo', 'fecha_marcado_inicial', 'fecha_marcado_final'));
+    }
+    public function filtrarConsolidadoCajaChica(Request $request)
+    {
+
+        $user = Auth::user();
+        $sucursales = Sucursal::all();
+        $sucursal = $request->get('sucursal_id');
+        $fecha_marcado_inicial = $request->get('fecha_inicial');
+        $fecha_marcado_final = $request->get('fecha_final');
+        $detalleCajaChicaFactura = [];
+        $total_egresoFactura = 0;
+        $total_egresoRecibo = 0;
+
+        $recibo = new Collection();
+        $factura = new Collection();
+        $collectionFinalFactura = new Collection();
+        $collectionFinalRecibo = new Collection();
+
+        $todasSucursalesEnRango = new Collection();
+        if ($sucursal == 'x') {
+            $registrosAll = CajaChica::whereBetween('fecha', [$fecha_marcado_inicial, $fecha_marcado_final])->get();
+            foreach ($registrosAll as $key => $value) {
+                $todasSucursalesEnRango->push($value->sucursal_id);
+            }
+            $todasSucursalesEnRango = array_unique($todasSucursalesEnRango->toArray());
+            foreach ($todasSucursalesEnRango as $key => $value) {
+                $recibo = new Collection();
+                $factura = new Collection();
+                $registros = CajaChica::whereBetween('fecha', [$fecha_marcado_inicial, $fecha_marcado_final])->where('sucursal_id', $value)->get();
+                foreach ($registros as $key => $value) {
+                    //  CON RECIBO
+                    $detalleCajaChica = DetalleCajaChica::selectRaw('SUM(egreso) AS suma_egreso, categorias_caja_chica.nombre')
+                        ->join('categorias_caja_chica', 'categorias_caja_chica.id', '=', 'categoria_caja_chica_id',)
+                        ->where('caja_chica_id', $value->id)
+                        ->where('tipo_comprobante', 'R')
+                        ->groupBy('categorias_caja_chica.nombre')
+                        ->get();
+                    foreach ($detalleCajaChica as $key => $valueDetalleCajaChica) {
+                        $catCajaChica = CategoriaCajaChica::where('nombre', $valueDetalleCajaChica->nombre)->first();
+                        $valueDetalleCajaChica['sucursal'] = $value->sucursal->nombre;
+                        $valueDetalleCajaChica['sub_categoria_id'] =  $this->categorizar($catCajaChica->sub_categoria_id);
+                    }
+                    foreach ($detalleCajaChica as $key => $valueees) {
+                        $recibo->push($valueees);
+                    }
+                    //CON FACTURA
+                    $detalleCajaChicaFactura = DetalleCajaChica::selectRaw('SUM(egreso) AS suma_egreso, categorias_caja_chica.nombre')
+                        ->join('categorias_caja_chica', 'categorias_caja_chica.id', '=', 'categoria_caja_chica_id',)
+                        ->where('caja_chica_id', $value->id)
+                        ->where('tipo_comprobante', 'F')
+                        ->groupBy('categorias_caja_chica.nombre')
+                        ->get();
+                    //dd($detalleCajaChicaFactura);   
+                    foreach ($detalleCajaChicaFactura as $key => $valueDetalleCajaChicaFactura) {
+                        $catCajaChica = CategoriaCajaChica::where('nombre', $valueDetalleCajaChicaFactura->nombre)->first();
+                        $valueDetalleCajaChicaFactura['sucursal'] = $value->sucursal->nombre;
+                        $valueDetalleCajaChicaFactura['sub_categoria_id'] =  $this->categorizar($catCajaChica->sub_categoria_id);
+                    }
+                    foreach ($detalleCajaChicaFactura as $key => $valuees) {
+                        $factura->push($valuees);
+                    }
+                }
+                //PASO DOS RECIBO
+                $groupwithcountRecibo = $recibo->groupBy('nombre')->map(function ($row) {
+                    return [
+                        'nombre' =>  $row->first()['nombre'],
+                        'sucursal' =>  $row->first()['sucursal'],
+                        'sub_categoria_id' =>  $row->first()['sub_categoria_id'],
+                        'suma_egreso' => $row->sum('suma_egreso')
+                    ];
+                });
+                foreach ($groupwithcountRecibo as $key => $valuezz) {
+                    $collectionFinalRecibo->push($valuezz);
+                }
+                foreach ($collectionFinalRecibo as $key => $valorR) {
+                    foreach ($valorR as $llave => $valor) {
+                        if ($llave == "suma_egreso") {
+                            $total_egresoRecibo +=  $valor;
+                        }
+                    }
+                }
+                //PASO DOS FACTURA
+                $groupwithcount = $factura->groupBy('nombre')->map(function ($row) {
+                    //  return $row->sum('suma_egreso');
+                    return [
+                        'nombre' =>  $row->first()['nombre'],
+                        'sucursal' =>  $row->first()['sucursal'],
+                        'sub_categoria_id' =>  $row->first()['sub_categoria_id'],
+                        'suma_egreso' => $row->sum('suma_egreso')
+                    ];
+                });
+
+                foreach ($groupwithcount as $key => $valuez) {
+                    $collectionFinalFactura->push($valuez);
+                }
+                // $collectionFinalFactura = new Collection([['nombre' => "Verduras",'sucursal'=>"Suc. Palmas",'suma_egreso'=>79.31],['nombre' => "Abarrotes",'sucursal'=>"Suc. Palmas",'suma_egreso'=>53.18],['nombre' => "Plasticos",'sucursal'=>"Suc. Palmas",'suma_egreso'=>13.5]]);    
+                // echo "Coleccion Final Factura".$collectionFinalFactura.'</br>';
+                foreach ($collectionFinalFactura as $key => $value) {
+                    foreach ($value as $llave => $valor) {
+                        if ($llave == "suma_egreso") {
+                            $total_egresoFactura +=  $valor;
+                        }
+                    }
+                }
+            }
+            return view('contabilidad.reportes.consolidadoCajaChica', compact('total_egresoFactura', 'total_egresoRecibo', 'sucursales', 'collectionFinalFactura', 'collectionFinalRecibo', 'fecha_marcado_inicial', 'fecha_marcado_final'));
+        } else {
+            $registros = CajaChica::whereBetween('fecha', [$fecha_marcado_inicial, $fecha_marcado_final])->where('sucursal_id', $sucursal)->get();
+            foreach ($registros as $key => $value) {
+                //  CON RECIBO
+                $detalleCajaChica = DetalleCajaChica::selectRaw('SUM(egreso) AS suma_egreso, categorias_caja_chica.nombre')
+                    ->join('categorias_caja_chica', 'categorias_caja_chica.id', '=', 'categoria_caja_chica_id',)
+                    ->where('caja_chica_id', $value->id)
+                    ->where('tipo_comprobante', 'R')
+                    ->groupBy('categorias_caja_chica.nombre')
+                    ->get();
+                foreach ($detalleCajaChica as $key => $valueDetalleCajaChica) {
+                    $catCajaChica = CategoriaCajaChica::where('nombre', $valueDetalleCajaChica->nombre)->first();
+                    $valueDetalleCajaChica['sucursal'] = $value->sucursal->nombre;
+                    $valueDetalleCajaChica['sub_categoria_id'] =  $this->categorizar($catCajaChica->sub_categoria_id);
+                }
+                foreach ($detalleCajaChica as $key => $valueees) {
+                    $recibo->push($valueees);
+                }
+                //CON FACTURA
+                $detalleCajaChicaFactura = DetalleCajaChica::selectRaw('SUM(egreso) AS suma_egreso, categorias_caja_chica.nombre')
+                    ->join('categorias_caja_chica', 'categorias_caja_chica.id', '=', 'categoria_caja_chica_id',)
+                    ->where('caja_chica_id', $value->id)
+                    ->where('tipo_comprobante', 'F')
+                    ->groupBy('categorias_caja_chica.nombre')
+                    ->get();
+                foreach ($detalleCajaChicaFactura as $key => $valueDetalleCajaChicaFactura) {
+                    $catCajaChica = CategoriaCajaChica::where('nombre', $valueDetalleCajaChicaFactura->nombre)->first();
+                    $valueDetalleCajaChicaFactura['sucursal'] = $value->sucursal->nombre;
+                    $valueDetalleCajaChicaFactura['sub_categoria_id'] =  $this->categorizar($catCajaChica->sub_categoria_id);
+                }
+                foreach ($detalleCajaChicaFactura as $key => $valuees) {
+                    $factura->push($valuees);
+                }
+            }
+            //PASO DOS RECIBO
+            $groupwithcountRecibo = $recibo->groupBy('nombre')->map(function ($row) {
+                return [
+                    'nombre' =>  $row->first()['nombre'],
+                    'sucursal' =>  $row->first()['sucursal'],
+                    'sub_categoria_id' =>  $row->first()['sub_categoria_id'],
+                    'suma_egreso' => $row->sum('suma_egreso')
+                ];
+            });
+
+            foreach ($groupwithcountRecibo as $key => $valuezz) {
+                $collectionFinalRecibo->push($valuezz);
+            }
+            foreach ($collectionFinalRecibo as $key => $valorR) {
+                foreach ($valorR as $llave => $valor) {
+                    if ($llave == "suma_egreso") {
+                        $total_egresoRecibo +=  $valor;
+                    }
+                }
+            }
+
+            //PASO DOS FACTURA
+            $groupwithcount = $factura->groupBy('nombre')->map(function ($row) {
+                //  return $row->sum('suma_egreso');
+                return [
+                    'nombre' =>  $row->first()['nombre'],
+                    'sucursal' =>  $row->first()['sucursal'],
+                    'sub_categoria_id' =>  $row->first()['sub_categoria_id'],
+                    'suma_egreso' => $row->sum('suma_egreso')
+                ];
+            });
+            foreach ($groupwithcount as $key => $valuez) {
+                $collectionFinalFactura->push($valuez);
+            }
+            // $collectionFinalFactura = new Collection([['nombre' => "Verduras",'sucursal'=>"Suc. Palmas",'suma_egreso'=>79.31],['nombre' => "Abarrotes",'sucursal'=>"Suc. Palmas",'suma_egreso'=>53.18],['nombre' => "Plasticos",'sucursal'=>"Suc. Palmas",'suma_egreso'=>13.5]]);    
+            // echo "Coleccion Final Factura".$collectionFinalFactura.'</br>';
+            foreach ($collectionFinalFactura as $key => $value) {
+                foreach ($value as $llave => $valor) {
+                    if ($llave == "suma_egreso") {
+                        $total_egresoFactura +=  $valor;
+                    }
+                }
+            }
+            return view('contabilidad.reportes.consolidadoCajaChica', compact('total_egresoFactura', 'total_egresoRecibo', 'sucursales', 'collectionFinalFactura', 'collectionFinalRecibo', 'fecha_marcado_inicial', 'fecha_marcado_final'));
+        }
+    }
+    public function categorizar($subCategoriaId)
+    {
+        $categoriaTxt = "";
+        switch ($subCategoriaId) {
+            case (1):
+                $categoriaTxt = "Costo";
+                break;
+            case (2):
+                $categoriaTxt = "Gasto";
+                break;
+            case (3):
+                $categoriaTxt = "Otros Costos";
+                break;
+            default:
+            break;
+        }
+        return $categoriaTxt;
     }
 
     public function filtrarCajaChica(Request $request)
@@ -158,19 +375,50 @@ class CajaChicaController extends Controller
         $sucursal = $request->get('sucursal_id');
         $fecha_marcado_inicial = $request->get('fecha_inicial');
         $fecha_marcado_final = $request->get('fecha_final');
-        
-        if($user->roles[0]->id==3){
-            $registros = CajaChica::whereBetween('fecha', [$fecha_marcado_inicial, $fecha_marcado_final])->where('sucursal_id',$user->sucursals[0]->id)->get();
-        }else{
-            if($sucursal=='x'){
+
+        if ($user->roles[0]->id == 3) {
+            $registros = CajaChica::whereBetween('fecha', [$fecha_marcado_inicial, $fecha_marcado_final])->where('sucursal_id', $user->sucursals[0]->id)->get();
+        } else {
+            if ($sucursal == 'x') {
                 //dd('true');
                 $registros = CajaChica::whereBetween('fecha', [$fecha_marcado_inicial, $fecha_marcado_final])->get();
-            }else{
+            } else {
                 //dd('false');
-                $registros = CajaChica::whereBetween('fecha', [$fecha_marcado_inicial, $fecha_marcado_final])->where('sucursal_id', $sucursal )->get();
+                $registros = CajaChica::whereBetween('fecha', [$fecha_marcado_inicial, $fecha_marcado_final])->where('sucursal_id', $sucursal)->get();
             }
         }
-
-        return view('contabilidad.reportes.reporteCajaChica', compact('sucursales' ,'registros', 'fecha_marcado_inicial', 'fecha_marcado_final') );
+        return view('contabilidad.reportes.reporteCajaChica', compact('sucursales', 'registros', 'fecha_marcado_inicial', 'fecha_marcado_final'));
     }
+
+    public function indexReporteGastos(){
+
+        $detalleGastosAdm = [];
+        $fecha = new Carbon();
+        $request = null;
+        return view('contabilidad.reportes.reporteGastos',compact('detalleGastosAdm','request'));
+    }
+    public function filtrarDatos(Request $request){
+
+
+        $detalleGastosAdm = DetalleGastosAdministrativos::selectRaw('SUM(detalles_gasto_admin.egreso) AS suma_egreso, categorias_gasto_admin.nombre,categorias_gasto_admin.codigo,categorias_gasto_admin.id')
+        ->join('categorias_gasto_admin', 'categorias_gasto_admin.id', '=', 'categoria_gasto_id',)->whereBetween('fecha', [$request->fecha_inicial, $request->fecha_final])->groupBy(['categorias_gasto_admin.nombre','categorias_gasto_admin.id','categorias_gasto_admin.codigo'])
+        ->get();
+
+        $detalleG = DetalleGastosAdministrativos::all();
+        dd($detalleG[0]->categoria_gasto_id);
+        dd($detalleGastosAdm[0]->categoria_gastos_administrativos->sub_categoria_id);
+        //categoria_gastos_administrativos
+        return view('contabilidad.reportes.reporteGastos',compact('detalleGastosAdm','request'));
+
+    }
+
+    public function detalle(Request $request){
+         $detalleGastosAdm = DetalleGastosAdministrativos::where('categoria_gasto_id',$request->categoria)
+                                                            ->whereBetween('fecha', [$request->fecha_inicial, $request->fecha_final])
+                                                            ->get();
+        return view('contabilidad.reportes.detalleGastos',compact('detalleGastosAdm'));
+    }
+
 }
+
+

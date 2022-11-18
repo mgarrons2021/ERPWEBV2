@@ -6,6 +6,7 @@ use App\Models\CategoriaPlato;
 use App\Models\DetalleInventario;
 use App\Models\Plato;
 use App\Models\PlatoProducto;
+use App\Models\PlatoSucursal;
 use App\Models\Producto;
 use App\Models\Proveedor;
 use App\Models\UnidadMedidaCompra;
@@ -23,14 +24,19 @@ class PlatoController extends Controller
      */
     public function index()
     {
-        $platos= Plato::all();
-        $cantidadPlatos = Plato::where('costo_plato','<>',null)->count();
+        $platos = Plato::all();
+        $cantidadPlatos = Plato::where('costo_plato', '<>', null)->count();
         $sumaCosto = Plato::sum('costo_plato');
-        $costoPromedioTotal = $sumaCosto/$cantidadPlatos;
+
         $categorias_platos = CategoriaPlato::all();
-        
-    
-        return view('platos.index', compact('categorias_platos','platos','costoPromedioTotal'));
+        if ($cantidadPlatos == 0) {
+            $costoPromedioTotal = 0;
+        } else {
+            $costoPromedioTotal = $sumaCosto / $cantidadPlatos;
+        }
+
+
+        return view('platos.index', compact('categorias_platos', 'platos', 'costoPromedioTotal'));
     }
 
     /**
@@ -44,7 +50,7 @@ class PlatoController extends Controller
         $um_ventas = UnidadMedidaVenta::all();
         $categorias_platos = CategoriaPlato::all();
         $platos = Plato::all();
-        return view('platos.create', compact('categorias_platos','platos','um_compras','um_ventas'));
+        return view('platos.create', compact('categorias_platos', 'platos', 'um_compras', 'um_ventas'));
     }
 
     /**
@@ -56,24 +62,23 @@ class PlatoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombre' =>'required',
-            
+            'nombre' => 'required',
+
         ]);
 
-        $plato= new Plato();
+        $plato = new Plato();
         $plato->nombre = $request->get('nombre');
-        
-      
-        if($request->hasFile('imagen')){
-            $file= $request->file(('imagen'));
-            $destinationPath ='img/platos/';
-            $filename = time() .'-'. $file->getClientOriginalName();
+
+        if ($request->hasFile('imagen')) {
+            $file = $request->file(('imagen'));
+            $destinationPath = 'img/platos/';
+            $filename = time() . '-' . $file->getClientOriginalName();
             $uploadsucess = $request->file('imagen')->move($destinationPath, $filename);
-            $plato->imagen = $destinationPath.$filename;
+            $plato->imagen = $destinationPath . $filename;
         }
 
-        $plato->unidad_medida_compra_id= $request->get('unidad_medida_compra_id');
-        $plato->unidad_medida_venta_id= $request->get('unidad_medida_venta_id');
+        $plato->unidad_medida_compra_id = $request->get('unidad_medida_compra_id');
+        $plato->unidad_medida_venta_id = $request->get('unidad_medida_venta_id');
         $plato->estado = $request->get('estado');
         $plato->save();
 
@@ -91,7 +96,7 @@ class PlatoController extends Controller
         $plato = Plato::find($id);
         $recetas = PlatoProducto::where('plato_id', $id)->get();
         $categoria_plato = CategoriaPlato::all();
-        return view('platos.show', compact('plato','categoria_plato', 'recetas'));
+        return view('platos.show', compact('plato', 'categoria_plato', 'recetas'));
     }
 
     /**
@@ -103,10 +108,10 @@ class PlatoController extends Controller
     public function edit($id)
     {
         $plato = Plato::find($id);
-        $categorias_platos= CategoriaPlato::all();
+        $categorias_platos = CategoriaPlato::all();
         $um_compras = UnidadMedidaCompra::all();
         $um_ventas = UnidadMedidaVenta::all();
-        return view('platos.edit', compact('plato','categorias_platos','um_compras','um_ventas'));
+        return view('platos.edit', compact('plato', 'categorias_platos', 'um_compras', 'um_ventas'));
     }
 
     /**
@@ -120,7 +125,7 @@ class PlatoController extends Controller
     {
         $plato = Plato::find($id);
         $plato->nombre = $request->get('nombre');
-       
+
         if ($request->hasFile("imagen")) {
             if (@getimagesize($plato->imagen)) {
                 unlink($plato->imagen);
@@ -137,14 +142,12 @@ class PlatoController extends Controller
                 $plato->imagen = $destinationPath . $filename;
             }
         }
-        $plato->unidad_medida_compra_id= $request->get('unidad_medida_compra_id');
-        $plato->unidad_medida_venta_id= $request->get('unidad_medida_venta_id');
+        $plato->unidad_medida_compra_id = $request->get('unidad_medida_compra_id');
+        $plato->unidad_medida_venta_id = $request->get('unidad_medida_venta_id');
         $plato->estado = $request->get('estado');
         $plato->save();
 
         return redirect()->route('platos.index');
-
-
     }
 
     /**
@@ -158,13 +161,14 @@ class PlatoController extends Controller
         $plato = Plato::find($id);
         unlink($plato->imagen);
         Plato::destroy($id);
-       
-        return redirect()->route('platos.index')->with('eliminar','ok');
+
+        return redirect()->route('platos.index')->with('eliminar', 'ok');
     }
 
-    public function obtenercosto(Request $request){
+    public function obtenercosto(Request $request)
+    {
         $plato = Plato::find($request->idplato);
-        $detalle = DetalleInventario::where('plato_id',$plato->id)->get();
+        $detalle = DetalleInventario::where('plato_id', $plato->id)->get();
         /* if(  ){
 
         }else{
@@ -172,50 +176,91 @@ class PlatoController extends Controller
         } */
     }
 
-    public function asignarReceta($id){
+    public function asignarReceta($id)
+    {
         $recetas = PlatoProducto::where('plato_id', $id)->get();
-        if(isset($recetas[0])){
+        if (isset($recetas[0])) {
             $categorias_platos = CategoriaPlato::all();
-            $platos= Plato::all();
-            return redirect()->route('platos.index', compact('categorias_platos','platos'))->with('receta','tiene');        
-        }else{
-            $plato=Plato::find($id);
+            $platos = Plato::all();
+            return redirect()->route('platos.index', compact('categorias_platos', 'platos'))->with('receta', 'tiene');
+        } else {
+            $plato = Plato::find($id);
             $categoria_plato = CategoriaPlato::all();
             $recetas = PlatoProducto::all();
             $productos = Producto::all();
             $proveedores = Proveedor::all();
-            return view('recetas.create', compact('categoria_plato', 'recetas', 'productos', 'proveedores','plato'));
+            return view('recetas.create', compact('categoria_plato', 'recetas', 'productos', 'proveedores', 'plato'));
         }
-        
     }
 
-    public function filtrarPlatos(Request $request){
-        /* dd($request); */
-      $categorias_platos = CategoriaPlato::all();
-      $categoria_plato_id = $request->categoria_plato_id;
+    public function filtrarPlatos(Request $request)
+    {
+        
 
-      $platos = Plato::join('platos_sucursales','platos_sucursales.plato_id','=','platos.id')
-      ->where('platos_sucursales.categoria_plato_id',$categoria_plato_id)
-      ->get();
+        $categorias_platos = CategoriaPlato::all();
+        $categoria_plato_id = $request->categoria_plato_id;
 
-      $cantidadPlatos = $platos->count();
-      $sumaCosto =$platos->sum('costo_plato');
+        $platos = Plato::selectRaw('DISTINCT platos.id, platos.nombre,platos.costo_plato,platos.estado, categorias_plato.nombre as nombre_categoria')
+            ->join('platos_sucursales', 'platos_sucursales.plato_id', '=', 'platos.id')
+            ->join('categorias_plato','categorias_plato.id','=','platos_sucursales.categoria_plato_id')
+            ->where('platos_sucursales.categoria_plato_id', $categoria_plato_id)
+            ->distinct()
+            ->get(); 
+        
+    
+        
+          $cantidadPlatosCosteados =  Plato::selectRaw('DISTINCT platos.id, platos.nombre,platos.costo_plato,platos.estado, categorias_plato.nombre as nombre_categoria')
+        ->join('platos_sucursales', 'platos_sucursales.plato_id', '=', 'platos.id')
+        ->join('categorias_plato','categorias_plato.id','=','platos_sucursales.categoria_plato_id')
+        ->where('platos.costo_plato','<>',null)
+        ->where('platos_sucursales.categoria_plato_id', $categoria_plato_id)
+        ->get();   
+        
 
-      $costoPromedioTotal = $sumaCosto/$cantidadPlatos;
 
-    return view('platos.index',compact('platos','categorias_platos','costoPromedioTotal'));
+      
+        
+     /*    $totalPlatos = $cantidadPlatosCosteados->total_platos- $cantidadPlatosNulos->total_platos ;  */
+        
+         /* dd($platos,$cantidadPlatos);  */   
+
+         $sumaCosto = $platos->sum('costo_plato');
+         
+         
+            foreach ($cantidadPlatosCosteados as $key => $plato) {
+            
+             if (is_null($plato->costo_plato)) {
+                    $cantidadPlatosCosteados->pop();
+                }else{
+                    $cantidad = $plato->count(); 
+                }
+            } 
+            
+            $cantidad = $cantidadPlatosCosteados->count();
+            /* dd($cantidad) ;  */
+            
+         /* $cantidadPlatos = $platos->where($platos->costo_plato,'<>',null)->count();  */
+     
+
+        
+        if ($cantidad == 0) {
+            $costoPromedioTotal = 0;
+        } else {
+            $costoPromedioTotal = $sumaCosto / $cantidad;
+        }
+
+        return view('platos.index', compact('platos', 'categorias_platos', 'costoPromedioTotal'));
     }
 
     public function showPdf($id){
+
         $plato = Plato::find($id);
         $recetas = PlatoProducto::where('plato_id', $id)->get();
 
-        view()->share('platos.show-PDF',$plato,$recetas);
+        view()->share('platos.show-PDF', $plato, $recetas);
 
-        $pdf = PDF::loadView('platos.show-PDF',['plato'=>$plato,'recetas'=>$recetas])->setOptions(['defaultFont' => 'sans-serif', 'isRemoteEnabled' => true]);
+        $pdf = PDF::loadView('platos.show-PDF', ['plato' => $plato, 'recetas' => $recetas])->setOptions(['defaultFont' => 'sans-serif', 'isRemoteEnabled' => true]);
 
-        return $pdf->stream('Plato-Receta-'.$plato->id.'.pdf',['Attachment' => false]);
+        return $pdf->stream('Plato-Receta-' . $plato->id . '.pdf', ['Attachment' => false]);
     }
-
-
 }

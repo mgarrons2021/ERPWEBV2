@@ -21,7 +21,7 @@ class MailFacturacionController extends Controller
         $data['detalle_venta'] = $datosMail['detalle_venta'];
         $data['clienteNombre'] = $datosMail['clienteNombre'];
         $data['clienteCorreo'] = $datosMail['clienteCorreo'];
-        $data['fecha'] =  (new Carbon())->locale('es')->isoFormat(' D MMMM Y H:mm');
+        $data['fecha'] =  (new Carbon($data['venta']['created_at']))->locale('es')->isoFormat(' D MMMM Y H:mm');
 
 
 

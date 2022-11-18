@@ -26,6 +26,10 @@ use App\Http\Controllers\Controller;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Http\Controllers\MailFacturacionController;
 use App\Http\Controllers\Siat\EmisionIndividualController;
+use App\Models\Siat\SiatCui;
+use App\Services\ConfigService;
+use App\Services\VerificarConexionService;
+use App\Services\VerificarNitService;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\DocumentTypes;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Invoices\SiatInvoice;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Services\ServicioSiat;
@@ -34,9 +38,34 @@ use Letras as GlobalLetras;
 
 class VentaController extends Controller
 {
+    public $configService;
+
+    public function __construct()
+    {
+
+        $this->configService = new ConfigService();
+    }
+
     public function registerSale(Request $request)
     {
         try {
+            $verificarConexionService = new VerificarConexionService();
+            $res = $verificarConexionService->verificarConexionImpuestos();
+            return $res;
+
+            $cuis = SiatCui::where('sucursal_id', $request->sucursal)->where('estado', 'V')->orderBy('id', 'desc')->first();
+
+            $codigoExcepcion = 0;
+            $verifiyNit = new VerificarNitService();
+
+            if ($request->documento_identidad_id == 5) {
+                $verifyConnection = $verifiyNit->verificarNit($cuis->codigo_cui, 0, $request->nit_ci);
+                /*       print_r($verifyConnection); */
+                if ($verifyConnection->RespuestaVerificarNit->mensajesList->codigo == 994) {
+                    $codigoExcepcion = 1;
+                }
+            }
+
             DB::beginTransaction();
             $fecha = Carbon::now()->toDateString();
             $hora_actual = Carbon::now()->toTimeString();
@@ -45,9 +74,14 @@ class VentaController extends Controller
             $tipoFactura = 1; //Factura derecho credito fiscal
             $cantidad_visitas = 1;
             $sucursal_id = $request->sucursal;
-            $puntoVenta = 1;
+            $puntoVenta = $this->configService->puntoventa;
 
-            /*  return response()->json($request->nit_ci); */
+            /* return response()->json($request->nit_ci);  */
+
+            /*
+            $resNit = $verifiyNit->verificarNit(0,$request->nit_ci); */
+            /* print_r($resNit); */
+
 
             $clienteData = [
                 'cliente' => $request->cliente,
@@ -59,6 +93,8 @@ class VentaController extends Controller
                 'correo' => $request->correo,
                 'cantidad_visitas' => $cantidad_visitas,
             ];
+
+
 
             $clienteService = new ClienteService();
             $numero_letras = new  Letras();
@@ -143,19 +179,23 @@ class VentaController extends Controller
             }
 
             DB::commit();
+
             $dataFactura = [
                 'cliente' => $cliente,
                 'sucursal' => $sucursal,
                 'user' => $user,
                 'venta' => $venta,
-                'detalle_venta' => $request->detalle_venta,
+                'detalle_venta' => DetalleVenta::where('venta_id', $venta->id)->orderBy('plato_id', 'asc')->get(),
             ];
+
+
+
 
             $mailFacturacionController = new MailFacturacionController();
             if (!isset($request->evento_significativo_id) || $request->evento_significativo_id == 2) {
+                $emisionIndividualController = new EmisionIndividualController();
+                $response = $emisionIndividualController->emisionIndividual($dataFactura, $request->evento_significativo_id, $codigoExcepcion);
                 if (!isset($request->evento_significativo_id)) {
-                    $emisionIndividualController = new EmisionIndividualController();
-                    $response = $emisionIndividualController->emisionIndividual($dataFactura);
                     if ($response->RespuestaServicioFacturacion->codigoEstado == 908) {
                         $venta->update([
                             'estado_emision' => 'V', /* Validada */
@@ -176,7 +216,9 @@ class VentaController extends Controller
                 $leyenda_factura = LeyendaFactura::all()->random(1)->first();
 
                 $total_texto = $numero_letras->convertir(floatval($venta->total_neto));
-                $detalle_venta = DetalleVenta::where('venta_id', $venta->id)->get();
+                $detalle_venta = DetalleVenta::where('venta_id', $venta->id)
+                    ->orderBy('detalles_ventas.plato_id')
+                    ->get();
 
                 $pdf = PDF::loadView('mails.FacturaVaucherPDF', [
                     "clienteNombre" => $cliente->nombre,
@@ -193,6 +235,7 @@ class VentaController extends Controller
                     'total' => $total_texto,
                     'leyenda' => $leyenda_factura
                 ]);
+                $pdf->setPaper([0, 0, 950.98, 280.05], 'landscape'); // 3er parametro es Height - altura
 
                 $data = [
                     "clienteNombre" => $cliente->nombre,

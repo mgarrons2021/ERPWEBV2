@@ -20,7 +20,6 @@ class DetalleInventarioSeeder extends Seeder
             'subtotal' => 15.0,
             'producto_id' => 5,
             'inventario_id' => 1,
-      
         ]);
         DetalleInventario::create([
             'stock' => 4,
@@ -28,49 +27,88 @@ class DetalleInventarioSeeder extends Seeder
             'subtotal' => 55.0,
             'producto_id' => 13,
             'inventario_id' => 1,
-      
         ]);  DetalleInventario::create([
             'stock' => 1,
             'precio' => 10.0,
             'subtotal' => 10.0,
             'producto_id' => 15,
             'inventario_id' => 2,
- 
         ]);  DetalleInventario::create([
             'stock' => 2,
             'precio' => 22.0,
             'subtotal' => 22.0,
             'producto_id' => 13,
             'inventario_id' => 2,
-      
         ]);  DetalleInventario::create([
             'stock' => 1,
             'precio' => 10.0,
             'subtotal' => 10.0,
             'producto_id' => 15,
             'inventario_id' => 1,
- 
         ]);  DetalleInventario::create([
             'stock' => 3,
             'precio' => 12.0,
             'subtotal' => 12.0,
             'producto_id' => 2,
             'inventario_id' => 2,
- 
         ]);  DetalleInventario::create([
             'stock' => 2,
             'precio' => 13.0,
             'subtotal' => 13.0,
             'producto_id' => 1,
             'inventario_id' => 1,
- 
         ]);  DetalleInventario::create([
             'stock' => 5,
             'precio' => 7.0,
             'subtotal' => 7.0,
             'producto_id' => 1,
             'inventario_id' => 2,
+        ]);
+        //otra tanda
+        DetalleInventario::create([
+            'stock' => 2,
+            'precio' => 12.0,
+            'subtotal' => 12.0,
+            'producto_id' => 10,
+            'inventario_id' => 3,
+        ]);
+        DetalleInventario::create([
+            'stock' => 3,
+            'precio' => 15.0,
+            'subtotal' => 15.0,
+            'producto_id' => 12,
+            'inventario_id' => 3,
+        ]);
+        DetalleInventario::create([
+            'stock' => 1,
+            'precio' => 18.0,
+            'subtotal' => 18.0,
+            'producto_id' => 13,
+            'inventario_id' => 3,
+        ]);
+        //----
+        DetalleInventario::create([
+            'stock' => 2,
+            'precio' => 23.0,
+            'subtotal' => 23.0,
+            'producto_id' => 15,
+            'inventario_id' => 4,
       
+        ]);
+        DetalleInventario::create([
+            'stock' => 1,
+            'precio' => 24.0,
+            'subtotal' => 24.0,
+            'producto_id' => 9,
+            'inventario_id' => 4,
+      
+        ]);
+        DetalleInventario::create([
+            'stock' => 4,
+            'precio' => 21.0,
+            'subtotal' => 21.0,
+            'producto_id' => 4,
+            'inventario_id' => 4,
         ]);
     }
 }

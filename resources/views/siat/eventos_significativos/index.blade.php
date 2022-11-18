@@ -223,7 +223,7 @@
                         title: "Codigo::" + codigo,
                         text: descripcion,
                         showConfirmButton: true,
-                        timer: 3500,
+                        timer: 100000,
                         willClose: function() {
                             window.location.href = rutaIndex;
                         },

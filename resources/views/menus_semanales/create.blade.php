@@ -33,6 +33,7 @@
                                     <option value="VIERNES">Viernes</option>
                                     <option value="SABADO">Sabado</option>
                                     <option value="DOMINGO">Domingo</option>
+                                    <option value="PARO">Paro Civico</option>
                                  </select>
                             </div>
                         </div>

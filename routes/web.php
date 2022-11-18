@@ -28,6 +28,8 @@ use App\Http\Controllers\ChanchoController;
 use App\Http\Controllers\PostulantesController;
 use App\Http\Controllers\ParteProduccionController;
 use App\Http\Controllers\ProyeccionesVentasController;
+use App\Http\Controllers\GastosAdministrativosController;
+use App\Http\Controllers\CategoriaGastosAdministrativosController;
 
 use App\Models\CajaChica;
 use App\Models\Sucursal;
@@ -150,7 +152,7 @@ Route::group(['middleware' => ['auth', 'role:Super Admin|Contabilidad|Chef Corpo
 /*Rutas Proyecciones_Ventas */
 Route::group(['middleware' => ['auth', 'role:Super Admin|Contabilidad|Chef Corporativo']], function () {
     Route::get('/proyecciones_ventas', [App\Http\Controllers\ProyeccionesVentasController::class, 'index'])->name('proyecciones_ventas.index');
-    Route::get('/proyecciones_ventas/create', [App\Http\Controllers\ProyeccionesVentasController::class, 'create'])->name('proyecciones_ventas.create');
+   
     Route::get('/proyecciones_ventas/edit/{id}', [App\Http\Controllers\ProyeccionesVentasController::class, 'edit'])->name('proyecciones_ventas.edit');
     Route::post('/proyecciones_ventas', [App\Http\Controllers\ProyeccionesVentasController::class, 'store'])->name('proyecciones_ventas.store');
     Route::put('/proyecciones_ventas/{id}', [App\Http\Controllers\ProyeccionesVentasController::class, 'update'])->name('proyecciones_ventas.update');
@@ -162,6 +164,12 @@ Route::group(['middleware' => ['auth', 'role:Super Admin|Contabilidad|Chef Corpo
     Route::post('/proyecciones_ventas/filtrarReporteCarnes', [ProyeccionesVentasController::class, 'filtrarReporteCarnes'])->name('proyecciones_ventas.filtrarReporteCarnes');
     Route::post('/proyecciones_ventas/actualizarStock', [ProyeccionesVentasController::class, 'actualizarStock'])->name('proyecciones_ventas.actualizarStock');
 });
+Route::get('/proyecciones_ventas/create/{id}', [App\Http\Controllers\ProyeccionesVentasController::class, 'create'])->name('proyecciones_ventas.create');
+Route::get('/proyecciones_ventas_reales/create/{id}', [App\Http\Controllers\ProyeccionesVentasController::class, 'create_ventas_reales'])->name('proyecciones_ventas.create_ventas_reales');
+Route::post('/proyecciones_ventas/agregar',[App\Http\Controllers\ProyeccionesVentasController::class, 'agregarNuevaProyeccion'])->name('proyecciones_ventas.agregarNuevaProyeccion');
+Route::post('/proyecciones_ventas_reales/agregar',[App\Http\Controllers\ProyeccionesVentasController::class, 'agregarNuevaVentaReal'])->name('proyecciones_ventas.agregarNuevaVentaReal');
+
+
 
 
 /*Rutas Inventario*/
@@ -374,6 +382,17 @@ Route::group(['middleware' => ['auth', 'role:Super Admin|Contabilidad']], functi
     Route::post('contabilidad/reportes/reporteProveedores', [PagoController::class, 'filtrarComprasyPagos'])->name('contabilidad.filtrarComprasyPagos');
     Route::get('contabilidad/reportes/reporteCajaChica', [CajaChicaController::class, 'reporteCajaChica'])->name('contabilidad.reporteCajaChica');
     Route::post('contabilidad/reportes/reporteCajaChica', [CajaChicaController::class, 'filtrarCajaChica'])->name('contabilidad.filtrarCajaChica');
+    //domeki ----------------------------------------------------------------------------------------------------------
+
+    Route::get('contabilidad/reportes/consolidadoCajaChica', [CajaChicaController::class, 'consolidadoCajaChica'])->name('contabilidad.consolidadoCajaChica');
+    Route::post('contabilidad/reportes/consolidadoCajaChica', [CajaChicaController::class, 'filtrarConsolidadoCajaChica'])->name('contabilidad.filtrarConsolidadoCajaChica');
+
+    Route::get('contabilidad/reportes/reporte-gastos', [CajaChicaController::class, 'indexReporteGastos'])->name('contabilidad.indexReporteGastos');
+    Route::post('contabilidad/reportes/reporte-filtrar', [CajaChicaController::class, 'filtrarDatos'])->name('contabilidad.filtrarDatos');
+    Route::post('contabilidad/reportes/reporte-gastos-detalle', [CajaChicaController::class, 'detalle'])->name('contabilidad.detalle');
+
+
+    //fin domeki
     Route::get('contabilidad/reportes/reporteProveedores/detalle/{id}/{fecha_inicial}/{fecha_final}', [PagoController::class, 'detalleComprasyPagos'])->name('contabilidad.detalleComprasyPagos');
 });
 /*Rutas   ?*/
@@ -468,7 +487,34 @@ Route::group(['middleware' => ['auth', 'role:Super Admin|Contabilidad']], functi
     Route::get('/categorias_caja_chica/show/{id}', [App\Http\Controllers\CategoriaCajaChicaController::class, 'show'])->name('categorias_caja_chica.show');
     Route::post('contabilidad/caja_chica/filtrarIndexCajaChica', [CajaChicaController::class, 'filtrarIndexCajaChica'])->name('contabilidad.filtrarIndexCajaChica');
     Route::delete('/categorias_caja_chica/{id}', [\App\Http\Controllers\CategoriaCajaChicaController::class, 'destroy'])->name('categorias_caja_chica.destroy');
+    //PARA LAS SUBCATEGORIAS
+    Route::get('/subcategoria', [App\Http\Controllers\CategoriaCajaChicaController::class, 'indexSubcategoria'])->name('subcategoria.indexSubcategoria');
+    Route::post('/subcategoria', [App\Http\Controllers\CategoriaCajaChicaController::class, 'createSubCategoria'])->name('subcategoria.createSubCategoria');
+
 });
+
+/* Rutas Categorias Gastos Administrativos */
+Route::group(['middleware' => ['auth', 'role:Super Admin|Contabilidad|Encargado']], function () {
+    Route::resource('/gastos_administrativos', GastosAdministrativosController::class);
+    Route::post('/gastos_administrativos/registrarGasto', [App\Http\Controllers\GastosAdministrativosController::class, 'registrarGasto'])->name('gastos_administrativos.registrarGasto');
+    Route::post('/gastos_administrativos/agregarDetalle', [App\Http\Controllers\GastosAdministrativosController::class, 'agregarDetalle'])->name('gastos_administrativos.agregarDetalle');
+    Route::post('/gastos_administrativos/eliminarDetalle', [App\Http\Controllers\GastosAdministrativosController::class, 'eliminarDetalle'])->name('gastos_administrativos.eliminarDetalle');
+});
+
+/* Rutas Categorias Gastos Administrativos*/
+Route::group(['middleware' => ['auth', 'role:Super Admin|Contabilidad']], function () {
+    Route::get('/categorias_gastos_administrativos', [App\Http\Controllers\CategoriaGastosAdministrativosController::class, 'index'])->name('categorias_gastos_administrativos.index');
+    Route::get('/categorias_gastos_administrativos/create', [App\Http\Controllers\CategoriaGastosAdministrativosController::class, 'create'])->name('categorias_gastos_administrativos.create');
+    Route::post('/categorias_gastos_administrativos', [App\Http\Controllers\CategoriaGastosAdministrativosController::class, 'store'])->name('categorias_gastos_administrativos.store');
+    Route::get('/categorias_gastos_administrativos/edit/{id}', [App\Http\Controllers\CategoriaGastosAdministrativosController::class, 'edit'])->name('categorias_gastos_administrativos.edit');
+    Route::put('/categorias_gastos_administrativos/{id}', [App\Http\Controllers\CategoriaGastosAdministrativosController::class, 'update'])->name('categorias_gastos_administrativos.update');
+    Route::get('/categorias_gastos_administrativos/show/{id}', [App\Http\Controllers\CategoriaGastosAdministrativosController::class, 'show'])->name('categorias_gastos_administrativos.show');
+    Route::post('contabilidad/gastos_administrativos/filtrarIndexGasto', [GastosAdministrativosController::class, 'filtrarIndexGasto'])->name('contabilidad.filtrarIndexGasto');
+    Route::delete('/categorias_gastos_administrativos/{id}', [\App\Http\Controllers\CategoriaGastosAdministrativosController::class, 'destroy'])->name('categorias_gastos_administrativos.destroy');
+});
+
+
+
 
 /* Rutas Mantenimiento 1 */
 Route::group(['middleware' => ['auth', 'role:Super Admin']], function () {
@@ -692,6 +738,7 @@ Route::get('/reportes/ventas_sucursal', [App\Http\Controllers\VentaController::c
 
 Route::get('/reportes/ventas_por_sucursal', [App\Http\Controllers\ReporteController::class, 'index'])->name('reportes.ventas_por_sucursal');
 Route::post('/reportes/inventario_ajuste', [App\Http\Controllers\ReporteController::class, 'inventario'])->name('reportes.ajuste_inventario');
+Route::post('/reportes/inventario_ajuste_sem', [App\Http\Controllers\ReporteController::class, 'ajusteSemanal'])->name('reportes.ajuste_inventario_semanal');
 
 Route::get('/reportes/costo_totales', [App\Http\Controllers\ReporteController::class, 'index'])->name('reportes.index');
 Route::post('/reportes/costo_totales', [App\Http\Controllers\ReporteController::class, 'parteProduccion'])->name('reportes.costo_totales');
@@ -699,7 +746,14 @@ Route::post('/reportes/costo_totales', [App\Http\Controllers\ReporteController::
 Route::post('/reportes/ventas_por_sucursal', [App\Http\Controllers\ReporteController::class, 'cajaChica'])->name('reportes.porSucursal');
 //Route::post('/reportes/ventas_por_sucursal', [App\Http\Controllers\ReporteController::class, 'parteProduccion'])->name('reportes.parteProduccion');
 Route::get('/reportes/ajuste-inventario', [App\Http\Controllers\ReporteController::class, 'ajuste'])->name('reportes.ajuste');
+
+Route::get('/reportes/ajuste-inventario-semanal', [App\Http\Controllers\ReporteController::class, 'indexSemanal'])->name('reportes.ajuste_semanal');
+
+
 Route::get('/reportes/ajuste-inventario-show/{id}/{fecha}/{sucursal}', [App\Http\Controllers\ReporteController::class, 'show'])->name('reportes.show');
+
+
+
 
 
 /* RUTAS FACTURACION EN LINEA */

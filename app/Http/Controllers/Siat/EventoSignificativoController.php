@@ -66,7 +66,7 @@ class EventoSignificativoController extends Controller
         $evento_significativo = EventoSignificativo::find($ventas[0]->evento_significativo_id);
         /*  dd($evento_significativo); */
         $sucursal = 0;
-        $puntoventa = 1;
+        $puntoventa = 0;
         $cantidadFacturas = count($ventas);
         $arrayEventosCafc = array(5, 6, 7);
         $codigoEvento = $evento_significativo->codigo_clasificador;
@@ -101,8 +101,8 @@ class EventoSignificativoController extends Controller
 
 
         $fechaFin        = Carbon::now();
-        $pvfechaInicio     = (new Carbon($cufd_bd->fecha_generado))->addMinutes(1)->format("Y-m-d\TH:i:s.v");
-        $pvfechaFin        = (new Carbon($cufd_bd->fecha_generado))->addMinutes(3)->format("Y-m-d\TH:i:s.v");
+        $pvfechaInicio     = (new Carbon($request->fecha_inicio))->format("Y-m-d\TH:i:s.v");
+        $pvfechaFin        = (new Carbon($request->fecha_fin))->format("Y-m-d\TH:i:s.v");
 
         $evento         = $this->emisionPaqueteService->obtenerListadoEventos($sucursal, $puntoventa, $codigoEvento);
         $resEvento         = $this->emisionPaqueteService->registroEvento(
@@ -121,6 +121,7 @@ class EventoSignificativoController extends Controller
             die("No se pudo registrar el evento significativo\n"); */
             return $resEvento;
         }
+        $codigoExcepcion = 1;
         /*  $this->emisionPaqueteService->test_log($resEvento); */
         $facturas         = $this->emisionPaqueteService->construirFacturas2(
             $sucursal,
@@ -133,6 +134,7 @@ class EventoSignificativoController extends Controller
             $cufdAntiguo,
             $cafc,
             $arrayVentas,
+            $codigoExcepcion
         );
 
         $res = $this->emisionPaqueteService->testPaquetes($sucursal, $puntoventa, $facturas, $codigoControlAntiguo, $this->configService->tipoFactura, $resEvento->RespuestaListaEventos, $cafc);
@@ -148,9 +150,9 @@ class EventoSignificativoController extends Controller
                         $venta_db->save();
                         $this->enviarCorreoaCliente($venta);
                     }
-                }else{
-                    if($res->RespuestaServicioFacturacion->codigoEstado== 904){
-                        foreach($ventas as $venta){
+                } else {
+                    if ($res->RespuestaServicioFacturacion->codigoEstado == 904) {
+                        foreach ($ventas as $venta) {
                             $venta_db = Venta::find($venta->id);
                             $venta_db->estado_emision = "O";
                             $venta_db->save();
@@ -238,7 +240,7 @@ class EventoSignificativoController extends Controller
             'fecha' => $fecha->format('Y-m-d'),
             'total' => $total_texto
         ]);
-
+        $pdf->setPaper([0, 0, 950.98, 280.05], 'landscape'); 
         $data = [
             "clienteNombre" => $cliente->nombre,
             "clienteCorreo" => $cliente->correo,

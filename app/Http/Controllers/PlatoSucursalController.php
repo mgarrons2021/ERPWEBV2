@@ -191,15 +191,15 @@ class PlatoSucursalController extends Controller
 
     public function filtrarPlatos (Request $request){
        
-            $platos_sucursales= PlatoSucursal::all();
+            
             $sucursales = Sucursal::all();
             $sucursal_id = $request->get('sucursal_id');
             
-            $filtrado = PlatoSucursal::where('sucursal_id',$sucursal_id)->get();
+            $platos_sucursales = PlatoSucursal::where('sucursal_id',$sucursal_id)->get();
 
             
         
-            return view('platos_sucursales.index',compact('sucursales','filtrado','platos_sucursales'));
+            return view('platos_sucursales.index',compact('sucursales','platos_sucursales'));
     }
     
 
@@ -208,7 +208,7 @@ class PlatoSucursalController extends Controller
         $sucursal_id = $request->get('sucursal_id');
         $categoria_plato_id = $request->get('categoria_plato_id');
 
-        $plato_sucursal = PlatoSucursal::find($id);
+        $plato_sucursal = PlatoSucursal::find($id);33
         $plato_sucursal->id->detach($plato_id,$sucursal_id,$categoria_plato_id);
 
         return redirect()->route('platos_sucursales.index',compact('plato_sucursal')); */

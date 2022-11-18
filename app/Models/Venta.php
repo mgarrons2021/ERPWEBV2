@@ -107,11 +107,12 @@ class Venta extends Model
     public function getsalesDetail($venta_id)
     {
 
-        $sql = "select platos.nombre , detalles_ventas.cantidad , detalles_ventas.precio , detalles_ventas.subtotal, detalles_ventas.descuento as descuento
+        $sql = "select platos.id as plato_id, platos.nombre , detalles_ventas.cantidad , detalles_ventas.precio , detalles_ventas.subtotal, detalles_ventas.descuento as descuento
         from ventas 
         JOIN detalles_ventas on detalles_ventas.venta_id = ventas.id
         JOIN platos on platos.id = detalles_ventas.plato_id
-        and ventas.id = $venta_id";
+        and ventas.id = $venta_id
+        order by detalles_ventas.plato_id";
 
         $plates_detail = DB::select($sql);
         return $plates_detail;
@@ -185,12 +186,13 @@ class Venta extends Model
     {
         $venta = Venta::selectRaw("ventas.numero_factura,ventas.cuf,clientes.id as idcliente , clientes.contador_visitas, autorizaciones.nro_autorizacion, ventas.sucursal_id as sucursal,  
          sucursals.nombre as sucursal_nombre, ventas.codigo_control,  clientes.telefono,autorizaciones.fecha_fin,autorizaciones.nit,ventas.fecha_venta,ventas.hora_venta, ventas.evento_significativo_id,
-        clientes.nombre,clientes.ci_nit,clientes.complemento, ventas.total_venta , ventas.total_descuento, ventas.total_neto,ventas.tipo_pago,ventas.qr,clientes.telefono, clientes.correo, 
+        clientes.nombre,clientes.ci_nit,clientes.complemento, ventas.total_venta , ventas.total_descuento, ventas.total_neto,ventas.tipo_pago,ventas.qr,clientes.telefono, clientes.correo, ventas.leyenda_factura_id as leyendaID,
         sucursals.direccion, sucursals.codigo_fiscal")
             ->join('sucursals', 'sucursals.id', '=', 'ventas.sucursal_id')
             ->Leftjoin('clientes', 'clientes.id', '=', 'ventas.cliente_id')
             ->Leftjoin('autorizaciones', 'autorizaciones.id', '=', 'ventas.autorizacion_id')
             ->where('ventas.id', '=', $id_venta)
+
             ->first();
 
         return $venta;

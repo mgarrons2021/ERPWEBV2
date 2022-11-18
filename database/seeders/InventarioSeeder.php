@@ -23,11 +23,27 @@ class InventarioSeeder extends Seeder
             'turno_id' => 1
         ]);
         Inventario::create([
-            'fecha' => '2022-10-04',
+            'fecha' => '2022-10-03',
             'total' => 300.0000,
             'tipo_inventario' => 'D',
             'sucursal_id' => 11,
             'user_id'=>4,
+            'turno_id' => 2
+        ]);
+        Inventario::create([
+            'fecha' => '2022-10-04',
+            'total' => 120.0000,
+            'tipo_inventario' => 'D',
+            'sucursal_id' => 11,
+            'user_id'=>3,
+            'turno_id' => 1
+        ]);
+        Inventario::create([
+            'fecha' => '2022-10-04',
+            'total' => 130.0000,
+            'tipo_inventario' => 'D',
+            'sucursal_id' => 11,
+            'user_id'=>2,
             'turno_id' => 2
         ]);
     }

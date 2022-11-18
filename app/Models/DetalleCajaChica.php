@@ -21,6 +21,7 @@ class DetalleCajaChica extends Model
         'para_costo'
     ];
 
+
     public function caja_chica(){
         return $this->belongsTo(CajaChica::class);
     }

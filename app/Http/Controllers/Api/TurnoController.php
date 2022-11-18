@@ -12,6 +12,7 @@ use App\Models\TurnoIngreso;
 use App\Models\Siat\SiatCufd;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Services\ConfigService;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\SiatConfig;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Services\ServicioSiat;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Services\ServicioFacturacionCodigos;
@@ -20,9 +21,11 @@ use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Services\ServicioFac
 class TurnoController extends Controller
 {
     public $config;
+    public $configService;
 
     public function __construct()
     {
+        $this->configService = new ConfigService();
         $this->config = new SiatConfig([
             'nombreSistema' => 'MAGNORESTv2',
             'codigoSistema' => '72422DD433BE8177DC71FE6',
@@ -30,7 +33,7 @@ class TurnoController extends Controller
             'razonSocial'   => 'DONESCO S.R.L',
             'modalidad'     => ServicioSiat::MOD_ELECTRONICA_ENLINEA,
             'ambiente'      => ServicioSiat::AMBIENTE_PRUEBAS,
-            'tokenDelegado'    => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJET05FU0NPXzAyMyIsImNvZGlnb1Npc3RlbWEiOiI3MjQyMkRENDMzQkU4MTc3REM3MUZFNiIsIm5pdCI6Ikg0c0lBQUFBQUFBQUFETTBNek0wTnpJd01nWUE3bHFjcHdrQUFBQT0iLCJpZCI6NTE5NjgyLCJleHAiOjE2NjcyNjA4MDAsImlhdCI6MTY2NTI0MDIyOCwibml0RGVsZWdhZG8iOjE2NjE3MjAyMywic3Vic2lzdGVtYSI6IlNGRSJ9.5ZkQ6815VtUXK07ieWTBit6roArGNK2ZIq90W7TdGhzUnotYE7C31nSv-XrifFTSVrEKRgtwiNlDie8wdkrMJg',
+            'tokenDelegado'    => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJET05FU0NPXzAyMyIsImNvZGlnb1Npc3RlbWEiOiI3MjQyMkRENDMzQkU4MTc3REM3MUZFNiIsIm5pdCI6Ikg0c0lBQUFBQUFBQUFETTBNek0wTnpJd01nWUE3bHFjcHdrQUFBQT0iLCJpZCI6NTE5NjgyLCJleHAiOjE2Njk5MzkyMDAsImlhdCI6MTY2NzMwOTA5Miwibml0RGVsZWdhZG8iOjE2NjE3MjAyMywic3Vic2lzdGVtYSI6IlNGRSJ9.VPieRnSYnLGywOTNZnWlrYCnJEhzCrKh4UecDByyE_VzXf76CuJecCf_PG3PCRfFS85pwRYKlhd2xSuHYxcObw',
             'pubCert'        => MOD_SIAT_DIR . SB_DS . 'certs' . SB_DS . 'terminalx' . SB_DS . 'DONESCO_SRL_CER.pem',
             'privCert'        => MOD_SIAT_DIR . SB_DS . 'certs' . SB_DS . 'terminalx' . SB_DS . 'DONESCO_S.R.L..pem',
             'telefono'        => '34345435',
@@ -44,7 +47,7 @@ class TurnoController extends Controller
         $user_id = User::find($request->user_id);
         $sucursal = Sucursal::find($request->sucursal_id);
 
-        $codigoPuntoVenta  = 1;
+        $codigoPuntoVenta  = $this->configService->puntoventa;
         $fecha_generado_cufd = Carbon::now()->toDateTimeString();
         $fecha = Carbon::now()->format('Y-m-d H:i');
         $turno_am = DB::select("select turno from turnos_ingresos where fecha = '$fecha' and user_id = '$user' and turno = 0 and sucursal_id='$sucursal->id' ");

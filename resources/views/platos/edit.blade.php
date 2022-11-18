@@ -60,14 +60,7 @@
                     <div class="row">
 
 
-                        <div class="col-md-6">
-                            <h6 class="card-title">Categoria</h6>
-                            <select class="form-select" aria-label="Default select example" name="categoria_plato_id">
-                                @foreach($categorias_platos as $categoria_plato)
-                                <option value="{{$categoria_plato->id}}">{{$categoria_plato->nombre}}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                      
 
                         <div class="col-md-6">
 

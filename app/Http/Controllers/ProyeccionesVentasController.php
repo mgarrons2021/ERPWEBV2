@@ -10,10 +10,7 @@ use App\Models\Inventario;
 use App\Models\Producto;
 use App\Models\Sucursal;
 use App\Models\Categoria;
-use App\Models\User;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
+use App\Models\DetalleProyeccionesVentasReales;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,18 +19,10 @@ class ProyeccionesVentasController extends Controller
 
     public function index()
     {
-        $asignar_stockes = ProyeccionesVentas::all();
-        return view('proyecciones_ventas.index', compact('asignar_stockes'));
+        $proyecciones_ventas = ProyeccionesVentas::all();
+        return view('proyecciones_ventas.index', compact('proyecciones_ventas'));
     }
 
-    public function create()
-    {
-        $fecha_act = date("Y-m-d");
-        $productos = Producto::all();
-        $sucursales = Sucursal::all();
-
-        return view('proyecciones_ventas.create', compact('fecha_act'))->with('productos', $productos)->with('sucursales', $sucursales);
-    }
 
     public function asignarProducto(Request $request)
     {
@@ -104,22 +93,22 @@ class ProyeccionesVentasController extends Controller
         $asignar_stock = ProyeccionesVentas::find($id);
         return view('proyecciones_ventas.show', compact('producto', 'asignar_stock',));
     }
-    
-    
+
+
     public function edit($id)
     {
         $categorias = Categoria::all();
         $asignar_stock = ProyeccionesVentas::find($id);
         return view('proyecciones_ventas.edit', compact('asignar_stock', 'categorias'));
     }
-     
+
     public function actualizarStock(Request $request)
     {
-        $detalles_stock_ideal= ProyeccionesVentas::find($request->asignar__stock_id);
+        $detalles_stock_ideal = ProyeccionesVentas::find($request->asignar__stock_id);
         $total_eliminado = 0;
-      /*   $nuevospedidos = $request->agregarNuevos; */
+        /*   $nuevospedidos = $request->agregarNuevos; */
 
-      /*  if (sizeof($nuevospedidos) != 0) {
+        /*  if (sizeof($nuevospedidos) != 0) {
             foreach ($nuevospedidos as $index => $detalle) {
                 $detalle_pedido = new DetalleAsignarStock();
                 $detalle_pedido->cantidad = $detalle['cantidad'];   
@@ -128,11 +117,11 @@ class ProyeccionesVentasController extends Controller
                 $detalle_pedido->save();
             }
         } */
-        
+
         if (sizeof($request->detallesAEditar_id) != 0) {
             foreach ($request->detallesAEditar_id as $index => $detalleEditar) {
                 $detalle_pedido = DetalleProyeccionesVentas::find($detalleEditar);
-                $detalle_pedido-> cantidad = $request->stocks[$index];
+                $detalle_pedido->cantidad = $request->stocks[$index];
                 $detalle_pedido->save();
             }
         }
@@ -145,7 +134,7 @@ class ProyeccionesVentasController extends Controller
                 }
             }
         }
-        
+
         $detalles_stock_ideal->save();
         return response()->json(
             [
@@ -185,7 +174,145 @@ class ProyeccionesVentasController extends Controller
             'success' => true
         ]);
     }
+    public function showDetalleProyeccion()
+    {
+        $detalleProyeccionesVentas = DetalleProyeccionesVentas::all();
+        return view('proyecciones_ventas.edit', compact('asignar_stock', 'categorias'));
+    }
 
+    public function create($param)
+    {
+        $id = $param;
+        $detalleProyeccionesVentas = DetalleProyeccionesVentas::where('proyecciones_ventas_id', $id)->get();
+        return view('proyecciones_ventas.create', compact('id', 'detalleProyeccionesVentas'));
+    }
+    public function create_ventas_reales($param)
+    {
+        $id = $param;
+        $detalleProyeccionesVentas = DetalleProyeccionesVentasReales::where('proyecciones_ventas_id', $id)->get();       
+        return view('proyecciones_ventas.create_venta', compact('id', 'detalleProyeccionesVentas'));
+    }
+    public function agregarNuevaVentaReal(Request $request)
+    {
+        //dd($request);
+        $detalleProyeccionesVentasReales = DetalleProyeccionesVentasReales::where('fecha', $request->fecha)
+            ->where('proyecciones_ventas_id', $request->id)
+            ->get();
+        if (count($detalleProyeccionesVentasReales) > 0) {
+            echo "Editar";
+            $detalleProyeccionesVentasReales = DetalleProyeccionesVentasReales::where('fecha', $request->fecha)
+                ->where('proyecciones_ventas_id', $request->id)
+                ->first();
+            if ($request->turno === "AM") {
+                echo "Editar registro en AM" . '</br>';
+                $id = $request->id;
+                $detalleProyeccionesVentasReales->venta_real_am = $request->venta;
+                $detalleProyeccionesVentasReales->venta_real_subtotal =  $detalleProyeccionesVentasReales->venta_real_am +  $detalleProyeccionesVentasReales->venta_real_pm;
+                $detalleProyeccionesVentasReales->save();
+            } else {
+                echo "Editar registro en PM" . '</br>';
+                $id = $request->id;
+                $detalleProyeccionesVentasReales->venta_real_pm = $request->venta;
+                $detalleProyeccionesVentasReales->venta_real_subtotal = $detalleProyeccionesVentasReales->venta_real_am +  $detalleProyeccionesVentasReales->venta_real_pm;
+                $detalleProyeccionesVentasReales->save();
+            }
+            //editar Proyeccion 
+            $this->editarProyeccionesVenta($request->turno, $request->venta, $id);
+        } else {
+            echo "crear Nuevo registro" . '</br>';
+            //Agreagar nuevo detalle
+            if ($request->turno === "AM") {
+                echo "crear Nuevo registro en AM" . '</br>';
+                $id = $request->id;
+                $detalleProyeccionesVentasReales = new DetalleProyeccionesVentasReales();
+                $detalleProyeccionesVentasReales->fecha = $request->fecha;
+                $detalleProyeccionesVentasReales->venta_real_am = $request->venta;
+                $detalleProyeccionesVentasReales->venta_real_pm = 0;
+                $detalleProyeccionesVentasReales->venta_real_subtotal =  $detalleProyeccionesVentasReales->venta_real_am +  $detalleProyeccionesVentasReales->venta_real_pm;
+                $detalleProyeccionesVentasReales->proyecciones_ventas_id = $id;
+                $detalleProyeccionesVentasReales->save();
+            } else {
+                echo "crear Nuevo registro en PM" . '</br>';
+                $id = $request->id;
+                $detalleProyeccionesVentasReales = new DetalleProyeccionesVentasReales();
+                $detalleProyeccionesVentasReales->fecha = $request->fecha;
+                $detalleProyeccionesVentasReales->venta_real_am = 0;
+                $detalleProyeccionesVentasReales->venta_real_pm = $request->venta;
+                $detalleProyeccionesVentasReales->venta_real_subtotal = $detalleProyeccionesVentasReales->venta_real_am +  $detalleProyeccionesVentasReales->venta_real_pm;
+                $detalleProyeccionesVentasReales->proyecciones_ventas_id = $id;
+                $detalleProyeccionesVentasReales->save();
+            }
+            //editar Proyeccion 
+            $this->editarProyeccionesVenta($request->turno, $request->venta, $id);
+        }
+        return redirect()->route('proyecciones_ventas.create_ventas_reales', $id);
+    }
+
+
+    public function agregarNuevaProyeccion(Request $request)
+    {
+        $total = $request->proyeccion_am + $request->proyeccion_pm;
+        $id = 0;
+        if ($request->id != 0) {
+            //Agreagar nuevo detalle
+            $id = $request->id;
+            $detalleProyeccionesVentas = new DetalleProyeccionesVentas();
+            $detalleProyeccionesVentas->fecha_proyeccion = $request->fecha;
+            $detalleProyeccionesVentas->venta_proyeccion_am = $request->proyeccion_am;
+            $detalleProyeccionesVentas->venta_proyeccion_pm = $request->proyeccion_pm;
+            $detalleProyeccionesVentas->venta_proyeccion_subtotal = $total;
+            $detalleProyeccionesVentas->proyecciones_ventas_id = $id;
+            $detalleProyeccionesVentas->save();
+            //BUSCAR LA PROYECCION DE VENTA E IR actualizando el total de proyeccion AM,PM y Total
+            $proyeccionVentas = ProyeccionesVentas::where('id', $id)->first();
+            $proyeccionVentas->proyeccion_subtotal_am += $request->proyeccion_am;
+            $proyeccionVentas->proyeccion_subtotal_pm += $request->proyeccion_pm;
+            $proyeccionVentas->total_proyeccion += $total;
+            $proyeccionVentas->diferencias = $proyeccionVentas->total_proyeccion * (-1);
+            $proyeccionVentas->save();
+        } else {
+            //CREAR UN NUEVO REGISTRO DE PROYECCION DE VENTAS
+            $proyeccionVentas = new ProyeccionesVentas();
+            $fecha = Carbon::parse($request->fecha);
+            $respuesta = $proyeccionVentas::create([
+                'mes_proyeccion' => $fecha->monthName,
+                'proyeccion_subtotal_am' => $request->proyeccion_am,
+                'proyeccion_subtotal_pm' => $request->proyeccion_pm,
+                'total_proyeccion' => $total,
+                'venta_subtotal_am' => 0,
+                'venta_subtotal_pm' => 0,
+                'total_ventas_real' => 0,
+                'diferencias' => $total * (-1),
+                'user_id' => Auth::user()->id,
+                'sucursal_id' => Auth::user()->sucursals[0]->id,
+            ]);
+            $id = $respuesta->id;
+            $detalleProyeccionesVentas = new DetalleProyeccionesVentas();
+            $detalleProyeccionesVentas->fecha_proyeccion = $request->fecha;
+            $detalleProyeccionesVentas->venta_proyeccion_am = $request->proyeccion_am;
+            $detalleProyeccionesVentas->venta_proyeccion_pm = $request->proyeccion_pm;
+            $detalleProyeccionesVentas->venta_proyeccion_subtotal = $total;
+            $detalleProyeccionesVentas->proyecciones_ventas_id = $respuesta->id;
+            $detalleProyeccionesVentas->save();
+        }
+        return redirect()->route('proyecciones_ventas.create', $id);
+    }
+
+    public function editarProyeccionesVenta($turno, $venta, $id)
+    {
+        $proyeccionVentas = ProyeccionesVentas::where('id', $id)->first();
+        if ($turno === "AM") {
+            $proyeccionVentas->venta_subtotal_am += $venta;
+            $proyeccionVentas->total_ventas_real += $venta;
+            $proyeccionVentas->diferencias = $proyeccionVentas->total_proyeccion - $proyeccionVentas->total_ventas_real;
+            $proyeccionVentas->save();
+        } else {
+            $proyeccionVentas->venta_subtotal_pm += $venta;
+            $proyeccionVentas->total_ventas_real += $venta;
+            $proyeccionVentas->diferencias = $proyeccionVentas->total_proyeccion - $proyeccionVentas->total_ventas_real;
+            $proyeccionVentas->save();
+        }
+    }
     public function reporteCarnicos()
     {
 
@@ -242,9 +369,7 @@ class ProyeccionesVentasController extends Controller
 
                 array_push($array_search, ["sucursal_id" => $inventario_carne->sucursal_id, "producto_id" => $inventario_carne->producto_id]);
                 $collection->push($inventario_carne);
-            
             }
-        
         }
 
 
@@ -294,25 +419,25 @@ class ProyeccionesVentasController extends Controller
             ->whereDate('inventarios.fecha', '=', $fecha_anterior)
             ->where('productos.categoria_id', '=', 9)
             ->get();
-            
-            
-        
+
+
+
 
         $array_search = array();
         $collection = collect();
         $invertido = $inventarios_carnes->reverse();
 
         foreach ($invertido as $inventario_carne) {
-            if ($inventario_carne->detalle_stock_producto_id === $inventario_carne->detalle_inventario_producto_id ) {
+            if ($inventario_carne->detalle_stock_producto_id === $inventario_carne->detalle_inventario_producto_id) {
                 $collection->push($inventario_carne);
             }
         }
 
-	
+
         /*foreach($inventarios as $item){
             echo  json_encode($item)."<br><br>"; 
         }
-        dd($collection);*/ 
+        dd($collection);*/
         $filter = ProyeccionesVentas::where('fecha', $fecha_inicio)->get();
 
         return view(

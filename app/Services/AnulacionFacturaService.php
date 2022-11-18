@@ -23,11 +23,11 @@ class AnulacionFacturaService
 		$this->emisionIndividualService = new EmisionIndividualService();
 	}
 
-	function pruebasAnulacion($cuf,$cufd_id, $motivo, $sucursal_id)
+	function pruebasAnulacion($cuf, $cufd_id, $motivo, $sucursal_id)
 	{
 		/* dd($cuf,$motivo); */
 		$fecha_actual =  Carbon::now()->toDateString();
-		$puntoventa = 0;
+		$puntoventa = $this->configService->puntoventa;
 		$sucursal = 0;
 		$resCuis 	= SiatCui::where('fecha_expiracion', '>=', $fecha_actual)
 			->where('sucursal_id', $sucursal_id)
@@ -38,12 +38,12 @@ class AnulacionFacturaService
 			->orderBy('id', 'desc')->first();
 
 
-		$res = $this->testAnular($sucursal_id, $motivo, $cuf, $sucursal, $puntoventa, $this->configService->tipoFactura, SiatInvoice::TIPO_EMISION_ONLINE, $this->configService->documentoSector,$cufd_id);
+		$res = $this->testAnular($sucursal_id, $motivo, $cuf, $sucursal, $puntoventa, $this->configService->tipoFactura, SiatInvoice::TIPO_EMISION_ONLINE, $this->configService->documentoSector, $cufd_id);
 		/* dd($res); */
 		return $res;
 	}
 
-	function testAnular($sucursal_id, $motivo,  $cuf, $sucursal, $puntoventa, $tipoFactura, $tipoEmision, $documentoSector,$cufd_id)
+	function testAnular($sucursal_id, $motivo,  $cuf, $sucursal, $puntoventa, $tipoFactura, $tipoEmision, $documentoSector, $cufd_id)
 	{
 		$fecha_actual =  Carbon::now()->toDateString();
 
@@ -58,7 +58,7 @@ class AnulacionFacturaService
 		$service = new ServicioFacturacionElectronica();
 		$service->setConfig((array)$this->configService->config);
 		$service->cufd = $cufd_id;
-	/* 	dd($service->cufd); */
+		/* 	dd($service->cufd); */
 		$service->cuis = $resCuis->codigo_cui;
 		/* dd($motivo,$cuf,$sucursal,$puntoventa);  */
 		/* dd($motivo); */
