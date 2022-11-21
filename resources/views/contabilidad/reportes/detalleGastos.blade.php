@@ -16,6 +16,7 @@
                         <th style="text-align: center;">Glosa</th>
                         <th style="text-align: center;">Tipo Comprobante</th>
                         <th style="text-align: center;">Nro Comprobante</th>
+                        <th style="text-align: center;">Sucursal</th>
                     </thead>
                     <tbody id="tbody">
                         @foreach ($detalleGastosAdm as $detalle)
@@ -26,17 +27,10 @@
                             <td style="text-align: center;">{{$detalle->glosa}}</td>
                             <td style="text-align: center;">{{$detalle->tipo_comprobante}}</td>
                             <td style="text-align: center;">{{$detalle->nro_comprobante}}</td>
+                            <td style="text-align: center;">{{$detalle->nombre}}</td>
                         </tr>
                         @endforeach
 
-                        {{-- @if ($subcategorias != null)
-                        @foreach ($subcategorias as $subcategoria)
-                        <tr>
-                            <td style="text-align: center;">{{$subcategoria->id}}</td>
-                            <td style="text-align: center;">{{$subcategoria->sub_categoria}}</td>
-                        </tr>
-                        @endforeach
-                        @endif --}}
                     </tbody>
                     <tfoot>
                         <tr>

@@ -60,7 +60,7 @@
                 <div class="card-body">
 
                     <div class="table-responsive ">
-                        <table id="dtable" class="table">
+                        <table class="table table-bordered " id="table">
                             <thead style="background-color: #6777ef;">
                                 <tr>
                                     <td style="color: white">ID</td>
@@ -104,8 +104,8 @@
 @endsection
 
 @section('scripts')
+<script type="text/javascript" src="{{ URL::asset('assets/js/cajas_chicas/reportes/reporteCajaChica.js') }}"></script>
 
-@section('page_js')
 <script type="text/javascript" src="//cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script>
 <script type="text/javascript" src="//cdn.datatables.net/buttons/1.3.1/js/buttons.bootstrap4.min.js"></script>
 
@@ -114,11 +114,18 @@
 <script type="text/javascript" src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/pdfmake.min.js"></script>
 <script type="text/javascript" src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/vfs_fonts.js"></script>
 <script type="text/javascript" src="//cdn.datatables.net/buttons/1.3.1/js/buttons.html5.min.js"></script>
-{{-- <script src="https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.js"></script> --}}
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 
 @endsection
 
+@section('css')
+.titulo{
+font-size: 50px;
+background-color: red;
+
+}
+@endsection
+@section('page_css')
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.15/css/dataTables.bootstrap4.min.css" />
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/buttons/1.3.1/css/buttons.bootstrap4.min.css" />
 @endsection

@@ -14,13 +14,28 @@ class CategoriaGastosAdministrativos extends Model
         'nombre',
         'sub_categoria_id'
     ];
-    public function sub_categoria(){
+    public function sub_categoria()
+    {
         return $this->belongsTo(SubCategoria::class);
     }
-    // public function detalles_gastos_administrativos(){
-    //     return $this->hasMany(DetalleGastosAdministrativos::class);
-    // }
-    public function categoria_gastos_administrativos(){
-        return $this->belongsTo(DetalleGastosAdministrativos::class);
+    
+    public function categoria_gasto(){
+        return $this->hasMany(DetGastoAdm::class);
     }
+
+    public function categoria_gasto_adm(){
+        return $this->hasMany(DetalleGastosAdministrativos::class);
+    }
+    public function nombre(){
+        return $this->hasMany(CategoriaCajaChica::class);
+    }
+
+    // public function categoria_gastos_administrativos(){
+    //     return $this->belongsTo(DetalleGastosAdministrativos::class);
+    // }
+    
+
+
+    
+
 }

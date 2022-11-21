@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\CajaChica;
 use App\Models\CajaChicaSubCategoria;
 use App\Models\CategoriaCajaChica;
+use App\Models\CategoriaGastosAdministrativos;
 use App\Models\DetalleCajaChica;
 use App\Models\DetalleGastosAdministrativos;
+use App\Models\DetGastoAdm;
 use App\Models\GastosAdministrativos;
 use App\Models\Sucursal;
 use Illuminate\Http\Request;
@@ -395,27 +397,45 @@ class CajaChicaController extends Controller
         $detalleGastosAdm = [];
         $fecha = new Carbon();
         $request = null;
-        return view('contabilidad.reportes.reporteGastos',compact('detalleGastosAdm','request'));
+        $listOne= [];
+        $listTwo= [];
+        $total_egresoFactura = 0;
+        return view('contabilidad.reportes.reporteGastos',compact('listOne','listTwo','total_egresoFactura','request'));
     }
     public function filtrarDatos(Request $request){
 
-
+        $categoria_gastos_adm = CategoriaGastosAdministrativos::all();
         $detalleGastosAdm = DetalleGastosAdministrativos::selectRaw('SUM(detalles_gasto_admin.egreso) AS suma_egreso, categorias_gasto_admin.nombre,categorias_gasto_admin.codigo,categorias_gasto_admin.id')
         ->join('categorias_gasto_admin', 'categorias_gasto_admin.id', '=', 'categoria_gasto_id',)->whereBetween('fecha', [$request->fecha_inicial, $request->fecha_final])->groupBy(['categorias_gasto_admin.nombre','categorias_gasto_admin.id','categorias_gasto_admin.codigo'])
         ->get();
+        $total_egresoFactura = 0;
+        foreach ($detalleGastosAdm as $key => $value) {
+            $categorias = CategoriaGastosAdministrativos::where('id',$value->id)->first();
+            $total_egresoFactura+=$value->suma_egreso;
+            $value['subcategoria'] = $categorias->sub_categoria->sub_categoria;
+        }
+        $listOne = new Collection();
+        $listTwo = new Collection();
+        foreach ($detalleGastosAdm as $key => $value) {
+            if ($value->subcategoria=="Gastos de Administración") {
+                $listOne->push($value);
+            }else if($value->subcategoria=="Gastos de Comercialización"){
+                $listTwo->push($value);
+            }
+        }
 
-        $detalleG = DetalleGastosAdministrativos::all();
-        dd($detalleG[0]->categoria_gasto_id);
-        dd($detalleGastosAdm[0]->categoria_gastos_administrativos->sub_categoria_id);
-        //categoria_gastos_administrativos
-        return view('contabilidad.reportes.reporteGastos',compact('detalleGastosAdm','request'));
+        return view('contabilidad.reportes.reporteGastos',compact('listOne','listTwo','total_egresoFactura','request'));
 
     }
 
     public function detalle(Request $request){
-         $detalleGastosAdm = DetalleGastosAdministrativos::where('categoria_gasto_id',$request->categoria)
-                                                            ->whereBetween('fecha', [$request->fecha_inicial, $request->fecha_final])
-                                                            ->get();
+                                                            
+        $detalleGastosAdm = DetalleGastosAdministrativos::select('sucursals.nombre','detalles_gasto_admin.fecha','detalles_gasto_admin.egreso','detalles_gasto_admin.glosa','detalles_gasto_admin.tipo_comprobante','detalles_gasto_admin.nro_comprobante','detalles_gasto_admin.id')
+                ->where('categoria_gasto_id',$request->categoria)
+                ->whereBetween('detalles_gasto_admin.fecha', [$request->fecha_inicial, $request->fecha_final])
+                ->join('gastos_administrativo', 'gastos_administrativo.id', '=', 'detalles_gasto_admin.gastos_administrativos_id')
+                ->join('sucursals', 'sucursals.id' ,'gastos_administrativo.sucursal_id')
+                ->get();  
         return view('contabilidad.reportes.detalleGastos',compact('detalleGastosAdm'));
     }
 

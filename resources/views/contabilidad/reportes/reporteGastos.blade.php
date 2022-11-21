@@ -63,14 +63,56 @@
                                 <th style="color: #fff;text-align:center">Ver</th>
                             </thead>
                             <tbody>
+                                <tr>
+                                    <td style="text-align:center"><strong>6-1100</strong></td>
+                                    <td style="text-align:center"><strong>Gastos De Administracion</strong></td>
+                                    <td style="text-align:center"></td>
+                                    <td style="text-align:center"></td>
+                                    <td style="text-align:center"></td>
+                                </tr>
                                 @if ($request != null)
-                                @foreach ($detalleGastosAdm as $valor)
+                                @foreach ($listOne as $valor)
                                 <tr>
 
                                     <td style="text-align:center">{{$valor->codigo}}</td>
                                     <td style="text-align:center">{{$valor->nombre}}</td>
                                     <td style="text-align:center">{{$valor->suma_egreso}}</td>
-                                    <td style="text-align:center">{{$valor->categoria_gastos_administrativos->nombre}}</td>
+                                    <td style="text-align:center">{{$valor->subcategoria}}</td>
+                                    <td style="text-align:center">
+                                        <form action="{{route('contabilidad.detalle')}}" method="POST">
+                                            @csrf
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <div class="input-daterange input-group" id="datepicker">
+                                                        <input hidden type="date" id="fecha_inicial" class="input-sm form-control" name="fecha_inicial" value="{{$request->fecha_inicial}}" />
+                                                        <input hidden type="date" id="fecha_final" class="input-sm form-control" name="fecha_final" value="{{$request->fecha_final}}" />
+                                                        <input hidden type="text" id="categoria" class="input-sm form-control" name="categoria" value="{{ $valor->id }}" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <button class="btn btn-primary" type="submit">ver detalle</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </td>
+                                </tr>
+                                @endforeach
+                                @endif
+                                <tr>
+                                    <td style="text-align:center"><strong>6-1200</strong></td>
+                                    <td style="text-align:center"><strong>Gastos De Comercializacion</strong></td>
+                                    <td style="text-align:center"></td>
+                                    <td style="text-align:center"></td>
+                                    <td style="text-align:center"></td>
+                                </tr>
+                                @if ($request != null)
+                                @foreach ($listTwo as $valor)
+                                <tr>
+
+                                    <td style="text-align:center">{{$valor->codigo}}</td>
+                                    <td style="text-align:center">{{$valor->nombre}}</td>
+                                    <td style="text-align:center">{{$valor->suma_egreso}}</td>
+                                    <td style="text-align:center">{{$valor->subcategoria}}</td>
                                     <td style="text-align:center">
                                         <form action="{{route('contabilidad.detalle')}}" method="POST">
                                             @csrf
@@ -93,8 +135,10 @@
                                 @endif
                             </tbody>
                             <tfoot>
-                                <td style="text-align:center" colspan="3" class="table-warning">TOTAL EGRESO </td>
-                                {{-- <td style="text-align:center" class="table-primary">Bs{{ number_format($total_egresoFactura,2,',','.') }}</td> --}}
+                                <td style="text-align:center" colspan="2" class="table-warning">TOTAL EGRESO </td>
+                                <td style="text-align:center" class="table-primary">Bs{{ number_format($total_egresoFactura,2,',','.') }}</td>
+                                <td></td>
+                                <td></td>
                             </tfoot>
                         </table>
                     </div>
@@ -105,7 +149,7 @@
 </section>
 @endsection
 @section('scripts')
-<script type="text/javascript" src="{{ URL::asset('assets/js/cajas_chicas/reportes/reporteCajaChica.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('assets/js/gastos_administrativos/reportes/reportegastos.js') }}"></script>
 
 <script type="text/javascript" src="//cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script>
 <script type="text/javascript" src="//cdn.datatables.net/buttons/1.3.1/js/buttons.bootstrap4.min.js"></script>

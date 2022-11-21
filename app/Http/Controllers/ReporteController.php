@@ -61,23 +61,18 @@ class ReporteController extends Controller
   }
   public function show($id, $fecha, $sucursal)
   {
-    // echo $fecha . '</br>';
-    // echo $sucursal . '</br>';
     //DETALLE INVENTARIO 
-
     $detallesInventario = DetalleInventario::where('inventario_id', $id)->get(['producto_id', 'stock', 'precio']);
     //COMPRAS
     $compras = Compra::where('sucursal_id', $sucursal)
       ->where('fecha_compra', $fecha)
       ->get(['id', 'fecha_compra']);
-    // echo "Todas las Comras: " . $compras . '</br>';
     //DETALLE COMPRAS
     $detalleComprasCollection = new Collection();
     $primeraC = 0;
     foreach ($compras as $key => $compra) {
       $detallesCompras = DetalleCompra::where('compra_id', $compra->id)
         ->get(['producto_id', 'cantidad']);
-      // echo "Detalle de esa Compra: " . $detallesCompras . '</br>';
       if ($primeraC > 0) {
         for ($j = 0; $j < count($detallesCompras); $j++) {
           if ($detalleComprasCollection->contains('producto_id', $detallesCompras[$j]->producto_id)) {
@@ -94,8 +89,6 @@ class ReporteController extends Controller
         $primeraC++;
       }
     }
-    // echo "Colleccition de Detalle Compras" . '</br>';
-    // echo $detalleComprasCollection . '</br>';
     //PEDIDOS
     $detallePedidosCollection = new Collection();
     $primeraP = 0;
@@ -126,25 +119,20 @@ class ReporteController extends Controller
         $primeraP++;
       }
     }
-    // echo "Colleccition de Detalle Pedidos" . '</br>';
-    // echo $detallePedidosCollection . '</br>';
     //ELIMINACION
     $detalleEliminacionCollection = new Collection();
     $primeraE = 0;
     $eliminaciones = Eliminacion::where('sucursal_id', $sucursal)
       ->where('fecha', $fecha)
       ->get(['id', 'fecha']);
-    // echo "Todas los Eliminaciones: " . $eliminaciones . '</br>';
     //DETALLE ELIMINACION
     foreach ($eliminaciones as $key => $eliminacion) {
       $detalleEliminacion = DetalleEliminacion::where('eliminacion_id', $eliminacion->id)
         ->get(['cantidad', 'producto_id']);
-      // echo "Detalle de ese Eliminacion: " . $detalleEliminacion . '</br>';
       if ($primeraE > 0) {
         for ($j = 0; $j < count($detalleEliminacion); $j++) {
           if ($detalleEliminacionCollection->contains('producto_id', $detalleEliminacion[$j]->producto_id)) {
-            $pos = $this->getPocisionT($detalleEliminacionCollection, $detalleEliminacion[$j]->producto_id);
-            //echo "Ser repite el producto: ".$detallePedidos[$j]->producto_id." En la posicion: ".$pos;
+            $pos = $this->getPocisionT($detalleEliminacionCollection, $detalleEliminacion[$j]->producto_id);  
             $detalleEliminacionCollection[$pos]['cantidad'] += $detalleEliminacion[$j]->cantidad;
           } else {
             $detalleEliminacionCollection->push($detalleEliminacion[$j]);
@@ -157,8 +145,6 @@ class ReporteController extends Controller
         $primeraE++;
       }
     }
-    // echo "Colleccition de Detalle Eliminacion" . '</br>';
-    // echo $detalleEliminacionCollection . '</br>';
     $detalleDeAjustes = new Collection();
     for ($i = 0; $i < count($detallesInventario); $i++) {
       $ajusteInventario = new AjusteInventario();
@@ -171,7 +157,6 @@ class ReporteController extends Controller
       $detalleDeAjustes[$i] =  $ajusteInventario;
     }
     // echo "--------DETALLE AJUTES ANTES DE INSERTAR COMPRAS-----------" . '</br>';
-    // echo $detalleDeAjustes . '</br>';
     // echo "--------- mostrando todos los Id de los productos comprados y comparando con los del inventario----------" . '</br>';
     foreach ($detalleComprasCollection as $compra => $value) {
       // echo $value->producto_id . '</br>';
@@ -236,31 +221,23 @@ class ReporteController extends Controller
       }
     }
     //  echo "--------DETALLE AJUTES DESPUES DE INSERTAR COMPRAS,PEDIDOS y ELIMINACION---------". '</br>';
-    //  echo $detalleDeAjustes . '</br>';
     foreach ($detalleDeAjustes as $xd => $valueDetalle) {
       $valueDetalle->inventario_sis = $valueDetalle->inventario_ini + $valueDetalle->compras + $valueDetalle->pedido - $valueDetalle->eliminacion;
       $valueDetalle->inventario_fin = 0;
     }
     // echo "--------DETALLE AJUTES DESPUES DE OPERACION INV-SISTEMA---------". '</br>';
-
-    // echo $detalleDeAjustes . '</br>';
     // echo "-------- INVENTARIO PM ---------". '</br>';
     $sumaTotalDiferencia = 0;
     $inventariosPM = Inventario::where('sucursal_id', $sucursal)
       ->where('turno_id', 2)
       ->where('fecha', $fecha)
       ->get(['id', 'fecha']);
-    // echo $inventariosPM . '</br>';
     if (count($inventariosPM) > 0) {
       //  echo "-------- DETALLE INVENTARIO PM ---------". '</br>';
       $detallesInventarioPM = DetalleInventario::where('inventario_id', $inventariosPM[0]['id'])->get(['producto_id', 'stock']);
-      //  echo $detallesInventarioPM . '</br>';
 
       foreach ($detallesInventarioPM as $detalleInvPm => $valuePm) {
-        // echo 'Stock: '.$valuePm->stock.'</br>';
-        // echo "producto_id a buscar: " . $valuePm->producto_id . '</br>';
         $posItemsPM = $this->getPocision($detalleDeAjustes, $valuePm->producto_id);
-        // echo "posicion de productos encontrados: " . $posItemsPM . '</br>';
         if (!$detalleDeAjustes->contains('item', $valuePm->producto_id)) {
           $ajusteInventa = new AjusteInventario();
           $ajusteInventa['item'] = $valuePm->producto_id;
@@ -277,7 +254,6 @@ class ReporteController extends Controller
         }
       }
       //  echo "--------DETALLE AJUTES DESPUES DE DETALLE INVENTARIO PM---------". '</br>';
-      //  echo $detalleDeAjustes . '</br>';
       //  echo "--------DIFERENCIA---------". '</br>';
       foreach ($detalleDeAjustes as $OX => $valorDetalle) {
         $valorDetalle->diferencia = $valorDetalle->inventario_fin - $valorDetalle->inventario_sis;
@@ -295,9 +271,7 @@ class ReporteController extends Controller
       echo "El Inventario final de esta fecha no existe" . '</br>';
     }
     foreach ($detalleDeAjustes as $Por => $valval) {
-      // echo $valval . '</br>';
       $producto = Producto::where('id', $valval->item)->first();
-      // echo $producto. '</br>';
       $valval['producto'] = $producto->nombre;
     }
     return view('reportes.show_ajuste_inventario', ['detalleAjustes' => $detalleDeAjustes, 'sumaTotalDiferencia' => $sumaTotalDiferencia]);
@@ -310,14 +284,12 @@ class ReporteController extends Controller
     $compras = Compra::where('sucursal_id', $sucursal)
       ->where('fecha_compra', $fecha)
       ->get(['id', 'fecha_compra']);
-    // echo "Todas las Comras: " . $compras . '</br>';
     //DETALLE COMPRAS
     $detalleComprasCollection = new Collection();
     $primeraC = 0;
     foreach ($compras as $key => $compra) {
       $detallesCompras = DetalleCompra::where('compra_id', $compra->id)
         ->get(['producto_id', 'cantidad']);
-      // echo "Detalle de esa Compra: " . $detallesCompras . '</br>';
       if ($primeraC > 0) {
         for ($j = 0; $j < count($detallesCompras); $j++) {
           if ($detalleComprasCollection->contains('producto_id', $detallesCompras[$j]->producto_id)) {
@@ -334,8 +306,6 @@ class ReporteController extends Controller
         $primeraC++;
       }
     }
-    // echo "Colleccition de Detalle Compras" . '</br>';
-    // echo $detalleComprasCollection . '</br>';
     //PEDIDOS
     $detallePedidosCollection = new Collection();
     $primeraP = 0;
@@ -366,15 +336,12 @@ class ReporteController extends Controller
         $primeraP++;
       }
     }
-    // echo "Colleccition de Detalle Pedidos" . '</br>';
-    // echo $detallePedidosCollection . '</br>';
     //ELIMINACION
     $detalleEliminacionCollection = new Collection();
     $primeraE = 0;
     $eliminaciones = Eliminacion::where('sucursal_id', $sucursal)
       ->where('fecha', $fecha)
       ->get(['id', 'fecha']);
-    // echo "Todas los Eliminaciones: " . $eliminaciones . '</br>';
     //DETALLE ELIMINACION
     foreach ($eliminaciones as $key => $eliminacion) {
       $detalleEliminacion = DetalleEliminacion::where('eliminacion_id', $eliminacion->id)
@@ -411,10 +378,8 @@ class ReporteController extends Controller
       $detalleDeAjustes[$i] =  $ajusteInventario;
     }
     // echo "--------DETALLE AJUTES ANTES DE INSERTAR COMPRAS-----------" . '</br>';
-    // echo $detalleDeAjustes . '</br>';
     // echo "--------- mostrando todos los Id de los productos comprados y comparando con los del inventario----------" . '</br>';
     foreach ($detalleComprasCollection as $compra => $value) {
-      // echo $value->producto_id . '</br>';
       $posicionItem = $this->getPocision($detalleDeAjustes, $value->producto_id);
       if (!$detalleDeAjustes->contains('item', $value->producto_id)) {
         //armar la estructura
@@ -426,19 +391,14 @@ class ReporteController extends Controller
         $ajusteInv['pedido'] = 0;
         $ajusteInv['eliminacion'] = 0;
         $detalleDeAjustes->push($ajusteInv);
-
-        // $detalleDeAjustes->push($value->producto_id);
-
       } else {
         $detalleDeAjustes[$posicionItem]['compras'] = $value->cantidad;
       }
     }
     // echo "--------DETALLE AJUTES DESPUES DE INSERTAR COMPRAS y ANTES DE INSERTAR PEDIDOS-----------" . '</br>';
-    // echo $detalleDeAjustes . '</br>';
+
     foreach ($detallePedidosCollection as $pedidoTurno => $valor) {
-      //   echo "producto_id a buscar: " . $valor->producto_id . '</br>';
       $posItem = $this->getPocision($detalleDeAjustes, $valor->producto_id);
-      // echo "posicion de productos encontrados: " . $posItem . '</br>';
 
       if (!$detalleDeAjustes->contains('item', $valor->producto_id)) {
         //armar la estructura
@@ -455,12 +415,10 @@ class ReporteController extends Controller
       }
     }
     //echo "--------DETALLE AJUTES DESPUES DE INSERTAR COMPRAS,PEDIDOS Y ANTES DE ELIMINACION---------". '</br>';
-    //echo $detalleDeAjustes . '</br>';
+ 
     foreach ($detalleEliminacionCollection as $eliminacionTurno => $val) {
-      // echo "producto_id a buscar: " . $val->producto_id . '</br>';
       if ($val->producto_id != null) {
         $posItemsE = $this->getPocision($detalleDeAjustes, $val->producto_id);
-        // echo "posicion de productos encontrados: " . $posItemsE . '</br>';
         if (!$detalleDeAjustes->contains('item', $val->producto_id)) {
           $ajusteInvent = new AjusteInventario();
           $ajusteInvent['item'] = $val->producto_id;
@@ -511,9 +469,6 @@ class ReporteController extends Controller
     }
     return -1;
   }
-  public function getPlatoPosition(Collection $array, $value)
-  {
-  }
 
   public function cajaChica(Request $request)
   {
@@ -545,7 +500,6 @@ class ReporteController extends Controller
       ->whereBetween('fecha_venta', [$fi, $ff])->get();
     return view('reportes.ventas_por_sucursal', ['sucursales' => $sucursales, 'ventas' => $ventas]);
   }
-
   public function indexSemanal()
   {
     $sucursales = Sucursal::All();
@@ -564,8 +518,9 @@ class ReporteController extends Controller
     //COLLECCION INICIAL O BASE
     $inventariosAM = Inventario::where('sucursal_id', $id)
       ->where('turno_id', 1)
-      ->where('fecha', $request->fecha_inicial)
+      ->orWhere('fecha', $request->fecha_inicial)
       ->first();
+
     $newCollection = $this->getCollectionAjusteInventarioDiario($inventariosAM->id, $inventariosAM->fecha, $inventariosAM->sucursal_id);
     $fechaInicio += 86400;
    // echo "Colleccion INICIAL: " . $newCollection . '</br>';
@@ -576,6 +531,7 @@ class ReporteController extends Controller
         ->where('fecha', $date)
         ->first();
       if ($inventariosAM != null) {
+
         $newCollectionCambiante = $this->getCollectionAjusteInventarioDiario($inventariosAM->id, $inventariosAM->fecha, $inventariosAM->sucursal_id);
 
       //  echo "Colleccion dentro del FOR: " . $newCollectionCambiante . '</br>';
@@ -610,7 +566,7 @@ class ReporteController extends Controller
      $sumaTotalDiferencia = 0;
      $inventariosPM = Inventario::where('sucursal_id', $id)
        ->where('turno_id', 2)
-       ->where('fecha', $request->fecha_final)
+       ->orWhere('fecha', $request->fecha_final)
        ->get(['id', 'fecha']);
     
     //   echo "--------DETALLE AJUTES DESPUES DE OPERACION INV-SISTEMA---------" . '</br>';

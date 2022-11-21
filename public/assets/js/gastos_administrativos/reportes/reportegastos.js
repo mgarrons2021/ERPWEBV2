@@ -30,8 +30,8 @@ $(document).ready(function() {
                 //Botón para Excel
                 extend: 'excel',
                 footer: true,
-                title: 'Caja Chica',
-                filename: 'Caja Chica',
+                title: 'Gastos Admin',
+                filename: 'Gastos Admin',
                 //Aquí es donde generas el botón personalizado
                 text: '<button class="btn btn-success">Exportar a Excel <i class="fas fa-file-excel"></i></button>'
             },
@@ -39,8 +39,8 @@ $(document).ready(function() {
             {
                 extend: 'pdf',
                 footer: true,
-                title: 'Caja Chica',
-                filename: 'Caja Chica',
+                title: 'Gastos Admin',
+                filename: 'Gasto Admin',
                 text: '<button class="btn btn-danger">Exportar a PDF <i class="far fa-file-pdf"></i></button>',
                 customize: function(pdfDocument) {                   
                 }
@@ -81,8 +81,8 @@ $(document).ready(function() {
                 //Botón para Excel
                 extend: 'excel',
                 footer: true,
-                title: 'Caja Chica',
-                filename: 'Caja Chica',
+                title: 'Gastos Admin',
+                filename: 'Gastos Admin',
 
                 //Aquí es donde generas el botón personalizado
                 text: '<button class="btn btn-success">Exportar a Excel <i class="fas fa-file-excel"></i></button>'
@@ -91,8 +91,8 @@ $(document).ready(function() {
             {
                 extend: 'pdf',
                 footer: true,
-                title: 'Caja Chica',
-                filename: 'Caja Chica',
+                title: 'Gastos Admin',
+                filename: 'Gastos Admin',
                 text: '<button class="btn btn-danger">Exportar a PDF <i class="far fa-file-pdf"></i></button>',
                 customize: function(pdfDocument) {
                     
