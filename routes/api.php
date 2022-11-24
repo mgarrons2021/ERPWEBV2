@@ -22,6 +22,7 @@ use App\Models\siat\DocumentoIdentidad;
 use App\Models\Siat\DocumentoSector;
 use App\Models\Siat\EventoSignificativo;
 use App\Models\Siat\SiatCufd;
+use App\Services\VerificarConexionService;
 use Illuminate\Support\Facades\DB;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Services\ServicioFacturacionCodigos;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Services\ServicioSiat;
@@ -62,6 +63,13 @@ Route::post('turn_register', [\App\Http\Controllers\Api\TurnoController::class, 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
     return $request->user();
+});
+
+Route::get('/conexion-siat', function () {
+    $verificarConexionService = new VerificarConexionService();
+    $res = $verificarConexionService->verificarConexionImpuestos();
+     $res->return->transaccion = false;
+    return $res;
 });
 
 Route::get('/compras', [CompraController::class, 'getCompras']);
@@ -196,8 +204,8 @@ Route::post('updated_turn', function (Request $request) {
 
         //Obtener el total de ventas (Bs) del turno
         $turns = new TurnoIngreso();
-        $turns->close_turn($turno_id, $sucursal_id);
-
+        return $turns->close_turn($turno_id, $sucursal_id);
+         
         /* total_ventas =  $turns->getSaleTurn($turno_id);      
         $hora_fin = Carbon::now()->format('H:i:s');
         $turno = TurnoIngreso::find($turno_id);
@@ -485,4 +493,9 @@ Route::get('get_leyendas', function () {
         'leyenda' => $client,
     ];
     return response($response, 200)->header('Content-Type', 'application/json');
+});
+
+Route::get('obtenerventasContingencias', function (Request $request) {
+    $turnoingreso = new TurnoIngreso();
+    return $turnoingreso->emitirFacturasFueradeLinea($request->evento_id,0);
 });

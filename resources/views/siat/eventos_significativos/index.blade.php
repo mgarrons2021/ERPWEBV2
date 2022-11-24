@@ -54,91 +54,86 @@
                     </div>
                 </div>
             </div>
-            <form action="{{route('eventos_significativos.generar_evento_significativo')}}" method="POST">
-                @csrf
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-resposive">
+                        <table class="table table-bordered table-md" id="table">
+                            <thead>
+                                {{-- <th>Fecha Venta</th>
+                                <th>Hora Transaccion</th>
+                                <th>Nro Factura</th>
+                                <th>Tipo Pago </th>
+                                <th>Total Venta </th>
+                                <th>Usuario</th>
+                                <th>Sucursal</th>
+                                <th>Motivo Contingencia</th>
+                                <th>Estado</th>
+                                <th>Estado Siat</th> --}}
+                                <th>id</th>
+                                <th>Fecha Inicio Contingencia</th>
+                                <th>Fecha Fin Contingencia</th>
+                                <th>Hora Inicio Contingencia</th>
+                                <th>Hora Fin Contingencia</th>
+                                <th>estado</th>
+                                <th>Evento Significativo</th>
+                            </thead>
+                            <tbody>
+                                @foreach ($contingencias as $contingencia)
+                                <tr>
+                                    <td> <a href="{{route('eventos_significativos.show',$contingencia->id)}}">{{$contingencia->id}}</a> </td>
+                                    <td>{{$contingencia->fecha_inicio_contingencia}}</td>
+                                    <td>{{$contingencia->fecha_fin_contingencia}}</td>
+                                    <td>{{$contingencia->hora_ini}}</td>
+                                    <td>{{$contingencia->hora_fin}}</td>
+                                    @if($contingencia->Estado)
+                                    <td> <span class="badge badge-success"> Enviado </span> </td>
+                                    @else
+                                    <td> <span class="badge badge-warning"> Pendiente </span></td>
+                                    @endif
+                                    <td>{{$contingencia->evento_significativo->descripcion}}</td>
+                                </tr>
+                                @endforeach
+                                {{-- @foreach ($ventas as $venta)
+                                <tr>
+                                    <td>{{ $venta->fecha_venta }}</td>
+                                <td>{{ $venta->hora_venta }}</td>
+                                <td>{{ $venta->numero_factura }}</td>
+                                <td>{{ $venta->tipo_pago }}</td>
+                                <td>{{ number_format($venta->total_venta,2) }} Bs</td>
+                                <td>{{ $venta->user->name }} {{$venta->user->apellido}}</td>
+                                <td>{{ $venta->sucursal->nombre }}</td>
+                                @if(isset($venta->evento_significativo))
+                                <td>{{$venta->evento_significativo->descripcion}}</td>
+                                @else
+                                <td><span class="badge badge-warning"> Sin Contingencia</span></td>
+                                @endif
 
-                                <div class="col-md-4">
+                                @if($venta->estado == 1)
+                                <td> <span class="badge badge-success"> Vigente </span> </td>
+                                @else
+                                <td> <span class="badge badge-warning"> Anulado </span></td>
+                                @endif
 
-                                    <div class="form-group">
-                                        <label for="fecha_actual">Fecha Inicio Contingencia</label>
-                                        <input type="datetime-local" class="form-control" id="fecha_inicio" name="fecha_inicio" value="{{ $fecha_actual }}">
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="fecha_actual">Fecha Fin Contingencia</label>
-                                        <input type="datetime-local" class="form-control" id="fecha_fin" name="fecha_fin">
-                                    </div>
-                                </div>
-                                <input type="hidden" id="ventas" name="ventas" value="{{$ventas}}">
-                            </div>
-                        </div>
+                                @if($venta->estado_emision == "V")
+                                <td> <span class="badge badge-success"> Validada por el Siat </span> </td>
+                                @endif
+                                @if($venta->estado_emision == "R")
+                                <td> <span class="badge badge-danger"> Rechazada por el Siat </span> </td>
+                                @endif
+                                @if($venta->estado_emision == "P")
+                                <td> <span class="badge badge-warning"> Pendiente </span> </td>
+                                @endif
+                                </tr>
+                                @endforeach --}}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <div class="card">
-                    <div class="card-body">
-                        <div class="table-resposive">
-                            <table class="table table-bordered table-md" id="table">
-                                <thead>
-                                    <th>Fecha Venta</th>
-                                    <th>Hora Transaccion</th>
-                                    <th>Nro Factura</th>
-                                    <th>Tipo Pago </th>
-                                    <th>Total Venta </th>
-                                    <th>Usuario</th>
-                                    <th>Sucursal</th>
-                                    <th>Motivo Contingencia</th>
-                                    <th>Estado</th>
-                                    <th>Estado Siat</th>
-                                </thead>
-                                <tbody>
-                                    @foreach ($ventas as $venta)
-                                    <tr>
-                                        <td>{{ $venta->fecha_venta }}</td>
-                                        <td>{{ $venta->hora_venta }}</td>
-                                        <td>{{ $venta->numero_factura }}</td>
-                                        <td>{{ $venta->tipo_pago }}</td>
-                                        <td>{{ number_format($venta->total_venta,2) }} Bs</td>
-                                        <td>{{ $venta->user->name }} {{$venta->user->apellido}}</td>
-                                        <td>{{ $venta->sucursal->nombre }}</td>
-                                        @if(isset($venta->evento_significativo))
-                                        <td>{{$venta->evento_significativo->descripcion}}</td>
-                                        @else
-                                        <td><span class="badge badge-warning"> Sin Contingencia</span></td>
-                                        @endif
-
-                                        @if($venta->estado == 1)
-                                        <td> <span class="badge badge-success"> Vigente </span> </td>
-                                        @else
-                                        <td> <span class="badge badge-warning"> Anulado </span></td>
-                                        @endif
-
-                                        @if($venta->estado_emision == "V")
-                                        <td> <span class="badge badge-success"> Validada por el Siat </span> </td>
-                                        @endif
-                                        @if($venta->estado_emision == "R")
-                                        <td> <span class="badge badge-danger"> Rechazada por el Siat </span> </td>
-                                        @endif
-                                        @if($venta->estado_emision == "P")
-                                        <td> <span class="badge badge-warning"> Pendiente </span> </td>
-                                        @endif
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" id="registrar_facturas_paquetes" class="btn btn-warning">Registrar Facturar Paquetes</button>
-                    <button type="button" class="btn btn-dark">Close</button>
-                </div>
-            </form>
+            </div>
+            {{-- <div class="modal-footer">
+                <button type="button" id="registrar_facturas_paquetes" class="btn btn-warning">Registrar Facturar Paquetes</button>
+                <button type="button" class="btn btn-dark">Close</button>
+            </div> --}}
         </div>
     </div>
 </section>

@@ -22,4 +22,8 @@ class EventoSignificativo extends Model
         return $eventos_significativos;
     }
 
+    public function contingencia(){
+        return $this->hasOne(Contingencia::class);
+    }
+
 }

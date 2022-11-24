@@ -23,7 +23,7 @@ class Venta extends Model
         'tipo_pago', 'estado', 'estado_emision', 'user_id',
         'cliente_id', 'sucursal_id', 'turnos_ingreso_id',
         'codigo_control', 'qr', 'cuf', 'evento_significativo_id',
-        'documento_identidad_id', 'leyenda_factura_id'
+        'documento_identidad_id', 'leyenda_factura_id', 'contingencia_id'
     ];
 
     public function user()
@@ -74,6 +74,11 @@ class Venta extends Model
     public function leyenda_factura()
     {
         return $this->belongsTo(LeyendaFactura::class);
+    }
+
+    public function contigencia()
+    {
+        return $this->belongsTo(Contigencia::class);
     }
 
     public function getSales($fecha_inicio, $fecha_fin, $sucursal)

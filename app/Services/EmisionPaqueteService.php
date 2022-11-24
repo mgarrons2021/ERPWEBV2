@@ -91,12 +91,12 @@ class EmisionPaqueteService
         return $facturas;
     }
 
-    function construirFacturas2($sucursal, $puntoventa, int $cantidad, $documentoSector, $codigoActividad, $codigoProductoSin, &$fechaEmision = null, $cufdAntiguo = null, $cafc = null, $arrayFacturas = [])
+    function construirFacturas2($sucursal, $puntoventa, int $cantidad, $documentoSector, $codigoActividad, $codigoProductoSin, &$fechaEmision = null, $cufdAntiguo = null, $cafc = null, $arrayFacturas = [], $codigoExcepcion = 1)
     {
         /*  dd($arrayFacturas); */
         $facturas = [];
         for ($i = 0; $i < $cantidad; $i++) {
-            $factura = $this->emisionIndividualService->construirFactura3($puntoventa, $sucursal, $this->configService->config->modalidad, $documentoSector, $codigoActividad, $codigoProductoSin, $arrayFacturas[$i]);
+            $factura = $this->emisionIndividualService->construirFactura3($puntoventa, $sucursal, $this->configService->config->modalidad, $documentoSector, $codigoActividad, $codigoProductoSin, $arrayFacturas[$i], $codigoExcepcion);
             $factura->cabecera->nitEmisor = $this->configService->config->nit;
             $factura->cabecera->razonSocialEmisor = $this->configService->config->razonSocial;
             /*  $factura->cabecera->fechaEmision = $fechaEmision ?: ('Y-m-d\TH:i:s.v'); */

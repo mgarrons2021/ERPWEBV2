@@ -777,6 +777,8 @@ Route::get('/eventos_significativos/index', [App\Http\Controllers\Siat\EventoSig
 Route::post('/eventos_significativos/filtrarEventosSignificativos', [\App\Http\Controllers\Siat\EventoSignificativoController::class, 'filtrarEventosSignificativos'])->name('eventos_significativos.filtrarEventosSignificativos');
 Route::post('generar_evento_significativo', [\App\Http\Controllers\Siat\EventoSignificativoController::class, 'generar_evento_significativo'])->name('eventos_significativos.generar_evento_significativo');
 
+Route::get('/eventos_significativos/{id}', [App\Http\Controllers\Siat\EventoSignificativoController::class, 'show'])->name('eventos_significativos.show');
+
 /* Anular Facturas */
 Route::get('/anulacion_facturas/index', [App\Http\Controllers\Siat\AnulacionFacturaController::class, 'index'])->name('anulacion_facturas.index');
 Route::post('/anulacion_facturas/filtrar_facturas', [AnulacionFacturaController::class, 'filtrar_facturas'])->name('anulacion_facturas.filtrar_facturas');

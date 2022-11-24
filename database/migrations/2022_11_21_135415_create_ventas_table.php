@@ -42,6 +42,7 @@
                 $table->unsignedBigInteger('evento_significativo_id')->nullable();
                 $table->unsignedBigInteger('documento_identidad_id')->nullable();
                 $table->unsignedBigInteger('leyenda_factura_id')->nullable();
+                $table->unsignedBigInteger('contingencia_id')->nullable();
 
 
                 $table->foreign('user_id')->on('users')->references('id');
@@ -52,6 +53,7 @@
                 $table->foreign('autorizacion_id')->on('autorizaciones')->references('id');
                 $table->foreign('documento_identidad_id')->on('siat_documentos_identidad')->references('id');
                 $table->foreign('leyenda_factura_id')->on('siat_leyendas_facturas')->references('id');
+                $table->foreign('contingencia_id')->on('contingencias')->references('id');
 
 
                 $table->foreign('evento_significativo_id')->on('siat_eventos_significativos')->references('id');

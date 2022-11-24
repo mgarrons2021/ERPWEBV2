@@ -23,6 +23,7 @@ use App\Models\Siat\EventoSignificativo;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Services\EventoSignificativoService;
 use App\Http\Controllers\MailFacturacionController;
+use App\Models\Contingencia;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\SiatFactory;
 use SinticBolivia\SBFramework\Modules\Invoices\Classes\Siat\Invoices\SiatInvoice;
 
@@ -98,7 +99,10 @@ class EventoSignificativoController extends Controller
             'sucursal_id' => $sucursal_db->id,
             'numero_factura' => 0
         ]);
-
+        SiatCufd::where('estado', 'V')
+            ->where('id', '<>', $guardar_cufd->id)
+            ->where('sucursal_id', $sucursal_db->id)
+            ->update(['estado' => 'N']);
 
         $fechaFin        = Carbon::now();
         $pvfechaInicio     = (new Carbon($request->fecha_inicio))->format("Y-m-d\TH:i:s.v");
@@ -148,7 +152,9 @@ class EventoSignificativoController extends Controller
                         $venta_db = Venta::find($venta->id);
                         $venta_db->estado_emision = "V";
                         $venta_db->save();
-                        $this->enviarCorreoaCliente($venta);
+                        if ($venta_db->evento_significativo_id != 2) {
+                            $this->enviarCorreoaCliente($venta);
+                        }
                     }
                 } else {
                     if ($res->RespuestaServicioFacturacion->codigoEstado == 904) {
@@ -171,6 +177,12 @@ class EventoSignificativoController extends Controller
             ]);
         }
     }
+    public function show($id)
+    {
+        $detalleContingencias = Venta::where('contingencia_id', $id)->get();
+        //  dd($detalleContingencias);
+        return view('siat.eventos_significativos.show', compact('detalleContingencias'));
+    }
 
 
     public function index()
@@ -178,32 +190,43 @@ class EventoSignificativoController extends Controller
         $fecha_actual = Carbon::now()->toDateString();
         $eventos_significativos = EventoSignificativo::all();
 
-        $ventas = Venta::where('sucursal_id', Auth::user()->sucursals[0]->id)
-            ->where('fecha_venta', (new Carbon())->toDateString())
-            ->where('estado', 1)
-            ->where('estado_emision', 'P')
-            ->where('evento_significativo_id', "<>", null)
-            ->get();
+        // $ventas = Venta::where('sucursal_id', Auth::user()->sucursals[0]->id)
+        //     ->where('fecha_venta', (new Carbon())->toDateString())
+        //     ->where('estado', 1)
+        //     ->where('estado_emision', 'P')
+        //     ->where('evento_significativo_id', "<>", null)
+        //     ->get();
 
-        return view('siat.eventos_significativos.index', compact('eventos_significativos', 'ventas', 'fecha_actual'));
+        $contingencias = Contingencia::where('fecha_inicio_contingencia', $fecha_actual)->where('evento_significativo_id', 2)->get();
+
+
+
+
+        // return view('siat.eventos_significativos.index', compact('eventos_significativos', 'ventas', 'fecha_actual'));
+        return view('siat.eventos_significativos.index', compact('eventos_significativos', 'contingencias', 'fecha_actual'));
     }
 
     public function filtrarEventosSignificativos(Request $request)
     {
         $fecha_inicial = $request->fecha_inicial;
         $fecha_final = $request->fecha_final;
+
         $evento_significativo = EventoSignificativo::find($request->evento_significativo_id);
         $fecha_actual = Carbon::now()->toDateString();
         $eventos_significativos = EventoSignificativo::all();
 
-        $ventas = Venta::where('sucursal_id', Auth::user()->sucursals[0]->id)
-            ->whereBetween('fecha_venta', [$fecha_inicial, $fecha_final])
-            ->where('ventas.evento_significativo_id', $evento_significativo->id)
-            ->where('estado', 1)
-            ->where('estado_emision', 'P')
-            ->where('ventas.evento_significativo_id', "<>", null)
+        $contingencias = Contingencia::where('evento_significativo_id', $request->evento_significativo_id)
+            ->whereBetween('fecha_inicio_contingencia', [$fecha_inicial, $fecha_final])
             ->get();
-        return view('siat.eventos_significativos.index', compact('eventos_significativos', 'ventas', 'fecha_actual'));
+        // $ventas = Venta::where('sucursal_id', Auth::user()->sucursals[0]->id)
+        //     ->whereBetween('fecha_venta', [$fecha_inicial, $fecha_final])
+        //     ->where('ventas.evento_significativo_id', $evento_significativo->id)
+        //     ->where('estado', 1)
+        //     ->where('estado_emision', 'P')
+        //     ->where('ventas.evento_significativo_id', "<>", null)
+        //     ->get();
+
+        return view('siat.eventos_significativos.index', compact('eventos_significativos', 'contingencias', 'fecha_actual'));
     }
 
     public function enviarCorreoaCliente($venta)
@@ -240,7 +263,7 @@ class EventoSignificativoController extends Controller
             'fecha' => $fecha->format('Y-m-d'),
             'total' => $total_texto
         ]);
-        $pdf->setPaper([0, 0, 950.98, 280.05], 'landscape'); 
+        $pdf->setPaper([0, 0, 950.98, 280.05], 'landscape');
         $data = [
             "clienteNombre" => $cliente->nombre,
             "clienteCorreo" => $cliente->correo,

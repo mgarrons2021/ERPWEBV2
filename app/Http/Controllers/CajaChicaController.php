@@ -423,9 +423,7 @@ class CajaChicaController extends Controller
                 $listTwo->push($value);
             }
         }
-
         return view('contabilidad.reportes.reporteGastos',compact('listOne','listTwo','total_egresoFactura','request'));
-
     }
 
     public function detalle(Request $request){

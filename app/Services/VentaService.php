@@ -57,6 +57,11 @@ class VentaService
         $venta->cufd_id = $ventaData['cufd_id'];
         $venta->estado_emision = 'P';
         $venta->created_at = $ventaData['fechaEmision'];
+
+        if ($ventaData['contingencia'] != null) {
+            $venta->contingencia_id = $ventaData['contingencia']['id'];
+        }
+
         $turno->save();
 
         $venta->numero_factura = $ventaData['numero_factura'];

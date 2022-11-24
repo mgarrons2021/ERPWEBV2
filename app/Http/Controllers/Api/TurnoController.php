@@ -61,11 +61,8 @@ class TurnoController extends Controller
             $turno->sucursal_id = $sucursal->id;
             $turno->nro_transacciones = 0;
             $turno->save();
-
             /* CREA CUFD CUANDO SE INGRESA NUEVO TURNO */
-
             $cuis = SiatCui::where('sucursal_id', $sucursal->id)->first();
-
             if (is_null($cuis)) {
                 $response =  $this->obtenerCuis($codigoPuntoVenta, $sucursal->codigo_fiscal);
                 /* return $response; */
@@ -206,7 +203,6 @@ class TurnoController extends Controller
             ->where('fecha', $fecha_actual)
             ->where('estado', 1)
             ->first();
-
         if (!is_null($turno)) {
             return  response(["status" => true, "msj" => "Ya existe un Turno Abierto"], 200)->header('Content-Type', 'application/json');
         } else {
@@ -216,14 +212,12 @@ class TurnoController extends Controller
 
     public function get_open_turn(Request $request)
     {
-
         $sucursal_id = $request->sucursal_id;
         $fecha_actual = Carbon::now()->format('Y-m-d');
         $turno = TurnoIngreso::where('sucursal_id', $sucursal_id)
             ->where('fecha', $fecha_actual)
             ->where('estado', 1)
             ->first();
-
         return response(["turno" => $turno != null ? $turno : []], 200)->header('Content-Type', 'application/json');
     }
 
@@ -233,18 +227,15 @@ class TurnoController extends Controller
         $serviceCodigos->debug = true;
         $serviceCodigos->setConfig((array)$this->config);
         $resCuis = $serviceCodigos->cuis($codigoPuntoVenta, $codigoSucursal);
-        /*  dd($resCuis); */
         return $resCuis;
     }
 
     function obtenerCufd($codigoPuntoVenta, $codigoSucursal, $cuis, $new = false)
     {
-
         $serviceCodigos = new ServicioFacturacionCodigos(null, null, $this->config->tokenDelegado);
         $serviceCodigos->setConfig((array)$this->config);
         $serviceCodigos->cuis = $cuis;
         $resCufd = $serviceCodigos->cufd($codigoPuntoVenta, $codigoSucursal);
-
         return $resCufd;
     }
 }

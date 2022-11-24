@@ -26,6 +26,7 @@ use App\Http\Controllers\Controller;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Http\Controllers\MailFacturacionController;
 use App\Http\Controllers\Siat\EmisionIndividualController;
+use App\Models\Contingencia;
 use App\Models\Siat\SiatCui;
 use App\Services\ConfigService;
 use App\Services\VerificarConexionService;
@@ -49,10 +50,27 @@ class VentaController extends Controller
     public function registerSale(Request $request)
     {
         try {
+            $fecha_actual = Carbon::now();
+            $contingencia = null;
             $verificarConexionService = new VerificarConexionService();
             $res = $verificarConexionService->verificarConexionImpuestos();
-            return $res;
-
+            $res->return->transaccion = false;
+            if (!$res->return->transaccion) {
+                /*  return response()->json(false); */
+                $request->evento_significativo_id = 2;
+                $contingencia = Contingencia::where([
+                    ['fecha_inicio_contingencia', '>=', $fecha_actual->startOfDay()],
+                    ['evento_significativo_id', '=', $request->evento_significativo_id]
+                ])->first();
+                if ($contingencia == null) {
+                    $contingencia = new Contingencia();
+                    $contingencia->fecha_inicio_contingencia = Carbon::now();
+                    $contingencia->hora_ini = Carbon::now();
+                    $contingencia->Estado = 0;
+                    $contingencia->evento_significativo_id = $request->evento_significativo_id;
+                    $contingencia->save();
+                }
+            }
             $cuis = SiatCui::where('sucursal_id', $request->sucursal)->where('estado', 'V')->orderBy('id', 'desc')->first();
 
             $codigoExcepcion = 0;
@@ -124,7 +142,7 @@ class VentaController extends Controller
                 "codigoDocumentoSector" => DocumentTypes::FACTURA_COMPRA_VENTA,
                 "numeroFactura" => $cufd->numero_factura,
                 "codigoPuntoVenta" => $puntoVenta,
-                "fechaEmision" => $request->evento_significativo_id == null ? date('Y-m-d\TH:i:s.v') : new Carbon($request->fecha_emision_manual . "T" . $request->hora_emision_manual . ".000000Z"),
+                "fechaEmision" => $request->evento_significativo_id == null || $request->evento_significativo_id == 2  ? date('Y-m-d\TH:i:s.v') : new Carbon($request->fecha_emision_manual . "T" . $request->hora_emision_manual . ".000000Z"),
                 "modalidad" => ServicioSiat::MOD_ELECTRONICA_ENLINEA,
                 "tipoEmision" => $request->evento_significativo_id == null ? SiatInvoice::TIPO_EMISION_ONLINE : SiatInvoice::TIPO_EMISION_OFFLINE,
                 "tipoFactura" => SiatInvoice::FACTURA_DERECHO_CREDITO_FISCAL,
@@ -135,7 +153,7 @@ class VentaController extends Controller
 
             /* print_r($request->fecha_emision_manual + " " + $request->hora_emision_manual); */
             $fecha_emision_manual = $request->fecha_emision_manual != null && $request->hora_emision_manual != null ? new Carbon($request->fecha_emision_manual . "T" . $request->hora_emision_manual . ".000000Z") : "";
-            /* return response()->json($fecha_emision_manual); */
+          /*   return response()->json($dataCuf['fechaEmision']); */
             $ventaData = collect([
                 'user_id' => $request->user_id,
                 'total_venta' => $request->total_venta,
@@ -157,6 +175,7 @@ class VentaController extends Controller
                 'cuf' => $cuf,
                 'cufd_id' => $cufd->id,
                 "fechaEmision" => $fecha_emision_manual == "" ? $dataCuf['fechaEmision'] : $fecha_emision_manual,
+                'contingencia' => $contingencia,
             ]);
 
             $ventaService = new VentaService();

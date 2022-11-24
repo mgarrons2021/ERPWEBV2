@@ -19,11 +19,11 @@ class CategoriaGastosAdministrativos extends Model
         return $this->belongsTo(SubCategoria::class);
     }
     
-    public function categoria_gasto(){
-        return $this->hasMany(DetGastoAdm::class);
-    }
+    // public function categoria_gasto(){
+    //     return $this->hasMany(DetGastoAdm::class);
+    // }
 
-    public function categoria_gasto_adm(){
+    public function categoria_gasto(){
         return $this->hasMany(DetalleGastosAdministrativos::class);
     }
     public function nombre(){
